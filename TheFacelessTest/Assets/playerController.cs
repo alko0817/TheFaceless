@@ -11,19 +11,46 @@ public class playerController : MonoBehaviour
     public LayerMask enemyLayer;
     public float attackRadius = .5f;
 
-    public int combos = 0;
-    public float lastClick;
+    int combos = 0;
+    float lastClick = 0f;
+    public float attackDelay = 1.5f;
+    public float nextAttack = 2f;
+    float nextCombo = 0f;
     public bool attacking = false;
 
   
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+       // Debug.Log("clicked " + lastClick);
+        //Debug.Log("combo 2 is up " + nextCombo);
+        Debug.Log("combo counter: " + combos);
+        lastClick -= Time.deltaTime;
+        nextCombo -= Time.deltaTime;
+
+        if (lastClick <= 0)
         {
-            Slash();
+            if (Input.GetButtonDown("Fire1") && (combos == 0))
+            {
+                lastClick = attackDelay;
+                Slash();
+                nextCombo = nextAttack;
+
+            }
             
         }
 
+        if (nextCombo > 0)
+        {
+            if (Input.GetButtonDown("Fire1") && (combos == 1))
+            {
+                Slash();
+            }
+        }
+
+
+
+        
+        
 
         if (Input.GetButtonDown("Fire2"))
         {
@@ -34,14 +61,48 @@ public class playerController : MonoBehaviour
     }
 
 
+    //void Slash2()
+    //{
+    //    anim.SetTrigger("isSlash2");
+    //}
+
     void Slash ()
     {
-        //Animation
-        anim.SetTrigger("isSlash");
+        //ANIMATION PLAY & CYCLE
+        switch (combos)
+        {
+            case 0:
+                anim.SetTrigger("isSlash");
+                break;
 
-        //Enemy Detect
+            case 1:
+                anim.SetTrigger("isSlash2");
+                combos = 0;
+                break;
+
+            default:
+                Debug.LogWarning("nåt är fel... ");
+                break;
+        }
+        //if (combos == 0)
+        //{
+        //    anim.SetTrigger("isSlash");
+        //    combos = 1;
+        //}
+
+        //if (combos == 1)
+        //{
+        //    anim.SetTrigger("isSlash2");
+        //    combos = 0;
+        //}
+
+
+
+        //ENEMY DETECT
         Physics.OverlapSphere(detectPoint.position, attackRadius, enemyLayer);
-        //Damage output
+
+        //DPS
+
     }
 
     void Stab()

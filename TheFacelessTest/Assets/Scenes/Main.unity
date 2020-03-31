@@ -983,6 +983,36 @@ Transform:
   m_Father: {fileID: 1971234644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &412878386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 412878387}
+  m_Layer: 0
+  m_Name: attackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412878387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412878386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.232, y: 0.93, z: 1.048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 741066636}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &477599732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,6 +1800,7 @@ Transform:
   - {fileID: 1169238972}
   - {fileID: 27455366}
   - {fileID: 477599733}
+  - {fileID: 412878387}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1787,13 +1818,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 741066630}
   anim: {fileID: 741066635}
-  detectPoint: {fileID: 0}
+  detectPoint: {fileID: 412878387}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  attackRadius: 0.5
+  attackRadius: 0.65
   combos: 0
-  lastClick: 0
+  attackDelay: 0.6
+  nextAttack: 2
   attacking: 0
 --- !u!1 &746819197
 GameObject:
