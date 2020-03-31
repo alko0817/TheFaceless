@@ -1823,9 +1823,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   attackRadius: 0.65
-  combos: 0
-  attackDelay: 0.6
-  nextAttack: 2
+  attackDelay1: 0.7
+  attackDelay2: 0.7
+  nextAttack: 2.3
   attacking: 0
 --- !u!1 &746819197
 GameObject:

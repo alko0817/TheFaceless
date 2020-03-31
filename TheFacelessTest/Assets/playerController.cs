@@ -7,23 +7,31 @@ public class playerController : MonoBehaviour
     public GameObject player;
     public Animator anim;
 
+    //ENEMY DETECT
     public Transform detectPoint;
     public LayerMask enemyLayer;
     public float attackRadius = .5f;
 
+    //COMBAT
     int combos = 0;
     float lastClick = 0f;
-    public float attackDelay = 1.5f;
+    public float attackDelay1 = 1.5f;
+    public float attackDelay2 = 1.5f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
     public bool attacking = false;
 
+    //DODGE
+    public float dodgeCooldown = 1f;
+    float dodgeCd = 0;
+
   
     void Update()
     {
-       // Debug.Log("clicked " + lastClick);
-        //Debug.Log("combo 2 is up " + nextCombo);
-        Debug.Log("combo counter: " + combos);
+
+
+        #region ATTACKS
+
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
@@ -31,71 +39,66 @@ public class playerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && (combos == 0))
             {
-                lastClick = attackDelay;
+                lastClick = attackDelay1;
+                combos = 1;
                 Slash();
+                
                 nextCombo = nextAttack;
 
             }
-            
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                lastClick = attackDelay1;
+                Stab();
+            }
+
         }
 
-        if (nextCombo > 0)
+        if (lastClick <= 0 && nextCombo > 0)
         {
             if (Input.GetButtonDown("Fire1") && (combos == 1))
             {
-                Slash();
+                lastClick = attackDelay2;
+                combos = 0;
+                Slash2();
             }
         }
 
+        if (nextCombo <= 0) combos = 0;
 
+        #endregion
 
-        
-        
+        #region DODGE
+        dodgeCd -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire2"))
+        if (dodgeCd <=0)
         {
-            Stab();
+            if (Input.GetButtonDown("Dodge"))
+            {
+                dodgeCd = dodgeCooldown;
+                Dodge();
+            }
         }
-
+        #endregion
 
     }
 
-
-    //void Slash2()
-    //{
-    //    anim.SetTrigger("isSlash2");
-    //}
+    void Dodge()
+    {
+        anim.SetTrigger("dodging");
+    }
+    void Slash2()
+    {
+        anim.SetTrigger("isSlash2");
+        //anim.SetBool("attacking", true);
+        
+    }
 
     void Slash ()
     {
-        //ANIMATION PLAY & CYCLE
-        switch (combos)
-        {
-            case 0:
-                anim.SetTrigger("isSlash");
-                break;
-
-            case 1:
-                anim.SetTrigger("isSlash2");
-                combos = 0;
-                break;
-
-            default:
-                Debug.LogWarning("nåt är fel... ");
-                break;
-        }
-        //if (combos == 0)
-        //{
-        //    anim.SetTrigger("isSlash");
-        //    combos = 1;
-        //}
-
-        //if (combos == 1)
-        //{
-        //    anim.SetTrigger("isSlash2");
-        //    combos = 0;
-        //}
-
+       //ANIMATION PLAY
+        anim.SetTrigger("isSlash");
 
 
         //ENEMY DETECT
