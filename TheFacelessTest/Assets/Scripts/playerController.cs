@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
@@ -28,17 +29,39 @@ public class playerController : MonoBehaviour
     public int slashDamage = 20;
     public int slash2Damage = 25;
     public int stabDamage = 40;
+    public int dischargeDamage = 40;
 
     //DODGE
     [Header("Dodge Cooldown")]
     public float dodgeCooldown = 1f;
     float dodgeCd = 0;
 
-  
+    //DISCHARGE
+    [Header("Discharge Mechanic")]
+    public float maxCharge = 100f;
+    public float chargeRate = 10f;
+    float currentCharge = 0f;
+    float lastCharge = 0f;
+    public Image swordFill;
+    bool canDischarge = false;
+
+
+    //TESTING VARS
+    
+
+
     void Update()
     {
+        //TESTING GROUNDS
+
+       
 
 
+        
+        
+
+
+        //TESTING GROUNDS
         #region ATTACKS
 
         lastClick -= Time.deltaTime;
@@ -60,6 +83,12 @@ public class playerController : MonoBehaviour
             {
                 lastClick = attackDelay1;
                 Stab();
+            }
+
+            if (Input.GetButtonDown("discharge") && canDischarge)
+            {
+                lastClick = attackDelay1;
+                Discharge();
             }
 
         }
@@ -104,23 +133,50 @@ public class playerController : MonoBehaviour
     {
         anim.SetTrigger("isSlash2");
         DPS(slash2Damage);
-        //anim.SetBool("attacking", true);
+        Charge();
         
     }
 
     void Slash ()
     {
-       //ANIMATION PLAY
         anim.SetTrigger("isSlash");
         DPS(slashDamage);
+        Charge();
 
     }
     void Stab()
     {
         anim.SetTrigger("isStab");
         DPS(stabDamage);
+        Charge();
+    }
+
+    void Discharge ()
+    {
+        anim.SetTrigger("discharge");
+        DPS(dischargeDamage);
+        canDischarge = false;
+        swordFill.fillAmount = 0;
+        currentCharge = 0;
     }
     #endregion
+
+
+    void Charge()
+    {
+        if (currentCharge < maxCharge) currentCharge += chargeRate;
+        else if (currentCharge >= maxCharge) currentCharge = maxCharge;
+
+
+        float charged = currentCharge / maxCharge;
+        swordFill.fillAmount = charged;
+
+        
+
+        if (currentCharge >= maxCharge) canDischarge = true;
+
+    }
+
 
     void DPS (int damageDone)
     {
