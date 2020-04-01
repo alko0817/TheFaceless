@@ -8,20 +8,29 @@ public class playerController : MonoBehaviour
     public Animator anim;
 
     //ENEMY DETECT
+    [Header("Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public LayerMask enemyLayer;
     public float attackRadius = .5f;
 
     //COMBAT
+    
     int combos = 0;
     float lastClick = 0f;
+    [Header("Attack Delays")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
     public bool attacking = false;
 
+    [Header("Attack Damage")]
+    public int slashDamage = 20;
+    public int slash2Damage = 25;
+    public int stabDamage = 40;
+
     //DODGE
+    [Header("Dodge Cooldown")]
     public float dodgeCooldown = 1f;
     float dodgeCd = 0;
 
@@ -88,9 +97,13 @@ public class playerController : MonoBehaviour
     {
         anim.SetTrigger("dodging");
     }
+
+    #region AttackAnimations
+
     void Slash2()
     {
         anim.SetTrigger("isSlash2");
+        DPS(slash2Damage);
         //anim.SetBool("attacking", true);
         
     }
@@ -99,19 +112,30 @@ public class playerController : MonoBehaviour
     {
        //ANIMATION PLAY
         anim.SetTrigger("isSlash");
-
-
-        //ENEMY DETECT
-        Physics.OverlapSphere(detectPoint.position, attackRadius, enemyLayer);
-
-        //DPS
+        DPS(slashDamage);
 
     }
-
     void Stab()
     {
         anim.SetTrigger("isStab");
+        DPS(stabDamage);
     }
+    #endregion
+
+    void DPS (int damageDone)
+    {
+
+        //ENEMY DETECT
+        Collider[] hitEnemies = Physics.OverlapSphere(detectPoint.position, attackRadius, enemyLayer);
+
+        //APPLY DPS
+        foreach (Collider enemy in hitEnemies)
+        {
+            enemy.GetComponent<enemyController>().takeDamage(damageDone);
+        }
+    }
+
+
 
 
     private void OnDrawGizmosSelected()
