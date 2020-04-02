@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class AIBehaviour : MonoBehaviour
 {
+    enum BEHAVIOUR_STATE
+    {
+        IDLE,
+        PATROL,
+        PURSUE,
+        ATTACK,
+        BLOCK
+    }
+
     public float sightDistance;
     public float attackDistance;
     public float speed;
@@ -17,15 +26,16 @@ public class AIBehaviour : MonoBehaviour
     private float senseTimer;
 
     private bool playerDetected;
-    private bool moveToPlayer;
+
+    BEHAVIOUR_STATE state;
 
     // Start is called before the first frame update
     void Start()
     {
         playerDetected = false;
-        moveToPlayer = false;
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
+        state = BEHAVIOUR_STATE.IDLE;
     }
 
     // Update is called once per frame
@@ -40,9 +50,9 @@ public class AIBehaviour : MonoBehaviour
         {
             senseTimer = 0.0f;
             Sense();
+            Decide();
         }
 
-        Decide();
         Act();
     }
 
@@ -66,34 +76,71 @@ public class AIBehaviour : MonoBehaviour
 
     void Decide()
     {
+        if(!playerDetected && state != BEHAVIOUR_STATE.PURSUE)
+        {
+            state = BEHAVIOUR_STATE.PATROL;
+        }
+
         if (playerDetected && distanceToPlayer > attackDistance)
         {
-            moveToPlayer = true;
+            state = BEHAVIOUR_STATE.PURSUE;
+        }
+
+        if(distanceToPlayer < attackDistance)
+        {
+            state = BEHAVIOUR_STATE.ATTACK;
         }
     }
 
     void Act()
     {
-        if(moveToPlayer)
+        if (state == BEHAVIOUR_STATE.IDLE)
+        {
+
+        }
+
+        if (state == BEHAVIOUR_STATE.PATROL)
+        {
+            Patrol();
+        }
+
+        if (state == BEHAVIOUR_STATE.PURSUE)
         {
             MoveTo(lastKnownPlayerLocation);
         }
 
+        if(state == BEHAVIOUR_STATE.ATTACK)
+        {
+            Attack();
+        }
+
+        if(state == BEHAVIOUR_STATE.BLOCK)
+        {
+            Block();
+        }
 
     }
 
     void Attack()
     {
-
+        Debug.Log(gameObject.name + " is attacking");
     }
 
     void Patrol()
     {
-
+        Debug.Log(gameObject.name + " is patrolling");
     }
 
     void MoveTo(Transform location)
     {
+        Vector3 direction = location.position - transform.position;
+        direction.Normalize();
 
+        transform.position = transform.position + (direction * speed * Time.deltaTime);
+    }
+
+    void Block()
+    {
+        Debug.Log(gameObject.name + " is blocking");
     }
 }
