@@ -64,6 +64,7 @@ public class playerController : MonoBehaviour
     public float shakeDuration = 1f;
     public float shakeMagnitude = 1f;
     public ParticleSystem electricityCharge;
+    public ParticleSystem burst;
     #endregion
 
     //TESTING VARS
@@ -86,8 +87,7 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
-        if (canDischarge) electricityCharge.Play();
-        else electricityCharge.Stop();
+       // if (!canDischarge) electricityCharge.Stop();
 
        
 
@@ -236,6 +236,7 @@ public class playerController : MonoBehaviour
     void Slash2()
     {
         anim.SetTrigger("isSlash2");
+
         DPS(slash2Damage);
        // Charge();
         
@@ -272,6 +273,8 @@ public class playerController : MonoBehaviour
     void Discharge ()
     {
         anim.SetTrigger("discharge");
+        
+
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         StartCoroutine("explode");
         canDischarge = false;
@@ -282,7 +285,12 @@ public class playerController : MonoBehaviour
 
     IEnumerator explode()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(.4f);
+        burst.Play();
+
+        yield return new WaitForSeconds(1.3f);
+
+        electricityCharge.Stop();
 
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
 
@@ -293,6 +301,12 @@ public class playerController : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
         foreach (Collider enemy in hitEnemies)
         {
+            //Rigidbody rb = enemy.GetComponent<Rigidbody>();
+
+            //float force = 1001f;
+            //float up = 1001f;
+            //rb.AddExplosionForce(force, aoePoint.position, aoeRadius, up);
+
             enemy.GetComponent<enemyController>().takeDamage(dischargeDamage);
             
         }
@@ -308,6 +322,7 @@ public class playerController : MonoBehaviour
         {
             currentCharge = maxCharge;
             canDischarge = true;
+            electricityCharge.Play();
 
         }
 
