@@ -27,6 +27,7 @@ public class playerController : MonoBehaviour
     [Header("Attack Delays")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
+    public float heavyDelay = 1f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
     public bool attacking = false;
@@ -41,6 +42,12 @@ public class playerController : MonoBehaviour
     //DODGE
     [Header("Dodge Cooldown")]
     public float dodgeCooldown = 1f;
+    public float dodgeDashBoost = 4f;
+
+    [Range(.1f, 1f)]
+    public float axisThreshold = .1f;
+
+
     float dodgeCd = 0;
 
     //DISCHARGE
@@ -60,8 +67,15 @@ public class playerController : MonoBehaviour
     #endregion
 
     //TESTING VARS
-    
+    protected float originSpeed;
 
+
+    private void Start()
+    {
+        originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
@@ -75,6 +89,7 @@ public class playerController : MonoBehaviour
         if (canDischarge) electricityCharge.Play();
         else electricityCharge.Stop();
 
+       
 
 
 
@@ -101,7 +116,7 @@ public class playerController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
             {
-                lastClick = attackDelay1;
+                lastClick = heavyDelay;
                 //combosHeavy = 1;
                 heavyAttack();
 
@@ -126,12 +141,7 @@ public class playerController : MonoBehaviour
                 Slash2();
             }
 
-            //if (Input.GetButtonDown("Fire2") && (combosHeavy == 1))
-            //{
-            //    lastClick = attackDelay2;
-            //    combosHeavy = 0;
-            //    heavyAttack2();
-            //}
+           
         }
 
         if (nextCombo <= 0)
@@ -144,14 +154,37 @@ public class playerController : MonoBehaviour
         #endregion
 
         #region DODGE
+
         dodgeCd -= Time.deltaTime;
+
+        float inputZ = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal");
+
 
         if (dodgeCd <=0)
         {
-            if (Input.GetButtonDown("Dodge"))
+            if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
             {
                 dodgeCd = dodgeCooldown;
-                Dodge();
+                DodgeLeft();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRight();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeBack();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRoll();
             }
         }
         #endregion
@@ -162,10 +195,43 @@ public class playerController : MonoBehaviour
 
     #region AnimationFunctions
 
-    void Dodge()
+    void DodgeLeft()
     {
-        anim.SetTrigger("dodging");
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingLeft");
     }
+
+    void DodgeRight()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingRight");
+    }
+
+    void DodgeBack()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingBack");
+    }
+
+    void DodgeRoll()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingRoll");
+    }
+
+    IEnumerator Dash ()
+    {
+        //float originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
+
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
+
+        yield return new WaitForSeconds(.7f);
+
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
+
+    }
+
+
 
     void Slash2()
     {
@@ -216,7 +282,7 @@ public class playerController : MonoBehaviour
 
     IEnumerator explode()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
 
