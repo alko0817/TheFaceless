@@ -208,7 +208,7 @@ namespace Invector.vCharacterController
                     }
                 }
             }
-            stopMove = false;
+           // stopMove = false;
         }
 
         public virtual void RotateToPosition(Vector3 position)

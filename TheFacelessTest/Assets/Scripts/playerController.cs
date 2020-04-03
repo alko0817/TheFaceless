@@ -206,7 +206,7 @@ public class playerController : MonoBehaviour
     void Discharge ()
     {
         anim.SetTrigger("discharge");
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         StartCoroutine("explode");
         canDischarge = false;
         swordFill.fillAmount = 0;
@@ -222,7 +222,7 @@ public class playerController : MonoBehaviour
 
         explosion.Play();
 
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
         Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
         foreach (Collider enemy in hitEnemies)

@@ -2354,7 +2354,7 @@ MonoBehaviour:
   dischargeDamage: 90
   dodgeCooldown: 1
   maxCharge: 100
-  chargeRate: 100
+  chargeRate: 20
   UIChargeMultiplier: 50
   explosion: {fileID: 1735076284}
   swordFill: {fileID: 1558634724}
