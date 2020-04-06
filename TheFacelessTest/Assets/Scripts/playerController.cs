@@ -6,11 +6,11 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
-    public GameObject player;
+    //public GameObject player;
     public Animator anim;
 
     //ENEMY DETECT
-    [Header("Player Attack Point/Radius & Enemy Layer")]
+    [Header("- Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public Transform aoePoint;
     public LayerMask enemyLayer;
@@ -24,14 +24,15 @@ public class playerController : MonoBehaviour
     int combosHeavy = 0;
     float lastClick = 0f;
 
-    [Header("Attack Delays")]
+    [Header("- Attack Delays")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
+    public float heavyDelay = 1f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
     public bool attacking = false;
 
-    [Header("Attack Damage")]
+    [Header("- Attack Damage")]
     public int slashDamage = 20;
     public int slash2Damage = 25;
     public int heavyDamage = 40;
@@ -39,12 +40,18 @@ public class playerController : MonoBehaviour
     public int dischargeDamage = 40;
 
     //DODGE
-    [Header("Dodge Cooldown")]
+    [Header("- Dodge Cooldown")]
     public float dodgeCooldown = 1f;
+    public float dodgeDashBoost = 4f;
+
+    [Range(.1f, 1f)]
+    public float axisThreshold = .1f;
+
+
     float dodgeCd = 0;
 
     //DISCHARGE
-    [Header("Discharge Mechanic")]
+    [Header("- Discharge Mechanic")]
     public float maxCharge = 100f;
     public float chargeRate = 10f;
     public float UIChargeMultiplier = 2f;
@@ -57,24 +64,35 @@ public class playerController : MonoBehaviour
     public float shakeDuration = 1f;
     public float shakeMagnitude = 1f;
     public ParticleSystem electricityCharge;
+    public ParticleSystem burst;
     #endregion
 
     //TESTING VARS
-    
+    protected float originSpeed;
 
+
+    private void Start()
+    {
+        //ORIGINAL MOVEMENT SPEED SET
+        originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
+        
+        //HIDE CURSOR
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
         #region UI/VFX
+
+        //UI SWORD CHARGE
         if (currentCharge > lastCharge)
         {
             lastCharge += Time.deltaTime * UIChargeMultiplier;
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
-        if (canDischarge) electricityCharge.Play();
-        else electricityCharge.Stop();
 
+       
 
 
 
@@ -87,8 +105,10 @@ public class playerController : MonoBehaviour
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
+        //CHECK FOR LAST TIME ATTACKED
         if (lastClick <= 0)
         {
+            //LIGHT ATTACK
             if (Input.GetButtonDown("Fire1") && (combos == 0))
             {
                 lastClick = attackDelay1;
@@ -99,15 +119,17 @@ public class playerController : MonoBehaviour
 
             }
 
+            //HEAVY ATTACK
             if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
             {
-                lastClick = attackDelay1;
+                lastClick = heavyDelay;
                 //combosHeavy = 1;
                 heavyAttack();
 
                 //nextCombo = nextAttack;
             }
 
+            //DISCHARGE
             if (Input.GetButtonDown("discharge") && canDischarge)
             {
                 lastClick = attackDelay1;
@@ -117,6 +139,7 @@ public class playerController : MonoBehaviour
 
         }
 
+        //LIGHT ATTACK COMBO
         if (lastClick <= 0 && nextCombo > 0)
         {
             if (Input.GetButtonDown("Fire1") && (combos == 1))
@@ -126,14 +149,10 @@ public class playerController : MonoBehaviour
                 Slash2();
             }
 
-            //if (Input.GetButtonDown("Fire2") && (combosHeavy == 1))
-            //{
-            //    lastClick = attackDelay2;
-            //    combosHeavy = 0;
-            //    heavyAttack2();
-            //}
+           
         }
 
+        //RESET TIMERS AND COMBOS
         if (nextCombo <= 0)
         {
             combos = 0;
@@ -144,14 +163,37 @@ public class playerController : MonoBehaviour
         #endregion
 
         #region DODGE
+
         dodgeCd -= Time.deltaTime;
 
+        float inputZ = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal");
+
+        //CHECK FOR LAST TIME DODGED
         if (dodgeCd <=0)
         {
-            if (Input.GetButtonDown("Dodge"))
+            if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
             {
                 dodgeCd = dodgeCooldown;
-                Dodge();
+                DodgeLeft();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRight();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeBack();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRoll();
             }
         }
         #endregion
@@ -160,28 +202,67 @@ public class playerController : MonoBehaviour
 
 
 
-    #region AnimationFunctions
+    #region DodgingFunctions
 
-    void Dodge()
+    //FUNCTIONS FOR DODGING. DIRECTION IS SET IN UPDATE
+    void DodgeLeft()
     {
-        anim.SetTrigger("dodging");
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingLeft");
+    }
+
+    void DodgeRight()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingRight");
+    }
+
+    void DodgeBack()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingBack");
+    }
+
+    void DodgeRoll()
+    {
+        StartCoroutine("Dash");
+        anim.SetTrigger("dodgingRoll");
+    }
+
+    //TEMPORARILY INCREASES PLAYER SPEED WHILE DODGING
+    IEnumerator Dash ()
+    {
+        
+
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
+
+        yield return new WaitForSeconds(.7f);
+
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
+
+    }
+
+    #endregion
+
+    #region AttackingFunctions
+
+    
+    void Slash()
+    {
+        anim.SetTrigger("isSlash");
+        DPS(slashDamage);
+
+
     }
 
     void Slash2()
     {
         anim.SetTrigger("isSlash2");
         DPS(slash2Damage);
-       // Charge();
         
     }
 
-    void Slash ()
-    {
-        anim.SetTrigger("isSlash");
-        DPS(slashDamage);
-        //Charge();
-
-    }
+    
     void heavyAttack()
     {
         anim.SetTrigger("isHeavy");
@@ -189,23 +270,27 @@ public class playerController : MonoBehaviour
         
     }
 
+    //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
     IEnumerator heavyAtt ()
     {
         yield return new WaitForSeconds(1f);
         DPS(heavyDamage);
-       // Charge();
+       
     }
 
-    void heavyAttack2()
-    {
-        anim.SetTrigger("isHeavy2");
-        DPS(heavy2Damage);
-        //Charge();
-    }
+    //void heavyAttack2()
+    //{
+    //    anim.SetTrigger("isHeavy2");
+    //    DPS(heavy2Damage);
+       
+    //}
 
+    //FUNCTION FOR DISCHARGE ATTACK. TEMPORARILY STOPS ALL PLAYER MOVEMENT
     void Discharge ()
     {
         anim.SetTrigger("discharge");
+        
+
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         StartCoroutine("explode");
         canDischarge = false;
@@ -214,9 +299,15 @@ public class playerController : MonoBehaviour
         lastCharge = 0;
     }
 
+    //DISCHARGE ATTACK DELAY AND DAMAGE APPLICATION. PLAYER MOVEMENT SET TO NORMAL
     IEnumerator explode()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.4f);
+        burst.Play();
+
+        yield return new WaitForSeconds(1.3f);
+
+        electricityCharge.Stop();
 
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
 
@@ -227,6 +318,12 @@ public class playerController : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
         foreach (Collider enemy in hitEnemies)
         {
+            //Rigidbody rb = enemy.GetComponent<Rigidbody>();
+
+            //float force = 1001f;
+            //float up = 1001f;
+            //rb.AddExplosionForce(force, aoePoint.position, aoeRadius, up);
+
             enemy.GetComponent<enemyController>().takeDamage(dischargeDamage);
             
         }
@@ -235,18 +332,9 @@ public class playerController : MonoBehaviour
     #endregion
 
 
-    void Charge()
-    {
-        if (currentCharge < maxCharge) currentCharge += chargeRate;
-        else if (currentCharge >= maxCharge)
-        {
-            currentCharge = maxCharge;
-            canDischarge = true;
 
-        }
 
-    }
-
+    //DAMAGE APPLICATION
 
     void DPS (int damageDone)
     {
@@ -262,9 +350,21 @@ public class playerController : MonoBehaviour
         }
     }
 
+    //SWORD CHARGE
+    void Charge()
+    {
+        if (currentCharge < maxCharge) currentCharge += chargeRate;
+        else if (currentCharge >= maxCharge)
+        {
+            currentCharge = maxCharge;
+            canDischarge = true;
+            electricityCharge.Play();
 
+        }
 
+    }
 
+    //VISUALS FOR THE AREAS OF ATTACK
     private void OnDrawGizmosSelected()
     {
         if (detectPoint == null || aoePoint == null) return;
