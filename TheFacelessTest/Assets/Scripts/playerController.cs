@@ -28,6 +28,7 @@ public class playerController : MonoBehaviour
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
     public float heavyDelay = 1f;
+    public float dischargeDelay = 2f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
     public bool attacking = false;
@@ -132,7 +133,7 @@ public class playerController : MonoBehaviour
             //DISCHARGE
             if (Input.GetButtonDown("discharge") && canDischarge)
             {
-                lastClick = attackDelay1;
+                lastClick = dischargeDelay;
                 Discharge();
                 
             }

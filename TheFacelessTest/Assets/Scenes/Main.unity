@@ -5534,11 +5534,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: vBasicController_Idle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2623165045082957689, guid: 93b4ed3211f1b834ca8352c635869afa,
+        type: 3}
+      propertyPath: strafeSpeed.walkSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: swordFill
       value: 
       objectReference: {fileID: 1459931075}
+    - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
+        type: 3}
+      propertyPath: heavyDelay
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: m_LocalPosition.x
