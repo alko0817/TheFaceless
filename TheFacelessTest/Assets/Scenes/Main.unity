@@ -1787,6 +1787,36 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 16777215
       objectReference: {fileID: 0}
+    - target: {fileID: 4156523899207765680, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156523899207765680, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156523899207765680, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156523899207765680, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156523899207765680, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128157794679503808, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7990548256086106346, guid: 78245e1da84781c4491f5efe5dfac56f,
         type: 3}
       propertyPath: m_Color.a
