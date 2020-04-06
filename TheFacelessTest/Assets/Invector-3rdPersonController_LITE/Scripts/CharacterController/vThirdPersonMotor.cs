@@ -148,7 +148,7 @@ namespace Invector.vCharacterController
         public virtual void UpdateMotor()
         {
             CheckGround();
-            CheckSlopeLimit();
+            //CheckSlopeLimit();
             ControlJumpBehaviour();
             AirControl();
         }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class audioManager : MonoBehaviour
 {
+    //FindObjectOfType<audioManager>().Play("any sound"); copy-paste this line in any script, in any event you want to add sounds.
+
 
     public sound[] sounds;
 
@@ -23,7 +25,7 @@ public class audioManager : MonoBehaviour
 
     public void Play (string name)
     {
-        //FindObjectOfType<audioManager>().Play("any sound");
+        
         sound s = Array.Find(sounds, sound => sound.name == name);
         
         if (s == null)
