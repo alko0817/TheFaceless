@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AIBehaviour : MonoBehaviour
 {
@@ -15,17 +16,26 @@ public class AIBehaviour : MonoBehaviour
 
     public float sightDistance;
     public float attackDistance;
-    public float speed;
+    public float speed; 
 
+    public float maxHealth;
+    private float currentHealth;
+
+    public Image healthBar;
+
+    #region Player Parameters
 
     private GameObject player;
     private Transform lastKnownPlayerLocation;
     private float distanceToPlayer;
 
+    private bool playerDetected;
+
+    #endregion
+
     public float senseFrequency;
     private float senseTimer;
 
-    private bool playerDetected;
 
     BEHAVIOUR_STATE state;
 
@@ -36,6 +46,7 @@ public class AIBehaviour : MonoBehaviour
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
         state = BEHAVIOUR_STATE.IDLE;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -56,6 +67,10 @@ public class AIBehaviour : MonoBehaviour
 
         Act();
 
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 
@@ -146,4 +161,22 @@ public class AIBehaviour : MonoBehaviour
     {
         Debug.Log(gameObject.name + " is blocking");
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.fillAmount = currentHealth / maxHealth;
+
+        //HURT ANIMATIONS
+        Debug.Log("UGH");
+
+
+    }
+
+    void Die()
+    {
+        Debug.Log("Death");
+        //DIE ANIMATION
+    }
+
 }

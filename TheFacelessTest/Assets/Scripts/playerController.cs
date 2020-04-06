@@ -324,7 +324,7 @@ public class playerController : MonoBehaviour
             //float up = 1001f;
             //rb.AddExplosionForce(force, aoePoint.position, aoeRadius, up);
 
-            enemy.GetComponent<enemyController>().takeDamage(dischargeDamage);
+            enemy.GetComponent<AIBehaviour>().TakeDamage(dischargeDamage);
             
         }
         
@@ -345,7 +345,7 @@ public class playerController : MonoBehaviour
         //APPLY DPS
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<enemyController>().takeDamage(damageDone);
+            enemy.GetComponent<AIBehaviour>().TakeDamage(damageDone);
             Charge();
         }
     }
