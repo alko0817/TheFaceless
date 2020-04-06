@@ -6,11 +6,11 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
-    public GameObject player;
+    //public GameObject player;
     public Animator anim;
 
     //ENEMY DETECT
-    [Header("Player Attack Point/Radius & Enemy Layer")]
+    [Header("- Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public Transform aoePoint;
     public LayerMask enemyLayer;
@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour
     int combosHeavy = 0;
     float lastClick = 0f;
 
-    [Header("Attack Delays")]
+    [Header("- Attack Delays")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
     public float heavyDelay = 1f;
@@ -32,7 +32,7 @@ public class playerController : MonoBehaviour
     float nextCombo = 0f;
     public bool attacking = false;
 
-    [Header("Attack Damage")]
+    [Header("- Attack Damage")]
     public int slashDamage = 20;
     public int slash2Damage = 25;
     public int heavyDamage = 40;
@@ -40,7 +40,7 @@ public class playerController : MonoBehaviour
     public int dischargeDamage = 40;
 
     //DODGE
-    [Header("Dodge Cooldown")]
+    [Header("- Dodge Cooldown")]
     public float dodgeCooldown = 1f;
     public float dodgeDashBoost = 4f;
 
@@ -51,7 +51,7 @@ public class playerController : MonoBehaviour
     float dodgeCd = 0;
 
     //DISCHARGE
-    [Header("Discharge Mechanic")]
+    [Header("- Discharge Mechanic")]
     public float maxCharge = 100f;
     public float chargeRate = 10f;
     public float UIChargeMultiplier = 2f;
@@ -73,21 +73,24 @@ public class playerController : MonoBehaviour
 
     private void Start()
     {
+        //ORIGINAL MOVEMENT SPEED SET
         originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
         
+        //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
         #region UI/VFX
+
+        //UI SWORD CHARGE
         if (currentCharge > lastCharge)
         {
             lastCharge += Time.deltaTime * UIChargeMultiplier;
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
-       // if (!canDischarge) electricityCharge.Stop();
 
        
 
@@ -102,8 +105,10 @@ public class playerController : MonoBehaviour
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
+        //CHECK FOR LAST TIME ATTACKED
         if (lastClick <= 0)
         {
+            //LIGHT ATTACK
             if (Input.GetButtonDown("Fire1") && (combos == 0))
             {
                 lastClick = attackDelay1;
@@ -114,6 +119,7 @@ public class playerController : MonoBehaviour
 
             }
 
+            //HEAVY ATTACK
             if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
             {
                 lastClick = heavyDelay;
@@ -123,6 +129,7 @@ public class playerController : MonoBehaviour
                 //nextCombo = nextAttack;
             }
 
+            //DISCHARGE
             if (Input.GetButtonDown("discharge") && canDischarge)
             {
                 lastClick = attackDelay1;
@@ -132,6 +139,7 @@ public class playerController : MonoBehaviour
 
         }
 
+        //LIGHT ATTACK COMBO
         if (lastClick <= 0 && nextCombo > 0)
         {
             if (Input.GetButtonDown("Fire1") && (combos == 1))
@@ -144,6 +152,7 @@ public class playerController : MonoBehaviour
            
         }
 
+        //RESET TIMERS AND COMBOS
         if (nextCombo <= 0)
         {
             combos = 0;
@@ -160,7 +169,7 @@ public class playerController : MonoBehaviour
         float inputZ = Input.GetAxis("Vertical");
         float inputX = Input.GetAxis("Horizontal");
 
-
+        //CHECK FOR LAST TIME DODGED
         if (dodgeCd <=0)
         {
             if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
@@ -193,8 +202,9 @@ public class playerController : MonoBehaviour
 
 
 
-    #region AnimationFunctions
+    #region DodgingFunctions
 
+    //FUNCTIONS FOR DODGING. DIRECTION IS SET IN UPDATE
     void DodgeLeft()
     {
         StartCoroutine("Dash");
@@ -219,9 +229,10 @@ public class playerController : MonoBehaviour
         anim.SetTrigger("dodgingRoll");
     }
 
+    //TEMPORARILY INCREASES PLAYER SPEED WHILE DODGING
     IEnumerator Dash ()
     {
-        //float originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
+        
 
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 
@@ -231,24 +242,27 @@ public class playerController : MonoBehaviour
 
     }
 
+    #endregion
 
+    #region AttackingFunctions
+
+    
+    void Slash()
+    {
+        anim.SetTrigger("isSlash");
+        DPS(slashDamage);
+
+
+    }
 
     void Slash2()
     {
         anim.SetTrigger("isSlash2");
-
         DPS(slash2Damage);
-       // Charge();
         
     }
 
-    void Slash ()
-    {
-        anim.SetTrigger("isSlash");
-        DPS(slashDamage);
-        //Charge();
-
-    }
+    
     void heavyAttack()
     {
         anim.SetTrigger("isHeavy");
@@ -256,20 +270,22 @@ public class playerController : MonoBehaviour
         
     }
 
+    //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
     IEnumerator heavyAtt ()
     {
         yield return new WaitForSeconds(1f);
         DPS(heavyDamage);
-       // Charge();
+       
     }
 
-    void heavyAttack2()
-    {
-        anim.SetTrigger("isHeavy2");
-        DPS(heavy2Damage);
-        //Charge();
-    }
+    //void heavyAttack2()
+    //{
+    //    anim.SetTrigger("isHeavy2");
+    //    DPS(heavy2Damage);
+       
+    //}
 
+    //FUNCTION FOR DISCHARGE ATTACK. TEMPORARILY STOPS ALL PLAYER MOVEMENT
     void Discharge ()
     {
         anim.SetTrigger("discharge");
@@ -283,6 +299,7 @@ public class playerController : MonoBehaviour
         lastCharge = 0;
     }
 
+    //DISCHARGE ATTACK DELAY AND DAMAGE APPLICATION. PLAYER MOVEMENT SET TO NORMAL
     IEnumerator explode()
     {
         yield return new WaitForSeconds(.4f);
@@ -315,19 +332,9 @@ public class playerController : MonoBehaviour
     #endregion
 
 
-    void Charge()
-    {
-        if (currentCharge < maxCharge) currentCharge += chargeRate;
-        else if (currentCharge >= maxCharge)
-        {
-            currentCharge = maxCharge;
-            canDischarge = true;
-            electricityCharge.Play();
 
-        }
 
-    }
-
+    //DAMAGE APPLICATION
 
     void DPS (int damageDone)
     {
@@ -343,9 +350,21 @@ public class playerController : MonoBehaviour
         }
     }
 
+    //SWORD CHARGE
+    void Charge()
+    {
+        if (currentCharge < maxCharge) currentCharge += chargeRate;
+        else if (currentCharge >= maxCharge)
+        {
+            currentCharge = maxCharge;
+            canDischarge = true;
+            electricityCharge.Play();
 
+        }
 
+    }
 
+    //VISUALS FOR THE AREAS OF ATTACK
     private void OnDrawGizmosSelected()
     {
         if (detectPoint == null || aoePoint == null) return;

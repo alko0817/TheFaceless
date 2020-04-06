@@ -37,7 +37,8 @@ public class vThirdPersonCamera : MonoBehaviour
     [HideInInspector]
     public Vector2 movementSpeed;
 
-    private Transform targetLookAt;
+    [HideInInspector]
+    public Transform targetLookAt;
     private Vector3 currentTargetPos;
     private Vector3 lookPoint;
     private Vector3 current_cPos;
