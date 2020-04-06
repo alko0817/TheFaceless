@@ -2166,8 +2166,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: clipName
-    clip: {fileID: 0}
+  - name: Bluezone_BC0234_impact_006
+    clip: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bluezone_BC0235_impact_003
+    clip: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
     volume: 1
     pitch: 1
     loop: 0

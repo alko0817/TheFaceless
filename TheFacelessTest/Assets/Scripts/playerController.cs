@@ -135,6 +135,7 @@ public class playerController : MonoBehaviour
             {
                 lastClick = dischargeDelay;
                 Discharge();
+
                 
             }
 
@@ -306,6 +307,8 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         burst.Play();
 
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0234_impact_006");
+        //Put sound here for when the character "loads" the Discharge.
         yield return new WaitForSeconds(1.3f);
 
         electricityCharge.Stop();
@@ -313,6 +316,8 @@ public class playerController : MonoBehaviour
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
 
         explosion.Play();
+        // Put sound here for when the character smashes the ground.
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0235_impact_003");
 
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
@@ -360,6 +365,7 @@ public class playerController : MonoBehaviour
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
+            //Put Sound here if you want to play a sound when sword is fully charged!
 
         }
 
