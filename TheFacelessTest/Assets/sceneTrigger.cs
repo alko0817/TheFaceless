@@ -7,8 +7,8 @@ using TMPro;
 public class sceneTrigger : MonoBehaviour
 {
     public GameObject player;
-    public GameObject panel;
-    public TextMeshProUGUI text;
+   // public GameObject panel;
+   // public TextMeshProUGUI text;
     public Animator UIAnim;
     public float fadeOutDelay = 1f;
 
