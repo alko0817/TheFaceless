@@ -46,6 +46,7 @@ public class AIBehaviour : MonoBehaviour
 
         senseTimer += Time.deltaTime;
 
+
         if(senseTimer > senseFrequency)
         {
             senseTimer = 0.0f;
@@ -54,6 +55,7 @@ public class AIBehaviour : MonoBehaviour
         }
 
         Act();
+
     }
 
 
@@ -65,6 +67,7 @@ public class AIBehaviour : MonoBehaviour
             playerDetected = true;
             lastKnownPlayerLocation = player.transform;
             Debug.Log("Player sighted by " + gameObject.name);
+
         }
         else
         {
@@ -76,7 +79,7 @@ public class AIBehaviour : MonoBehaviour
 
     void Decide()
     {
-        if(!playerDetected && state != BEHAVIOUR_STATE.PURSUE)
+        if(!playerDetected)
         {
             state = BEHAVIOUR_STATE.PATROL;
         }
@@ -96,7 +99,7 @@ public class AIBehaviour : MonoBehaviour
     {
         if (state == BEHAVIOUR_STATE.IDLE)
         {
-
+            Debug.Log(gameObject.name + " is idling");
         }
 
         if (state == BEHAVIOUR_STATE.PATROL)
