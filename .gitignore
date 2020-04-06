@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/TheFacelessTest/[Ll]ibrary/
-/TheFacelessTest/[Tt]emp/
-/TheFacelessTest/[Oo]bj/
-/TheFacelessTest/[Bb]uild/
-/TheFacelessTest/[Bb]uilds/
-/TheFacelessTest/[Ll]ogs/
-/TheFacelessTest/[Mm]emoryCaptures/
+TheFacelessTest/[Ll]ibrary/
+TheFacelessTest/[Tt]emp/
+TheFacelessTest/[Oo]bj/
+TheFacelessTest/[Bb]uild/
+TheFacelessTest/[Bb]uilds/
+TheFacelessTest/[Ll]ogs/
+TheFacelessTest/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
