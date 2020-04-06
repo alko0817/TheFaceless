@@ -253,9 +253,6 @@ public class playerController : MonoBehaviour
     {
         anim.SetTrigger("isSlash");
         DPS(slashDamage);
-        FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-
-
 
 
     }
@@ -264,12 +261,10 @@ public class playerController : MonoBehaviour
     {
         anim.SetTrigger("isSlash2");
         DPS(slash2Damage);
-        FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-
-
+        
     }
 
-
+    
     void heavyAttack()
     {
         anim.SetTrigger("isHeavy");
@@ -312,9 +307,8 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         burst.Play();
 
-        FindObjectOfType<audioManager>().Play("Charge_Discharge");
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0234_impact_006");
         //Put sound here for when the character "loads" the Discharge.
-
         yield return new WaitForSeconds(1.3f);
 
         electricityCharge.Stop();
@@ -323,7 +317,7 @@ public class playerController : MonoBehaviour
 
         explosion.Play();
         // Put sound here for when the character smashes the ground.
-        FindObjectOfType<audioManager>().Play("Impact_Discharge");
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0235_impact_003");
 
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
@@ -359,8 +353,6 @@ public class playerController : MonoBehaviour
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damageDone);
             Charge();
-            FindObjectOfType<audioManager>().Play("Head_Explosion");
-
         }
     }
 
