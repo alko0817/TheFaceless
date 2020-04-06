@@ -2196,15 +2196,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Bluezone_BC0234_impact_006
+  - name: Charge_Discharge
     clip: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Bluezone_BC0235_impact_003
+  - name: Impact_Discharge
     clip: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
-    volume: 1
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
+  - name: Hallway
+    clip: {fileID: 8300000, guid: 94ea95a11b0eba54591104dae2959e47, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Light_Hit_Electricity_Concept
+    clip: {fileID: 8300000, guid: a3314ca4cb854854e8ca1748598b3e06, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Hit_Electricity_Concept
+    clip: {fileID: 8300000, guid: a3314ca4cb854854e8ca1748598b3e06, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Head_Explosion
+    clip: {fileID: 8300000, guid: c5c008c4a15e51c41b40d891f4e744d3, type: 3}
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -5696,7 +5720,12 @@ PrefabInstance:
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: attackDelay1
-      value: 0.5
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
+        type: 3}
+      propertyPath: attackDelay2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
