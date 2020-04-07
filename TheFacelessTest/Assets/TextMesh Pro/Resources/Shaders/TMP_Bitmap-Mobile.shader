@@ -52,10 +52,7 @@ SubShader {
 		#pragma multi_compile __ UNITY_UI_CLIP_RECT
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
-<<<<<<< HEAD
-=======
 
->>>>>>> jossan
 		#include "UnityCG.cginc"
 
 		struct appdata_t {
@@ -84,26 +81,13 @@ SubShader {
 
 		v2f vert (appdata_t v)
 		{
-<<<<<<< HEAD
-			v2f o;
-=======
 			v2f OUT;
->>>>>>> jossan
 			float4 vert = v.vertex;
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 
 			vert.xy += (vert.w * 0.5) / _ScreenParams.xy;
 
-<<<<<<< HEAD
-			o.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
-			o.color = v.color;
-			o.color *= _Color;
-			o.color.rgb *= _DiffusePower;
-			o.texcoord0 = v.texcoord0;
-
-			float2 pixelSize = o.vertex.w;
-=======
 			OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
 			OUT.color = v.color;
 			OUT.color *= _Color;
@@ -111,33 +95,10 @@ SubShader {
 			OUT.texcoord0 = v.texcoord0;
 
 			float2 pixelSize = OUT.vertex.w;
->>>>>>> jossan
 			//pixelSize /= abs(float2(_ScreenParams.x * UNITY_MATRIX_P[0][0], _ScreenParams.y * UNITY_MATRIX_P[1][1]));
 
 			// Clamp _ClipRect to 16bit.
 			float4 clampedRect = clamp(_ClipRect, -2e10, 2e10);
-<<<<<<< HEAD
-			o.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
-
-			return o;
-		}
-
-		fixed4 frag (v2f i) : COLOR
-		{
-			fixed4 c = fixed4(i.color.rgb, i.color.a * tex2D(_MainTex, i.texcoord0).a);
-
-			// Alternative implementation to UnityGet2DClipping with support for softness.
-			#if UNITY_UI_CLIP_RECT
-				half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(i.mask.xy)) * i.mask.zw);
-				c *= m.x * m.y;
-			#endif
-			
-			#if UNITY_UI_ALPHACLIP
-				clip(c.a - 0.001);
-			#endif
-			
-			return c;
-=======
 			OUT.mask = float4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy));
 
 			return OUT;
@@ -158,7 +119,6 @@ SubShader {
 			#endif
 			
 			return color;
->>>>>>> jossan
 		}
 		ENDCG
 	}

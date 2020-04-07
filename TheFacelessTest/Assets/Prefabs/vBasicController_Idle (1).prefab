@@ -12036,6 +12036,16 @@ MonoBehaviour:
   shakeMagnitude: 0.2
   electricityCharge: {fileID: 2623165044172992639}
   burst: {fileID: 2688521558888931655}
+  lightAttack1: 0.4
+  lightAttack2: 0
+  heavyAttack1: 0
+  enemyHit: 0.2
+  lightAttack1Sound: Samurai_Slash
+  lightAttack2Sound: 
+  heavyAttackSound: 
+  enemyHitSound: 
+  otherSounds: []
+  otherSoundsIndex: 0
 --- !u!1 &2623165045089791630
 GameObject:
   m_ObjectHideFlags: 0

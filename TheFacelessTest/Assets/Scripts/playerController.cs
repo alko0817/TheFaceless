@@ -71,6 +71,25 @@ public class playerController : MonoBehaviour
     public float shakeMagnitude = 1f;
     public ParticleSystem electricityCharge;
     public ParticleSystem burst;
+
+    //SOUNDS
+    [Header("Sound Delays")]
+    public float lightAttack1 = 0.4f;
+    public float lightAttack2 = 0.6f;
+    public float heavyAttack1 = 1.2f;
+    public float enemyHit = .2f;
+
+    [Header("Sound Clips")]
+    [Tooltip("Copy-paste the clip name from the Audio Manager")]
+    public string lightAttack1Sound;
+    public string lightAttack2Sound;
+    public string heavyAttackSound;
+    public string enemyHitSound;
+    public string[] otherSounds;
+    public int otherSoundsIndex;
+    
+
+
     #endregion
 
     //TESTING VARS
@@ -262,40 +281,23 @@ public class playerController : MonoBehaviour
     #region AttackingFunctions
 
     
+
     void Slash()
     {
         anim.SetTrigger("isSlash");       
         DPS(slashDamage);
-        //FindObjectOfType<audioManager>().Play("Light_Slash_1");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_3");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_5"); //favourite
-        //FindObjectOfType<audioManager>().Play("Light_Slash_7"); //favourite
-        //FindObjectOfType<audioManager>().Play("Light_Slash_9");
-        //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
-        //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-        FindObjectOfType<audioManager>().Play("Samurai_Slash");
-
-
-
-
+        StartCoroutine(AttackConnect(lightAttack1, lightAttack1Sound));
+        
 
     }
+
+    
 
     void Slash2()
     {
         anim.SetTrigger("isSlash2");        
         DPS(slash2Damage);
-        //FindObjectOfType<audioManager>().Play("Light_Slash_2");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_4");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_6"); //favourite
-        //FindObjectOfType<audioManager>().Play("Light_Slash_8"); //favourite
-        //FindObjectOfType<audioManager>().Play("Light_Slash_10");
-        //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
-        //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-        FindObjectOfType<audioManager>().Play("Samurai_Slash");
-
-
-
+        StartCoroutine(AttackConnect(lightAttack2, lightAttack2Sound));
 
     }
 
@@ -313,6 +315,7 @@ public class playerController : MonoBehaviour
 
         anim.SetTrigger("isHeavy");
         StartCoroutine("heavyAtt");
+        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
 
     }
 
@@ -381,6 +384,21 @@ public class playerController : MonoBehaviour
         }
         
     }
+
+    IEnumerator AttackConnect(float delay, string clip)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (clip == null)
+        {
+            yield return null;
+            Debug.LogWarning("No clip"); 
+        }
+
+        else FindObjectOfType<audioManager>().Play(clip);
+
+
+    }
     #endregion
 
 
@@ -397,6 +415,8 @@ public class playerController : MonoBehaviour
         //APPLY DPS
         foreach (Collider enemy in hitEnemies)
         {
+            StartCoroutine(AttackConnect(enemyHit, enemyHitSound));
+
             enemy.GetComponent<AIBehaviour>().TakeDamage(damageDone);
             Charge();
         }
