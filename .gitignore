@@ -2,7 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/TheFacelessTest/[Ll]ibrary/**
+/TheFacelessTest/Library/**
 /TheFacelessTest/[Tt]emp/
 /TheFacelessTest/[Oo]bj/
 /TheFacelessTest/[Bb]uild/
