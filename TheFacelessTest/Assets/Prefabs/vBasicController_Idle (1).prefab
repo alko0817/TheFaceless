@@ -11597,7 +11597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2623165045021964786
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12012,11 +12012,12 @@ MonoBehaviour:
     m_Bits: 512
   attackRadius: 1
   aoeRadius: 5
-  attackDelay1: 0.6
-  attackDelay2: 0.7
+  attackDelay1: 0.4
+  attackDelay2: 0.6
   heavyDelay: 1.5
+  dischargeDelay: 2
   nextAttack: 2.4
-  attacking: 0
+  holdFor: 0.207
   slashDamage: 10
   slash2Damage: 15
   heavyDamage: 30
