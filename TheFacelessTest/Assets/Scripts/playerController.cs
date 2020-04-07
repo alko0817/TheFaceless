@@ -268,12 +268,12 @@ public class playerController : MonoBehaviour
         DPS(slashDamage);
         //FindObjectOfType<audioManager>().Play("Light_Slash_1");
         //FindObjectOfType<audioManager>().Play("Light_Slash_3");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_5"); //favourite
+        FindObjectOfType<audioManager>().Play("Light_Slash_5"); //favourite
         //FindObjectOfType<audioManager>().Play("Light_Slash_7"); //favourite
         //FindObjectOfType<audioManager>().Play("Light_Slash_9");
         //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
         //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-        FindObjectOfType<audioManager>().Play("Samurai_Slash");
+        //FindObjectOfType<audioManager>().Play("Samurai_Slash");
 
 
 
@@ -287,12 +287,12 @@ public class playerController : MonoBehaviour
         DPS(slash2Damage);
         //FindObjectOfType<audioManager>().Play("Light_Slash_2");
         //FindObjectOfType<audioManager>().Play("Light_Slash_4");
-        //FindObjectOfType<audioManager>().Play("Light_Slash_6"); //favourite
+        FindObjectOfType<audioManager>().Play("Light_Slash_6"); //favourite
         //FindObjectOfType<audioManager>().Play("Light_Slash_8"); //favourite
         //FindObjectOfType<audioManager>().Play("Light_Slash_10");
         //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
         //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
-        FindObjectOfType<audioManager>().Play("Samurai_Slash");
+        //FindObjectOfType<audioManager>().Play("Samurai_Slash");
 
 
 
@@ -399,6 +399,14 @@ public class playerController : MonoBehaviour
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damageDone);
             Charge();
+            //Puy Sound here if you want to play a sound when enemies takes DMG
+            //FindObjectOfType<audioManager>().Play("Enemy_Take_DMG");
+            //FindObjectOfType<audioManager>().Play("Enemy_Take_DMG_1");
+            //FindObjectOfType<audioManager>().Play("Enemy_Take_DMG_2");
+            //FindObjectOfType<audioManager>().Play("Enemy_Take_DMG_3");
+            FindObjectOfType<audioManager>().Play("Enemy_Take_DMG_4");
+
+
         }
     }
 
