@@ -55,6 +55,10 @@ Properties {
 	_ScaleX				("Scale X", float) = 1.0
 	_ScaleY				("Scale Y", float) = 1.0
 	_PerspectiveFilter	("Perspective Correction", Range(0, 1)) = 0.875
+<<<<<<< HEAD
+=======
+	_Sharpness			("Sharpness", Range(-1,1)) = 0
+>>>>>>> jossan
 
 	_VertexOffsetX		("Vertex OffsetX", float) = 0
 	_VertexOffsetY		("Vertex OffsetY", float) = 0
