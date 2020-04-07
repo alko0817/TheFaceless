@@ -71,6 +71,14 @@ public class playerController : MonoBehaviour
     public float shakeMagnitude = 1f;
     public ParticleSystem electricityCharge;
     public ParticleSystem burst;
+
+    //SOUNDS
+    [Header("Sound Delays")]
+    public float lightAttack1 = 0f;
+    public float lightAttack2 = 0f;
+    public float lightAttack3 = 0f;
+
+
     #endregion
 
     //TESTING VARS
@@ -275,9 +283,11 @@ public class playerController : MonoBehaviour
         //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
         FindObjectOfType<audioManager>().Play("Samurai_Slash");
 
+    }
 
-
-
+    IEnumerator AttackConnect ()
+    {
+        yield return new WaitForSeconds(1f);
 
     }
 
