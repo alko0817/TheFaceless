@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class AIBehaviour : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class AIBehaviour : MonoBehaviour
     private float currentHealth;
 
     public Image healthBar;
+    private static Transform startPosition;
+
 
     #region Player Parameters
 
@@ -40,6 +43,10 @@ public class AIBehaviour : MonoBehaviour
     BEHAVIOUR_STATE state;
 
     // Start is called before the first frame update
+
+
+
+
     void Start()
     {
         playerDetected = false;
@@ -47,6 +54,10 @@ public class AIBehaviour : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         state = BEHAVIOUR_STATE.IDLE;
         currentHealth = maxHealth;
+
+        GetComponent<NavMeshAgent>().stoppingDistance = attackDistance;
+
+        startPosition = transform;
     }
 
     // Update is called once per frame
@@ -57,8 +68,9 @@ public class AIBehaviour : MonoBehaviour
 
         senseTimer += Time.deltaTime;
 
+        Debug.Log("Start position = " + startPosition.position);
 
-        if(senseTimer > senseFrequency)
+        if (senseTimer > senseFrequency)
         {
             senseTimer = 0.0f;
             Sense();
@@ -71,6 +83,8 @@ public class AIBehaviour : MonoBehaviour
         {
             Die();
         }
+        Debug.Log("Last Known PLayer position = " + lastKnownPlayerLocation.position);
+
     }
 
 
@@ -79,8 +93,9 @@ public class AIBehaviour : MonoBehaviour
 
         if (distanceToPlayer < sightDistance)
         {
-            playerDetected = true;
             lastKnownPlayerLocation = player.transform;
+
+            playerDetected = true;
             Debug.Log("Player sighted by " + gameObject.name);
 
         }
@@ -94,7 +109,7 @@ public class AIBehaviour : MonoBehaviour
 
     void Decide()
     {
-        if(!playerDetected)
+        if(!playerDetected && state != BEHAVIOUR_STATE.PURSUE)
         {
             state = BEHAVIOUR_STATE.PATROL;
         }
@@ -125,6 +140,10 @@ public class AIBehaviour : MonoBehaviour
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
             MoveTo(lastKnownPlayerLocation);
+            if(transform == lastKnownPlayerLocation)
+            {
+                state = BEHAVIOUR_STATE.PATROL;
+            }
         }
 
         if(state == BEHAVIOUR_STATE.ATTACK)
@@ -147,14 +166,17 @@ public class AIBehaviour : MonoBehaviour
     void Patrol()
     {
         Debug.Log(gameObject.name + " is patrolling");
+        MoveTo(startPosition);
     }
 
     void MoveTo(Transform location)
     {
-        Vector3 direction = location.position - transform.position;
-        direction.Normalize();
+        //Vector3 direction = location.position - transform.position;
+        //direction.Normalize();
 
-        transform.position = transform.position + (direction * speed * Time.deltaTime);
+        //transform.position = transform.position + (direction * speed * Time.deltaTime);
+
+        GetComponent<NavMeshAgent>().destination = location.position;
     }
 
     void Block()
