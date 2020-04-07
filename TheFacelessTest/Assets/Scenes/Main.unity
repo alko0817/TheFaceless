@@ -2230,9 +2230,69 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Samurai_Slash
-    clip: {fileID: 8300000, guid: 8ebe50190202a2d48816dd0baf91a574, type: 3}
-    volume: 0.15
+  - name: Enemy_Take_DMG
+    clip: {fileID: 8300000, guid: 16c4f7177c762414fb9cf60b3c0d5c25, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_1
+    clip: {fileID: 8300000, guid: 46fe361e60b3bc5458e1f74c0c73325d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_2
+    clip: {fileID: 8300000, guid: e56b9aa187a097d488f36e5dff683e19, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 8300000, guid: 875a48735c30af441b4a6ea836e976da, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_4
+    clip: {fileID: 8300000, guid: 4993b65ea0cbbd745b1a371662a0ddf1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Alien Evil 1
+    clip: {fileID: 8300000, guid: edaf788c1016281448bb54ce990d7dbe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy_Take_DMG_3
+    clip: {fileID: 0}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
