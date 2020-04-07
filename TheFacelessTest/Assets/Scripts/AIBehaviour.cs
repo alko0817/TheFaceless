@@ -23,13 +23,13 @@ public class AIBehaviour : MonoBehaviour
     private float currentHealth;
 
     public Image healthBar;
-    private static Transform startPosition;
+    private static Vector3 startPosition;
 
 
     #region Player Parameters
 
     private GameObject player;
-    private Transform lastKnownPlayerLocation;
+    private Vector3 lastKnownPlayerLocation;
     private float distanceToPlayer;
 
     private bool playerDetected;
@@ -57,7 +57,7 @@ public class AIBehaviour : MonoBehaviour
 
         GetComponent<NavMeshAgent>().stoppingDistance = attackDistance;
 
-        startPosition = transform;
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -68,22 +68,22 @@ public class AIBehaviour : MonoBehaviour
 
         senseTimer += Time.deltaTime;
 
-        Debug.Log("Start position = " + startPosition.position);
+        //Debug.Log("Start position = " + startPosition.position);
 
         if (senseTimer > senseFrequency)
         {
             senseTimer = 0.0f;
             Sense();
             Decide();
-        }
 
+        }
         Act();
 
         if (currentHealth <= 0)
         {
             Die();
         }
-        Debug.Log("Last Known PLayer position = " + lastKnownPlayerLocation.position);
+        //Debug.Log("Last Known PLayer position = " + lastKnownPlayerLocation.position);
 
     }
 
@@ -93,7 +93,7 @@ public class AIBehaviour : MonoBehaviour
 
         if (distanceToPlayer < sightDistance)
         {
-            lastKnownPlayerLocation = player.transform;
+            lastKnownPlayerLocation = player.transform.position;
 
             playerDetected = true;
             Debug.Log("Player sighted by " + gameObject.name);
@@ -140,7 +140,7 @@ public class AIBehaviour : MonoBehaviour
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
             MoveTo(lastKnownPlayerLocation);
-            if(transform == lastKnownPlayerLocation)
+            if(transform.position == lastKnownPlayerLocation)
             {
                 state = BEHAVIOUR_STATE.PATROL;
             }
@@ -165,18 +165,19 @@ public class AIBehaviour : MonoBehaviour
 
     void Patrol()
     {
-        Debug.Log(gameObject.name + " is patrolling");
         MoveTo(startPosition);
+        Debug.Log(gameObject.name + " is patrolling");
+
     }
 
-    void MoveTo(Transform location)
+    void MoveTo(Vector3 location)
     {
         //Vector3 direction = location.position - transform.position;
         //direction.Normalize();
 
         //transform.position = transform.position + (direction * speed * Time.deltaTime);
 
-        GetComponent<NavMeshAgent>().destination = location.position;
+        GetComponent<NavMeshAgent>().destination = location;
     }
 
     void Block()
