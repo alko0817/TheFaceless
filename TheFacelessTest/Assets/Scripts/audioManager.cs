@@ -23,6 +23,11 @@ public class audioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Play("hallway");
+    }
+
     public void Play (string name)
     {
         
