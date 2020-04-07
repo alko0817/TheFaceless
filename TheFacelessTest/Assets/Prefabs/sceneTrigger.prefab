@@ -107,7 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  panel: {fileID: 0}
-  text: {fileID: 0}
   UIAnim: {fileID: 0}
   fadeOutDelay: 5
