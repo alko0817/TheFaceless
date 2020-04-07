@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 
 public class AIBehaviour : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class AIBehaviour : MonoBehaviour
     {
         IDLE,
         PATROL,
+        SUSPICIOUS,
         PURSUE,
         ATTACK,
         BLOCK
     }
+
+    public VisualizePatrol patrolPath;
+    public float waypointTolerance = 1.0f;
+    int currentWaypointIndex = 0;
 
     public float sightDistance;
     public float attackDistance;
@@ -33,7 +39,8 @@ public class AIBehaviour : MonoBehaviour
     private float distanceToPlayer;
 
     private bool playerDetected;
-
+    private float timeSinceLastSawPlayer = Mathf.Infinity;
+    private float suspisionTime = 5.0f;
     #endregion
 
     public float senseFrequency;
@@ -57,6 +64,7 @@ public class AIBehaviour : MonoBehaviour
 
         GetComponent<NavMeshAgent>().stoppingDistance = attackDistance;
 
+        transform.position = patrolPath.GetWaypoint(0);
         startPosition = transform.position;
     }
 
@@ -67,6 +75,7 @@ public class AIBehaviour : MonoBehaviour
         distanceToPlayer = vectorToPlayer.magnitude;
 
         senseTimer += Time.deltaTime;
+
 
         //Debug.Log("Start position = " + startPosition.position);
 
@@ -84,9 +93,13 @@ public class AIBehaviour : MonoBehaviour
             Die();
         }
         //Debug.Log("Last Known PLayer position = " + lastKnownPlayerLocation.position);
-
+        timeSinceLastSawPlayer += Time.deltaTime;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, sightDistance);
+    }
 
     void Sense()
     {
@@ -97,7 +110,7 @@ public class AIBehaviour : MonoBehaviour
 
             playerDetected = true;
             Debug.Log("Player sighted by " + gameObject.name);
-
+            timeSinceLastSawPlayer = 0.0f;
         }
         else
         {
@@ -109,9 +122,13 @@ public class AIBehaviour : MonoBehaviour
 
     void Decide()
     {
-        if(!playerDetected && state != BEHAVIOUR_STATE.PURSUE)
+        if(!playerDetected && timeSinceLastSawPlayer > suspisionTime)
         {
             state = BEHAVIOUR_STATE.PATROL;
+        }
+        else if(!playerDetected && timeSinceLastSawPlayer < suspisionTime)
+        {
+            state = BEHAVIOUR_STATE.SUSPICIOUS;
         }
 
         if (playerDetected && distanceToPlayer > attackDistance)
@@ -132,6 +149,11 @@ public class AIBehaviour : MonoBehaviour
             Debug.Log(gameObject.name + " is idling");
         }
 
+        if(state ==BEHAVIOUR_STATE.SUSPICIOUS)
+        {
+            Debug.Log(gameObject.name + " is suspicious");
+        }
+
         if (state == BEHAVIOUR_STATE.PATROL)
         {
             Patrol();
@@ -140,10 +162,11 @@ public class AIBehaviour : MonoBehaviour
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
             MoveTo(lastKnownPlayerLocation);
-            if(transform.position == lastKnownPlayerLocation)
-            {
-                state = BEHAVIOUR_STATE.PATROL;
-            }
+            //if (transform.position == lastKnownPlayerLocation)
+            //{
+            //    state = BEHAVIOUR_STATE.PATROL;
+
+            //}
         }
 
         if(state == BEHAVIOUR_STATE.ATTACK)
@@ -165,10 +188,44 @@ public class AIBehaviour : MonoBehaviour
 
     void Patrol()
     {
-        MoveTo(startPosition);
+        //MoveTo(startPosition);
+        Vector3 nextPosition = startPosition;
+
+        if (patrolPath != null)
+        {
+            if (AtWaypoint())
+            {
+                CycleWaypoint();
+            }
+            nextPosition = GetCurrentWaypoint();
+        }
+
+        MoveTo(nextPosition);
+
         Debug.Log(gameObject.name + " is patrolling");
 
     }
+
+    #region Waypoint Finders
+    private bool AtWaypoint()
+    {
+        float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
+
+        return distanceToWaypoint < waypointTolerance;
+    }
+
+    private void CycleWaypoint()
+    {
+        currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+    }
+
+    private Vector3 GetCurrentWaypoint()
+    {
+        return patrolPath.GetWaypoint(currentWaypointIndex);
+    }
+
+    #endregion
+
 
     void MoveTo(Vector3 location)
     {
