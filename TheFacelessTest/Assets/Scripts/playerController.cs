@@ -34,8 +34,9 @@ public class playerController : MonoBehaviour
     float holdClick = 0;
     [Range(.1f, 1f)]
     public float holdFor = .2f;
-    bool holding = false;
-    bool attacked = true;
+    //bool holding = false;
+    //bool attacked = true;
+    //bool canHeavy = true;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -122,13 +123,13 @@ public class playerController : MonoBehaviour
             //NEW HEAVY ATTACK
                
 
-            if (Input.GetButton("Fire1"))
-            {
-                attacked = false;
-                holdClick += Time.deltaTime;
-                heavyAttack();
+            //if (Input.GetButton("Fire1") && canHeavy)
+            //{
+            //    attacked = false;
+            //    holdClick += Time.deltaTime;
+            //    heavyAttack();
 
-            }
+            //}
 
             //DISCHARGE
             if (Input.GetButton("discharge") && canDischarge)
@@ -140,14 +141,14 @@ public class playerController : MonoBehaviour
             }
 
             //OLD HEAVY ATTACK
-            //if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
-            //{
-            //    lastClick = heavyDelay;
-            //    //combosHeavy = 1;
-            //    heavyAttack();
+            if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
+            {
+                lastClick = heavyDelay;
+                //combosHeavy = 1;
+                heavyAttack();
 
-            //    //nextCombo = nextAttack;
-            //}
+                //nextCombo = nextAttack;
+            }
 
         }
 
@@ -279,18 +280,18 @@ public class playerController : MonoBehaviour
     
     void heavyAttack()
     {
-        if (holdClick > holdFor && !attacked)
-        {
-            Debug.LogError("holding " + holdClick);
-            anim.SetTrigger("isHeavy");
-            StartCoroutine("heavyAtt");
-            attacked = true;
-            holdClick = 0;
-        }
-        
-        //anim.SetTrigger("isHeavy");
-        //StartCoroutine("heavyAtt");
-        
+        //if (holdClick > holdFor && !attacked)
+        //{
+        //    Debug.LogError("holding " + holdClick);
+        //    anim.SetTrigger("isHeavy");
+        //    //StartCoroutine("heavyAtt");
+        //    attacked = true;
+        //    holdClick = 0;
+        //}
+
+        anim.SetTrigger("isHeavy");
+        StartCoroutine("heavyAtt");
+
     }
 
     //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
