@@ -24,13 +24,19 @@ public class playerController : MonoBehaviour
     int combosHeavy = 0;
     float lastClick = 0f;
 
-    [Header("- Attack Delays")]
+    [Header("- Attack Intervals")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
     public float heavyDelay = 1f;
+    public float dischargeDelay = 2f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
-    public bool attacking = false;
+    float holdClick = 0;
+    [Range(.1f, 1f)]
+    public float holdFor = .2f;
+    //bool holding = false;
+    //bool attacked = true;
+    //bool canHeavy = true;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -69,7 +75,7 @@ public class playerController : MonoBehaviour
 
     //TESTING VARS
     protected float originSpeed;
-
+    float clickHold = 0;
 
     private void Start()
     {
@@ -92,11 +98,6 @@ public class playerController : MonoBehaviour
         }
 
 
-       
-
-
-
-
 
         #endregion
 
@@ -109,7 +110,7 @@ public class playerController : MonoBehaviour
         if (lastClick <= 0)
         {
             //LIGHT ATTACK
-            if (Input.GetButtonDown("Fire1") && (combos == 0))
+            if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 lastClick = attackDelay1;
                 combos = 1;
@@ -119,7 +120,27 @@ public class playerController : MonoBehaviour
 
             }
 
-            //HEAVY ATTACK
+            //NEW HEAVY ATTACK
+               
+
+            //if (Input.GetButton("Fire1") && canHeavy)
+            //{
+            //    attacked = false;
+            //    holdClick += Time.deltaTime;
+            //    heavyAttack();
+
+            //}
+
+            //DISCHARGE
+            if (Input.GetButton("discharge") && canDischarge)
+            {
+                lastClick = dischargeDelay;
+                Discharge();
+
+                
+            }
+
+            //OLD HEAVY ATTACK
             if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
             {
                 lastClick = heavyDelay;
@@ -129,20 +150,14 @@ public class playerController : MonoBehaviour
                 //nextCombo = nextAttack;
             }
 
-            //DISCHARGE
-            if (Input.GetButtonDown("discharge") && canDischarge)
-            {
-                lastClick = attackDelay1;
-                Discharge();
-                
-            }
-
         }
+
+       // if (Input.GetButtonUp("Fire1")) holdClick = 0;
 
         //LIGHT ATTACK COMBO
         if (lastClick <= 0 && nextCombo > 0)
         {
-            if (Input.GetButtonDown("Fire1") && (combos == 1))
+            if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 lastClick = attackDelay2;
                 combos = 0;
@@ -265,9 +280,18 @@ public class playerController : MonoBehaviour
     
     void heavyAttack()
     {
+        //if (holdClick > holdFor && !attacked)
+        //{
+        //    Debug.LogError("holding " + holdClick);
+        //    anim.SetTrigger("isHeavy");
+        //    //StartCoroutine("heavyAtt");
+        //    attacked = true;
+        //    holdClick = 0;
+        //}
+
         anim.SetTrigger("isHeavy");
         StartCoroutine("heavyAtt");
-        
+
     }
 
     //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
@@ -305,6 +329,9 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         burst.Play();
 
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0234_impact_006");
+        //Put sound here for when the character "loads" the Discharge.
+
         yield return new WaitForSeconds(1.3f);
 
         electricityCharge.Stop();
@@ -312,6 +339,9 @@ public class playerController : MonoBehaviour
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
 
         explosion.Play();
+
+        // Put sound here for when the character smashes the ground.
+        FindObjectOfType<audioManager>().Play("Bluezone_BC0235_impact_003");
 
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
@@ -359,6 +389,7 @@ public class playerController : MonoBehaviour
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
+            //Put Sound here if you want to play a sound when sword is fully charged!
 
         }
 

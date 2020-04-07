@@ -11924,7 +11924,7 @@ MonoBehaviour:
     walkByDefault: 1
     rotateWithCamera: 0
     walkSpeed: 4
-    runningSpeed: 5
+    runningSpeed: 10
     sprintSpeed: 8
   jumpWithRigidbodyForce: 0
   jumpAndRotate: 1
@@ -12032,7 +12032,7 @@ MonoBehaviour:
   swordFill: {fileID: 0}
   camShake: {fileID: 2623165044700509559}
   shakeDuration: 0.5
-  shakeMagnitude: 0.5
+  shakeMagnitude: 0.2
   electricityCharge: {fileID: 2623165044172992639}
   burst: {fileID: 2688521558888931655}
 --- !u!1 &2623165045089791630

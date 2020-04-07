@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 6215925131401345264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000016024474}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.98087996, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 6215925132003877497}
   m_RootOrder: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 6215925132303965933}
   - component: {fileID: 6215925132303965934}
   - component: {fileID: 6215925132303965935}
-  - component: {fileID: 6215925132303965939}
+  - component: {fileID: 2469879772081296306}
   m_Layer: 9
   m_Name: enemyProp
   m_TagString: Untagged
@@ -356,7 +356,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6215925132303965939
+--- !u!114 &2469879772081296306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,11 +365,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6215925132303965928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd5846acda880147b0dec01b3d3422c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad190f8b782d8b4cbecaa18a92f2acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sightDistance: 15
+  attackDistance: 3
+  speed: 1
+  maxHealth: 100
   healthBar: {fileID: 6215925131401345270}
-  enemyHealth: 100
+  senseFrequency: 2
 --- !u!1001 &6215925130621809461
 PrefabInstance:
   m_ObjectHideFlags: 0
