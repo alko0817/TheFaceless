@@ -25,7 +25,10 @@ public class audioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("hallway");
+        //Play("Hallway");
+        //Play("Hallway2");
+        Play("Hallway3");
+        //Play("Background_Music");
     }
 
     public void Play (string name)

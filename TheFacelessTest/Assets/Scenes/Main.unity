@@ -2116,15 +2116,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Bluezone_BC0234_impact_006
+  - name: Discharge_First
     clip: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Bluezone_BC0235_impact_003
+  - name: Discharge_Second
     clip: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
-    volume: 1
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_2
+    clip: {fileID: 8300000, guid: 1080154d511c94245b61f0b3d074566d, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_1
+    clip: {fileID: 8300000, guid: 96856b22b11edb1438a0ebe925a5b09c, type: 3}
+    volume: 0.15
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -2133,6 +2145,96 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Light_Slash_3
+    clip: {fileID: 8300000, guid: 9b56eb27510cfac4482c6d2b40e653c8, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_4
+    clip: {fileID: 8300000, guid: 149dbae582cfe0c459bf85c6d908c315, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_5
+    clip: {fileID: 8300000, guid: 720ddb630da3a0b42b038c6f248cebd1, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_6
+    clip: {fileID: 8300000, guid: 28ebae265b898274da4d6aca5f22e924, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_7
+    clip: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_8
+    clip: {fileID: 8300000, guid: 0f51666af62543e4391248200ef9a761, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_9
+    clip: {fileID: 8300000, guid: a268730d3674feb47b48e8e8a13ce268, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Slash_10
+    clip: {fileID: 8300000, guid: 10597d74e6328a0479622265494fac5b, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Hit_Concept
+    clip: {fileID: 8300000, guid: 14edaf85bee93434dbf4dbe6c23345ea, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Light_Hit_Electricity_Concept
+    clip: {fileID: 8300000, guid: 1b5ce467b18389049a9a66a12b549f6e, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hallway2
+    clip: {fileID: 8300000, guid: ce17eb36774164740b8e26186fff4c0d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Background_Music
+    clip: {fileID: 8300000, guid: 2c036b5abafae304dabd45228cf0c038, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Samurai_Slash
+    clip: {fileID: 8300000, guid: 8ebe50190202a2d48816dd0baf91a574, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hallway3
+    clip: {fileID: 8300000, guid: 8a4c51fc8ea63ea4e8f50c7ad737dff2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Samurai_Slash
+    clip: {fileID: 8300000, guid: 8ebe50190202a2d48816dd0baf91a574, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!1 &705507993
 GameObject:

@@ -264,20 +264,42 @@ public class playerController : MonoBehaviour
     
     void Slash()
     {
-        anim.SetTrigger("isSlash");
+        anim.SetTrigger("isSlash");       
         DPS(slashDamage);
+        //FindObjectOfType<audioManager>().Play("Light_Slash_1");
+        //FindObjectOfType<audioManager>().Play("Light_Slash_3");
+        //FindObjectOfType<audioManager>().Play("Light_Slash_5"); //favourite
+        //FindObjectOfType<audioManager>().Play("Light_Slash_7"); //favourite
+        //FindObjectOfType<audioManager>().Play("Light_Slash_9");
+        //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
+        //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
+        FindObjectOfType<audioManager>().Play("Samurai_Slash");
+
+
+
 
 
     }
 
     void Slash2()
     {
-        anim.SetTrigger("isSlash2");
+        anim.SetTrigger("isSlash2");        
         DPS(slash2Damage);
-        
+        //FindObjectOfType<audioManager>().Play("Light_Slash_2");
+        //FindObjectOfType<audioManager>().Play("Light_Slash_4");
+        //FindObjectOfType<audioManager>().Play("Light_Slash_6"); //favourite
+        //FindObjectOfType<audioManager>().Play("Light_Slash_8"); //favourite
+        //FindObjectOfType<audioManager>().Play("Light_Slash_10");
+        //FindObjectOfType<audioManager>().Play("Light_Hit_Concept");
+        //FindObjectOfType<audioManager>().Play("Light_Hit_Electricity_Concept");
+        FindObjectOfType<audioManager>().Play("Samurai_Slash");
+
+
+
+
     }
 
-    
+
     void heavyAttack()
     {
         //if (holdClick > holdFor && !attacked)
@@ -329,7 +351,7 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         burst.Play();
 
-        FindObjectOfType<audioManager>().Play("Bluezone_BC0234_impact_006");
+        FindObjectOfType<audioManager>().Play("Discharge_First");
         //Put sound here for when the character "loads" the Discharge.
 
         yield return new WaitForSeconds(1.3f);
@@ -341,7 +363,7 @@ public class playerController : MonoBehaviour
         explosion.Play();
 
         // Put sound here for when the character smashes the ground.
-        FindObjectOfType<audioManager>().Play("Bluezone_BC0235_impact_003");
+        FindObjectOfType<audioManager>().Play("Discharge_Second");
 
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
