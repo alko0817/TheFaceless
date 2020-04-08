@@ -5038,7 +5038,7 @@ GameObject:
   - component: {fileID: 6215925132303965934}
   - component: {fileID: 6215925132303965935}
   - component: {fileID: 2469879772081296306}
-  - component: {fileID: 5782355657563779059}
+  - component: {fileID: 432931987}
   m_Layer: 9
   m_Name: enemyProp
   m_TagString: Untagged
@@ -5055,7 +5055,7 @@ Transform:
   m_GameObject: {fileID: 6215925132303965928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.29, y: 1.04, z: -19.19}
-  m_LocalScale: {x: 1, y: 1.9642199, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 6220467167147244813}
   - {fileID: 6215925131780492275}
@@ -5135,14 +5135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPath: {fileID: 0}
-  waypointTolerance: 1
+  waypointTolerance: 1.5
+  waypointWaitTime: 2
   sightDistance: 15
   attackDistance: 3
-  speed: 1
   maxHealth: 100
   healthBar: {fileID: 6215925131401345270}
-  senseFrequency: 2
---- !u!195 &5782355657563779059
+  suspicionTime: 5
+  senseFrequency: 0.5
+--- !u!195 &432931987
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5152,7 +5153,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -5164,44 +5165,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!1001 &6215925130621809461
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6215925132303965928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585901dad4c09564db67dc1e08787f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEffectTime: 2
-  pause: 1
-  fadeIn:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &6216645354522602411
 GameObject:
   m_ObjectHideFlags: 0

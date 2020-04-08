@@ -19,37 +19,53 @@ public class AIBehaviour : MonoBehaviour
     NavMeshAgent navMeshAgent;
 
     #region Patrolling Paramenters
-
+    [Header("- Patrolling Parameters")]
+    [Tooltip("The Patrol Route of this enemy. Drag the Patrol Route you want this enemy to follow into this box.")]
     public PatrolRoute patrolPath;
+    [Tooltip("The distance away from a waypoint that this enemy has to reach before moving to the next one. Must be no less than 1.2.")]
     public float waypointTolerance;
-    int currentWaypointIndex;
+    [Tooltip("The number of seconds this enemy waits at each waypoint.")]
+    public float waypointWaitTime;
+    private int currentWaypointIndex;
+    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     #endregion
 
+    #region Distancing Parameters
+    [Header("- Distancing Parameters")]
+    [Tooltip("The range at which this enemy will detect the player")]
     public float sightDistance;
+    [Tooltip("The range at which this enemy will attack the player")]
     public float attackDistance;
+    #endregion
 
     #region Health Parameters
-
+    [Header("- Health Parameters")]
+    [Tooltip("The max health of this enemy.")]
     public float maxHealth;
     private float currentHealth;
+    [Tooltip("The health bar image associated with this enemy")]
     public Image healthBar;
+
     #endregion
 
     private static Vector3 startPosition;
 
 
     #region Player Parameters
-
+    [Header("- Player Parameters")]
     private GameObject player;
     private Vector3 lastKnownPlayerLocation;
     private float distanceToPlayer;
 
     private bool playerDetected;
     private float timeSinceLastSawPlayer = Mathf.Infinity;
-    private float suspisionTime = 5.0f;
+    [Tooltip("The number of seconds this enemy will wait after losing sight of the player before returning to its patrol route.")]
+    public float suspicionTime;
     #endregion
 
     #region Sensing Parameters
+    [Header("- Sensing Parameters")]
+    [Tooltip("The frequency that this enemy gathers information about the player. The number of seconds between each Sense() action.")]
     public float senseFrequency;
     private float senseTimer;
     #endregion
@@ -69,7 +85,6 @@ public class AIBehaviour : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         currentWaypointIndex = 0;
-        waypointTolerance = 1.5f;
         transform.position = GetCurrentWaypoint();
         startPosition = transform.position;
     }
@@ -79,9 +94,6 @@ public class AIBehaviour : MonoBehaviour
     {
         Vector3 vectorToPlayer = player.transform.position - transform.position;
         distanceToPlayer = vectorToPlayer.magnitude;
-
-        senseTimer += Time.deltaTime;
-
 
         if (senseTimer > senseFrequency)
         {
@@ -97,14 +109,22 @@ public class AIBehaviour : MonoBehaviour
             Die();
         }
 
-        timeSinceLastSawPlayer += Time.deltaTime;
+        UpdateTimers();
     }
 
+    private void UpdateTimers()
+    {
+        timeSinceLastSawPlayer += Time.deltaTime;
+        timeSinceArrivedAtWaypoint += Time.deltaTime;
+        senseTimer += Time.deltaTime;
+
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
     }
 
+    #region AI LOOP
     void Sense()
     {
 
@@ -127,14 +147,14 @@ public class AIBehaviour : MonoBehaviour
 
     void Decide()
     {
-        if(!playerDetected && timeSinceLastSawPlayer > suspisionTime)
+        if(!playerDetected && timeSinceLastSawPlayer > suspicionTime)
         {
             state = BEHAVIOUR_STATE.PATROL;
         }
-        //if (!playerDetected && timeSinceLastSawPlayer < suspisionTime)
-        //{
-        //    state = BEHAVIOUR_STATE.SUSPICIOUS;
-        //}
+        if (!playerDetected && timeSinceLastSawPlayer < suspicionTime)
+        {
+            state = BEHAVIOUR_STATE.SUSPICIOUS;
+        }
 
         if (playerDetected && distanceToPlayer > attackDistance)
         {
@@ -150,26 +170,20 @@ public class AIBehaviour : MonoBehaviour
     void Act()
     {
 
-
-        if(state ==BEHAVIOUR_STATE.SUSPICIOUS)
+        if(state == BEHAVIOUR_STATE.SUSPICIOUS)
         {
+            Stop();
             print(gameObject.name + " is suspicious");
         }
 
         if (state == BEHAVIOUR_STATE.PATROL)
         {
             Patrol();
-
         }
 
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
             MoveTo(lastKnownPlayerLocation);
-            //if (transform.position == lastKnownPlayerLocation)
-            //{
-            //    state = BEHAVIOUR_STATE.PATROL;
-
-            //}
         }
 
         if(state == BEHAVIOUR_STATE.ATTACK)
@@ -183,42 +197,40 @@ public class AIBehaviour : MonoBehaviour
         }
 
     }
-
-    void Attack()
-    {
-        Debug.Log(gameObject.name + " is attacking");
-    }
+    #endregion
 
     void Patrol()
     {
-
-        
 
         if (patrolPath != null)
         {
             if (AtWaypoint())
             {
+                timeSinceArrivedAtWaypoint = 0;
                 CycleWaypoint();
                 print("cycled waypoint");
+                
             }
-            Vector3 nextPosition;
             print(AtWaypoint());
-            nextPosition = GetCurrentWaypoint();
-            MoveTo(nextPosition);
-            print(gameObject.name + " is patrolling");
-            print("currentWaypointIndex: " + currentWaypointIndex);
+
+            if(timeSinceArrivedAtWaypoint > waypointWaitTime)
+            {
+                Vector3 nextPosition;
+                nextPosition = GetCurrentWaypoint();
+                MoveTo(nextPosition);
+
+            }
+            print(gameObject.name + "  patrolling");
 
         }
 
-        // MoveTo(nextPosition);
 
     }
 
-    #region Waypoint Finders
+    #region WAYPOINT FINDERS
     private bool AtWaypoint()
     {
         float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
-        print(distanceToWaypoint);
         if (distanceToWaypoint <= waypointTolerance)
             return true;
         else
@@ -237,7 +249,7 @@ public class AIBehaviour : MonoBehaviour
 
     #endregion
 
-
+    #region MOVEMENT
     void MoveTo(Vector3 location)
     {
         navMeshAgent.destination = location;
@@ -248,6 +260,13 @@ public class AIBehaviour : MonoBehaviour
     void Stop()
     {
         navMeshAgent.isStopped = true;
+    }
+    #endregion
+
+    #region COMBAT
+    void Attack()
+    {
+        Debug.Log(gameObject.name + " is attacking");
     }
 
     void Block()
@@ -263,7 +282,6 @@ public class AIBehaviour : MonoBehaviour
         //HURT ANIMATIONS
         Debug.Log("UGH");
 
-
     }
 
     void Die()
@@ -271,5 +289,5 @@ public class AIBehaviour : MonoBehaviour
         Debug.Log("Death");
         //DIE ANIMATION
     }
-
+    #endregion
 }
