@@ -2160,8 +2160,8 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Enemy_Take_DMG_1
-    clip: {fileID: 8300000, guid: 27a435521e4e35f4d98954ebad443e2c, type: 3}
+  - name: Enemy_Take_DMG_5
+    clip: {fileID: 8300000, guid: 5b8b586425ea47746a2c5b28d7afc850, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
@@ -5774,7 +5774,7 @@ PrefabInstance:
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: enemyHitSound
-      value: Enemy_Take_DMG_1
+      value: Enemy_Take_DMG_5
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
