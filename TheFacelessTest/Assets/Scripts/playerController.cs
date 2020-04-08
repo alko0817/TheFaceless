@@ -17,6 +17,10 @@ public class playerController : MonoBehaviour
     public float attackRadius = .5f;
     public float aoeRadius = 5f;
 
+    [Header("Slow Motion & Camera FX")]
+    public TimeManager timeManager;
+    public camFov foving;
+
     #region COMBAT_VARIABLES
     //COMBAT
 
@@ -352,37 +356,42 @@ public class playerController : MonoBehaviour
     IEnumerator explode()
     {
         yield return new WaitForSeconds(.4f);
-        burst.Play();
-
+        
+        explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
+
+        timeManager.Slowmo();
+
         //Put sound here for when the character "loads" the Discharge.
 
+        foving.FovIn();
+
         yield return new WaitForSeconds(1.3f);
+
+        foving.FovOut();
 
         electricityCharge.Stop();
 
         StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
-
-        explosion.Play();
+        burst.Play();
+        
 
         // Put sound here for when the character smashes the ground.
         FindObjectOfType<audioManager>().Play("Discharge_Second");
 
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+
+        
 
         Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
         foreach (Collider enemy in hitEnemies)
         {
-            //Rigidbody rb = enemy.GetComponent<Rigidbody>();
-
-            //float force = 1001f;
-            //float up = 1001f;
-            //rb.AddExplosionForce(force, aoePoint.position, aoeRadius, up);
 
             enemy.GetComponent<AIBehaviour>().TakeDamage(dischargeDamage);
             
         }
-        
+
+        yield return new WaitForSeconds(1.8f);
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
     }
 
     IEnumerator AttackConnect(float delay, string clip)
