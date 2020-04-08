@@ -266,6 +266,8 @@ public class AIBehaviour : MonoBehaviour
     #region COMBAT
     void Attack()
     {
+        Stop();
+
         Debug.Log(gameObject.name + " is attacking");
     }
 
