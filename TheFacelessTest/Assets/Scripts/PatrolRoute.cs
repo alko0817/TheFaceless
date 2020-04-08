@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VisualizePatrol : MonoBehaviour
+public class PatrolRoute : MonoBehaviour
 {
     const float radius = 0.5f;
     private void OnDrawGizmos()

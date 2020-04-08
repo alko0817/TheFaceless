@@ -17,13 +17,12 @@ public class AIBehaviour : MonoBehaviour
         BLOCK
     }
 
-    public VisualizePatrol patrolPath;
+    public PatrolRoute patrolPath;
     public float waypointTolerance = 1.0f;
     int currentWaypointIndex = 0;
 
     public float sightDistance;
     public float attackDistance;
-    public float speed; 
 
     public float maxHealth;
     private float currentHealth;
@@ -188,7 +187,6 @@ public class AIBehaviour : MonoBehaviour
 
     void Patrol()
     {
-        //MoveTo(startPosition);
         Vector3 nextPosition = startPosition;
 
         if (patrolPath != null)
