@@ -2060,13 +2060,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Light_Slash_2
     clip: {fileID: 8300000, guid: 1080154d511c94245b61f0b3d074566d, type: 3}
-    volume: 0.15
+    volume: 0.08
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Light_Slash_1
     clip: {fileID: 8300000, guid: 96856b22b11edb1438a0ebe925a5b09c, type: 3}
-    volume: 0.15
+    volume: 0.08
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -2160,9 +2160,9 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Enemy_Take_DMG_4
-    clip: {fileID: 8300000, guid: 11fb3908bc383504abafaca36d4cca18, type: 3}
-    volume: 0.5
+  - name: Enemy_Take_DMG_1
+    clip: {fileID: 8300000, guid: 27a435521e4e35f4d98954ebad443e2c, type: 3}
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -5774,12 +5774,12 @@ PrefabInstance:
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: enemyHitSound
-      value: Enemy_Take_DMG_4
+      value: Enemy_Take_DMG_1
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: enemyHit
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
