@@ -38,8 +38,8 @@ ModelImporter:
       name: groundSlam
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 41
-      lastFrame: 118
+      firstFrame: 0
+      lastFrame: 144
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
