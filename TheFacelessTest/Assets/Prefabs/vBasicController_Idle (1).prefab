@@ -4794,6 +4794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2623165043549820090}
+  - component: {fileID: 2001581130}
   m_Layer: 0
   m_Name: cameraHolder
   m_TagString: Untagged
@@ -4809,13 +4810,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623165043549820091}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 2.25, z: -2.59}
+  m_LocalPosition: {x: 1.77, y: 1.96, z: -3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2623165044700509553}
   m_Father: {fileID: 2623165045082957695}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001581130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623165043549820091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef7595e6bce52845ab4bab7dce178b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2623165044700509554}
+  fov: 50
+  zoomRate: 10
 --- !u!1 &2623165043563429269
 GameObject:
   m_ObjectHideFlags: 0
@@ -11005,7 +11021,7 @@ Camera:
     height: 1
   near clip plane: 0.03
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -12013,11 +12029,12 @@ MonoBehaviour:
   attackRadius: 1
   aoeRadius: 5
   timeManager: {fileID: 0}
+  foving: {fileID: 2001581130}
   attackDelay1: 0.4
-  attackDelay2: 0.6
+  attackDelay2: 0.4
   heavyDelay: 1.5
   dischargeDelay: 2
-  nextAttack: 2.4
+  nextAttack: 2.5
   holdFor: 0.207
   slashDamage: 10
   slash2Damage: 15
@@ -12038,11 +12055,11 @@ MonoBehaviour:
   electricityCharge: {fileID: 2623165044172992639}
   burst: {fileID: 2688521558888931655}
   lightAttack1: 0.4
-  lightAttack2: 0
+  lightAttack2: 0.6
   heavyAttack1: 0
   enemyHit: 0.2
   lightAttack1Sound: Samurai_Slash
-  lightAttack2Sound: 
+  lightAttack2Sound: Samurai_Slash
   heavyAttackSound: 
   enemyHitSound: 
   otherSounds: []
