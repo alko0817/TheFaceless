@@ -68,7 +68,7 @@ public class AIBehaviour : MonoBehaviour
 
         senseTimer += Time.deltaTime;
 
-        Debug.Log("Start position = " + startPosition.position);
+        //Debug.Log("Start position = " + startPosition.position);
 
         if (senseTimer > senseFrequency)
         {

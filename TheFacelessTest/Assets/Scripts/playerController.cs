@@ -17,6 +17,10 @@ public class playerController : MonoBehaviour
     public float attackRadius = .5f;
     public float aoeRadius = 5f;
 
+    [Header("Slow Motion & Camera FX")]
+    public TimeManager timeManager;
+    public camPan panning;
+
     #region COMBAT_VARIABLES
     //COMBAT
 
@@ -355,9 +359,16 @@ public class playerController : MonoBehaviour
         burst.Play();
 
         FindObjectOfType<audioManager>().Play("Discharge_First");
+
+        timeManager.Slowmo();
+
         //Put sound here for when the character "loads" the Discharge.
 
+        panning.Pan();
+
         yield return new WaitForSeconds(1.3f);
+
+        panning.Unpan();
 
         electricityCharge.Stop();
 

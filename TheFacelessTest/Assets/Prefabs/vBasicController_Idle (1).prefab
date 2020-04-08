@@ -12012,6 +12012,7 @@ MonoBehaviour:
     m_Bits: 512
   attackRadius: 1
   aoeRadius: 5
+  timeManager: {fileID: 0}
   attackDelay1: 0.4
   attackDelay2: 0.6
   heavyDelay: 1.5
