@@ -19,7 +19,7 @@ public class playerController : MonoBehaviour
 
     [Header("Slow Motion & Camera FX")]
     public TimeManager timeManager;
-    public camPan panning;
+    public camFov foving;
 
     #region COMBAT_VARIABLES
     //COMBAT
@@ -364,11 +364,11 @@ public class playerController : MonoBehaviour
 
         //Put sound here for when the character "loads" the Discharge.
 
-        panning.Pan();
+        foving.FovIn();
 
         yield return new WaitForSeconds(1.3f);
 
-        panning.Unpan();
+        foving.FovOut();
 
         electricityCharge.Stop();
 

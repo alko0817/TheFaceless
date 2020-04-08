@@ -5210,7 +5210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 869766529}
   fov: 50
-  panRate: 10
+  zoomRate: 10
 --- !u!1 &2021037715
 GameObject:
   m_ObjectHideFlags: 0
