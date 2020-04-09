@@ -17,6 +17,9 @@ public class AIBehaviour : MonoBehaviour
     }
 
     NavMeshAgent navMeshAgent;
+    BEHAVIOUR_STATE state;
+    private static Vector3 startPosition;
+
 
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
@@ -48,9 +51,6 @@ public class AIBehaviour : MonoBehaviour
 
     #endregion
 
-    private static Vector3 startPosition;
-
-
     #region Player Parameters
     [Header("- Player Parameters")]
     private GameObject player;
@@ -58,6 +58,8 @@ public class AIBehaviour : MonoBehaviour
     private float distanceToPlayer;
 
     private bool playerDetected;
+    private bool canHitPlayer;
+
     private float timeSinceLastSawPlayer = Mathf.Infinity;
     [Tooltip("The number of seconds this enemy will wait after losing sight of the player before returning to its patrol route.")]
     public float suspicionTime;
@@ -70,23 +72,29 @@ public class AIBehaviour : MonoBehaviour
     private float senseTimer;
     #endregion
 
-    BEHAVIOUR_STATE state;
+    #region Combat Parameters
+    Transform attackPoint;
+    float attackHitBox = 1f;
 
-
-
+    public float attackDamage;
+    #endregion
     void Start()
     {
         playerDetected = false;
+        canHitPlayer = false;
+
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
         state = BEHAVIOUR_STATE.PATROL; 
         currentHealth = maxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        attackPoint = transform.GetChild(2).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
         startPosition = transform.position;
+
     }
 
     // Update is called once per frame
@@ -122,6 +130,8 @@ public class AIBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
+        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+
     }
 
     #region AI LOOP
@@ -161,7 +171,7 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.PURSUE;
         }
 
-        if(distanceToPlayer < attackDistance)
+        if(distanceToPlayer < attackDistance && CanAttack())
         {
             state = BEHAVIOUR_STATE.ATTACK;
         }
@@ -188,7 +198,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.ATTACK)
         {
-            Attack();
+            Stop();
+            StartCoroutine(Attack());
         }
 
         if(state == BEHAVIOUR_STATE.BLOCK)
@@ -264,16 +275,28 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region COMBAT
-    void Attack()
+    IEnumerator Attack()
     {
-        Stop();
 
-        Debug.Log(gameObject.name + " is attacking");
+        yield return new WaitForSeconds(2f);
+        player.GetComponent<playerController>().TakeDamage(attackDamage);
+        print(gameObject.name + " hit player");
+
+    }
+
+    private bool CanAttack()
+    {
+        if (Physics.CheckSphere(attackPoint.position, attackHitBox))
+            return true;
+        else
+            return false;
     }
 
     void Block()
     {
-        Debug.Log(gameObject.name + " is blocking");
+        Stop();
+
+        print(gameObject.name + " is blocking");
     }
 
     public void TakeDamage(int damage)
@@ -292,4 +315,6 @@ public class AIBehaviour : MonoBehaviour
         //DIE ANIMATION
     }
     #endregion
+
+
 }
