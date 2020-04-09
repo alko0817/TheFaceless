@@ -5575,16 +5575,6 @@ PrefabInstance:
       propertyPath: swordFill
       value: 
       objectReference: {fileID: 551295521}
-    - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
-        type: 3}
-      propertyPath: heavyAttack1
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
-        type: 3}
-      propertyPath: heavyDelay
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: m_LocalPosition.x

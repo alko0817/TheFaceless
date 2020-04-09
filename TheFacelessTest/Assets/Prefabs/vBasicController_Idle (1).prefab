@@ -6319,10 +6319,12 @@ MonoBehaviour:
   foving: {fileID: 2001581130}
   attackDelay1: 0.4
   attackDelay2: 0.4
-  heavyDelay: 1.5
+  heavyDelay1: 0.5
+  heavyDelay2: 1.5
   dischargeDelay: 2
-  nextAttack: 2.5
-  holdFor: 0.207
+  nextAttack: 0.8
+  nextHeavyAttack: 1.2
+  holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 15
   heavyDamage: 30
@@ -6343,7 +6345,7 @@ MonoBehaviour:
   burst: {fileID: 2688521558888931655}
   lightAttack1: 0.4
   lightAttack2: 0.4
-  heavyAttack1: 0
+  heavyAttack1: 0.3
   enemyHit: 0.2
   lightAttack1Sound: Light_Slash_10
   lightAttack2Sound: Light_Slash_2
