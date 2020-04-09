@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour
 
     int combos = 0;
     int combosHeavy = 0;
+    int combosBlock = 0;
     float lastClick = 0f;
 
     [Header("- Attack Intervals")]
@@ -34,8 +35,11 @@ public class playerController : MonoBehaviour
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
     public float dischargeDelay = 2f;
+    public float blockAttackDelay1 = 2f;
+    public float blockAttackDelay2 = 2f;
     public float nextAttack = 2f;
     public float nextHeavyAttack = 2f;
+    public float nextBlockAttack = 2f;
     float nextCombo = 0f;
     [Range(.1f, 1f)]
     public float holdForHeavy = .2f;
@@ -50,6 +54,8 @@ public class playerController : MonoBehaviour
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
     public int dischargeDamage = 40;
+    public int blockAttack1Dmg = 30;
+    public int blockAttack2Dmg = 30;
 
     //DODGE
     [Header("- Dodge Cooldown")]
@@ -64,6 +70,7 @@ public class playerController : MonoBehaviour
 
     //BLOCK-PARRY
     [Header("Blocking/Parrying")]
+    public float blockingSpeed = 2f;
     bool blocking = false;
     float blockHold = 0f;
 
@@ -89,6 +96,8 @@ public class playerController : MonoBehaviour
     public float lightAttack1 = 0.4f;
     public float lightAttack2 = 0.6f;
     public float heavyAttack1 = 1.2f;
+    public float blockAttack1 = 1f;
+    public float blockAttack2 = 1f;
     public float enemyHit = .2f;
 
     [Header("Sound Clips")]
@@ -96,6 +105,8 @@ public class playerController : MonoBehaviour
     public string lightAttack1Sound;
     public string lightAttack2Sound;
     public string heavyAttackSound;
+    public string blockAttack1Sound;
+    public string blockAttack2Sound;
     public string enemyHitSound;
     public string[] otherSounds;
     public int otherSoundsIndex;
@@ -128,7 +139,7 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
-        
+
 
         #endregion
 
@@ -138,7 +149,7 @@ public class playerController : MonoBehaviour
         nextCombo -= Time.deltaTime;
 
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding)
+        if (lastClick <= 0 && !holding && !blocking)
         {
 
 
@@ -148,7 +159,7 @@ public class playerController : MonoBehaviour
                 lastClick = attackDelay1;
                 combos = 1;
                 Slash();
-                
+
                 nextCombo = nextAttack;
 
             }
@@ -161,7 +172,7 @@ public class playerController : MonoBehaviour
                 lastClick = dischargeDelay;
                 Discharge();
 
-                
+
             }
 
 
@@ -175,7 +186,7 @@ public class playerController : MonoBehaviour
 
             //}
 
-            
+
 
 
 
@@ -191,7 +202,7 @@ public class playerController : MonoBehaviour
                 combos = 0;
                 Slash2();
             }
-            
+
             //HEAVY
             //if (Input.GetButtonDown("Fire2") && combosHeavy == 1)
             //{
@@ -208,6 +219,12 @@ public class playerController : MonoBehaviour
         {
             combos = 0;
             combosHeavy = 0;
+            combosBlock = 0;
+            //if (blocking)
+            //{
+            //    anim.SetTrigger("startBlock");
+            //    anim.SetBool("blocking", blocking);
+            //}
 
         }
 
@@ -223,9 +240,9 @@ public class playerController : MonoBehaviour
         }
         if (Input.GetButton("Fire1"))
         {
-            
+
             //ACTUAL HEAVY ATTACK
-            if (holding && !attacking)
+            if (lastClick<=0 && holding && !attacking)
             {
                 heavyHold += Time.deltaTime;
                 heavyAttack();
@@ -247,7 +264,7 @@ public class playerController : MonoBehaviour
         float inputX = Input.GetAxis("Horizontal");
 
         //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <=0)
+        if (dodgeCd <= 0)
         {
             if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
             {
@@ -277,33 +294,66 @@ public class playerController : MonoBehaviour
 
         #region BLOCK
 
+        //CHECK FOR BUTTON PRESS
         if (Input.GetButtonDown("Fire2"))
         {
-           
+
             blocking = true;
             anim.SetBool("blocking", blocking);
             anim.SetTrigger("startBlock");
 
-            
+
         }
 
+        //IF BUTTON RELEASED STOP BLOCKING
         if (Input.GetButtonUp("Fire2"))
         {
-            
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
             blocking = false;
             blockHold = 0;
             anim.SetBool("blocking", blocking);
         }
 
-        
+        //WHILE BUTTON IS PRESSED 
         if (Input.GetButton("Fire2"))
         {
+            
             if (blocking)
             {
-                blockHold += Time.deltaTime; 
-            } 
+                blockHold += Time.deltaTime;
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = blockingSpeed;
+            }
         }
 
+        //IF ATTACKING THROUGH BLOCK
+        if (lastClick <= 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
+            {
+                lastClick = blockAttackDelay1;
+                combosBlock = 1;
+
+
+                BlockAttack1();
+
+                //jump attack
+                nextCombo = nextBlockAttack;
+
+            }
+        }
+        //BLOCK ATTACK COMBO
+        if (lastClick <= 0 && nextCombo > 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+            {
+                lastClick = blockAttackDelay2;
+                combosBlock = 0;
+
+                BlockAttack2();
+                //swirle attack
+
+            }
+        }
         #endregion
     }
 
@@ -357,7 +407,20 @@ public class playerController : MonoBehaviour
 
     #region AttackingFunctions
 
-    
+    void BlockAttack1 ()
+    {
+        anim.SetTrigger("blockAttack");
+        anim.SetBool("blocking", false);
+        DPS(blockAttack1Dmg);
+        StartCoroutine(AttackConnect(blockAttack1, blockAttack1Sound));
+    }
+
+    void BlockAttack2()
+    {
+        anim.SetTrigger("blockAttack2");
+        DPS(blockAttack1Dmg);
+        StartCoroutine(AttackConnect(blockAttack2, blockAttack2Sound));
+    }
 
     void Slash()
     {
