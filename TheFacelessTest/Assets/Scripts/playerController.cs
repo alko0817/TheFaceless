@@ -28,21 +28,27 @@ public class playerController : MonoBehaviour
 
     int combos = 0;
     int combosHeavy = 0;
+    int combosBlock = 0;
     float lastClick = 0f;
 
     [Header("- Attack Intervals")]
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
-    public float heavyDelay = 1f;
+    public float heavyDelay1 = 1f;
+    public float heavyDelay2 = 1f;
     public float dischargeDelay = 2f;
+    public float blockAttackDelay1 = 2f;
+    public float blockAttackDelay2 = 2f;
     public float nextAttack = 2f;
+    public float nextHeavyAttack = 2f;
+    public float nextBlockAttack = 2f;
     float nextCombo = 0f;
-    float holdClick = 0;
     [Range(.1f, 1f)]
-    public float holdFor = .2f;
-    //bool holding = false;
-    //bool attacked = true;
-    //bool canHeavy = true;
+    public float holdForHeavy = .2f;
+
+    float heavyHold = 0;
+    bool holding = false;
+    bool attacking = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -50,6 +56,8 @@ public class playerController : MonoBehaviour
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
     public int dischargeDamage = 40;
+    public int blockAttack1Dmg = 30;
+    public int blockAttack2Dmg = 30;
 
     //DODGE
     [Header("- Dodge Cooldown")]
@@ -61,6 +69,13 @@ public class playerController : MonoBehaviour
 
 
     float dodgeCd = 0;
+
+    //BLOCK-PARRY
+    [Header("Blocking/Parrying")]
+    public float blockingSpeed = 2f;
+    bool blocking = false;
+    float blockHold = 0f;
+
 
     //DISCHARGE
     [Header("- Discharge Mechanic")]
@@ -83,6 +98,8 @@ public class playerController : MonoBehaviour
     public float lightAttack1 = 0.4f;
     public float lightAttack2 = 0.6f;
     public float heavyAttack1 = 1.2f;
+    public float blockAttack1 = 1f;
+    public float blockAttack2 = 1f;
     public float enemyHit = .2f;
 
     [Header("Sound Clips")]
@@ -90,6 +107,8 @@ public class playerController : MonoBehaviour
     public string lightAttack1Sound;
     public string lightAttack2Sound;
     public string heavyAttackSound;
+    public string blockAttack1Sound;
+    public string blockAttack2Sound;
     public string enemyHitSound;
     public string[] otherSounds;
     public int otherSoundsIndex;
@@ -100,7 +119,7 @@ public class playerController : MonoBehaviour
 
     //TESTING VARS
     protected float originSpeed;
-    float clickHold = 0;
+    
 
     private void Start()
     {
@@ -134,29 +153,22 @@ public class playerController : MonoBehaviour
         nextCombo -= Time.deltaTime;
 
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0)
+        if (lastClick <= 0 && !holding && !blocking)
         {
+
+
             //LIGHT ATTACK
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 lastClick = attackDelay1;
                 combos = 1;
                 Slash();
-                
+
                 nextCombo = nextAttack;
 
             }
 
-            //NEW HEAVY ATTACK
-               
 
-            //if (Input.GetButton("Fire1") && canHeavy)
-            //{
-            //    attacked = false;
-            //    holdClick += Time.deltaTime;
-            //    heavyAttack();
-
-            //}
 
             //DISCHARGE
             if (Input.GetButton("discharge") && canDischarge)
@@ -164,26 +176,30 @@ public class playerController : MonoBehaviour
                 lastClick = dischargeDelay;
                 Discharge();
 
-                
+
             }
+
 
             //OLD HEAVY ATTACK
-            if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
-            {
-                lastClick = heavyDelay;
-                //combosHeavy = 1;
-                heavyAttack();
+            //if (Input.GetButtonDown("Fire2") && combosHeavy == 0)
+            //{
+            //    lastClick = heavyDelay1;
+            //    combosHeavy++;
+            //    heavyAttack();
+            //    nextCombo = nextHeavyAttack;
 
-                //nextCombo = nextAttack;
-            }
+            //}
+
+
+
+
 
         }
 
-       // if (Input.GetButtonUp("Fire1")) holdClick = 0;
-
-        //LIGHT ATTACK COMBO
+        //COMBOS
         if (lastClick <= 0 && nextCombo > 0)
         {
+            //LIGHT
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 lastClick = attackDelay2;
@@ -191,16 +207,56 @@ public class playerController : MonoBehaviour
                 Slash2();
             }
 
-           
+            //HEAVY
+            //if (Input.GetButtonDown("Fire2") && combosHeavy == 1)
+            //{
+            //    lastClick = heavyDelay2;
+            //    combosHeavy++;
+            //    heavyAttack2();
+            //}
+
+
         }
 
-        //RESET TIMERS AND COMBOS
+        //RESET COMBOS
         if (nextCombo <= 0)
         {
             combos = 0;
             combosHeavy = 0;
+            combosBlock = 0;
+            //if (blocking)
+            //{
+            //    anim.SetTrigger("startBlock");
+            //    anim.SetBool("blocking", blocking);
+            //}
 
         }
+
+        #region Some_weird_shit_that_idk_why_works
+
+        if (Input.GetButtonDown("Fire1")) StartCoroutine("SmallEnum");
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine("SmallEnum");
+            holding = false;
+            heavyHold = 0;
+        }
+        if (Input.GetButton("Fire1"))
+        {
+
+            //ACTUAL HEAVY ATTACK
+            if (lastClick<=0 && holding && !attacking)
+            {
+                heavyHold += Time.deltaTime;
+                heavyAttack();
+
+                attacking = true;
+            }
+
+            //ADD COMBOS HERE
+        }
+        #endregion
 
         #endregion
 
@@ -212,7 +268,7 @@ public class playerController : MonoBehaviour
         float inputX = Input.GetAxis("Horizontal");
 
         //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <=0)
+        if (dodgeCd <= 0)
         {
             if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
             {
@@ -240,9 +296,76 @@ public class playerController : MonoBehaviour
         }
         #endregion
 
+        #region BLOCK
+
+        //CHECK FOR BUTTON PRESS
+        if (Input.GetButtonDown("Fire2"))
+        {
+
+            blocking = true;
+            anim.SetBool("blocking", blocking);
+            anim.SetTrigger("startBlock");
+
+
+        }
+
+        //IF BUTTON RELEASED STOP BLOCKING
+        if (Input.GetButtonUp("Fire2"))
+        {
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
+            blocking = false;
+            blockHold = 0;
+            anim.SetBool("blocking", blocking);
+        }
+
+        //WHILE BUTTON IS PRESSED 
+        if (Input.GetButton("Fire2"))
+        {
+            
+            if (blocking)
+            {
+                blockHold += Time.deltaTime;
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = blockingSpeed;
+            }
+        }
+
+        //IF ATTACKING THROUGH BLOCK
+        if (lastClick <= 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
+            {
+                lastClick = blockAttackDelay1;
+                combosBlock = 1;
+
+
+                BlockAttack1();
+
+                //jump attack
+                nextCombo = nextBlockAttack;
+
+            }
+        }
+        //BLOCK ATTACK COMBO
+        if (lastClick <= 0 && nextCombo > 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+            {
+                lastClick = blockAttackDelay2;
+                combosBlock = 0;
+
+                BlockAttack2();
+                //swirle attack
+
+            }
+        }
+        #endregion
     }
 
-
+    IEnumerator SmallEnum ()
+    {
+        yield return new WaitForSeconds(holdForHeavy);
+        holding = true;
+    }
 
     #region DodgingFunctions
 
@@ -288,7 +411,20 @@ public class playerController : MonoBehaviour
 
     #region AttackingFunctions
 
-    
+    void BlockAttack1 ()
+    {
+        anim.SetTrigger("blockAttack");
+        anim.SetBool("blocking", false);
+        DPS(blockAttack1Dmg);
+        StartCoroutine(AttackConnect(blockAttack1, blockAttack1Sound));
+    }
+
+    void BlockAttack2()
+    {
+        anim.SetTrigger("blockAttack2");
+        DPS(blockAttack1Dmg);
+        StartCoroutine(AttackConnect(blockAttack2, blockAttack2Sound));
+    }
 
     void Slash()
     {
@@ -309,38 +445,47 @@ public class playerController : MonoBehaviour
 
     }
 
-
     void heavyAttack()
     {
-        //if (holdClick > holdFor && !attacked)
-        //{
-        //    Debug.LogError("holding " + holdClick);
-        //    anim.SetTrigger("isHeavy");
-        //    //StartCoroutine("heavyAtt");
-        //    attacked = true;
-        //    holdClick = 0;
-        //}
-
+        
         anim.SetTrigger("isHeavy");
         StartCoroutine("heavyAtt");
         StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
 
     }
-
-    //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
-    IEnumerator heavyAtt ()
+    IEnumerator heavyAtt()
     {
         yield return new WaitForSeconds(1f);
         DPS(heavyDamage);
-       
+        attacking = false;
+        //yield return new WaitForSeconds(.2f);
+        //heavyStart = false;
+        //anim.SetBool("secondHeavy", heavyStart);
+
     }
 
-    //void heavyAttack2()
-    //{
-    //    anim.SetTrigger("isHeavy2");
-    //    DPS(heavy2Damage);
-       
-    //}
+    void heavyAttack2()
+    {
+
+        anim.SetTrigger("isHeavy2");
+        StartCoroutine("heavyAtt2");
+        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
+
+    }
+
+    //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
+    
+    IEnumerator heavyAtt2()
+    {
+        yield return new WaitForSeconds(1f);
+        DPS(heavyDamage);
+        
+        //anim.SetBool("secondHeavy", heavyStart);
+
+    }
+
+
+
 
     //FUNCTION FOR DISCHARGE ATTACK. TEMPORARILY STOPS ALL PLAYER MOVEMENT
     void Discharge ()
@@ -363,7 +508,7 @@ public class playerController : MonoBehaviour
         
         explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
-
+        
         timeManager.Slowmo();
 
         //Put sound here for when the character "loads" the Discharge.

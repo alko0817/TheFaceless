@@ -21,6 +21,8 @@ public class sound
     [Tooltip("Loop should be enabled only for ambient sounds and soundtracks")]
     public bool loop;
 
+    public bool mute;
+
     [HideInInspector]
     public AudioSource source;
 

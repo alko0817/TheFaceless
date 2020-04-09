@@ -11,6 +11,8 @@ public class audioManager : MonoBehaviour
     public sound[] sounds;
     public bool mute;
 
+    public bool muteAll;
+
     private void Awake()
     {
         foreach (sound s in sounds)
