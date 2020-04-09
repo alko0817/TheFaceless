@@ -184,4 +184,4 @@ MonoBehaviour:
     loop: 0
     mute: 0
     source: {fileID: 0}
-  muteAll: 1
+  mute: 1
