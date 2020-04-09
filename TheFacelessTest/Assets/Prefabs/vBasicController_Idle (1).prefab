@@ -6319,18 +6319,26 @@ MonoBehaviour:
   foving: {fileID: 2001581130}
   attackDelay1: 0.4
   attackDelay2: 0.4
-  heavyDelay: 1.5
+  heavyDelay1: 0.5
+  heavyDelay2: 1.5
   dischargeDelay: 2
-  nextAttack: 2.5
-  holdFor: 0.207
+  blockAttackDelay1: 0.8
+  blockAttackDelay2: 0.7
+  nextAttack: 0.8
+  nextHeavyAttack: 1.2
+  nextBlockAttack: 1.8
+  holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 15
   heavyDamage: 30
   heavy2Damage: 40
   dischargeDamage: 90
+  blockAttack1Dmg: 30
+  blockAttack2Dmg: 30
   dodgeCooldown: 1
   dodgeDashBoost: 3
   axisThreshold: 0.5
+  blockingSpeed: 0.1
   maxCharge: 100
   chargeRate: 100
   UIChargeMultiplier: 50
@@ -6343,11 +6351,15 @@ MonoBehaviour:
   burst: {fileID: 2688521558888931655}
   lightAttack1: 0.4
   lightAttack2: 0.4
-  heavyAttack1: 0
+  heavyAttack1: 0.3
+  blockAttack1: 1
+  blockAttack2: 1
   enemyHit: 0.2
   lightAttack1Sound: Light_Slash_10
   lightAttack2Sound: Light_Slash_2
   heavyAttackSound: 
+  blockAttack1Sound: 
+  blockAttack2Sound: 
   enemyHitSound: 
   otherSounds: []
   otherSoundsIndex: 0

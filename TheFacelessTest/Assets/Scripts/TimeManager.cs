@@ -8,6 +8,19 @@ public class TimeManager : MonoBehaviour
     public float slowmoIntensity = .05f;
     public float slowmoDuration = 2f;
 
+    public static TimeManager instance;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Update()
     {
