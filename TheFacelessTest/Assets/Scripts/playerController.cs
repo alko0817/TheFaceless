@@ -35,12 +35,11 @@ public class playerController : MonoBehaviour
     public float dischargeDelay = 2f;
     public float nextAttack = 2f;
     float nextCombo = 0f;
-    float holdClick = 0;
     [Range(.1f, 1f)]
-    public float holdFor = .2f;
-    //bool holding = false;
-    //bool attacked = true;
-    //bool canHeavy = true;
+    public float holdForHeavy = .2f;
+
+    float heavyHold = 0;
+    bool heavyStart = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -98,7 +97,6 @@ public class playerController : MonoBehaviour
 
     //TESTING VARS
     protected float originSpeed;
-    float clickHold = 0;
 
     private void Start()
     {
@@ -120,7 +118,7 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
-
+        
 
         #endregion
 
@@ -143,17 +141,6 @@ public class playerController : MonoBehaviour
 
             }
 
-            //NEW HEAVY ATTACK
-               
-
-            //if (Input.GetButton("Fire1") && canHeavy)
-            //{
-            //    attacked = false;
-            //    holdClick += Time.deltaTime;
-            //    heavyAttack();
-
-            //}
-
             //DISCHARGE
             if (Input.GetButton("discharge") && canDischarge)
             {
@@ -163,19 +150,38 @@ public class playerController : MonoBehaviour
                 
             }
 
+            //if (Input.GetButton("Fire2") )
+            //{
+            //    lastClick = heavyDelay;
+            //    heavyStart = true;
+            //    HeavyCharge();
+            //}
+
             //OLD HEAVY ATTACK
-            if (Input.GetButtonDown("Fire2") /*&& (combosHeavy == 0)*/)
+            if (Input.GetButtonDown("Fire2") && !heavyStart)
             {
                 lastClick = heavyDelay;
-                //combosHeavy = 1;
                 heavyAttack();
 
-                //nextCombo = nextAttack;
+            }
+
+            if (Input.GetButtonUp("Fire2") && heavyStart)
+            {
+                lastClick = heavyDelay;
+
+                heavyAttack2();
             }
 
         }
 
-       // if (Input.GetButtonUp("Fire1")) holdClick = 0;
+        //if (!(Input.GetButton("Fire2")))
+        //{
+
+        //    heavyStart = false;
+        //    anim.SetBool("beginHeavy", heavyStart);
+        //    heavyHold = 0;
+
+        //}
 
         //LIGHT ATTACK COMBO
         if (lastClick <= 0 && nextCombo > 0)
@@ -187,14 +193,16 @@ public class playerController : MonoBehaviour
                 Slash2();
             }
 
-           
+            
+
+
         }
 
         //RESET TIMERS AND COMBOS
         if (nextCombo <= 0)
         {
             combos = 0;
-            combosHeavy = 0;
+            
 
         }
 
@@ -305,38 +313,62 @@ public class playerController : MonoBehaviour
 
     }
 
+    //void HeavyCharge ()
+    //{
+    //    anim.SetBool("beginHeavy", heavyStart);
+    //    heavyHold += Time.deltaTime;
+
+    //    if (heavyHold >= holdForHeavy)
+    //    {
+    //        anim.SetFloat("holdHeavy", heavyHold);
+    //        StartCoroutine("heavyAtt");
+    //        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
+    //    }
+    //}
+
 
     void heavyAttack()
     {
-        //if (holdClick > holdFor && !attacked)
-        //{
-        //    Debug.LogError("holding " + holdClick);
-        //    anim.SetTrigger("isHeavy");
-        //    //StartCoroutine("heavyAtt");
-        //    attacked = true;
-        //    holdClick = 0;
-        //}
-
+        heavyStart = true;
         anim.SetTrigger("isHeavy");
         StartCoroutine("heavyAtt");
         StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
 
     }
 
+    void heavyAttack2()
+    {
+
+        anim.SetTrigger("isHeavy2");
+        //anim.SetBool("secondHeavy", heavyStart);
+        heavyStart = false;
+        //anim.SetBool("secondHeavy", heavyStart);
+        StartCoroutine("heavyAtt2");
+        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
+
+    }
+
     //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
-    IEnumerator heavyAtt ()
+    IEnumerator heavyAtt()
     {
         yield return new WaitForSeconds(1f);
         DPS(heavyDamage);
-       
+        yield return new WaitForSeconds(.2f);
+        heavyStart = false;
+        anim.SetBool("secondHeavy", heavyStart);
+
+    }
+    IEnumerator heavyAtt2()
+    {
+        yield return new WaitForSeconds(1f);
+        DPS(heavyDamage);
+        
+        anim.SetBool("secondHeavy", heavyStart);
+
     }
 
-    //void heavyAttack2()
-    //{
-    //    anim.SetTrigger("isHeavy2");
-    //    DPS(heavy2Damage);
-       
-    //}
+
+
 
     //FUNCTION FOR DISCHARGE ATTACK. TEMPORARILY STOPS ALL PLAYER MOVEMENT
     void Discharge ()
@@ -359,7 +391,7 @@ public class playerController : MonoBehaviour
         
         explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
-
+        
         timeManager.Slowmo();
 
         //Put sound here for when the character "loads" the Discharge.

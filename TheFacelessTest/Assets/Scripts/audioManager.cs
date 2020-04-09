@@ -10,6 +10,8 @@ public class audioManager : MonoBehaviour
 
     public sound[] sounds;
 
+    public bool muteAll;
+
     private void Awake()
     {
         foreach (sound s in sounds)
@@ -33,7 +35,8 @@ public class audioManager : MonoBehaviour
 
     public void Play (string name)
     {
-        
+        if (muteAll) return;
+
         sound s = Array.Find(sounds, sound => sound.name == name);
         
         if (s == null)
