@@ -78,12 +78,14 @@ public class AIBehaviour : MonoBehaviour
 
     public float attackDamage;
     private bool attackThrown;
+    private bool blocking;
     #endregion
     void Start()
     {
         playerDetected = false;
         canHitPlayer = false;
         attackThrown = false;
+        blocking = false;
 
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
@@ -113,6 +115,7 @@ public class AIBehaviour : MonoBehaviour
 
         }
         Act();
+
 
         if (currentHealth <= 0)
         {
@@ -178,6 +181,8 @@ public class AIBehaviour : MonoBehaviour
         {
             state = BEHAVIOUR_STATE.ATTACK;
         }
+
+
     }
 
     void Act()
@@ -212,7 +217,12 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.BLOCK)
         {
-            Block();
+            Stop();
+            if(!blocking)
+            {
+                Block();
+                StartCoroutine(ResetBlock());
+            }
         }
 
     }
@@ -310,18 +320,28 @@ public class AIBehaviour : MonoBehaviour
 
     void Block()
     {
-        Stop();
-
+        blocking = true;
         print(gameObject.name + " is blocking");
+    }
+
+    IEnumerator ResetBlock()
+    {
+        yield return new WaitForSeconds(10f);
+        blocking = false;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.fillAmount = currentHealth / maxHealth;
 
+        if (!blocking)
+        {
+            currentHealth -= damage;
+            healthBar.fillAmount = currentHealth / maxHealth;
+            Debug.Log("UGH");
+        }
+        else
+            print("attack blocked");
         //HURT ANIMATIONS
-        Debug.Log("UGH");
 
     }
 
