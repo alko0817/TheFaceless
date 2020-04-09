@@ -77,11 +77,13 @@ public class AIBehaviour : MonoBehaviour
     float attackHitBox = 1f;
 
     public float attackDamage;
+    private bool attackThrown;
     #endregion
     void Start()
     {
         playerDetected = false;
         canHitPlayer = false;
+        attackThrown = false;
 
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
@@ -117,6 +119,7 @@ public class AIBehaviour : MonoBehaviour
             Die();
         }
 
+        print(gameObject.name + " can attack: " + CanAttack());
         UpdateTimers();
     }
 
@@ -199,7 +202,12 @@ public class AIBehaviour : MonoBehaviour
         if(state == BEHAVIOUR_STATE.ATTACK)
         {
             Stop();
-            StartCoroutine(Attack());
+            if (!attackThrown)
+            {
+                StartCoroutine(Attack());
+                StartCoroutine(ResetAttack());
+
+            }
         }
 
         if(state == BEHAVIOUR_STATE.BLOCK)
@@ -222,7 +230,6 @@ public class AIBehaviour : MonoBehaviour
                 print("cycled waypoint");
                 
             }
-            print(AtWaypoint());
 
             if(timeSinceArrivedAtWaypoint > waypointWaitTime)
             {
@@ -277,10 +284,19 @@ public class AIBehaviour : MonoBehaviour
     #region COMBAT
     IEnumerator Attack()
     {
-
+        attackThrown = true;
         yield return new WaitForSeconds(2f);
+        if (!CanAttack())
+            yield break;
         player.GetComponent<playerController>().TakeDamage(attackDamage);
         print(gameObject.name + " hit player");
+
+    }
+
+    IEnumerator ResetAttack()
+    {
+       yield return new WaitForSeconds(2f);
+        attackThrown = false;
 
     }
 
