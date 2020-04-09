@@ -42,6 +42,7 @@ public class playerController : MonoBehaviour
 
     float heavyHold = 0;
     bool holding = false;
+    bool attacking = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -64,6 +65,7 @@ public class playerController : MonoBehaviour
     //BLOCK-PARRY
     [Header("Blocking/Parrying")]
     bool blocking = false;
+    float blockHold = 0f;
 
 
     //DISCHARGE
@@ -104,7 +106,7 @@ public class playerController : MonoBehaviour
 
     //TESTING VARS
     protected float originSpeed;
-    bool attacking = false;
+    
 
     private void Start()
     {
@@ -275,7 +277,32 @@ public class playerController : MonoBehaviour
 
         #region BLOCK
 
+        if (Input.GetButtonDown("Fire2"))
+        {
+           
+            blocking = true;
+            anim.SetBool("blocking", blocking);
+            anim.SetTrigger("startBlock");
+
+            
+        }
+
+        if (Input.GetButtonUp("Fire2"))
+        {
+            
+            blocking = false;
+            blockHold = 0;
+            anim.SetBool("blocking", blocking);
+        }
+
         
+        if (Input.GetButton("Fire2"))
+        {
+            if (blocking)
+            {
+                blockHold += Time.deltaTime; 
+            } 
+        }
 
         #endregion
     }
