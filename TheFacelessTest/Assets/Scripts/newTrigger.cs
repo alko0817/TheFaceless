@@ -1,37 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class sceneTrigger : MonoBehaviour
+public class newTrigger : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject popUp;
+    public int localIndex;
+    public fbManager manager;
+    GameObject player;
     Animator UIAnim;
-    public float fadeOutDelay = 1f;
+    float fadeOutDelay;
     string sound;
-
 
     private void Start()
     {
-        UIAnim = popUp.GetComponent<Animator>();
+        fadeOutDelay = manager.triggers[localIndex].duration;
+        UIAnim = manager.triggers[localIndex].animator;
+        sound = manager.triggers[localIndex].sound;
+        player = GameObject.Find("vBasicController_Idle (1)");
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == player.tag)
         {
             UIAnim.SetTrigger("fadeIn");
+            FindObjectOfType<audioManager>().Play(sound);
             StartCoroutine("FadeOut");
 
         }
     }
 
-    IEnumerator FadeOut ()
+    IEnumerator FadeOut()
     {
         yield return new WaitForSeconds(fadeOutDelay);
 
         UIAnim.SetTrigger("fadeOut");
     }
-
 }
+
