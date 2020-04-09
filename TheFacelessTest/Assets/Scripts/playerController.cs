@@ -8,6 +8,8 @@ public class playerController : MonoBehaviour
 {
     //public GameObject player;
     public Animator anim;
+    private float currentHealth;
+    public float maxHealth;
 
     //ENEMY DETECT
     [Header("- Player Attack Point/Radius & Enemy Layer")]
@@ -107,6 +109,8 @@ public class playerController : MonoBehaviour
         
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -455,6 +459,14 @@ public class playerController : MonoBehaviour
         Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
 
 
+
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        print("Player Health: " + currentHealth);
+        //healthBar.fillAmount = currentHealth / maxHealth;
 
     }
 }

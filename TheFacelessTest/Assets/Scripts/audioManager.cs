@@ -9,6 +9,7 @@ public class audioManager : MonoBehaviour
 
 
     public sound[] sounds;
+    public bool mute;
 
     private void Awake()
     {
@@ -33,7 +34,10 @@ public class audioManager : MonoBehaviour
 
     public void Play (string name)
     {
-        
+        if(mute)
+        {
+            return;
+        }
         sound s = Array.Find(sounds, sound => sound.name == name);
         
         if (s == null)
