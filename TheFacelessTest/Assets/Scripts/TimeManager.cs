@@ -31,17 +31,7 @@ public class TimeManager : MonoBehaviour
     {
         Time.timeScale = slowmoIntensity;
         Time.fixedDeltaTime = Time.timeScale * .02f;
-        //StartCoroutine("TimeReset");
+        
 
     }
-
-    //IEnumerator TimeReset()
-    //{
-    //    while (true)
-    //    {
-    //        if (Time.timeScale < 1) Time.timeScale += (1f / slowmoDuration) * Time.unscaledDeltaTime;
-
-    //        else yield return null;
-    //    }
-    //}
 }

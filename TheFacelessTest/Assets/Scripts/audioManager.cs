@@ -11,10 +11,19 @@ public class audioManager : MonoBehaviour
     public sound[] sounds;
     public bool mute;
 
-    public bool muteAll;
-
+    public static audioManager instance;
     private void Awake()
     {
+
+        if (instance == null) instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         foreach (sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

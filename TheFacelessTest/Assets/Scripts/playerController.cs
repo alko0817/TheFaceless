@@ -90,6 +90,7 @@ public class playerController : MonoBehaviour
     public cameraShake camShake;
     public float shakeDuration = 1f;
     public float shakeMagnitude = 1f;
+    public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
     public ParticleSystem burst;
 
@@ -119,6 +120,8 @@ public class playerController : MonoBehaviour
 
     //TESTING VARS
     protected float originSpeed;
+    protected float originTimeReset;
+    
     
 
     private void Start()
@@ -128,6 +131,9 @@ public class playerController : MonoBehaviour
         
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
+
+        //ORIGINAL TIME RESET RATE
+        originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
         currentHealth = maxHealth;
     }
@@ -234,7 +240,11 @@ public class playerController : MonoBehaviour
 
         #region Some_weird_shit_that_idk_why_works
 
-        if (Input.GetButtonDown("Fire1")) StartCoroutine("SmallEnum");
+        if (Input.GetButtonDown("Fire1"))
+        {
+            StartCoroutine("SmallEnum");
+
+        }
 
         if (Input.GetButtonUp("Fire1"))
         {
@@ -242,6 +252,7 @@ public class playerController : MonoBehaviour
             holding = false;
             heavyHold = 0;
         }
+
         if (Input.GetButton("Fire1"))
         {
 
@@ -508,7 +519,8 @@ public class playerController : MonoBehaviour
         
         explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
-        
+
+        timeManager.GetComponent<TimeManager>().slowmoDuration = dischargeSlowDuration;
         timeManager.Slowmo();
 
         //Put sound here for when the character "loads" the Discharge.
