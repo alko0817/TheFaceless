@@ -18,7 +18,7 @@ public class startingMenu : MonoBehaviour
     IEnumerator Delay ()
     {
         animator.SetTrigger("play");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene(1);
     }
 
