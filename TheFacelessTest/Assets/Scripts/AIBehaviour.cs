@@ -348,6 +348,7 @@ public class AIBehaviour : MonoBehaviour
     void Die()
     {
         Debug.Log("Death");
+        Destroy(this.gameObject);
         //DIE ANIMATION
     }
     #endregion
