@@ -35,17 +35,25 @@ public class EnemyBlackboard : MonoBehaviour
 
     public void RemovePursuingEnemy(GameObject enemy)
     {
-        enemy.GetComponent<AIBehaviour>().SetPursuing(false);
-        enemiesPursuingPlayer.Remove(enemy);
+        if (enemiesPursuingPlayer.Contains(enemy))
+        {
+            enemy.GetComponent<AIBehaviour>().SetPursuing(false);
+            enemiesPursuingPlayer.Remove(enemy);
+        }
+
     }
 
     public void AddEnemyInSight(GameObject enemy)
     {
-        enemiesInSightOfPlayer.Add(enemy);
+        if (!enemiesInSightOfPlayer.Contains(enemy))
+            enemiesInSightOfPlayer.Add(enemy);
+
     }
     
     public void RemoveEnemyInSight(GameObject enemy)
     {
-        enemiesInSightOfPlayer.Remove(enemy);
+        if (enemiesInSightOfPlayer.Contains(enemy))
+            enemiesInSightOfPlayer.Remove(enemy);
+
     }
 }

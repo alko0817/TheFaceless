@@ -159,6 +159,7 @@ public class AIBehaviour : MonoBehaviour
         }
         else
         {
+
             blackboard.RemoveEnemyInSight(this.gameObject);
             blackboard.RemovePursuingEnemy(this.gameObject);
             playerDetected = false;
