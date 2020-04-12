@@ -79,6 +79,10 @@ public class AIBehaviour : MonoBehaviour
     public float attackDamage;
     private bool attackThrown;
     private bool blocking;
+
+
+    
+    SpawnEffect dissolving;
     #endregion
     void Start()
     {
@@ -99,6 +103,8 @@ public class AIBehaviour : MonoBehaviour
         transform.position = GetCurrentWaypoint();
         startPosition = transform.position;
 
+        dissolving = GetComponent<SpawnEffect>();
+        
     }
 
     // Update is called once per frame
@@ -136,7 +142,7 @@ public class AIBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
-        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
     }
 
@@ -347,8 +353,9 @@ public class AIBehaviour : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Death");
-        Destroy(this.gameObject);
+        Stop();
+        dissolving.enabled = true;
+        Destroy(gameObject, 2f);
         //DIE ANIMATION
     }
     #endregion
