@@ -86,7 +86,10 @@ public class playerController : MonoBehaviour
     float currentCharge = 0f;
     float lastCharge = 0f;
     public Image swordFill;
-    bool canDischarge = false;
+
+    [HideInInspector]
+    public bool canDischarge = false;
+
     public cameraShake camShake;
     public float shakeDuration = 1f;
     public float shakeMagnitude = 1f;
@@ -131,6 +134,7 @@ public class playerController : MonoBehaviour
         
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         //ORIGINAL TIME RESET RATE
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
