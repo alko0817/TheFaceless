@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class startingMenu : MonoBehaviour
 {
     public Animator animator;
+    public levelLoader loader;
 
     
     public void PlayGame ()
@@ -19,7 +20,7 @@ public class startingMenu : MonoBehaviour
     {
         animator.SetTrigger("play");
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(1);
+        loader.LoadLevel(1);
     }
 
     public void QuitGame ()
