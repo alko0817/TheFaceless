@@ -273,12 +273,19 @@ public class AIBehaviour : MonoBehaviour
 
     private void CycleWaypoint()
     {
-        currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+        if (patrolPath != null)
+        {
+            currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+        }
     }
 
     private Vector3 GetCurrentWaypoint()
     {
-        return patrolPath.GetWaypoint(currentWaypointIndex);
+        if (patrolPath != null)
+        {
+            return patrolPath.GetWaypoint(currentWaypointIndex);
+        }
+        else return transform.position;
     }
 
     #endregion
