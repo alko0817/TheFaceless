@@ -13,7 +13,8 @@ public class AIBehaviour : MonoBehaviour
         SUSPICIOUS,
         PURSUE,
         ATTACK,
-        BLOCK
+        BLOCK,
+        STUNNED
     }
 
     NavMeshAgent navMeshAgent;
@@ -80,7 +81,7 @@ public class AIBehaviour : MonoBehaviour
     public float attackDamage;
     private bool attackThrown;
     private bool blocking;
-
+    private bool stunned;
 
     
     SpawnEffect dissolving;
@@ -92,6 +93,7 @@ public class AIBehaviour : MonoBehaviour
         attackThrown = false;
         blocking = false;
         pursuing = false;
+        stunned = false;
 
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
@@ -196,7 +198,10 @@ public class AIBehaviour : MonoBehaviour
         {
             state = BEHAVIOUR_STATE.ATTACK;
         }
-
+        if(stunned)
+        {
+            state = BEHAVIOUR_STATE.STUNNED;
+        }
 
     }
 
@@ -240,9 +245,30 @@ public class AIBehaviour : MonoBehaviour
             }
         }
 
+        if(state == BEHAVIOUR_STATE.STUNNED)
+        {
+            Stunned();
+        }
+    }
+
+    private void Stunned()
+    {
+        Stop();
+        StartCoroutine(Stun());
     }
     #endregion
+    IEnumerator Stun()
+    {
+        canHitPlayer = false;
+        yield return new WaitForSeconds(3);
+        canHitPlayer = true;
+        stunned = false;
+    }
 
+    public void SetStunned(bool value)
+    {
+        stunned = value;
+    }
     void Patrol()
     {
 
@@ -343,8 +369,13 @@ public class AIBehaviour : MonoBehaviour
 
     private bool CanAttack()
     {
-        if (Physics.CheckSphere(attackPoint.position, attackHitBox))
-            return true;
+        if (canHitPlayer)
+        {
+            if (Physics.CheckSphere(attackPoint.position, attackHitBox))
+                return true;
+            else
+                return false;
+        }
         else
             return false;
     }
