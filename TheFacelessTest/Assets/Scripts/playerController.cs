@@ -550,7 +550,7 @@ public class playerController : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
         foreach (Collider enemy in hitEnemies)
         {
-
+            enemy.GetComponent<AIBehaviour>().SetStunned(true);
             enemy.GetComponent<AIBehaviour>().TakeDamage(dischargeDamage);
             
         }
