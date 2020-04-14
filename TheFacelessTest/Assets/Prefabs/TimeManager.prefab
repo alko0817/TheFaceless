@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowmoIntensity: 0.1
   slowmoDuration: 1
+  stopUpdate: 0

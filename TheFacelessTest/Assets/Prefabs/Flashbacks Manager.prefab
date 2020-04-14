@@ -44,8 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggers:
-  - name: 1st trigger
+  - name: Tutorial
     index: 0
+    popUp: {fileID: 0}
+    duration: 5
+    sound: 
+    animator: {fileID: 0}
+  - name: Reflection
+    index: 1
     popUp: {fileID: 0}
     duration: 5
     sound: 
