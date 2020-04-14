@@ -19,7 +19,7 @@ public class AIBehaviour : MonoBehaviour
     NavMeshAgent navMeshAgent;
     BEHAVIOUR_STATE state;
     private static Vector3 startPosition;
-
+    EnemyBlackboard blackboard;
 
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
@@ -70,6 +70,7 @@ public class AIBehaviour : MonoBehaviour
     [Tooltip("The frequency that this enemy gathers information about the player. The number of seconds between each Sense() action.")]
     public float senseFrequency;
     private float senseTimer;
+    private bool pursuing;
     #endregion
 
     #region Combat Parameters
@@ -90,6 +91,7 @@ public class AIBehaviour : MonoBehaviour
         canHitPlayer = false;
         attackThrown = false;
         blocking = false;
+        pursuing = false;
 
         senseTimer = 0.0f;
         player = GameObject.FindWithTag("Player");
@@ -103,6 +105,7 @@ public class AIBehaviour : MonoBehaviour
         transform.position = GetCurrentWaypoint();
         startPosition = transform.position;
 
+        blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
         
     }
@@ -152,6 +155,9 @@ public class AIBehaviour : MonoBehaviour
 
         if (distanceToPlayer < sightDistance)
         {
+            if(!pursuing)
+                blackboard.AddEnemyInSight(this.gameObject);
+
             lastKnownPlayerLocation = player.transform.position;
 
             playerDetected = true;
@@ -161,6 +167,9 @@ public class AIBehaviour : MonoBehaviour
         }
         else
         {
+
+            blackboard.RemoveEnemyInSight(this.gameObject);
+            blackboard.RemovePursuingEnemy(this.gameObject);
             playerDetected = false;
             print(gameObject.name + " lost sight of Player");
         }
@@ -178,7 +187,7 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.SUSPICIOUS;
         }
 
-        if (playerDetected && distanceToPlayer > attackDistance)
+        if (playerDetected && distanceToPlayer > attackDistance && pursuing)
         {
             state = BEHAVIOUR_STATE.PURSUE;
         }
@@ -259,6 +268,15 @@ public class AIBehaviour : MonoBehaviour
         }
 
 
+    }
+
+    public void SetPursuing(bool value)
+    {
+        pursuing = value;
+    }
+    public bool GetPursuing()
+    {
+        return pursuing;
     }
 
     #region WAYPOINT FINDERS
@@ -360,6 +378,8 @@ public class AIBehaviour : MonoBehaviour
 
     void Die()
     {
+        blackboard.RemoveEnemyInSight(this.gameObject);
+        blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
         dissolving.enabled = true;
         Destroy(gameObject, 2f);
