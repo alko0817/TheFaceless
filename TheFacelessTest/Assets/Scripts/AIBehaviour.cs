@@ -149,7 +149,9 @@ public class AIBehaviour : MonoBehaviour
 
         if (distanceToPlayer < sightDistance)
         {
-            blackboard.AddEnemyInSight(this.gameObject);
+            if(!pursuing)
+                blackboard.AddEnemyInSight(this.gameObject);
+
             lastKnownPlayerLocation = player.transform.position;
 
             playerDetected = true;
@@ -364,6 +366,8 @@ public class AIBehaviour : MonoBehaviour
     void Die()
     {
         Debug.Log("Death");
+        blackboard.RemoveEnemyInSight(this.gameObject);
+        blackboard.RemovePursuingEnemy(this.gameObject);
         //DIE ANIMATION
     }
     #endregion
