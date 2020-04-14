@@ -172,7 +172,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Hallway3
     clip: {fileID: 8300000, guid: 8a4c51fc8ea63ea4e8f50c7ad737dff2, type: 3}
-    volume: 1
+    volume: 0.773
     pitch: 1
     loop: 1
     mute: 0
@@ -184,4 +184,4 @@ MonoBehaviour:
     loop: 0
     mute: 0
     source: {fileID: 0}
-  mute: 1
+  mute: 0
