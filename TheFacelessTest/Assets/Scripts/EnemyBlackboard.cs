@@ -23,7 +23,6 @@ public class EnemyBlackboard : MonoBehaviour
         AddPursuingEnemy();
 
 
-        print(enemiesInSightOfPlayer.Count);
 
     }
 
