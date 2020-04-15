@@ -9,10 +9,16 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float healingRate = 2f;
     public float healingDelay = 1f;
+    [Range(0f, .9f)]
+    public float blockMitigation = .5f;
     float currentHealth;
     public int testDamage = 10;
     bool canRegen = true;
     Color tempAlpha;
+    public playerController player;
+    public cameraShake cam;
+    public float duration;
+    public float mag;
 
     private void Start()
     {
@@ -48,9 +54,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if (!player.blocking) currentHealth -= damage;
+
+        else currentHealth -= damage * blockMitigation;
+
+        StartCoroutine(cam.Shake(duration, mag));
         StopCoroutine("HealingDelay");
         canRegen = false;
-        currentHealth -= damage;
         tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
         healthOverlay.color = tempAlpha;
         StartCoroutine("HealingDelay");

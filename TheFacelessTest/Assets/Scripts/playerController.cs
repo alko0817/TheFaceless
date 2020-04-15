@@ -6,7 +6,6 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
-    //public GameObject player;
     public Animator anim;
     private float currentHealth;
     public float maxHealth;
@@ -73,7 +72,8 @@ public class playerController : MonoBehaviour
     //BLOCK-PARRY
     [Header("Blocking/Parrying")]
     public float blockingSpeed = 2f;
-    bool blocking = false;
+    [HideInInspector]
+    public bool blocking = false;
     float blockHold = 0f;
 
 

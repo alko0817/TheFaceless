@@ -76,20 +76,22 @@ public class AIBehaviour : MonoBehaviour
 
     #region Combat Parameters
     Transform attackPoint;
-    float attackHitBox = 1f;
+    public float attackHitBox = 1f;
 
-    public float attackDamage;
+    public int attackDamage;
     private bool attackThrown;
     private bool blocking;
     private bool stunned;
 
     
     SpawnEffect dissolving;
+    GameObject playerHealth;
+    Animator anim;
     #endregion
     void Start()
     {
         playerDetected = false;
-        canHitPlayer = false;
+        canHitPlayer = true;
         attackThrown = false;
         blocking = false;
         pursuing = false;
@@ -109,7 +111,9 @@ public class AIBehaviour : MonoBehaviour
 
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
-        
+
+        playerHealth = GameObject.Find("stateOfHealth");
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -147,7 +151,7 @@ public class AIBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
-        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
     }
 
@@ -352,10 +356,13 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         attackThrown = true;
+        anim.SetTrigger("attack");
         yield return new WaitForSeconds(2f);
         if (!CanAttack())
             yield break;
-        player.GetComponent<playerController>().TakeDamage(attackDamage);
+
+        
+        playerHealth.GetComponent<PlayerHealth>().Damage(attackDamage);
         print(gameObject.name + " hit player");
 
     }
