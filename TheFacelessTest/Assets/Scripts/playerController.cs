@@ -630,4 +630,6 @@ public class playerController : MonoBehaviour
         //healthBar.fillAmount = currentHealth / maxHealth;
 
     }
+
+
 }
