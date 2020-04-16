@@ -10,6 +10,7 @@ public class newTrigger : MonoBehaviour
     Animator UIAnim;
     float fadeOutDelay;
     string sound;
+    bool triggered = false;
 
     private void Start()
     {
@@ -21,12 +22,16 @@ public class newTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == player.tag)
+        if (!triggered)
         {
-            UIAnim.SetTrigger("fadeIn");
-            FindObjectOfType<audioManager>().Play(sound);
-            StartCoroutine("FadeOut");
+            if (other.gameObject.tag == player.tag)
+            {
+                triggered = true;
+                UIAnim.SetTrigger("fadeIn");
+                FindObjectOfType<audioManager>().Play(sound);
+                StartCoroutine("FadeOut");
 
+            }
         }
     }
 
