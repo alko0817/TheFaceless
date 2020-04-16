@@ -14,13 +14,19 @@ public class AIBehaviour : MonoBehaviour
         PURSUE,
         ATTACK,
         BLOCK,
-        STUNNED
+        STUNNED,
+        SHOOTING,
+        FLEE
     }
 
     NavMeshAgent navMeshAgent;
     BEHAVIOUR_STATE state;
     private static Vector3 startPosition;
     EnemyBlackboard blackboard;
+
+    public bool shooter;
+    public float fleeDistance;
+    public float fireRate;
 
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
@@ -78,6 +84,9 @@ public class AIBehaviour : MonoBehaviour
     Transform attackPoint;
     float attackHitBox = 1f;
 
+    public GameObject projectile;
+    private GameObject[] projectiles;
+
     public float attackDamage;
     private bool attackThrown;
     private bool blocking;
@@ -89,7 +98,7 @@ public class AIBehaviour : MonoBehaviour
     void Start()
     {
         playerDetected = false;
-        canHitPlayer = false;
+        canHitPlayer = true;
         attackThrown = false;
         blocking = false;
         pursuing = false;
@@ -110,6 +119,13 @@ public class AIBehaviour : MonoBehaviour
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
         
+        for(int i = 0; i < 5; i++)
+        {
+            GameObject temp = Instantiate(projectile);
+            projectiles[i] = temp;
+            projectiles[i].SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -189,9 +205,14 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.SUSPICIOUS;
         }
 
-        if (playerDetected && distanceToPlayer > attackDistance && pursuing)
+        if (playerDetected && distanceToPlayer > attackDistance && pursuing && !shooter)
         {
             state = BEHAVIOUR_STATE.PURSUE;
+        }
+
+        if(playerDetected && shooter)
+        {
+            state = BEHAVIOUR_STATE.SHOOTING;
         }
 
         if(distanceToPlayer < attackDistance && CanAttack())
@@ -217,6 +238,11 @@ public class AIBehaviour : MonoBehaviour
         if (state == BEHAVIOUR_STATE.PATROL)
         {
             Patrol();
+        }
+
+        if(state == BEHAVIOUR_STATE.SHOOTING)
+        {
+            Shoot();
         }
 
         if (state == BEHAVIOUR_STATE.PURSUE)
@@ -251,24 +277,6 @@ public class AIBehaviour : MonoBehaviour
         }
     }
 
-    private void Stunned()
-    {
-        Stop();
-        StartCoroutine(Stun());
-    }
-    #endregion
-    IEnumerator Stun()
-    {
-        canHitPlayer = false;
-        yield return new WaitForSeconds(3);
-        canHitPlayer = true;
-        stunned = false;
-    }
-
-    public void SetStunned(bool value)
-    {
-        stunned = value;
-    }
     void Patrol()
     {
 
@@ -383,6 +391,7 @@ public class AIBehaviour : MonoBehaviour
     void Block()
     {
         blocking = true;
+        canHitPlayer = false;
         print(gameObject.name + " is blocking");
     }
 
@@ -390,6 +399,39 @@ public class AIBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         blocking = false;
+        canHitPlayer = true;
+    }
+
+    private void Stunned()
+    {
+        Stop();
+        StartCoroutine(Stun());
+    }
+    #endregion
+    IEnumerator Stun()
+    {
+        canHitPlayer = false;
+        yield return new WaitForSeconds(3);
+        canHitPlayer = true;
+        stunned = false;
+    }
+
+    public void SetStunned(bool value)
+    {
+        stunned = value;
+    }
+
+    void Shoot()
+    {
+
+        transform.LookAt(player.transform);
+        float timer = 0f;
+        timer += Time.deltaTime;
+        if(timer > fireRate)
+        {
+            timer = 0f;
+            
+        }
     }
 
     public void TakeDamage(int damage)
