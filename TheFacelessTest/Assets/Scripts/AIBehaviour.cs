@@ -87,7 +87,7 @@ public class AIBehaviour : MonoBehaviour
     public GameObject projectile;
     private GameObject[] projectiles;
 
-    public float attackDamage;
+    public int attackDamage;
     private bool attackThrown;
     private bool blocking;
     private bool stunned;
