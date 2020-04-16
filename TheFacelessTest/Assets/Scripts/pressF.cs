@@ -6,9 +6,14 @@ public class pressF : MonoBehaviour
 {
     public GameObject text;
     public GameObject textEffect;
-    public playerController player;
+    playerController player;
     bool enable;
 
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+    }
     private void Update()
     {
         enable = player.canDischarge;

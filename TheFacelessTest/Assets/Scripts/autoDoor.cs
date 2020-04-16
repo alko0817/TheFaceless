@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class autoDoor : MonoBehaviour
 {
-    public Animator DoorAnim;
-    public GameObject player;
+    Animator DoorAnim;
+    GameObject player;
     //bool isOpen = false;
 
-    
+    private void Start()
+    {
+        DoorAnim = GetComponentInChildren<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
