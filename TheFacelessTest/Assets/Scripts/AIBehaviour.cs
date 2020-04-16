@@ -24,10 +24,21 @@ public class AIBehaviour : MonoBehaviour
     private static Vector3 startPosition;
     EnemyBlackboard blackboard;
 
+    #region Shooter Parameters
+    [Header("- Shooter Parameters")]
     public bool shooter;
     public float fleeDistance;
     public float fireRate;
+    private float shootTimer;
 
+
+    Transform projectileSpawn;
+    public GameObject projectile;
+    private GameObject[] projectiles;
+
+    #endregion
+    public float pursueDelay;
+    private float pursueDelayTimer;
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
     [Tooltip("The Patrol Route of this enemy. Drag the Patrol Route you want this enemy to follow into this box.")]
@@ -84,10 +95,7 @@ public class AIBehaviour : MonoBehaviour
     Transform attackPoint;
     public float attackHitBox = 1f;
 
-    public GameObject projectile;
-    private GameObject[] projectiles;
-
-    public float attackDamage;
+    public int attackDamage;
     private bool attackThrown;
     private bool blocking;
     private bool stunned;
@@ -95,7 +103,7 @@ public class AIBehaviour : MonoBehaviour
     
     SpawnEffect dissolving;
     GameObject playerHealth;
-    Animator anim;
+  //  Animator anim;
     #endregion
     void Start()
     {
@@ -107,6 +115,8 @@ public class AIBehaviour : MonoBehaviour
         stunned = false;
 
         senseTimer = 0.0f;
+        shootTimer = 0f;
+
         player = GameObject.FindWithTag("Player");
         state = BEHAVIOUR_STATE.PATROL; 
         currentHealth = maxHealth;
@@ -120,17 +130,18 @@ public class AIBehaviour : MonoBehaviour
 
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
-        
-        for(int i = 0; i < 5; i++)
+
+        for (int i = 0; i < 5; i++)
         {
             GameObject temp = Instantiate(projectile);
             projectiles[i] = temp;
+            projectiles[i].transform.position = projectileSpawn.position;
             projectiles[i].SetActive(false);
         }
 
 
         playerHealth = GameObject.Find("stateOfHealth");
-        anim = GetComponent<Animator>();
+     //   anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -163,7 +174,6 @@ public class AIBehaviour : MonoBehaviour
         timeSinceLastSawPlayer += Time.deltaTime;
         timeSinceArrivedAtWaypoint += Time.deltaTime;
         senseTimer += Time.deltaTime;
-
     }
     private void OnDrawGizmos()
     {
@@ -176,7 +186,7 @@ public class AIBehaviour : MonoBehaviour
     void Sense()
     {
 
-        if (distanceToPlayer < sightDistance)
+        if (distanceToPlayer < sightDistance && IsPlayerVisible())
         {
             if(!pursuing)
                 blackboard.AddEnemyInSight(this.gameObject);
@@ -236,27 +246,40 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.SUSPICIOUS)
         {
+            pursueDelayTimer = 0f;
             Stop();
             print(gameObject.name + " is suspicious");
         }
 
         if (state == BEHAVIOUR_STATE.PATROL)
         {
+            pursueDelayTimer = 0f;
+
             Patrol();
         }
 
         if(state == BEHAVIOUR_STATE.SHOOTING)
         {
+            pursueDelayTimer = 0f;
+            Stop();
             Shoot();
         }
 
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
-            MoveTo(lastKnownPlayerLocation);
+            pursueDelayTimer += Time.deltaTime;
+
+            if (pursueDelayTimer > pursueDelay)
+            {
+                MoveTo(lastKnownPlayerLocation);
+            }
+
         }
 
-        if(state == BEHAVIOUR_STATE.ATTACK)
+        if (state == BEHAVIOUR_STATE.ATTACK)
         {
+            pursueDelayTimer = 0f;
+
             Stop();
             if (!attackThrown)
             {
@@ -268,6 +291,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.BLOCK)
         {
+            pursueDelayTimer = 0f;
+
             Stop();
             if(!blocking)
             {
@@ -278,6 +303,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.STUNNED)
         {
+            pursueDelayTimer = 0f;
+
             Stunned();
         }
     }
@@ -307,6 +334,17 @@ public class AIBehaviour : MonoBehaviour
         }
 
 
+    }
+
+    bool IsPlayerVisible()
+    {
+        NavMeshHit hit;
+        if (!navMeshAgent.Raycast(player.transform.position, out hit))
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     public void SetPursuing(bool value)
@@ -365,8 +403,8 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         attackThrown = true;
-        anim.SetTrigger("attack");
-        yield return new WaitForSeconds(2f);
+       // anim.SetTrigger("attack");
+        yield return new WaitForSeconds(3f);
         if (!CanAttack())
             yield break;
 
@@ -431,14 +469,24 @@ public class AIBehaviour : MonoBehaviour
 
     void Shoot()
     {
-
+        canHitPlayer = false;
         transform.LookAt(player.transform);
-        float timer = 0f;
-        timer += Time.deltaTime;
-        if(timer > fireRate)
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        shootTimer += Time.deltaTime;
+        if(shootTimer > fireRate)
         {
-            timer = 0f;
-            
+            shootTimer = 0f;
+
+
+            for(int i = 0; i < projectiles.Length; i++)
+            {
+                if(!projectiles[i].activeSelf)
+                {
+                    projectiles[i].SetActive(true);
+                    break;
+                }
+            }
         }
     }
 

@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
 
         else currentHealth -= damage * blockMitigation;
 
+        print("Player Health: " + currentHealth);
         StopCoroutine("HealingDelay");
         canRegen = false;
         tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
