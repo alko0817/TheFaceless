@@ -7,8 +7,6 @@ using Invector.vCharacterController;
 public class playerController : MonoBehaviour
 {
     public Animator anim;
-    private float currentHealth;
-    public float maxHealth;
 
     //ENEMY DETECT
     [Header("- Player Attack Point/Radius & Enemy Layer")]
@@ -139,7 +137,7 @@ public class playerController : MonoBehaviour
         //ORIGINAL TIME RESET RATE
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
     }
 
     void Update()
@@ -524,8 +522,12 @@ public class playerController : MonoBehaviour
         explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
 
-        timeManager.GetComponent<TimeManager>().slowmoDuration = dischargeSlowDuration;
-        timeManager.Slowmo();
+        if (timeManager != null)
+        {
+            timeManager.GetComponent<TimeManager>().slowmoDuration = dischargeSlowDuration;
+            timeManager.Slowmo();
+        }
+
 
         //Put sound here for when the character "loads" the Discharge.
 
@@ -622,14 +624,4 @@ public class playerController : MonoBehaviour
 
 
     }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        print("Player Health: " + currentHealth);
-        //healthBar.fillAmount = currentHealth / maxHealth;
-
-    }
-
-
 }
