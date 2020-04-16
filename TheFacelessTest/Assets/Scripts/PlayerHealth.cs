@@ -16,9 +16,6 @@ public class PlayerHealth : MonoBehaviour
     bool canRegen = true;
     Color tempAlpha;
     public playerController player;
-    public cameraShake cam;
-    public float duration;
-    public float mag;
 
     private void Start()
     {
@@ -58,7 +55,6 @@ public class PlayerHealth : MonoBehaviour
 
         else currentHealth -= damage * blockMitigation;
 
-        StartCoroutine(cam.Shake(duration, mag));
         StopCoroutine("HealingDelay");
         canRegen = false;
         tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
