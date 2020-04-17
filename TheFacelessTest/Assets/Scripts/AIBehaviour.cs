@@ -179,7 +179,7 @@ public class AIBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
-        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
     }
 

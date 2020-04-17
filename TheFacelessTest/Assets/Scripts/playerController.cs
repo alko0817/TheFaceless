@@ -13,8 +13,11 @@ public class playerController : MonoBehaviour
     [Header("- Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public Transform aoePoint;
+    [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
+    [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
     public float attackRadius = .5f;
+    [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
 
     [Header("Slow Motion & Camera FX")]
@@ -30,17 +33,26 @@ public class playerController : MonoBehaviour
     float lastClick = 0f;
 
     [Header("- Attack Intervals")]
+    [Tooltip("Input delay for the first light attack")]
     public float attackDelay1 = 1.5f;
+    [Tooltip("Input delay for the second light attack")]
     public float attackDelay2 = 1.5f;
+    [Tooltip("Inpute delay for the heavy attack")]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
+    [Tooltip("Input delay for the discharge attack")]
     public float dischargeDelay = 2f;
     public float blockAttackDelay1 = 2f;
     public float blockAttackDelay2 = 2f;
+    [Tooltip("Input timer before next light combo")]
     public float nextAttack = 2f;
+    [Tooltip("Input timer before next heavy combo")]
     public float nextHeavyAttack = 2f;
+    [Tooltip("Input timer before next block combo")]
     public float nextBlockAttack = 2f;
     float nextCombo = 0f;
+
+    [Tooltip("How long has the player to hold the button before triggering the heavy attack. Requires fine-tunning!")]
     [Range(.1f, 1f)]
     public float holdForHeavy = .2f;
 
@@ -59,27 +71,34 @@ public class playerController : MonoBehaviour
 
     //DODGE
     [Header("- Dodge Cooldown")]
+    [Tooltip("Input delay before player can dodge again")]
     public float dodgeCooldown = 1f;
+    [Tooltip("Temporary movement speed boost while dodging")]
     public float dodgeDashBoost = 4f;
 
+    [Tooltip("How long has the player to hold directional buttons to trigger the dodge. Requires fine-tunning!")]
     [Range(.1f, 1f)]
     public float axisThreshold = .1f;
-
 
     float dodgeCd = 0;
 
     //BLOCK-PARRY
     [Header("Blocking/Parrying")]
+    [Tooltip("Player movement speed while blocking")]
     public float blockingSpeed = 2f;
+
     [HideInInspector]
     public bool blocking = false;
+
     float blockHold = 0f;
 
 
     //DISCHARGE
     [Header("- Discharge Mechanic")]
     public float maxCharge = 100f;
+    [Tooltip("How fast the sword actually charges")]
     public float chargeRate = 10f;
+    [Tooltip("How fast the UI updates the charge")]
     public float UIChargeMultiplier = 2f;
     public ParticleSystem explosion;
     float currentCharge = 0f;
@@ -92,6 +111,7 @@ public class playerController : MonoBehaviour
     public cameraShake camShake;
     public float shakeDuration = 1f;
     public float shakeMagnitude = 1f;
+    [Tooltip("Slow motion duration")]
     public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
     public ParticleSystem burst;

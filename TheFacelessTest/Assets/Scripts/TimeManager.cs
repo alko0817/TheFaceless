@@ -7,6 +7,8 @@ public class TimeManager : MonoBehaviour
     [Range(.01f, .9f)]
     public float slowmoIntensity = .05f;
     public float slowmoDuration = 2f;
+
+    [HideInInspector]
     public bool stopUpdate = false;
 
     public static TimeManager instance;
