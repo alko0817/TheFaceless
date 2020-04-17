@@ -536,11 +536,11 @@ public class playerController : MonoBehaviour
 
         //Put sound here for when the character "loads" the Discharge.
 
-        foving.FovIn();
+        foving.FovOut();
 
         yield return new WaitForSeconds(1.3f);
 
-        foving.FovOut();
+        
 
         electricityCharge.Stop();
 
@@ -562,8 +562,12 @@ public class playerController : MonoBehaviour
             
         }
 
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(.8f);
+        foving.FovIn();
+        yield return new WaitForSeconds(1f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+        
+        
     }
 
     IEnumerator AttackConnect(float delay, string clip)
