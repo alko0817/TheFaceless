@@ -95,8 +95,6 @@ public class AIBehaviour : MonoBehaviour
     Transform attackPoint;
     public float attackHitBox = 1f;
 
-    public GameObject projectile;
-    private GameObject[] projectiles;
 
     public int attackDamage;
     private bool attackThrown;
