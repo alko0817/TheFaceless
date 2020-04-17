@@ -25,6 +25,7 @@ public class levelLoader : MonoBehaviour
 
         while (!operation.isDone)
         {
+            FindObjectOfType<audioManager>().StopPlaying("intro");
             //show operation.progress
             float progress = Mathf.Clamp01(operation.progress / .9f);
             Debug.Log(progress);

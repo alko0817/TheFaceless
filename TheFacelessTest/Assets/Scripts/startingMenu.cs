@@ -27,4 +27,10 @@ public class startingMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+    private void Start()
+    {
+        FindObjectOfType<audioManager>().Play("intro");
+    }
 }
