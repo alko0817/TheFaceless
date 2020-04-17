@@ -84,7 +84,7 @@ public class playerController : MonoBehaviour
     public ParticleSystem explosion;
     float currentCharge = 0f;
     float lastCharge = 0f;
-    public Image swordFill;
+    Image swordFill;
 
     [HideInInspector]
     public bool canDischarge = false;
@@ -134,6 +134,9 @@ public class playerController : MonoBehaviour
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //OTHER STUFF
+        swordFill = GameObject.Find("swordChargeFill").GetComponent<Image>();
 
         //ORIGINAL TIME RESET RATE
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;

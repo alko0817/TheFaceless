@@ -40,7 +40,6 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<playerController>().TakeDamage(damage);
 
         }
-
         ResetProjectile();
 
  
