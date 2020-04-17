@@ -34,7 +34,7 @@ public class AIBehaviour : MonoBehaviour
 
     Transform projectileSpawn;
     public GameObject projectile;
-    private GameObject[] projectiles;
+    public GameObject[] projectiles;
 
     #endregion
     public float pursueDelay;
@@ -102,7 +102,6 @@ public class AIBehaviour : MonoBehaviour
 
     
     SpawnEffect dissolving;
-    GameObject playerHealth;
   //  Animator anim;
     #endregion
     void Start()
@@ -131,16 +130,15 @@ public class AIBehaviour : MonoBehaviour
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < projectiles.Length; i++)
         {
-            GameObject temp = Instantiate(projectile);
-            projectiles[i] = temp;
+            projectiles[i] = Instantiate(projectile);
+
             projectiles[i].transform.position = projectileSpawn.position;
             projectiles[i].SetActive(false);
         }
 
 
-        playerHealth = GameObject.Find("stateOfHealth");
      //   anim = GetComponent<Animator>();
     }
 
@@ -409,7 +407,7 @@ public class AIBehaviour : MonoBehaviour
             yield break;
 
         
-        playerHealth.GetComponent<PlayerHealth>().Damage(attackDamage);
+        player.GetComponent<playerController>().TakeDamage(attackDamage);
         print(gameObject.name + " hit player");
 
     }
@@ -481,8 +479,10 @@ public class AIBehaviour : MonoBehaviour
 
             for(int i = 0; i < projectiles.Length; i++)
             {
-                if(!projectiles[i].activeSelf)
+                if(!projectiles[i].activeInHierarchy)
                 {
+                    projectiles[i].GetComponent<Projectile>().startingPosition = projectileSpawn.position;
+                    projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
                     break;
                 }
