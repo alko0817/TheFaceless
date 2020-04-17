@@ -7,6 +7,7 @@ using Invector.vCharacterController;
 public class playerController : MonoBehaviour
 {
     public Animator anim;
+    PlayerHealth health; 
 
     //ENEMY DETECT
     [Header("- Player Attack Point/Radius & Enemy Layer")]
@@ -137,6 +138,7 @@ public class playerController : MonoBehaviour
         //ORIGINAL TIME RESET RATE
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
+        health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
         //currentHealth = maxHealth;
     }
 
@@ -623,5 +625,10 @@ public class playerController : MonoBehaviour
 
 
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health.Damage(damage);
     }
 }
