@@ -122,6 +122,7 @@ public class AIBehaviour : MonoBehaviour
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         attackPoint = transform.GetChild(2).transform;
+        projectileSpawn = transform.GetChild(3).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
@@ -135,6 +136,7 @@ public class AIBehaviour : MonoBehaviour
             projectiles[i] = Instantiate(projectile);
 
             projectiles[i].transform.position = projectileSpawn.position;
+            projectiles[i].transform.rotation = projectileSpawn.rotation;
             projectiles[i].SetActive(false);
         }
 
@@ -307,6 +309,8 @@ public class AIBehaviour : MonoBehaviour
         }
     }
 
+    #endregion
+
     void Patrol()
     {
 
@@ -451,7 +455,7 @@ public class AIBehaviour : MonoBehaviour
         Stop();
         StartCoroutine(Stun());
     }
-    #endregion
+
     IEnumerator Stun()
     {
         canHitPlayer = false;
@@ -481,7 +485,8 @@ public class AIBehaviour : MonoBehaviour
             {
                 if(!projectiles[i].activeInHierarchy)
                 {
-                    projectiles[i].GetComponent<Projectile>().startingPosition = projectileSpawn.position;
+                    projectiles[i].transform.position = projectileSpawn.position;
+                    projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
                     break;

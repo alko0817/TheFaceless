@@ -19,11 +19,14 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.forward = direction;
-        transform.position += direction;
+        Move();
     }
 
 
+    void Move()
+    {
+        transform.position = transform.position + (direction * speed * Time.deltaTime);
+    }
 
     public void SetDirection(Vector3 dir)
     {
@@ -32,11 +35,15 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<playerController>().TakeDamage(damage);
+
         }
+
         ResetProjectile();
+
+ 
     }
 
     void ResetProjectile()

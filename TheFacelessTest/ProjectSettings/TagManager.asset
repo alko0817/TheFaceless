@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Blackboard
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Post Processing
   - Enemy
   - Player
-  - 
+  - Map
   - 
   - 
   - 
