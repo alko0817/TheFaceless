@@ -156,11 +156,11 @@ MonoBehaviour:
     loop: 1
     mute: 0
     source: {fileID: 0}
-  - name: Background_Music
+  - name: intro
     clip: {fileID: 8300000, guid: 2c036b5abafae304dabd45228cf0c038, type: 3}
     volume: 1
     pitch: 1
-    loop: 1
+    loop: 0
     mute: 0
     source: {fileID: 0}
   - name: Samurai_Slash

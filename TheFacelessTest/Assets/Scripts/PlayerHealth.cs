@@ -11,33 +11,37 @@ public class PlayerHealth : MonoBehaviour
     public float healingDelay = 1f;
     [Range(0f, .9f)]
     public float blockMitigation = .5f;
-    float currentHealth;
+
+    [HideInInspector]
+    public float currentHealth;
+
     public int testDamage = 10;
     bool canRegen = true;
     Color tempAlpha;
-    public playerController player;
+    playerController player;
 
     private void Start()
     {
         currentHealth = maxHealth;
         healthOverlay = GetComponent<Image>();
         tempAlpha = healthOverlay.color;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
 
 
     }
 
     private void Update()
     {
-        if (canRegen)
-        {
-            currentHealth += Time.deltaTime * healingRate;
-            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        //if (canRegen)
+        //{
+        //    currentHealth += Time.deltaTime * healingRate;
+        //    currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
-            
-            healthOverlay.color = tempAlpha;
-        }
+        //    tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
 
+        //    healthOverlay.color = tempAlpha;
+        //}
+        
         if (Input.GetKeyDown(KeyCode.K))
         {
             Damage(testDamage);
@@ -47,6 +51,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Death();
         }
+
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
     public void Damage(int damage)
@@ -62,6 +68,14 @@ public class PlayerHealth : MonoBehaviour
         healthOverlay.color = tempAlpha;
         StartCoroutine("HealingDelay");
     }
+
+    public void Heal (int heal)
+    {
+        currentHealth += heal;
+        tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
+        healthOverlay.color = tempAlpha;
+
+    } 
 
     IEnumerator HealingDelay ()
     {
