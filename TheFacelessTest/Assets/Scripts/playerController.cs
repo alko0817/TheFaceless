@@ -628,7 +628,7 @@ public class playerController : MonoBehaviour
     }
 
     //SWORD CHARGE
-    void Charge()
+    public void Charge()
     {
         if (currentCharge < maxCharge) currentCharge += chargeRate;
         else if (currentCharge >= maxCharge)

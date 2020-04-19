@@ -92,7 +92,7 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region Combat Parameters
-    Transform attackPoint;
+    public Transform attackPoint;
     public float attackHitBox = 1f;
 
 
@@ -108,7 +108,7 @@ public class AIBehaviour : MonoBehaviour
     void Start()
     {
         playerDetected = false;
-        canHitPlayer = true;
+        canHitPlayer = false;
         attackThrown = false;
         blocking = false;
         pursuing = false;
@@ -122,7 +122,7 @@ public class AIBehaviour : MonoBehaviour
         currentHealth = maxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
-        attackPoint = transform.GetChild(2).transform;
+        //attackPoint = transform.GetChild(2).transform;
         projectileSpawn = transform.GetChild(3).transform;
 
         currentWaypointIndex = 0;
@@ -179,7 +179,7 @@ public class AIBehaviour : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, sightDistance);
-        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
     }
 
