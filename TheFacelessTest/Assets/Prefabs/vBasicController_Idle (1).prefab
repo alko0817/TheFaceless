@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 2623165045021964784}
   - component: {fileID: 2623165045021964785}
   - component: {fileID: 2623165045021964790}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: CanvasAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,8 +1054,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623165045021964787}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.339}
-  m_LocalScale: {x: 0.0017372383, y: 0.0017372383, z: 0.0017372383}
+  m_LocalPosition: {x: 0, y: 0, z: 0.012}
+  m_LocalScale: {x: 0.0010033768, y: 0.0010033768, z: 0.0010033768}
   m_Children:
   - {fileID: 1971556696112437391}
   m_Father: {fileID: 2623165045082957695}
@@ -1063,7 +1063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.753, y: 1.5218}
+  m_AnchoredPosition: {x: -0.245, y: 1.233}
   m_SizeDelta: {x: 604.6958, y: 640.4128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2623165045021964791
@@ -1076,7 +1076,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2623165044700509554}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1084,8 +1084,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1443468661
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2623165045021964784
 MonoBehaviour:
@@ -1154,6 +1154,8 @@ GameObject:
   - component: {fileID: 2623165045082957684}
   - component: {fileID: 2623165045082957694}
   - component: {fileID: 2106645172}
+  - component: {fileID: 2106645173}
+  - component: {fileID: 2106645174}
   m_Layer: 0
   m_Name: vBasicController_Idle (1)
   m_TagString: Player
@@ -1333,6 +1335,12 @@ MonoBehaviour:
   nextAttack: 0.8
   nextHeavyAttack: 1.2
   nextBlockAttack: 1.8
+  hitLight1: 0.2
+  hitLight2: 0.2
+  hitHeavy: 0.4
+  hitDischarge: 1
+  hitBlock1: 0.3
+  hitBlock2: 0.3
   holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 15
@@ -1357,12 +1365,6 @@ MonoBehaviour:
   dischargeSlowDuration: 2
   electricityCharge: {fileID: 8346883991575434763}
   burst: {fileID: 2688521558888931655}
-  lightAttack1: 0.4
-  lightAttack2: 0.4
-  heavyAttack1: 0.3
-  blockAttack1: 1
-  blockAttack2: 1
-  enemyHit: 0.2
   lightAttack1Sound: Light_Slash_10
   lightAttack2Sound: Light_Slash_2
   heavyAttackSound: 
@@ -1384,6 +1386,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loader: {fileID: 0}
+  health: {fileID: 0}
+--- !u!114 &2106645173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623165045082957685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b580543d1b6aaa46abb50e0056ebe50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2106645174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623165045082957685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42aaa415d58812049ba4f95acd01271a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2623165045425825473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,7 +1884,7 @@ GameObject:
   - component: {fileID: 7837178397519363203}
   - component: {fileID: 6372364906890874871}
   - component: {fileID: 2905110457096389308}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: healthFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1914,7 +1941,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -7455,7 +7482,7 @@ GameObject:
   - component: {fileID: 1971556696112437391}
   - component: {fileID: 1442725811195113731}
   - component: {fileID: 4914755815064557366}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: healthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8130,37 +8157,37 @@ PrefabInstance:
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.033
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.022
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.087
+      value: -0.029
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00797641
+      value: -0.98884106
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99892473
+      value: 0.008160293
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.03271814
+      value: 0.088907234
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.03186423
+      value: 0.11925796
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
@@ -8170,17 +8197,17 @@ PrefabInstance:
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -176.281
+      value: -166.272
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -3.6879883
+      value: 10.310989
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016972, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -178.965
+      value: -360.299
       objectReference: {fileID: 0}
     - target: {fileID: 2476352314950016975, guid: 80ce9a5cd7a203549ab15eab7a437f35,
         type: 3}
