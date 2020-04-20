@@ -4,38 +4,46 @@ using UnityEngine;
 
 public class camFov : MonoBehaviour
 {
-    public Camera cam;
-    public float fov = 50f;
+    vThirdPersonCamera controller;
     public float zoomRate = 1f;
-    bool zoomed = false;
-    float originFov;
+
+    bool unzooming = false;
+    bool zooming = false;
+    float originDistance;
+    public float maxDistance; 
 
     private void Start()
     {
-        originFov = cam.fieldOfView;
+        controller = GetComponentInChildren<vThirdPersonCamera>();
+        originDistance = controller.defaultDistance;
     }
 
     private void Update()
     {
-        if (!zoomed)
+        if (zooming)
         {
-            cam.fieldOfView += Time.deltaTime * zoomRate;
+            unzooming = false;
+            controller.defaultDistance -= Time.deltaTime * zoomRate;
+            if (controller.defaultDistance <= originDistance) zooming = false;
         }
 
-        if (zoomed)
+        if (unzooming)
         {
-            cam.fieldOfView -= Time.deltaTime * zoomRate;
+            zooming = false;
+            controller.defaultDistance += Time.deltaTime * zoomRate;
+            if (controller.defaultDistance >= maxDistance - .1f) unzooming = false;
         }
-
-        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fov, originFov);
+        controller.defaultDistance = Mathf.Clamp(controller.defaultDistance, originDistance, maxDistance);
     }
+
+
     public void FovIn ()
     {
-        zoomed = true;      
+        zooming = true;      
     }
 
     public void FovOut ()
     {
-        zoomed = false;
+        unzooming = true;
     }
 }

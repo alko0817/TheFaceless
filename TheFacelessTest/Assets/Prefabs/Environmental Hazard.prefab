@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9218849442280678498}
   - component: {fileID: 9218849442280678497}
   - component: {fileID: 9218849442280678496}
-  - component: {fileID: 9218849442280678511}
   - component: {fileID: 9218849442280678499}
+  - component: {fileID: 1604761954}
   m_Layer: 0
   m_Name: Environmental Hazard
   m_TagString: Untagged
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &9218849442280678511
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9218849442280678510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &9218849442280678499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +97,20 @@ MonoBehaviour:
   player: {fileID: 0}
   health: {fileID: 0}
   damagePerTick: 1
-  tick: 0.5
+  tick: 0.3
+--- !u!65 &1604761954
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218849442280678510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8983818, y: 2, z: 0.8684623}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &9218849441703272988
 PrefabInstance:
   m_ObjectHideFlags: 0

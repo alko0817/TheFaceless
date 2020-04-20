@@ -7,6 +7,7 @@ public class healthPack : MonoBehaviour
     GameObject player;
     public int healAmount;
     PlayerHealth health;
+    bool canHeal = false;
 
     private void Start()
     {
@@ -14,12 +15,25 @@ public class healthPack : MonoBehaviour
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
     }
 
+    private void Update()
+    {
+        if (health.currentHealth == health.maxHealth)
+        {
+            canHeal = false;
+        }
+        else canHeal = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (player.CompareTag(other.tag))
         {
-            health.Heal(healAmount);
-            Destroy(gameObject);
+            if (canHeal)
+            {
+                health.Heal(healAmount);
+                Destroy(gameObject);
+            }
+
         }
     }
 }

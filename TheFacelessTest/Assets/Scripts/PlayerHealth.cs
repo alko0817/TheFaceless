@@ -75,11 +75,13 @@ public class PlayerHealth : MonoBehaviour
         tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
         healthOverlay.color = tempAlpha;
 
-    } 
+    }
 
-    IEnumerator HealingDelay ()
+    public void ResetHealth ()
     {
-        yield return new WaitForSeconds(healingDelay);
+        currentHealth = maxHealth;
+        tempAlpha.a = 0;
+        healthOverlay.color = tempAlpha;
         canRegen = true;
     }
 
@@ -87,5 +89,11 @@ public class PlayerHealth : MonoBehaviour
     {
         canRegen = false;
         //death animation
+    }
+
+    IEnumerator HealingDelay()
+    {
+        yield return new WaitForSeconds(healingDelay);
+        canRegen = true;
     }
 }
