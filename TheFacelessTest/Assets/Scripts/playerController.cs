@@ -27,10 +27,10 @@ public class playerController : MonoBehaviour
     #region COMBAT_VARIABLES
     //COMBAT
 
-    int combos = 0;
+    internal int combos = 0;
     int combosHeavy = 0;
-    int combosBlock = 0;
-    float lastClick = 0f;
+    internal int combosBlock = 0;
+    internal float lastClick = 0f;
 
     [Header("- Attack Intervals")]
     [Tooltip("Input delay for the first light attack")]
@@ -50,15 +50,23 @@ public class playerController : MonoBehaviour
     public float nextHeavyAttack = 2f;
     [Tooltip("Input timer before next block combo")]
     public float nextBlockAttack = 2f;
-    float nextCombo = 0f;
+    internal float nextCombo = 0f;
+
+    [Header("- Delay before attack lands and applies damage")]
+    public float hitLight1 = 0f;
+    public float hitLight2 = 0f;
+    public float hitHeavy = 0f;
+    public float hitDischarge = 0f;
+    public float hitBlock1 = 0f;
+    public float hitBlock2 = 0f;
 
     [Tooltip("How long has the player to hold the button before triggering the heavy attack. Requires fine-tunning!")]
     [Range(.1f, 1f)]
     public float holdForHeavy = .2f;
 
     float heavyHold = 0;
-    bool holding = false;
-    bool attacking = false;
+    internal bool holding = false;
+    internal bool attacking = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -80,7 +88,7 @@ public class playerController : MonoBehaviour
     [Range(.1f, 1f)]
     public float axisThreshold = .1f;
 
-    float dodgeCd = 0;
+    internal float dodgeCd = 0;
 
     //BLOCK-PARRY
     [Header("Blocking/Parrying")]
@@ -101,9 +109,9 @@ public class playerController : MonoBehaviour
     [Tooltip("How fast the UI updates the charge")]
     public float UIChargeMultiplier = 2f;
     public ParticleSystem explosion;
-    float currentCharge = 0f;
-    float lastCharge = 0f;
-    Image swordFill;
+    internal float currentCharge = 0f;
+    internal float lastCharge = 0f;
+    internal Image swordFill;
 
     [HideInInspector]
     public bool canDischarge = false;
@@ -146,7 +154,7 @@ public class playerController : MonoBehaviour
     
     
 
-    private void Start()
+    private void Awake()
     {
         //ORIGINAL MOVEMENT SPEED SET
         originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
@@ -162,7 +170,7 @@ public class playerController : MonoBehaviour
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
-        //currentHealth = maxHealth;
+
     }
 
     void Update()
@@ -178,160 +186,6 @@ public class playerController : MonoBehaviour
 
 
 
-        #endregion
-
-        #region ATTACKS
-
-        lastClick -= Time.deltaTime;
-        nextCombo -= Time.deltaTime;
-
-        //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !blocking)
-        {
-
-
-            //LIGHT ATTACK
-            if (Input.GetButtonUp("Fire1") && (combos == 0))
-            {
-                lastClick = attackDelay1;
-                combos = 1;
-                Slash();
-
-                nextCombo = nextAttack;
-
-            }
-
-
-
-            //DISCHARGE
-            if (Input.GetButton("discharge") && canDischarge)
-            {
-                lastClick = dischargeDelay;
-                Discharge();
-
-
-            }
-
-
-            //OLD HEAVY ATTACK
-            //if (Input.GetButtonDown("Fire2") && combosHeavy == 0)
-            //{
-            //    lastClick = heavyDelay1;
-            //    combosHeavy++;
-            //    heavyAttack();
-            //    nextCombo = nextHeavyAttack;
-
-            //}
-
-
-
-
-
-        }
-
-        //COMBOS
-        if (lastClick <= 0 && nextCombo > 0)
-        {
-            //LIGHT
-            if (Input.GetButtonUp("Fire1") && (combos == 1))
-            {
-                lastClick = attackDelay2;
-                combos = 0;
-                Slash2();
-            }
-
-            //HEAVY
-            //if (Input.GetButtonDown("Fire2") && combosHeavy == 1)
-            //{
-            //    lastClick = heavyDelay2;
-            //    combosHeavy++;
-            //    heavyAttack2();
-            //}
-
-
-        }
-
-        //RESET COMBOS
-        if (nextCombo <= 0)
-        {
-            combos = 0;
-            combosHeavy = 0;
-            combosBlock = 0;
-            //if (blocking)
-            //{
-            //    anim.SetTrigger("startBlock");
-            //    anim.SetBool("blocking", blocking);
-            //}
-
-        }
-
-        #region Some_weird_shit_that_idk_why_works
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            StartCoroutine("SmallEnum");
-
-        }
-
-        if (Input.GetButtonUp("Fire1"))
-        {
-            StopCoroutine("SmallEnum");
-            holding = false;
-            heavyHold = 0;
-        }
-
-        if (Input.GetButton("Fire1"))
-        {
-
-            //ACTUAL HEAVY ATTACK
-            if (lastClick<=0 && holding && !attacking)
-            {
-                heavyHold += Time.deltaTime;
-                heavyAttack();
-
-                attacking = true;
-            }
-
-            //ADD COMBOS HERE
-        }
-        #endregion
-
-        #endregion
-
-        #region DODGE
-
-        dodgeCd -= Time.deltaTime;
-
-        float inputZ = Input.GetAxis("Vertical");
-        float inputX = Input.GetAxis("Horizontal");
-
-        //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <= 0)
-        {
-            if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeLeft();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeRight();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeBack();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeRoll();
-            }
-        }
         #endregion
 
         #region BLOCK
@@ -397,12 +251,43 @@ public class playerController : MonoBehaviour
             }
         }
         #endregion
-    }
 
-    IEnumerator SmallEnum ()
-    {
-        yield return new WaitForSeconds(holdForHeavy);
-        holding = true;
+        #region DODGE
+
+        dodgeCd -= Time.deltaTime;
+
+        float inputZ = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal");
+
+        //CHECK FOR LAST TIME DODGED
+        if (dodgeCd <= 0)
+        {
+            if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeLeft();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRight();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeBack();
+            }
+
+            if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+            {
+                dodgeCd = dodgeCooldown;
+                DodgeRoll();
+            }
+        }
+        #endregion
+
     }
 
     #region DodgingFunctions
@@ -462,64 +347,6 @@ public class playerController : MonoBehaviour
         anim.SetTrigger("blockAttack2");
         DPS(blockAttack1Dmg);
         StartCoroutine(AttackConnect(blockAttack2, blockAttack2Sound));
-    }
-
-    void Slash()
-    {
-        anim.SetTrigger("isSlash");       
-        DPS(slashDamage);
-        StartCoroutine(AttackConnect(lightAttack1, lightAttack1Sound));
-        
-
-    }
-
-    
-
-    void Slash2()
-    {
-        anim.SetTrigger("isSlash2");        
-        DPS(slash2Damage);
-        StartCoroutine(AttackConnect(lightAttack2, lightAttack2Sound));
-
-    }
-
-    void heavyAttack()
-    {
-        
-        anim.SetTrigger("isHeavy");
-        StartCoroutine("heavyAtt");
-        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
-
-    }
-    IEnumerator heavyAtt()
-    {
-        yield return new WaitForSeconds(1f);
-        DPS(heavyDamage);
-        attacking = false;
-        //yield return new WaitForSeconds(.2f);
-        //heavyStart = false;
-        //anim.SetBool("secondHeavy", heavyStart);
-
-    }
-
-    void heavyAttack2()
-    {
-
-        anim.SetTrigger("isHeavy2");
-        StartCoroutine("heavyAtt2");
-        StartCoroutine(AttackConnect(heavyAttack1, heavyAttackSound));
-
-    }
-
-    //HEAVY ATTACK DELAY AND DAMAGE APPLICATION
-    
-    IEnumerator heavyAtt2()
-    {
-        yield return new WaitForSeconds(1f);
-        DPS(heavyDamage);
-        
-        //anim.SetBool("secondHeavy", heavyStart);
-
     }
 
 
@@ -649,9 +476,6 @@ public class playerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
         Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
-
-
-
     }
 
     public void TakeDamage(int damage)
