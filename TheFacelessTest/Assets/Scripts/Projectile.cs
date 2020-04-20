@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -33,19 +32,17 @@ public class Projectile : MonoBehaviour
         direction = dir;
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+
+       private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<playerController>().TakeDamage(damage);
+            other.gameObject.GetComponent<playerController>().TakeDamage(damage);
 
         }
-
         ResetProjectile();
-
- 
     }
-
     void ResetProjectile()
     {
         gameObject.SetActive(false);
