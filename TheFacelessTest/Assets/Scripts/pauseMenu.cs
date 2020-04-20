@@ -17,6 +17,7 @@ public class pauseMenu : MonoBehaviour
             {
                 foreach (GameObject element in otherUI)
                 {
+                    if (element == null) continue;
                     element.SetActive(false);
                 }
 
@@ -33,6 +34,7 @@ public class pauseMenu : MonoBehaviour
             {
                 foreach (GameObject element in otherUI)
                 {
+                    if (element == null) continue;
                     element.SetActive(true);
                 }
 
