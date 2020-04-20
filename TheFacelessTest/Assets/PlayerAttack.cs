@@ -144,7 +144,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 combos = 0;
-                Attack(hitLight2, attackDelay2, slashDamage, "isSlash2", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius);
             }
         }
 
@@ -181,6 +181,67 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         #endregion
+
+        #region Block
+        if (Input.GetButtonDown("Fire2"))
+        {
+
+            blocking = true;
+            controller.anim.SetBool("blocking", blocking);
+            controller.anim.SetTrigger("startBlock");
+
+
+        }
+
+        //IF BUTTON RELEASED STOP BLOCKING
+        if (Input.GetButtonUp("Fire2"))
+        {
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+            blocking = false;
+            controller.anim.SetBool("blocking", blocking);
+        }
+
+        //WHILE BUTTON IS PRESSED 
+        if (Input.GetButton("Fire2"))
+        {
+
+            if (blocking)
+            {
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+            }
+        }
+
+        //IF ATTACKING THROUGH BLOCK
+        if (lastClick <= 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
+            {
+                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius);
+                controller.anim.SetBool("blocking", !blocking);
+                combosBlock = 1;
+                nextCombo = nextBlockAttack;
+
+            }
+        }
+        //BLOCK ATTACK COMBO
+        if (lastClick <= 0 && nextCombo > 0 && blocking)
+        {
+            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+            {
+                Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius);
+                controller.anim.SetBool("blocking", !blocking);
+                combosBlock = 0;
+
+
+            }
+        }
+        #endregion
+
+        if (nextCombo < 0)
+        {
+            combos = 0;
+            combosBlock = 0;
+        }
 
     }
 
@@ -234,7 +295,6 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         controller.burst.Play();
         FindObjectOfType<audioManager>().Play("Discharge_Second");
-
         yield return new WaitForSeconds(.8f);
         controller.foving.FovIn();
         yield return new WaitForSeconds(1f);

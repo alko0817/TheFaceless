@@ -8,8 +8,6 @@ public class playerController : MonoBehaviour
 {
     public Animator anim;
     PlayerHealth health; 
-
-    //ENEMY DETECT
     [Header("- Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public Transform aoePoint;
@@ -25,10 +23,8 @@ public class playerController : MonoBehaviour
     public camFov foving;
 
     #region COMBAT_VARIABLES
-    //COMBAT
 
     internal int combos = 0;
-    int combosHeavy = 0;
     internal int combosBlock = 0;
     internal float lastClick = 0f;
 
@@ -64,7 +60,6 @@ public class playerController : MonoBehaviour
     [Range(.1f, 1f)]
     public float holdForHeavy = .2f;
 
-    float heavyHold = 0;
     internal bool holding = false;
     internal bool attacking = false;
 
@@ -98,9 +93,6 @@ public class playerController : MonoBehaviour
     [HideInInspector]
     public bool blocking = false;
 
-    float blockHold = 0f;
-
-
     //DISCHARGE
     [Header("- Discharge Mechanic")]
     public float maxCharge = 100f;
@@ -125,14 +117,6 @@ public class playerController : MonoBehaviour
     public ParticleSystem burst;
 
     //SOUNDS
-    [Header("Sound Delays")]
-    public float lightAttack1 = 0.4f;
-    public float lightAttack2 = 0.6f;
-    public float heavyAttack1 = 1.2f;
-    public float blockAttack1 = 1f;
-    public float blockAttack2 = 1f;
-    public float enemyHit = .2f;
-
     [Header("Sound Clips")]
     [Tooltip("Copy-paste the clip name from the Audio Manager")]
     public string lightAttack1Sound;
@@ -143,14 +127,10 @@ public class playerController : MonoBehaviour
     public string enemyHitSound;
     public string[] otherSounds;
     public int otherSoundsIndex;
-    
-
-
     #endregion
 
-    //TESTING VARS
-    protected float originSpeed;
-    protected float originTimeReset;
+    internal float originSpeed;
+    internal float originTimeReset;
     
     
 
@@ -175,8 +155,6 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
-        #region UI/VFX
-
         //UI SWORD CHARGE
         if (currentCharge > lastCharge)
         {
@@ -184,274 +162,8 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
+        // MAKE SWORD DISCHARGE GRADUALLY
 
-
-        #endregion
-
-        #region BLOCK
-
-        //CHECK FOR BUTTON PRESS
-        if (Input.GetButtonDown("Fire2"))
-        {
-
-            blocking = true;
-            anim.SetBool("blocking", blocking);
-            anim.SetTrigger("startBlock");
-
-
-        }
-
-        //IF BUTTON RELEASED STOP BLOCKING
-        if (Input.GetButtonUp("Fire2"))
-        {
-            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
-            blocking = false;
-            blockHold = 0;
-            anim.SetBool("blocking", blocking);
-        }
-
-        //WHILE BUTTON IS PRESSED 
-        if (Input.GetButton("Fire2"))
-        {
-            
-            if (blocking)
-            {
-                blockHold += Time.deltaTime;
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = blockingSpeed;
-            }
-        }
-
-        //IF ATTACKING THROUGH BLOCK
-        if (lastClick <= 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
-            {
-                lastClick = blockAttackDelay1;
-                combosBlock = 1;
-
-
-                BlockAttack1();
-
-                //jump attack
-                nextCombo = nextBlockAttack;
-
-            }
-        }
-        //BLOCK ATTACK COMBO
-        if (lastClick <= 0 && nextCombo > 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
-            {
-                lastClick = blockAttackDelay2;
-                combosBlock = 0;
-
-                BlockAttack2();
-                //swirle attack
-
-            }
-        }
-        #endregion
-
-        #region DODGE
-
-        dodgeCd -= Time.deltaTime;
-
-        float inputZ = Input.GetAxis("Vertical");
-        float inputX = Input.GetAxis("Horizontal");
-
-        //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <= 0)
-        {
-            if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeLeft();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeRight();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeBack();
-            }
-
-            if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
-            {
-                dodgeCd = dodgeCooldown;
-                DodgeRoll();
-            }
-        }
-        #endregion
-
-    }
-
-    #region DodgingFunctions
-
-    //FUNCTIONS FOR DODGING. DIRECTION IS SET IN UPDATE
-    void DodgeLeft()
-    {
-        StartCoroutine("Dash");
-        anim.SetTrigger("dodgingLeft");
-    }
-
-    void DodgeRight()
-    {
-        StartCoroutine("Dash");
-        anim.SetTrigger("dodgingRight");
-    }
-
-    void DodgeBack()
-    {
-        StartCoroutine("Dash");
-        anim.SetTrigger("dodgingBack");
-    }
-
-    void DodgeRoll()
-    {
-        StartCoroutine("Dash");
-        anim.SetTrigger("dodgingRoll");
-    }
-
-    //TEMPORARILY INCREASES PLAYER SPEED WHILE DODGING
-    IEnumerator Dash ()
-    {
-        
-
-        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
-
-        yield return new WaitForSeconds(.7f);
-
-        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = originSpeed;
-
-    }
-
-    #endregion
-
-    #region AttackingFunctions
-
-    void BlockAttack1 ()
-    {
-        anim.SetTrigger("blockAttack");
-        anim.SetBool("blocking", false);
-        DPS(blockAttack1Dmg);
-        StartCoroutine(AttackConnect(blockAttack1, blockAttack1Sound));
-    }
-
-    void BlockAttack2()
-    {
-        anim.SetTrigger("blockAttack2");
-        DPS(blockAttack1Dmg);
-        StartCoroutine(AttackConnect(blockAttack2, blockAttack2Sound));
-    }
-
-
-
-
-    //FUNCTION FOR DISCHARGE ATTACK. TEMPORARILY STOPS ALL PLAYER MOVEMENT
-    void Discharge ()
-    {
-        anim.SetTrigger("discharge");
-        
-
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
-        StartCoroutine("explode");
-        canDischarge = false;
-        swordFill.fillAmount = 0;
-        currentCharge = 0;
-        lastCharge = 0;
-    }
-
-    //DISCHARGE ATTACK DELAY AND DAMAGE APPLICATION. PLAYER MOVEMENT SET TO NORMAL
-    IEnumerator explode()
-    {
-        yield return new WaitForSeconds(.4f);
-        
-        explosion.Play();
-        FindObjectOfType<audioManager>().Play("Discharge_First");
-
-        if (timeManager != null)
-        {
-            timeManager.GetComponent<TimeManager>().slowmoDuration = dischargeSlowDuration;
-            timeManager.Slowmo();
-        }
-
-
-        //Put sound here for when the character "loads" the Discharge.
-
-        foving.FovOut();
-
-        yield return new WaitForSeconds(1.3f);
-
-        
-
-        electricityCharge.Stop();
-
-        StartCoroutine(camShake.Shake(shakeDuration, shakeMagnitude));
-        burst.Play();
-        
-
-        // Put sound here for when the character smashes the ground.
-        FindObjectOfType<audioManager>().Play("Discharge_Second");
-
-
-        
-
-        Collider[] hitEnemies = Physics.OverlapSphere(aoePoint.position, aoeRadius, enemyLayer);
-        foreach (Collider enemy in hitEnemies)
-        {
-            enemy.GetComponent<AIBehaviour>().SetStunned(true);
-            enemy.GetComponent<AIBehaviour>().TakeDamage(dischargeDamage);
-            
-        }
-
-        yield return new WaitForSeconds(.8f);
-        foving.FovIn();
-        yield return new WaitForSeconds(1f);
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
-        
-        
-    }
-
-    IEnumerator AttackConnect(float delay, string clip)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (clip == null)
-        {
-            yield return null;
-            Debug.LogWarning("No clip"); 
-        }
-
-        else FindObjectOfType<audioManager>().Play(clip);
-
-
-    }
-    #endregion
-
-
-
-
-    //DAMAGE APPLICATION
-
-    void DPS (int damageDone)
-    {
-
-        //ENEMY DETECT
-        Collider[] hitEnemies = Physics.OverlapSphere(detectPoint.position, attackRadius, enemyLayer);
-
-        //APPLY DPS
-        foreach (Collider enemy in hitEnemies)
-        {
-            StartCoroutine(AttackConnect(enemyHit, enemyHitSound));
-
-            enemy.GetComponent<AIBehaviour>().TakeDamage(damageDone);
-            Charge();
-        }
     }
 
     //SWORD CHARGE
