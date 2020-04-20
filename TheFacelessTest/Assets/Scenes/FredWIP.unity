@@ -252,13 +252,18 @@ PrefabInstance:
     - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: shooter
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 532705844}
+    - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
+        type: 3}
+      propertyPath: pursueDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4239413032477568615, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: cam
@@ -1746,6 +1751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655200952974210767, guid: 429ba130c3fe5bc438b50647d8339a56,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 1655200952978521599, guid: 429ba130c3fe5bc438b50647d8339a56,
         type: 3}

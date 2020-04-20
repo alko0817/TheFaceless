@@ -95,8 +95,6 @@ public class AIBehaviour : MonoBehaviour
     Transform attackPoint;
     public float attackHitBox = 1f;
 
-    public GameObject projectile;
-    private GameObject[] projectiles;
 
     public int attackDamage;
     private bool attackThrown;
@@ -168,7 +166,7 @@ public class AIBehaviour : MonoBehaviour
             Die();
         }
 
-        print(gameObject.name + " can attack: " + CanAttack());
+
         UpdateTimers();
     }
 
@@ -242,6 +240,10 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.STUNNED;
         }
 
+        if(distanceToPlayer < fleeDistance && shooter)
+        {
+            state = BEHAVIOUR_STATE.FLEE;
+        }
     }
 
     void Act()
@@ -281,18 +283,20 @@ public class AIBehaviour : MonoBehaviour
 
         if (state == BEHAVIOUR_STATE.ATTACK)
         {
+            Stop();
+
             pursueDelayTimer = 0f;
 
-            Stop();
             if (!attackThrown)
             {
                 StartCoroutine(Attack());
                 StartCoroutine(ResetAttack());
 
             }
+
         }
 
-        if(state == BEHAVIOUR_STATE.BLOCK)
+        if (state == BEHAVIOUR_STATE.BLOCK)
         {
             pursueDelayTimer = 0f;
 
@@ -309,6 +313,11 @@ public class AIBehaviour : MonoBehaviour
             pursueDelayTimer = 0f;
 
             Stunned();
+        }
+
+        if(state == BEHAVIOUR_STATE.FLEE)
+        {
+            Flee();
         }
     }
 
@@ -395,6 +404,11 @@ public class AIBehaviour : MonoBehaviour
     {
         navMeshAgent.destination = location;
         navMeshAgent.isStopped = false;
+
+    }
+
+    void Flee()
+    {
 
     }
 
