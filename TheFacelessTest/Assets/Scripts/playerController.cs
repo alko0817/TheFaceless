@@ -107,6 +107,7 @@ public class playerController : MonoBehaviour
 
     [HideInInspector]
     public bool canDischarge = false;
+    internal bool discharging = false;
 
     public cameraShake camShake;
     public float shakeDuration = 1f;
@@ -156,13 +157,22 @@ public class playerController : MonoBehaviour
     void Update()
     {
         //UI SWORD CHARGE
-        if (currentCharge > lastCharge)
+        if (currentCharge > lastCharge && !discharging)
         {
             lastCharge += Time.deltaTime * UIChargeMultiplier;
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
         // MAKE SWORD DISCHARGE GRADUALLY
+        if (discharging)
+        {
+            if (lastCharge > 0)
+            {
+                lastCharge -= Time.deltaTime * UIChargeMultiplier;
+                swordFill.fillAmount = lastCharge / maxCharge;
+                currentCharge = lastCharge;
+            }
+        }
 
     }
 
