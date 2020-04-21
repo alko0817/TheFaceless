@@ -225,13 +225,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         #endregion
-
-        if (nextCombo < 0)
-        {
-            combos = 0;
-            combosBlock = 0;
-        }
-
     }
 
     IEnumerator Holding()
