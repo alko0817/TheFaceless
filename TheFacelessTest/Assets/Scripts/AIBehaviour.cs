@@ -217,6 +217,7 @@ public class AIBehaviour : MonoBehaviour
             fleeTimer = 0f;
         }
 
+
     }
 
     void Decide()

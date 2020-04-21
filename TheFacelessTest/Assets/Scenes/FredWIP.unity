@@ -252,7 +252,7 @@ PrefabInstance:
     - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: shooter
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
@@ -264,11 +264,21 @@ PrefabInstance:
       propertyPath: pursueDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
+        type: 3}
+      propertyPath: fleeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469879772081296306, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
+        type: 3}
+      propertyPath: fleeDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4239413032477568615, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 2091731374}
+      objectReference: {fileID: 0}
     - target: {fileID: 6215925132303965928, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: m_Name
@@ -419,18 +429,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &979530450 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1322829573}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4ece692884d9f4cbf053c60b84507f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1322829573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2442,12 +2440,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58043f40acea00e4284ce21a2aa2c0fe, type: 3}
---- !u!4 &2091731374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2623165044700509553, guid: 93b4ed3211f1b834ca8352c635869afa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1322829573}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2133461297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2470,7 +2462,7 @@ PrefabInstance:
     - target: {fileID: 2015237082, guid: 78245e1da84781c4491f5efe5dfac56f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 979530450}
+      objectReference: {fileID: 0}
     - target: {fileID: 2015237082, guid: 78245e1da84781c4491f5efe5dfac56f, type: 3}
       propertyPath: healingRate
       value: 5
