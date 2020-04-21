@@ -17,7 +17,7 @@ public class newTrigger : MonoBehaviour
         fadeOutDelay = manager.triggers[localIndex].duration;
         UIAnim = manager.triggers[localIndex].animator;
         sound = manager.triggers[localIndex].sound;
-        player = GameObject.Find("vBasicController_Idle (1)");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)

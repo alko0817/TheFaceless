@@ -2793,6 +2793,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c28dee7424f6914c8a76ad9c3c05954, type: 3}
+--- !u!1 &2106645164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2623165045082957685, guid: 93b4ed3211f1b834ca8352c635869afa,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131567120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2131567120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2808,6 +2814,17 @@ PrefabInstance:
       propertyPath: health
       value: 
       objectReference: {fileID: 1293194177}
+    - target: {fileID: 1266732147541586018, guid: 93b4ed3211f1b834ca8352c635869afa,
+        type: 3}
+      propertyPath: m_CookingOptions
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266732147541586018, guid: 93b4ed3211f1b834ca8352c635869afa,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6796121518194019630, guid: 3bbb954bf71d30e40aa86a45bffde473,
+        type: 3}
     - target: {fileID: 2623165044700509580, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: targetLookAt
@@ -3015,7 +3032,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2106645164}
     - target: {fileID: 6843393320665425055, guid: fd31d63f2a12af544b05186d72cbe481,
         type: 3}
       propertyPath: m_Name
@@ -3311,7 +3328,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2106645164}
     - target: {fileID: 9218849442280678499, guid: f206a335ea28be3498fb16d067ece7c4,
         type: 3}
       propertyPath: health
