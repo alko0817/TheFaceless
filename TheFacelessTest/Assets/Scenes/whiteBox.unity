@@ -354,7 +354,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 440370321}
+      objectReference: {fileID: 0}
     - target: {fileID: 8716938843426233709, guid: 5c83dc0207ec7f74ca8275b26954ed28,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -628,12 +628,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80b5357e147fdf44a9b2af7ef62bbd35, type: 3}
---- !u!4 &440370321 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2623165044700509553, guid: 93b4ed3211f1b834ca8352c635869afa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2131567120}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &446867539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4148095578093447156, guid: c2897664b5fa1e2499fdc8244043cb42,
@@ -1587,7 +1581,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1865673417}
+      objectReference: {fileID: 0}
     - target: {fileID: 3855102575042882269, guid: 78245e1da84781c4491f5efe5dfac56f,
         type: 3}
       propertyPath: m_PlaneDistance
@@ -2496,12 +2490,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2897664b5fa1e2499fdc8244043cb42, type: 3}
---- !u!20 &1865673417 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2623165044700509554, guid: 93b4ed3211f1b834ca8352c635869afa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2131567120}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1889342007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2805,12 +2793,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c28dee7424f6914c8a76ad9c3c05954, type: 3}
---- !u!1 &2106645164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2623165045082957685, guid: 93b4ed3211f1b834ca8352c635869afa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2131567120}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2131567120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2834,7 +2816,7 @@ PrefabInstance:
     - target: {fileID: 2623165045082957685, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: m_Name
-      value: vBasicController_Idle (1)
+      value: NICOLA
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957694, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
@@ -3033,7 +3015,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2106645164}
+      objectReference: {fileID: 0}
     - target: {fileID: 6843393320665425055, guid: fd31d63f2a12af544b05186d72cbe481,
         type: 3}
       propertyPath: m_Name
@@ -3190,7 +3172,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 440370321}
+      objectReference: {fileID: 0}
     - target: {fileID: 8898085431204052680, guid: 0bba643fc8840a843b76425fc5db55d3,
         type: 3}
       propertyPath: saver
@@ -3200,7 +3182,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2106645164}
+      objectReference: {fileID: 0}
     - target: {fileID: 8898085431204052723, guid: 0bba643fc8840a843b76425fc5db55d3,
         type: 3}
       propertyPath: m_Name
@@ -3329,7 +3311,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2106645164}
+      objectReference: {fileID: 0}
     - target: {fileID: 9218849442280678499, guid: f206a335ea28be3498fb16d067ece7c4,
         type: 3}
       propertyPath: health
