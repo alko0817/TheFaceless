@@ -21,24 +21,22 @@ public class AIBehaviour : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     BEHAVIOUR_STATE state;
-    private static Vector3 startPosition;
     EnemyBlackboard blackboard;
 
     #region Shooter Parameters
     [Header("- Shooter Parameters")]
     public bool shooter;
-    public float fleeDistance;
     public float fireRate;
     private float shootTimer;
 
+    public float fleeTime;
+    private float fleeTimer;
 
     Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
 
     #endregion
-    public float pursueDelay;
-    private float pursueDelayTimer;
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
     [Tooltip("The Patrol Route of this enemy. Drag the Patrol Route you want this enemy to follow into this box.")]
@@ -57,6 +55,8 @@ public class AIBehaviour : MonoBehaviour
     public float sightDistance;
     [Tooltip("The range at which this enemy will attack the player")]
     public float attackDistance;
+    public float fleeDistance;
+
     #endregion
 
     #region Health Parameters
@@ -89,6 +89,9 @@ public class AIBehaviour : MonoBehaviour
     public float senseFrequency;
     private float senseTimer;
     private bool pursuing;
+    public float pursueDelay;
+    private float pursueDelayTimer;
+
     #endregion
 
     #region Combat Parameters
@@ -108,7 +111,7 @@ public class AIBehaviour : MonoBehaviour
     void Start()
     {
         playerDetected = false;
-        canHitPlayer = false;
+        canHitPlayer = true;
         attackThrown = false;
         blocking = false;
         pursuing = false;
@@ -116,18 +119,18 @@ public class AIBehaviour : MonoBehaviour
 
         senseTimer = 0.0f;
         shootTimer = 0f;
+        fleeTimer = Mathf.Infinity;
 
         player = GameObject.FindWithTag("Player");
         state = BEHAVIOUR_STATE.PATROL; 
         currentHealth = maxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //attackPoint = transform.GetChild(2).transform;
+        attackPoint = transform.GetChild(2).transform;
         projectileSpawn = transform.GetChild(3).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
-        startPosition = transform.position;
 
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
@@ -155,9 +158,9 @@ public class AIBehaviour : MonoBehaviour
         {
             senseTimer = 0.0f;
             Sense();
-            Decide();
 
         }
+        Decide();
         Act();
 
 
@@ -175,6 +178,7 @@ public class AIBehaviour : MonoBehaviour
         timeSinceLastSawPlayer += Time.deltaTime;
         timeSinceArrivedAtWaypoint += Time.deltaTime;
         senseTimer += Time.deltaTime;
+        fleeTimer += Time.deltaTime;
     }
     private void OnDrawGizmos()
     {
@@ -208,6 +212,11 @@ public class AIBehaviour : MonoBehaviour
             print(gameObject.name + " lost sight of Player");
         }
 
+        if(distanceToPlayer < fleeDistance && shooter)
+        {
+            fleeTimer = 0f;
+        }
+
     }
 
     void Decide()
@@ -235,12 +244,13 @@ public class AIBehaviour : MonoBehaviour
         {
             state = BEHAVIOUR_STATE.ATTACK;
         }
+
         if(stunned)
         {
             state = BEHAVIOUR_STATE.STUNNED;
         }
 
-        if(distanceToPlayer < fleeDistance && shooter)
+        if(fleeTimer < fleeTime)
         {
             state = BEHAVIOUR_STATE.FLEE;
         }
@@ -317,6 +327,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.FLEE)
         {
+            pursueDelayTimer = 0f;
+
             Flee();
         }
     }
@@ -409,7 +421,10 @@ public class AIBehaviour : MonoBehaviour
 
     void Flee()
     {
-
+        Vector3 direction = (player.transform.position - transform.position) * -1;
+        direction.Normalize();
+        Vector3 destination = transform.position + direction;
+        MoveTo(destination);
     }
 
     void Stop()
