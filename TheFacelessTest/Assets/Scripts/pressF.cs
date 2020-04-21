@@ -29,5 +29,11 @@ public class pressF : MonoBehaviour
             text.SetActive(false);
             textEffect.SetActive(false);
         }
+
+        if (player.discharging)
+        {
+            text.SetActive(false);
+            textEffect.SetActive(false);
+        }
     }
 }

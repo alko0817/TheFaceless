@@ -120,6 +120,7 @@ public class PlayerAttack : MonoBehaviour
             //DISCHARGE
             if (Input.GetButton("discharge") && controller.canDischarge)
             {
+                
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius);
                 StartCoroutine(Discharge());
             }
@@ -269,6 +270,7 @@ public class PlayerAttack : MonoBehaviour
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
 
         yield return new WaitForSeconds(.4f);
+        controller.discharging = true;
         controller.explosion.Play();
         FindObjectOfType<audioManager>().Play("Discharge_First");
         if(controller.timeManager != null)
@@ -288,11 +290,12 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
-
+        controller.discharging = false;
         controller.canDischarge = false;
-        controller.swordFill.fillAmount = 0;
-        controller.currentCharge = 0;
-        controller.lastCharge = 0;
+
+        //controller.swordFill.fillAmount = 0;
+        //controller.currentCharge = 0;
+        //controller.lastCharge = 0;
     }
 
     public bool GetAttacking ()
