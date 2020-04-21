@@ -4980,7 +4980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5305fdee5d63f8449a2115b1b7e415d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &6215925132003877498
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,26 +5166,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad190f8b782d8b4cbecaa18a92f2acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooter: 0
+  shooter: 1
   fleeDistance: 0
-  fireRate: 4
+  fireRate: 10
   projectile: {fileID: 8871684046561928921, guid: d57a3cb9292df244db4fef29c4d70e89,
     type: 3}
   projectiles:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  pursueDelay: 1
+  pursueDelay: 0.3
   patrolPath: {fileID: 0}
   waypointTolerance: 1.5
   waypointWaitTime: 2
-  sightDistance: 10
+  sightDistance: 20
   attackDistance: 3
   maxHealth: 40
   healthBar: {fileID: 6215925131401345270}
   suspicionTime: 5
   senseFrequency: 0.5
-  attackHitBox: 1
+  attackPoint: {fileID: 4247952540417507793}
+  attackHitBox: 3
   attackDamage: 10
 --- !u!195 &432931987
 NavMeshAgent:
