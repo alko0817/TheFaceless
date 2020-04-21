@@ -52,11 +52,6 @@ public class PlayerAttack : MonoBehaviour
     int blockAttack1Dmg;
     int blockAttack2Dmg;
 
-
-    //DISCHARGE
-    //BLOCK-PARRY
-
-
     #endregion  
 
     private void Start()
@@ -100,16 +95,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        //CHECK CLICK
-        //TRIGGER ATTACK
-        //PLAY ANIMATION
-        //WAIT FOR CONTACT
-        //APPLY DPS
-        //PLAY SOUND
-        //ADD CLICK COOLDOWN
-
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
+        controller.blocking = blocking;
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
