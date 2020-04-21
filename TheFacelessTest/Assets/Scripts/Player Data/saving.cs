@@ -5,7 +5,12 @@ using UnityEngine;
 public class saving : MonoBehaviour
 {
     public saveLoader saver;
-    public GameObject player;
+    GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
