@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 2623165045082957684}
   - component: {fileID: 2623165045082957694}
   - component: {fileID: 2106645172}
-  - component: {fileID: 2106645173}
+  - component: {fileID: 4062211569490831988}
   - component: {fileID: 2106645174}
   m_Layer: 0
   m_Name: NICOLA
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loader: {fileID: 0}
   health: {fileID: 0}
---- !u!114 &2106645173
+--- !u!114 &4062211569490831988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2623165045082957685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b580543d1b6aaa46abb50e0056ebe50, type: 3}
+  m_Script: {fileID: 11500000, guid: c2959a599e3cfd342b30fd7509fdabb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2106645174
