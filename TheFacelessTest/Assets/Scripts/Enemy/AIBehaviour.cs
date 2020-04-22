@@ -33,7 +33,7 @@ public class AIBehaviour : MonoBehaviour
     public float fleeTime;
     private float fleeTimer;
 
-    public Transform projectileSpawn;
+     Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
 
@@ -97,7 +97,7 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region Combat Parameters
-    public Transform attackPoint;
+    Transform attackPoint;
     public float attackHitBox = 1f;
 
 
@@ -110,13 +110,14 @@ public class AIBehaviour : MonoBehaviour
 
     public float dodgeDistance;
     public float dodgeSpeedMultiplier;
-   
+    private float initialSpeed;
 
     SpawnEffect dissolving;
   //  Animator anim;
     #endregion
     void Start()
     {
+
         playerDetected = false;
         canHitPlayer = true;
         attackThrown = false;
@@ -134,10 +135,10 @@ public class AIBehaviour : MonoBehaviour
         currentHealth = maxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        initialSpeed = navMeshAgent.speed;
 
-
-        //attackPoint = transform.GetChild(2).transform;
-        //projectileSpawn = transform.GetChild(3).transform;
+        attackPoint = transform.GetChild(0).transform;
+        projectileSpawn = transform.GetChild(1).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
@@ -210,7 +211,6 @@ public class AIBehaviour : MonoBehaviour
 
             playerDetected = true;
             timeSinceLastSawPlayer = 0.0f;
-            print("Player sighted by " + gameObject.name);
 
         }
         else
@@ -219,7 +219,6 @@ public class AIBehaviour : MonoBehaviour
             blackboard.RemoveEnemyInSight(this.gameObject);
             blackboard.RemovePursuingEnemy(this.gameObject);
             playerDetected = false;
-            print(gameObject.name + " lost sight of Player");
         }
 
         if(distanceToPlayer < fleeDistance && shooter)
@@ -227,34 +226,6 @@ public class AIBehaviour : MonoBehaviour
             fleeTimer = 0f;
         }
 
-        if(CanAttack())
-        {
-            if(player.GetComponent<PlayerAttack>().GetAttacking())
-            {
-                int rand = UnityEngine.Random.Range(0, 1);
-                if(rand == 0)
-                {
-                    dodge = true;
-                    block = false;
-                }
-                else if(rand == 1)
-                {
-                    dodge = false;
-                    block = true;
-                }
-                else if(rand == 2 || rand == 3)
-                {
-                    dodge = false;
-                    block = false;
-                }
-                
-            }
-        }
-        else
-        {
-            dodge = false;
-            block = false;
-        }
 
     }
 
@@ -294,7 +265,44 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.FLEE;
         }
 
-        if(dodge)
+        if (CanAttack())
+        {
+            int rand;
+                if (player.GetComponent<PlayerAttack>().GetAttacking())
+                {
+
+                rand = UnityEngine.Random.Range(0, 4);
+                print(rand);
+
+                if (rand == 0)
+                    {
+                        dodge = true;
+                        block = false;
+                    }
+                    else if (rand == 1)
+                    {
+                        dodge = false;
+                        block = true;
+                    }
+                    else if (rand == 2 || rand == 3)
+                    {
+                        print("neither");
+                        dodge = false;
+                        block = false;
+                    }
+
+                }
+            
+
+
+        }
+        else
+        {
+            dodge = false;
+            block = false;
+        }
+
+        if (dodge)
         {
             state = BEHAVIOUR_STATE.DODGE;
         }
@@ -312,7 +320,6 @@ public class AIBehaviour : MonoBehaviour
         {
             pursueDelayTimer = 0f;
             Stop();
-            print(gameObject.name + " is suspicious");
         }
 
         if (state == BEHAVIOUR_STATE.PATROL)
@@ -363,7 +370,6 @@ public class AIBehaviour : MonoBehaviour
             if(!blocking)
             {
                 Block();
-                StartCoroutine(ResetBlock());
             }
         }
 
@@ -371,7 +377,7 @@ public class AIBehaviour : MonoBehaviour
         {
             pursueDelayTimer = 0f;
 
-            StartCoroutine(Dodge());
+            Dodge();
         }
 
         if(state == BEHAVIOUR_STATE.STUNNED)
@@ -400,7 +406,6 @@ public class AIBehaviour : MonoBehaviour
             {
                 timeSinceArrivedAtWaypoint = 0;
                 CycleWaypoint();
-                print("cycled waypoint");
                 
             }
 
@@ -411,7 +416,6 @@ public class AIBehaviour : MonoBehaviour
                 MoveTo(nextPosition);
 
             }
-            print(gameObject.name + "  patrolling");
 
         }
 
@@ -483,21 +487,9 @@ public class AIBehaviour : MonoBehaviour
         MoveTo(destination);
     }
 
-    IEnumerator Dodge()
+    void Dodge()
     {
         print("dodge");
-        Vector3 direction = (player.transform.position - transform.position) * -1;
-        direction.Normalize();
-        float initialSpeed = navMeshAgent.speed;
-        navMeshAgent.speed = navMeshAgent.speed * dodgeSpeedMultiplier;
-        Vector3 destination = direction;
-        MoveTo(destination);
-        yield return new WaitForSeconds(1f);
-        Stop();
-        dodge = false;
-        navMeshAgent.speed = initialSpeed;
-        
-        
     }
 
     void Stop()
@@ -517,7 +509,7 @@ public class AIBehaviour : MonoBehaviour
 
         
         player.GetComponent<playerController>().TakeDamage(attackDamage);
-        print(gameObject.name + " hit player");
+        //print(gameObject.name + " hit player");
 
     }
 
@@ -550,7 +542,7 @@ public class AIBehaviour : MonoBehaviour
 
     IEnumerator ResetBlock()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2f);
         blocking = false;
         canHitPlayer = true;
     }
@@ -607,10 +599,12 @@ public class AIBehaviour : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
-            Debug.Log("UGH");
         }
         else
+        {
             print("attack blocked");
+            StartCoroutine(ResetBlock());
+        }
         //HURT ANIMATIONS
 
     }

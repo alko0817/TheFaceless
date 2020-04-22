@@ -244,6 +244,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator AttackConnection (float delay, int damage, Vector3 aoe, float aoeRadius)
     {
+        yield return new WaitForEndOfFrame();
+        attacking = false;
         yield return new WaitForSeconds(delay);
 
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
@@ -255,7 +257,6 @@ public class PlayerAttack : MonoBehaviour
             controller.Charge();
         }
 
-        attacking = false;
     }
 
     IEnumerator Discharge ()

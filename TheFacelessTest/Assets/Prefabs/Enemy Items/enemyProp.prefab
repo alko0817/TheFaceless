@@ -5120,7 +5120,6 @@ MonoBehaviour:
   shooter: 1
   fireRate: 2
   fleeTime: 1
-  projectileSpawn: {fileID: 9117856281279457494}
   projectile: {fileID: 8871684046561928921, guid: d57a3cb9292df244db4fef29c4d70e89,
     type: 3}
   projectiles:
@@ -5140,9 +5139,10 @@ MonoBehaviour:
   suspicionTime: 5
   senseFrequency: 0.5
   pursueDelay: 0.3
-  attackPoint: {fileID: 4247952540417507793}
   attackHitBox: 3
   attackDamage: 10
+  dodgeDistance: 0
+  dodgeSpeedMultiplier: 0
 --- !u!195 &432931987
 NavMeshAgent:
   m_ObjectHideFlags: 0
