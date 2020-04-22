@@ -34,7 +34,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 350, y: -200, z: 0}
+  m_AnyStatePosition: {x: 320, y: -180, z: 0}
   m_EntryPosition: {x: 340, y: 430, z: 0}
   m_ExitPosition: {x: 650, y: 430, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -13115,16 +13115,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8250903122462691169}
-    m_Position: {x: 510, y: 890, z: 0}
+    m_Position: {x: 510, y: 830, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6123207270277331130}
     m_Position: {x: 500, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1445581845684083096}
-    m_Position: {x: 510, y: 820, z: 0}
+    m_Position: {x: 510, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -564254311091757272}
-    m_Position: {x: 510, y: 750, z: 0}
+    m_Position: {x: 510, y: 730, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6593641614365005900}
     m_Position: {x: 510, y: 680, z: 0}
@@ -15996,7 +15996,7 @@ BlendTree:
   m_Name: Unarmed
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: d7b1edb2b3ce73348a01eccaa92b1fbf,
+    m_Motion: {fileID: -5381980352375698998, guid: bc14122087c3d8c478fac2f6b88d9b4f,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
