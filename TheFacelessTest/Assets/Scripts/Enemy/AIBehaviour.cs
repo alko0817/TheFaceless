@@ -32,7 +32,7 @@ public class AIBehaviour : MonoBehaviour
     public float fleeTime;
     private float fleeTimer;
 
-    Transform projectileSpawn;
+    public Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
 
@@ -126,8 +126,10 @@ public class AIBehaviour : MonoBehaviour
         currentHealth = maxHealth;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
-        attackPoint = transform.GetChild(2).transform;
-        projectileSpawn = transform.GetChild(3).transform;
+
+
+        //attackPoint = transform.GetChild(2).transform;
+        //projectileSpawn = transform.GetChild(3).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
