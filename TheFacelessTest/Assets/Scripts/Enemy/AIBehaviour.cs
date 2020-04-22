@@ -28,7 +28,8 @@ public class AIBehaviour : MonoBehaviour
     [Header("- Shooter Parameters")]
     public bool shooter;
     public float fireRate;
-    private float shootTimer;
+    internal float shootTimer;
+    internal bool shooting = false;
 
     public float fleeTime;
     private float fleeTimer;
@@ -576,6 +577,7 @@ public class AIBehaviour : MonoBehaviour
 
     void Shoot()
     {
+        shooting = true;
         canHitPlayer = false;
         transform.LookAt(player.transform);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
@@ -594,7 +596,9 @@ public class AIBehaviour : MonoBehaviour
                     projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
+                    shooting = false;
                     break;
+                    
                 }
             }
         }
