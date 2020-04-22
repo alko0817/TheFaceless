@@ -151,7 +151,7 @@ public class playerController : MonoBehaviour
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
-
+        //timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
     }
 
     void Update()

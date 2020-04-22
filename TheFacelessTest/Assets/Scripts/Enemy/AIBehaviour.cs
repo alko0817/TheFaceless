@@ -14,6 +14,7 @@ public class AIBehaviour : MonoBehaviour
         PURSUE,
         ATTACK,
         BLOCK,
+        DODGE,
         STUNNED,
         SHOOTING,
         FLEE
@@ -37,6 +38,7 @@ public class AIBehaviour : MonoBehaviour
     public GameObject[] projectiles;
 
     #endregion
+
     #region Patrolling Paramenters
     [Header("- Patrolling Parameters")]
     [Tooltip("The Patrol Route of this enemy. Drag the Patrol Route you want this enemy to follow into this box.")]
@@ -103,8 +105,13 @@ public class AIBehaviour : MonoBehaviour
     private bool attackThrown;
     private bool blocking;
     private bool stunned;
+    private bool dodge;
+    private bool block;
 
-    
+    public float dodgeDistance;
+    public float dodgeSpeedMultiplier;
+   
+
     SpawnEffect dissolving;
   //  Animator anim;
     #endregion
@@ -116,6 +123,7 @@ public class AIBehaviour : MonoBehaviour
         blocking = false;
         pursuing = false;
         stunned = false;
+        dodge = false;
 
         senseTimer = 0.0f;
         shootTimer = 0f;
@@ -217,6 +225,34 @@ public class AIBehaviour : MonoBehaviour
             fleeTimer = 0f;
         }
 
+        if(CanAttack())
+        {
+            if(player.GetComponent<PlayerAttack>().GetAttacking())
+            {
+                int rand = UnityEngine.Random.Range(0, 1);
+                if(rand == 0)
+                {
+                    dodge = true;
+                    block = false;
+                }
+                else if(rand == 1)
+                {
+                    dodge = false;
+                    block = true;
+                }
+                else if(rand == 2 || rand == 3)
+                {
+                    dodge = false;
+                    block = false;
+                }
+                
+            }
+        }
+        else
+        {
+            dodge = false;
+            block = false;
+        }
 
     }
 
@@ -254,6 +290,16 @@ public class AIBehaviour : MonoBehaviour
         if(fleeTimer < fleeTime)
         {
             state = BEHAVIOUR_STATE.FLEE;
+        }
+
+        if(dodge)
+        {
+            state = BEHAVIOUR_STATE.DODGE;
+        }
+
+        if(block)
+        {
+            state = BEHAVIOUR_STATE.BLOCK;
         }
     }
 
@@ -317,6 +363,13 @@ public class AIBehaviour : MonoBehaviour
                 Block();
                 StartCoroutine(ResetBlock());
             }
+        }
+
+        if(state == BEHAVIOUR_STATE.DODGE)
+        {
+            pursueDelayTimer = 0f;
+
+            StartCoroutine(Dodge());
         }
 
         if(state == BEHAVIOUR_STATE.STUNNED)
@@ -426,6 +479,23 @@ public class AIBehaviour : MonoBehaviour
         direction.Normalize();
         Vector3 destination = transform.position + direction;
         MoveTo(destination);
+    }
+
+    IEnumerator Dodge()
+    {
+        print("dodge");
+        Vector3 direction = (player.transform.position - transform.position) * -1;
+        direction.Normalize();
+        float initialSpeed = navMeshAgent.speed;
+        navMeshAgent.speed = navMeshAgent.speed * dodgeSpeedMultiplier;
+        Vector3 destination = direction;
+        MoveTo(destination);
+        yield return new WaitForSeconds(1f);
+        Stop();
+        dodge = false;
+        navMeshAgent.speed = initialSpeed;
+        
+        
     }
 
     void Stop()
