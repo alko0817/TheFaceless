@@ -93,9 +93,7 @@ public class playerController : MonoBehaviour
     [Header("Blocking/Parrying")]
     [Tooltip("Player movement speed while blocking")]
     public float blockingSpeed = 2f;
-
-    [HideInInspector]
-    public bool blocking = false;
+    internal bool blocking = false;
 
     //DISCHARGE
     [Header("- Discharge Mechanic")]

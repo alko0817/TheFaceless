@@ -8,9 +8,9 @@ public class PlayerStamina : MonoBehaviour
 {
     public Image bar;
     [Tooltip("Rate at which stamina depletes while blocking")]
-    public float deplete = 1f;
+    public float depleteRate = 1f;
     [Tooltip("Rate at which stamina recharges")]
-    public float recharge = 1f;
+    public float rechargeRate = 1f;
     [Tooltip("Delay before stamina starts recharging")]
     public float chargeDelay = .5f;
 
@@ -32,7 +32,7 @@ public class PlayerStamina : MonoBehaviour
             canRecharge = false;
             if (bar.fillAmount > 0)
             {
-                bar.fillAmount -= Time.deltaTime * deplete;
+                bar.fillAmount -= Time.deltaTime * depleteRate;
             }
 
             if (bar.fillAmount == 0)
@@ -52,8 +52,7 @@ public class PlayerStamina : MonoBehaviour
 
         if (canRecharge)
         {
-            bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * recharge));
-            if (bar.fillAmount > 0) canBlock = true;
+            Regen();
         }
 
 
@@ -64,5 +63,11 @@ public class PlayerStamina : MonoBehaviour
         yield return new WaitForSeconds(chargeDelay);
         canRecharge = true;
 
+    }
+
+    public void Regen()
+    {
+        bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * rechargeRate));
+        if (bar.fillAmount > 0) canBlock = true;
     }
 }

@@ -107,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 combos = 1;
-                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius, nextAttack);
 
                 nextCombo = nextAttack;
 
@@ -119,7 +119,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("discharge") && controller.canDischarge)
             {
                 
-                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius);
+                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
                 StartCoroutine(Discharge());
             }
 
@@ -131,7 +131,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 combos = 0;
-                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius, nextAttack);
             }
         }
 
@@ -140,6 +140,7 @@ public class PlayerAttack : MonoBehaviour
         {
             combos = 0;
             combosBlock = 0;
+            attacking = false;
 
         }
         #endregion
@@ -164,7 +165,7 @@ public class PlayerAttack : MonoBehaviour
             //ACTUAL HEAVY ATTACK
             if (lastClick <= 0 && holding && !attacking)
             {
-                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius, nextHeavyAttack);
             }
         }
         #endregion
@@ -193,6 +194,17 @@ public class PlayerAttack : MonoBehaviour
             //WHILE BUTTON IS PRESSED 
             if (Input.GetButton("Fire2"))
             {
+                if (attacking)
+                {
+                    
+                    controller.anim.SetBool("blocking", false);
+                }
+                else
+                {
+                    
+                    controller.anim.SetBool("blocking", true);
+                    controller.anim.SetTrigger("startBlock");
+                }
 
                 if (controller.blocking)
                 {
@@ -205,7 +217,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
                 {
-                    Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius);
+                    Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 1;
                     nextCombo = nextBlockAttack;
@@ -213,11 +225,11 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
             //BLOCK ATTACK COMBO
-            if (lastClick <= 0 && nextCombo > 0 && controller.blocking)
+            if (lastClick <= 0 && nextCombo > 0)
             {
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
                 {
-                    Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius);
+                    Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 0;
 
@@ -234,12 +246,13 @@ public class PlayerAttack : MonoBehaviour
         holding = true;
     }
 
-    public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius)
+    public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
     {
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
         StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius));
+        nextCombo = comboTimer;
 
     }
 
@@ -255,8 +268,6 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
             controller.Charge();
         }
-
-        attacking = false;
     }
 
     IEnumerator Discharge ()
@@ -286,10 +297,6 @@ public class PlayerAttack : MonoBehaviour
 
         controller.discharging = false;
         controller.canDischarge = false;
-
-        //controller.swordFill.fillAmount = 0;
-        //controller.currentCharge = 0;
-        //controller.lastCharge = 0;
     }
 
     public bool GetAttacking ()

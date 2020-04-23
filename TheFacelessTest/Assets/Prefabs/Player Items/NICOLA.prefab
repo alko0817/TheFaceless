@@ -591,7 +591,7 @@ MonoBehaviour:
   heavyDelay2: 1.5
   dischargeDelay: 2
   blockAttackDelay1: 0.8
-  blockAttackDelay2: 0.7
+  blockAttackDelay2: 0.9
   nextAttack: 0.8
   nextHeavyAttack: 1.2
   nextBlockAttack: 1.8
@@ -599,8 +599,8 @@ MonoBehaviour:
   hitLight2: 0.2
   hitHeavy: 0.4
   hitDischarge: 1
-  hitBlock1: 0.3
-  hitBlock2: 0.3
+  hitBlock1: 2
+  hitBlock2: 1
   holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 15
@@ -614,7 +614,6 @@ MonoBehaviour:
   dodgeCost: 0.25
   axisThreshold: 0.5
   blockingSpeed: 0.1
-  blocking: 0
   maxCharge: 100
   chargeRate: 50
   UIChargeMultiplier: 50

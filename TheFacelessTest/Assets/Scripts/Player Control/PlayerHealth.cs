@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float healingRate = 2f;
     public float healingDelay = 1f;
+    [Tooltip("The smaller the number, the higher the migigation")]
     [Range(0f, .9f)]
     public float blockMitigation = .5f;
 
@@ -32,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        #region PassiveRegen
         //if (canRegen)
         //{
         //    currentHealth += Time.deltaTime * healingRate;
@@ -41,7 +43,8 @@ public class PlayerHealth : MonoBehaviour
 
         //    healthOverlay.color = tempAlpha;
         //}
-        
+        #endregion
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             Damage(testDamage);
