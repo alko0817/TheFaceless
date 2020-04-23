@@ -14,8 +14,6 @@ public class healthFX : MonoBehaviour
     public float satIntensity;
     ColorGrading saturation;
     ChromaticAberration aberration;
-    public float smooth;
-    float timer;
 
     private void Start()
     {

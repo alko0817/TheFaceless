@@ -12,7 +12,6 @@ public class PlayerAttack : MonoBehaviour
     //CHECKS
     bool attacking = false;
     bool holding = false;
-    bool blocking = false;
 
     //TIMERS 
     int combos = 0;
@@ -97,11 +96,10 @@ public class PlayerAttack : MonoBehaviour
     {
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
-        controller.blocking = blocking;
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !blocking)
+        if (lastClick <= 0 && !holding && !controller.blocking)
         {
 
 
@@ -109,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 combos = 1;
-                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius, nextAttack);
 
                 nextCombo = nextAttack;
 
@@ -121,7 +119,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("discharge") && controller.canDischarge)
             {
                 
-                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius);
+                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
                 StartCoroutine(Discharge());
             }
 
@@ -133,7 +131,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 combos = 0;
-                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius, nextAttack);
             }
         }
 
@@ -142,6 +140,7 @@ public class PlayerAttack : MonoBehaviour
         {
             combos = 0;
             combosBlock = 0;
+            attacking = false;
 
         }
         #endregion
@@ -166,62 +165,76 @@ public class PlayerAttack : MonoBehaviour
             //ACTUAL HEAVY ATTACK
             if (lastClick <= 0 && holding && !attacking)
             {
-                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius);
+                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius, nextHeavyAttack);
             }
         }
         #endregion
 
         #region Block
-        if (Input.GetButtonDown("Fire2"))
+        if (controller.stamina.canBlock)
         {
-
-            blocking = true;
-            controller.anim.SetBool("blocking", blocking);
-            controller.anim.SetTrigger("startBlock");
-
-
-        }
-
-        //IF BUTTON RELEASED STOP BLOCKING
-        if (Input.GetButtonUp("Fire2"))
-        {
-            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-            blocking = false;
-            controller.anim.SetBool("blocking", blocking);
-        }
-
-        //WHILE BUTTON IS PRESSED 
-        if (Input.GetButton("Fire2"))
-        {
-
-            if (blocking)
+            if (Input.GetButtonDown("Fire2"))
             {
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
-            }
-        }
 
-        //IF ATTACKING THROUGH BLOCK
-        if (lastClick <= 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
-            {
-                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius);
-                controller.anim.SetBool("blocking", !blocking);
-                combosBlock = 1;
-                nextCombo = nextBlockAttack;
+                controller.blocking = true;
+                controller.anim.SetBool("blocking", controller.blocking);
+                controller.anim.SetTrigger("startBlock");
+
 
             }
-        }
-        //BLOCK ATTACK COMBO
-        if (lastClick <= 0 && nextCombo > 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+
+            //IF BUTTON RELEASED STOP BLOCKING
+            if (Input.GetButtonUp("Fire2"))
             {
-                Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius);
-                controller.anim.SetBool("blocking", !blocking);
-                combosBlock = 0;
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+                controller.blocking = false;
+                controller.anim.SetBool("blocking", controller.blocking);
+            }
+
+            //WHILE BUTTON IS PRESSED 
+            if (Input.GetButton("Fire2"))
+            {
+                if (attacking)
+                {
+                    
+                    controller.anim.SetBool("blocking", false);
+                }
+                else
+                {
+                    
+                    controller.anim.SetBool("blocking", true);
+                    controller.anim.SetTrigger("startBlock");
+                }
+
+                if (controller.blocking)
+                {
+                    gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+                }
+            }
+
+            //IF ATTACKING THROUGH BLOCK
+            if (lastClick <= 0 && controller.blocking)
+            {
+                if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
+                {
+                    Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                    controller.anim.SetBool("blocking", !controller.blocking);
+                    combosBlock = 1;
+                    nextCombo = nextBlockAttack;
+
+                }
+            }
+            //BLOCK ATTACK COMBO
+            if (lastClick <= 0 && nextCombo > 0)
+            {
+                if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+                {
+                    Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                    controller.anim.SetBool("blocking", !controller.blocking);
+                    combosBlock = 0;
 
 
+                }
             }
         }
         #endregion
@@ -233,12 +246,13 @@ public class PlayerAttack : MonoBehaviour
         holding = true;
     }
 
-    public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius)
+    public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
     {
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
         StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius));
+        nextCombo = comboTimer;
 
     }
 
@@ -256,7 +270,6 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
             controller.Charge();
         }
-
     }
 
     IEnumerator Discharge ()
@@ -286,10 +299,6 @@ public class PlayerAttack : MonoBehaviour
 
         controller.discharging = false;
         controller.canDischarge = false;
-
-        //controller.swordFill.fillAmount = 0;
-        //controller.currentCharge = 0;
-        //controller.lastCharge = 0;
     }
 
     public bool GetAttacking ()
