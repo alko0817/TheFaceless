@@ -7,7 +7,8 @@ using Invector.vCharacterController;
 public class playerController : MonoBehaviour
 {
     public Animator anim;
-    PlayerHealth health; 
+    internal PlayerHealth health;
+    internal PlayerStamina stamina;
     [Header("- Player Attack Point/Radius & Enemy Layer")]
     public Transform detectPoint;
     public Transform aoePoint;
@@ -151,6 +152,8 @@ public class playerController : MonoBehaviour
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
+        stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
+
         //timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
     }
 

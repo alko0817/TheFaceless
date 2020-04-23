@@ -12,7 +12,6 @@ public class PlayerAttack : MonoBehaviour
     //CHECKS
     bool attacking = false;
     bool holding = false;
-    bool blocking = false;
 
     //TIMERS 
     int combos = 0;
@@ -97,11 +96,10 @@ public class PlayerAttack : MonoBehaviour
     {
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
-        controller.blocking = blocking;
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !blocking)
+        if (lastClick <= 0 && !holding && !controller.blocking)
         {
 
 
@@ -172,56 +170,59 @@ public class PlayerAttack : MonoBehaviour
         #endregion
 
         #region Block
-        if (Input.GetButtonDown("Fire2"))
+        if (controller.stamina.canBlock)
         {
-
-            blocking = true;
-            controller.anim.SetBool("blocking", blocking);
-            controller.anim.SetTrigger("startBlock");
-
-
-        }
-
-        //IF BUTTON RELEASED STOP BLOCKING
-        if (Input.GetButtonUp("Fire2"))
-        {
-            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-            blocking = false;
-            controller.anim.SetBool("blocking", blocking);
-        }
-
-        //WHILE BUTTON IS PRESSED 
-        if (Input.GetButton("Fire2"))
-        {
-
-            if (blocking)
+            if (Input.GetButtonDown("Fire2"))
             {
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
-            }
-        }
 
-        //IF ATTACKING THROUGH BLOCK
-        if (lastClick <= 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
-            {
-                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius);
-                controller.anim.SetBool("blocking", !blocking);
-                combosBlock = 1;
-                nextCombo = nextBlockAttack;
+                controller.blocking = true;
+                controller.anim.SetBool("blocking", controller.blocking);
+                controller.anim.SetTrigger("startBlock");
+
 
             }
-        }
-        //BLOCK ATTACK COMBO
-        if (lastClick <= 0 && nextCombo > 0 && blocking)
-        {
-            if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+
+            //IF BUTTON RELEASED STOP BLOCKING
+            if (Input.GetButtonUp("Fire2"))
             {
-                Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius);
-                controller.anim.SetBool("blocking", !blocking);
-                combosBlock = 0;
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+                controller.blocking = false;
+                controller.anim.SetBool("blocking", controller.blocking);
+            }
+
+            //WHILE BUTTON IS PRESSED 
+            if (Input.GetButton("Fire2"))
+            {
+
+                if (controller.blocking)
+                {
+                    gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+                }
+            }
+
+            //IF ATTACKING THROUGH BLOCK
+            if (lastClick <= 0 && controller.blocking)
+            {
+                if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
+                {
+                    Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius);
+                    controller.anim.SetBool("blocking", !controller.blocking);
+                    combosBlock = 1;
+                    nextCombo = nextBlockAttack;
+
+                }
+            }
+            //BLOCK ATTACK COMBO
+            if (lastClick <= 0 && nextCombo > 0 && controller.blocking)
+            {
+                if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
+                {
+                    Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius);
+                    controller.anim.SetBool("blocking", !controller.blocking);
+                    combosBlock = 0;
 
 
+                }
             }
         }
         #endregion
