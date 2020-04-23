@@ -19,7 +19,7 @@ public class playerController : MonoBehaviour
     [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
 
-    [Header("Slow Motion & Camera FX")]
+    [Header("- Slow Motion & Camera FX")]
     public TimeManager timeManager;
     public camFov foving;
 
@@ -74,11 +74,14 @@ public class playerController : MonoBehaviour
     public int blockAttack2Dmg = 30;
 
     //DODGE
-    [Header("- Dodge Cooldown")]
+    [Header("- Dodging")]
     [Tooltip("Input delay before player can dodge again")]
     public float dodgeCooldown = 1f;
     [Tooltip("Temporary movement speed boost while dodging")]
     public float dodgeDashBoost = 4f;
+    [Tooltip("Stamina cost for dodging. Requires fine-tunning!")]
+    [Range(.1f, .8f)]
+    public float dodgeCost = .2f;
 
     [Tooltip("How long has the player to hold directional buttons to trigger the dodge. Requires fine-tunning!")]
     [Range(.1f, 1f)]
@@ -119,7 +122,7 @@ public class playerController : MonoBehaviour
     public ParticleSystem burst;
 
     //SOUNDS
-    [Header("Sound Clips")]
+    [Header("- Sound Clips")]
     [Tooltip("Copy-paste the clip name from the Audio Manager")]
     public string lightAttack1Sound;
     public string lightAttack2Sound;

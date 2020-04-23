@@ -611,6 +611,7 @@ MonoBehaviour:
   blockAttack2Dmg: 30
   dodgeCooldown: 1
   dodgeDashBoost: 3
+  dodgeCost: 0.25
   axisThreshold: 0.5
   blockingSpeed: 0.1
   blocking: 0

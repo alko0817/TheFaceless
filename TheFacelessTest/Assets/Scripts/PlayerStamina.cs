@@ -16,8 +16,7 @@ public class PlayerStamina : MonoBehaviour
 
     playerController controller;
     internal bool canBlock = true;
-    private bool canRecharge = true;
-    bool blocking;
+    internal bool canRecharge = true;
 
     private void Start()
     {
@@ -27,7 +26,6 @@ public class PlayerStamina : MonoBehaviour
 
     private void Update()
     {
-        blocking = controller.blocking;
 
         if (controller.blocking && canBlock)
         {
