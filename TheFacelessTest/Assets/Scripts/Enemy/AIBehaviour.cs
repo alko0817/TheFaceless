@@ -31,6 +31,7 @@ public class AIBehaviour : MonoBehaviour
     private float shootTimer;
 
     public float fleeTime;
+    public float fleeSpeed;
     private float fleeTimer;
 
      Transform projectileSpawn;
@@ -337,12 +338,14 @@ public class AIBehaviour : MonoBehaviour
         if(state == BEHAVIOUR_STATE.SUSPICIOUS)
         {
             pursueDelayTimer = 0f;
+            navMeshAgent.speed = initialSpeed;
             Stop();
         }
 
         if (state == BEHAVIOUR_STATE.PATROL)
         {
             pursueDelayTimer = 0f;
+            navMeshAgent.speed = initialSpeed;
 
             Patrol();
         }
@@ -350,12 +353,16 @@ public class AIBehaviour : MonoBehaviour
         if(state == BEHAVIOUR_STATE.SHOOTING)
         {
             pursueDelayTimer = 0f;
+            navMeshAgent.speed = initialSpeed;
+
             Stop();
             Shoot();
         }
 
         if (state == BEHAVIOUR_STATE.PURSUE)
         {
+            navMeshAgent.speed = initialSpeed;
+
             pursueDelayTimer += Time.deltaTime;
 
             if (pursueDelayTimer > pursueDelay)
@@ -367,6 +374,8 @@ public class AIBehaviour : MonoBehaviour
 
         if (state == BEHAVIOUR_STATE.ATTACK)
         {
+            navMeshAgent.speed = initialSpeed;
+
             Stop();
 
             pursueDelayTimer = 0f;
@@ -382,6 +391,8 @@ public class AIBehaviour : MonoBehaviour
 
         if (state == BEHAVIOUR_STATE.BLOCK)
         {
+            navMeshAgent.speed = initialSpeed;
+
             pursueDelayTimer = 0f;
 
             Stop();
@@ -393,6 +404,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.DODGE)
         {
+            navMeshAgent.speed = initialSpeed;
+
             pursueDelayTimer = 0f;
 
            StartCoroutine(Dodge());
@@ -400,6 +413,8 @@ public class AIBehaviour : MonoBehaviour
 
         if(state == BEHAVIOUR_STATE.STUNNED)
         {
+            navMeshAgent.speed = initialSpeed;
+
             pursueDelayTimer = 0f;
 
             Stunned();
@@ -502,6 +517,7 @@ public class AIBehaviour : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
         Vector3 destination = transform.position + direction;
+        navMeshAgent.speed = fleeSpeed;
         MoveTo(destination);
     }
 
