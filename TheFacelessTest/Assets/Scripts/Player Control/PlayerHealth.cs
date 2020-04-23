@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     public int testDamage = 10;
+    public float intensity = 1f;
     bool canRegen = true;
     Color tempAlpha;
     playerController player;
@@ -67,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         print("Player Health: " + currentHealth);
         StopCoroutine("HealingDelay");
         canRegen = false;
-        tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
+        tempAlpha.a = ((maxHealth - currentHealth) / maxHealth) * intensity;
         healthOverlay.color = tempAlpha;
         StartCoroutine("HealingDelay");
     }
@@ -75,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
     public void Heal (int heal)
     {
         currentHealth += heal;
-        tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
+        tempAlpha.a = ((maxHealth - currentHealth) / maxHealth) * intensity;
         healthOverlay.color = tempAlpha;
 
     }

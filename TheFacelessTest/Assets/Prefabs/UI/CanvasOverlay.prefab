@@ -474,13 +474,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1122526782}
-    characterCount: 121
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 22
-    wordCount: 22
+    spaceCount: 2
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1165223362}
   m_TextComponent: {fileID: 1122526782}
   m_materialReferenceIndex: 1
@@ -829,6 +829,7 @@ MonoBehaviour:
   blockMitigation: 0.1
   currentHealth: 0
   testDamage: 25
+  intensity: 0.2
 --- !u!114 &420907641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1733,7 +1734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.77576256, a: 1}
+  m_Color: {r: 0.07742971, g: 0.46295348, b: 0.5660378, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
