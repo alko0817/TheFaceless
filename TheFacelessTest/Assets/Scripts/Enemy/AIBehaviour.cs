@@ -100,6 +100,8 @@ public class AIBehaviour : MonoBehaviour
     Transform attackPoint;
     public float attackHitBox = 1f;
 
+    public int dodgeChanceOutOf10;
+    public int blockChanceOutOf10;
 
     public int attackDamage;
     private bool attackThrown;
@@ -108,8 +110,6 @@ public class AIBehaviour : MonoBehaviour
     private bool dodge;
     private bool block;
 
-    public float dodgeDistance;
-    public float dodgeSpeedMultiplier;
     private float initialSpeed;
 
     SpawnEffect dissolving;
@@ -126,6 +126,14 @@ public class AIBehaviour : MonoBehaviour
         stunned = false;
         dodge = false;
 
+        if(shooter)
+        {
+            canHitPlayer = false;
+        }
+
+        
+
+        
         senseTimer = 0.0f;
         shootTimer = 0f;
         fleeTimer = Mathf.Infinity;
@@ -250,7 +258,16 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.SHOOTING;
         }
 
-        if(distanceToPlayer < attackDistance && CanAttack())
+        if(distanceToPlayer < attackDistance && !blocking && !stunned)
+        {
+            canHitPlayer = true;
+        }
+        else
+        {
+            canHitPlayer = false;
+        }
+
+        if (CanAttack())
         {
             state = BEHAVIOUR_STATE.ATTACK;
         }
@@ -265,26 +282,27 @@ public class AIBehaviour : MonoBehaviour
             state = BEHAVIOUR_STATE.FLEE;
         }
 
+        print(CanAttack());
         if (CanAttack())
         {
-            int rand;
+            int rand = -1;
                 if (player.GetComponent<PlayerAttack>().GetAttacking())
                 {
 
-                rand = UnityEngine.Random.Range(0, 4);
+                rand = UnityEngine.Random.Range(0, 10);
                 print(rand);
 
-                if (rand == 0)
+                    if (0 <= rand && rand < dodgeChanceOutOf10)
                     {
                         dodge = true;
                         block = false;
                     }
-                    else if (rand == 1)
+                    else if (dodgeChanceOutOf10 <= rand && rand < dodgeChanceOutOf10 + blockChanceOutOf10)
                     {
                         dodge = false;
                         block = true;
                     }
-                    else if (rand == 2 || rand == 3)
+                    else if (rand >= blockChanceOutOf10 + dodgeChanceOutOf10)
                     {
                         print("neither");
                         dodge = false;
@@ -296,7 +314,7 @@ public class AIBehaviour : MonoBehaviour
 
 
         }
-        else
+        else if(!CanAttack())
         {
             dodge = false;
             block = false;
@@ -377,7 +395,7 @@ public class AIBehaviour : MonoBehaviour
         {
             pursueDelayTimer = 0f;
 
-            Dodge();
+           StartCoroutine(Dodge());
         }
 
         if(state == BEHAVIOUR_STATE.STUNNED)
@@ -487,9 +505,15 @@ public class AIBehaviour : MonoBehaviour
         MoveTo(destination);
     }
 
-    void Dodge()
+    IEnumerator Dodge()
     {
         print("dodge");
+        Vector3 direction = (player.transform.position - transform.position) * -1;
+        direction.Normalize();
+;
+        navMeshAgent.Move(direction / 5f);
+        yield return new WaitForSeconds(0.5f);
+        dodge = false;
     }
 
     void Stop()
@@ -536,7 +560,6 @@ public class AIBehaviour : MonoBehaviour
     void Block()
     {
         blocking = true;
-        canHitPlayer = false;
         print(gameObject.name + " is blocking");
     }
 
@@ -544,7 +567,6 @@ public class AIBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         blocking = false;
-        canHitPlayer = true;
     }
 
     private void Stunned()
@@ -555,9 +577,7 @@ public class AIBehaviour : MonoBehaviour
 
     IEnumerator Stun()
     {
-        canHitPlayer = false;
         yield return new WaitForSeconds(3);
-        canHitPlayer = true;
         stunned = false;
     }
 
@@ -568,7 +588,6 @@ public class AIBehaviour : MonoBehaviour
 
     void Shoot()
     {
-        canHitPlayer = false;
         transform.LookAt(player.transform);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 

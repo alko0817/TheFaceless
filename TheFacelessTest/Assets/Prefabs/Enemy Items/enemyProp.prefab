@@ -5140,9 +5140,9 @@ MonoBehaviour:
   senseFrequency: 0.5
   pursueDelay: 0.3
   attackHitBox: 3
+  dodgeChanceOutOf10: 2
+  blockChanceOutOf10: 2
   attackDamage: 10
-  dodgeDistance: 0
-  dodgeSpeedMultiplier: 0
 --- !u!195 &432931987
 NavMeshAgent:
   m_ObjectHideFlags: 0
