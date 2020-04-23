@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     
     //CHECKS
     bool attacking = false;
+    bool attackThrown = false;
     bool holding = false;
 
     //TIMERS 
@@ -251,6 +252,7 @@ public class PlayerAttack : MonoBehaviour
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
+        attackThrown = true;
         StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius));
         nextCombo = comboTimer;
 
@@ -259,7 +261,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackConnection (float delay, int damage, Vector3 aoe, float aoeRadius)
     {
         yield return new WaitForEndOfFrame();
-        attacking = false;
+        attackThrown = false;
         yield return new WaitForSeconds(delay);
 
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
@@ -303,6 +305,6 @@ public class PlayerAttack : MonoBehaviour
 
     public bool GetAttacking ()
     {
-        return attacking;
+        return attackThrown;
     }
 }
