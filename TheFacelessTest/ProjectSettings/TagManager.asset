@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Blackboard
   - Map
+  - Time Manager
   layers:
   - Default
   - TransparentFX
