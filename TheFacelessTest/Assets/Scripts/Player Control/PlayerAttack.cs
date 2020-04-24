@@ -95,6 +95,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        controller.attacking = attacking;
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
@@ -170,7 +171,7 @@ public class PlayerAttack : MonoBehaviour
             if (lastClick <= 0 && holding && !attacking)
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius, nextHeavyAttack);
-                StartCoroutine(AttackSound(hitLight1, controller.heavyAttackSound));
+                StartCoroutine(AttackSound(hitHeavy, controller.heavyAttackSound));
             }
         }
         #endregion
@@ -223,7 +224,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
                 {
                     Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
+                    StartCoroutine(AttackSound(hitBlock1, controller.lightAttack1Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 1;
                     nextCombo = nextBlockAttack;
@@ -236,7 +237,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
                 {
                     Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitLight1, controller.lightAttack2Sound));
+                    StartCoroutine(AttackSound(hitBlock2, controller.lightAttack2Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 0;
 

@@ -8,6 +8,7 @@ TagManager:
   - Map
   - Stamina
   - Health
+  - Enemy
   layers:
   - Default
   - TransparentFX

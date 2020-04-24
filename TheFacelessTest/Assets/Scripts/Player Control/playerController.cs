@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
+    public GameObject swordTrail;
     [Header("- Player Attack Pointers")]
     public Transform detectPoint;
     public Transform aoePoint;
@@ -180,6 +181,10 @@ public class playerController : MonoBehaviour
                 currentCharge = lastCharge;
             }
         }
+
+        //SWORD FX
+        if (attacking) swordTrail.SetActive(true);
+        else swordTrail.SetActive(false);
 
     }
 
