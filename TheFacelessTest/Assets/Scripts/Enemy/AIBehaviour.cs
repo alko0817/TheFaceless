@@ -99,7 +99,7 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region Combat Parameters
-    Transform attackPoint;
+    public Transform attackPoint;
     public float attackHitBox = 1f;
 
     public int dodgeChanceOutOf10;
@@ -147,8 +147,8 @@ public class AIBehaviour : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         initialSpeed = navMeshAgent.speed;
 
-        attackPoint = transform.GetChild(0).transform;
-        projectileSpawn = transform.GetChild(1).transform;
+        attackPoint = transform.GetChild(1).transform;
+        projectileSpawn = transform.GetChild(0).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
