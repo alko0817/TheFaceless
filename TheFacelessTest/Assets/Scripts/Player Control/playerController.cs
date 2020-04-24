@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
-    [Header("- Player Attack Point/Radius & Enemy Layer")]
+    [Header("- Player Attack Pointers")]
     public Transform detectPoint;
     public Transform aoePoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
@@ -120,6 +120,9 @@ public class playerController : MonoBehaviour
     public ParticleSystem burst;
 
     //SOUNDS
+    #endregion
+
+    #region SOUNDS
     [Header("- Sound Clips")]
     [Tooltip("Copy-paste the clip name from the Audio Manager")]
     public string lightAttack1Sound;

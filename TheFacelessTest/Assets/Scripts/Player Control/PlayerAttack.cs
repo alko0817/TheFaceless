@@ -109,6 +109,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 1;
                 Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
 
                 nextCombo = nextAttack;
 
@@ -121,6 +122,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
+
                 StartCoroutine(Discharge());
             }
 
@@ -133,6 +135,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 0;
                 Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                StartCoroutine(AttackSound(hitLight1, controller.lightAttack2Sound));
             }
         }
 
@@ -167,6 +170,7 @@ public class PlayerAttack : MonoBehaviour
             if (lastClick <= 0 && holding && !attacking)
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius, nextHeavyAttack);
+                StartCoroutine(AttackSound(hitLight1, controller.heavyAttackSound));
             }
         }
         #endregion
@@ -219,6 +223,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
                 {
                     Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                    StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 1;
                     nextCombo = nextBlockAttack;
@@ -231,6 +236,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
                 {
                     Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                    StartCoroutine(AttackSound(hitLight1, controller.lightAttack2Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 0;
 
@@ -245,6 +251,12 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(holdForHeavy);
         holding = true;
+    }
+
+    IEnumerator AttackSound (float connectDelay, string sound)
+    {
+        yield return new WaitForSeconds(connectDelay);
+        FindObjectOfType<audioManager>().Play(sound);
     }
 
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
@@ -270,6 +282,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
+            //enemy.GetComponent<Dummy>().TakeDamage(damage);
             controller.Charge();
         }
     }
