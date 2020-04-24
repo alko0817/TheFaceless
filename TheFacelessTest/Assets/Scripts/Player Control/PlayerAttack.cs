@@ -283,7 +283,12 @@ public class PlayerAttack : MonoBehaviour
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
             //enemy.GetComponent<Dummy>().TakeDamage(damage);
-            controller.Charge();
+            if (!enemy.GetComponent<AIBehaviour>().GetBlocking())
+            {
+                FindObjectOfType<audioManager>().Play(controller.enemyHitSound);
+                controller.Charge();
+            }
+            
         }
     }
 
