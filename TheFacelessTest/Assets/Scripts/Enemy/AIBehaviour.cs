@@ -70,6 +70,7 @@ public class AIBehaviour : MonoBehaviour
     private float currentHealth;
     [Tooltip("The health bar image associated with this enemy")]
     public Image healthBar;
+    internal bool dying = false;
 
     #endregion
 
@@ -651,6 +652,7 @@ public class AIBehaviour : MonoBehaviour
 
     void Die()
     {
+        dying = true;
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
