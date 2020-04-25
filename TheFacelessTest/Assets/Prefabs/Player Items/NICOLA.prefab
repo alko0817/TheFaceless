@@ -703,7 +703,7 @@ MonoBehaviour:
     walkByDefault: 1
     rotateWithCamera: 0
     walkSpeed: 4
-    runningSpeed: 10
+    runningSpeed: 6
     sprintSpeed: 8
   jumpWithRigidbodyForce: 0
   jumpAndRotate: 1

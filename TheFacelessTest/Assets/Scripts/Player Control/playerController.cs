@@ -36,6 +36,7 @@ public class playerController : MonoBehaviour
     [Tooltip("Input delay for the second light attack")]
     public float attackDelay2 = 1.5f;
     [Tooltip("Inpute delay for the heavy attack")]
+    public float attackDelay3 = 1.5f;
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
     [Tooltip("Input delay for the discharge attack")]

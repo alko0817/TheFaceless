@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     bool attacking = false;
     bool attackThrown = false;
     bool holding = false;
+    float blockHolding = 0f;
 
     //TIMERS 
     int combos = 0;
@@ -21,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
     float attackDelay1;
     float attackDelay2;
+    float attackDelay3;
 
     float heavyDelay1;
 
@@ -64,6 +66,7 @@ public class PlayerAttack : MonoBehaviour
         lastClick = controller.lastClick;
         attackDelay1 = controller.attackDelay1;
         attackDelay2 = controller.attackDelay2;
+        attackDelay3 = controller.attackDelay3;
         heavyDelay1 = controller.heavyDelay1;
         dischargeDelay = controller.dischargeDelay;
         blockAttackDelay1 = controller.blockAttackDelay1;
@@ -134,8 +137,15 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
-                combos = 0;
+                combos = 2;
                 Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                StartCoroutine(AttackSound(hitLight2, controller.lightAttack2Sound));
+            }
+
+            else if (Input.GetButtonUp("Fire1") && (combos == 2))
+            {
+                combos = 0;
+                Attack(hitLight2, attackDelay3, slash2Damage, "isSlash3", controller.detectPoint.position, controller.attackRadius, nextAttack);
                 StartCoroutine(AttackSound(hitLight1, controller.lightAttack2Sound));
             }
         }
@@ -186,7 +196,6 @@ public class PlayerAttack : MonoBehaviour
                 controller.anim.SetBool("blocking", controller.blocking);
                 controller.anim.SetTrigger("startBlock");
 
-
             }
 
             //IF BUTTON RELEASED STOP BLOCKING
@@ -200,18 +209,6 @@ public class PlayerAttack : MonoBehaviour
             //WHILE BUTTON IS PRESSED 
             if (Input.GetButton("Fire2"))
             {
-                if (attacking)
-                {
-                    
-                    controller.anim.SetBool("blocking", false);
-                }
-                else
-                {
-                    
-                    controller.anim.SetBool("blocking", true);
-                    controller.anim.SetTrigger("startBlock");
-                }
-
                 if (controller.blocking)
                 {
                     gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
@@ -245,6 +242,8 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
+
+        else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
         #endregion
     }
 
