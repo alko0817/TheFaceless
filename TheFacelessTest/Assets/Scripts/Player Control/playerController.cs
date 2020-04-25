@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Invector.vCharacterController;
 
+[RequireComponent(typeof(TimeManager))]
 public class playerController : MonoBehaviour
 {
     public Animator anim;
@@ -31,18 +32,18 @@ public class playerController : MonoBehaviour
     internal float lastClick = 0f;
 
     [Header("- Attack Intervals")]
-    [Tooltip("Input delay for the first light attack")]
     public float attackDelay1 = 1.5f;
-    [Tooltip("Input delay for the second light attack")]
     public float attackDelay2 = 1.5f;
-    [Tooltip("Inpute delay for the heavy attack")]
     public float attackDelay3 = 1.5f;
+    [Space]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
-    [Tooltip("Input delay for the discharge attack")]
+    [Space]
     public float dischargeDelay = 2f;
+    [Space]
     public float blockAttackDelay1 = 2f;
     public float blockAttackDelay2 = 2f;
+    [Space]
     [Tooltip("Input timer before next light combo")]
     public float nextAttack = 2f;
     [Tooltip("Input timer before next heavy combo")]
@@ -54,8 +55,12 @@ public class playerController : MonoBehaviour
     [Header("- Delay before attack lands and applies damage")]
     public float hitLight1 = 0f;
     public float hitLight2 = 0f;
+    public float hitLight3 = 0f;
+    [Space]
     public float hitHeavy = 0f;
+    [Space]
     public float hitDischarge = 0f;
+    [Space]
     public float hitBlock1 = 0f;
     public float hitBlock2 = 0f;
 
@@ -69,9 +74,13 @@ public class playerController : MonoBehaviour
     [Header("- Attack Damage")]
     public int slashDamage = 20;
     public int slash2Damage = 25;
+    public int slash3Damage = 25;
+    [Space]
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
+    [Space]
     public int dischargeDamage = 40;
+    [Space]
     public int blockAttack1Dmg = 30;
     public int blockAttack2Dmg = 30;
 
@@ -109,8 +118,8 @@ public class playerController : MonoBehaviour
     internal float lastCharge = 0f;
     internal Image swordFill;
 
-    [HideInInspector]
-    public bool canDischarge = false;
+    
+    internal bool canDischarge = false;
     internal bool discharging = false;
 
     public cameraShake camShake;
@@ -120,8 +129,6 @@ public class playerController : MonoBehaviour
     public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
     public ParticleSystem burst;
-
-    //SOUNDS
     #endregion
 
     #region SOUNDS
@@ -129,10 +136,15 @@ public class playerController : MonoBehaviour
     [Tooltip("Copy-paste the clip name from the Audio Manager")]
     public string lightAttack1Sound;
     public string lightAttack2Sound;
+    public string lightAttack3Sound;
+    [Space]
     public string heavyAttackSound;
+    [Space]
     public string blockAttack1Sound;
     public string blockAttack2Sound;
+    [Space]
     public string enemyHitSound;
+    [Space]
     public string[] otherSounds;
     public int otherSoundsIndex;
     #endregion
@@ -159,8 +171,6 @@ public class playerController : MonoBehaviour
 
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
-
-        //timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
     }
 
     void Update()

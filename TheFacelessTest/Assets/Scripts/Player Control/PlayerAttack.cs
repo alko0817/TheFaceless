@@ -41,16 +41,24 @@ public class PlayerAttack : MonoBehaviour
     //CONNECT TIMERS
     float hitLight1;
     float hitLight2;
+    float hitLight3;
+
     float hitHeavy;
+
     float hitDischarge;
+
     float hitBlock1;
     float hitBlock2;
 
     //DAMAGES
     int slashDamage;
     int slash2Damage;
+    int slash3Damage;
+
     int heavyDamage;
+
     int dischargeDamage;
+
     int blockAttack1Dmg;
     int blockAttack2Dmg;
 
@@ -64,13 +72,17 @@ public class PlayerAttack : MonoBehaviour
         combos = controller.combos;
         combosBlock = controller.combosBlock;
         lastClick = controller.lastClick;
+
         attackDelay1 = controller.attackDelay1;
         attackDelay2 = controller.attackDelay2;
         attackDelay3 = controller.attackDelay3;
+
         heavyDelay1 = controller.heavyDelay1;
         dischargeDelay = controller.dischargeDelay;
+
         blockAttackDelay1 = controller.blockAttackDelay1;
         blockAttackDelay2 = controller.blockAttackDelay2;
+
         nextAttack = controller.nextAttack;
         nextHeavyAttack = controller.nextHeavyAttack;
         nextBlockAttack = controller.nextBlockAttack;
@@ -80,16 +92,22 @@ public class PlayerAttack : MonoBehaviour
         //CONNECT TIMERS
         hitLight1 = controller.hitLight1;
         hitLight2 = controller.hitLight2;
+        hitLight3 = controller.hitLight3;
+
         hitHeavy = controller.hitHeavy;
         hitDischarge = controller.hitDischarge;
+
         hitBlock1 = controller.hitBlock1;
         hitBlock2 = controller.hitBlock2;
 
         //DAMAGES
         slashDamage = controller.slashDamage;
         slash2Damage = controller.slash2Damage;
+        slash3Damage = controller.slash3Damage;
+
         heavyDamage = controller.heavyDamage;
         dischargeDamage = controller.dischargeDamage;
+
         blockAttack1Dmg = controller.blockAttack1Dmg;
         blockAttack2Dmg = controller.blockAttack2Dmg;
 
@@ -145,8 +163,8 @@ public class PlayerAttack : MonoBehaviour
             else if (Input.GetButtonUp("Fire1") && (combos == 2))
             {
                 combos = 0;
-                Attack(hitLight2, attackDelay3, slash2Damage, "isSlash3", controller.detectPoint.position, controller.attackRadius, nextAttack);
-                StartCoroutine(AttackSound(hitLight1, controller.lightAttack2Sound));
+                Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                StartCoroutine(AttackSound(hitLight3, controller.lightAttack3Sound));
             }
         }
 
@@ -221,7 +239,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
                 {
                     Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitBlock1, controller.lightAttack1Sound));
+                    StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 1;
                     nextCombo = nextBlockAttack;
@@ -234,7 +252,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
                 {
                     Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitBlock2, controller.lightAttack2Sound));
+                    StartCoroutine(AttackSound(hitBlock2, controller.blockAttack2Sound));
                     controller.anim.SetBool("blocking", !controller.blocking);
                     combosBlock = 0;
 
@@ -282,7 +300,6 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
-            //enemy.GetComponent<Dummy>().TakeDamage(damage);
             controller.Charge();
         }
     }
