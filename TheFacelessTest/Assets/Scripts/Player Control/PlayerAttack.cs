@@ -6,6 +6,7 @@ using Invector.vCharacterController;
 public class PlayerAttack : MonoBehaviour
 {
     playerController controller;
+    audioManager sounds;
 
     #region COMBAT-VARIABLES
     
@@ -67,6 +68,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<playerController>();
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
 
         //CLICK TIMERS
         combos = controller.combos;
@@ -274,7 +276,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackSound (float connectDelay, string sound)
     {
         yield return new WaitForSeconds(connectDelay);
-        FindObjectOfType<audioManager>().Play(sound);
+        sounds.Play(sound, sounds.PlayerEffects);
     }
 
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
@@ -311,7 +313,7 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(.4f);
         controller.discharging = true;
         controller.explosion.Play();
-        FindObjectOfType<audioManager>().Play("Discharge_First");
+        sounds.Play("Discharge_First", sounds.PlayerEffects);
         if(controller.timeManager != null)
         {
             controller.timeManager.GetComponent<TimeManager>().slowmoDuration = controller.dischargeSlowDuration;
@@ -323,7 +325,7 @@ public class PlayerAttack : MonoBehaviour
         controller.electricityCharge.Stop();
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         controller.burst.Play();
-        FindObjectOfType<audioManager>().Play("Discharge_Second");
+        sounds.Play("Discharge_Second", sounds.PlayerEffects);
         yield return new WaitForSeconds(.8f);
         controller.foving.FovIn();
         yield return new WaitForSeconds(1f);

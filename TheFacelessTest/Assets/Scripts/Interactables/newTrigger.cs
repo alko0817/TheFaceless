@@ -7,6 +7,7 @@ public class newTrigger : MonoBehaviour
     public int localIndex;
     public fbManager manager;
     GameObject player;
+    audioManager sounds;
     Animator UIAnim;
     float fadeOutDelay;
     string sound;
@@ -18,6 +19,7 @@ public class newTrigger : MonoBehaviour
         UIAnim = manager.triggers[localIndex].animator;
         sound = manager.triggers[localIndex].sound;
         player = GameObject.FindGameObjectWithTag("Player");
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +30,7 @@ public class newTrigger : MonoBehaviour
             {
                 triggered = true;
                 UIAnim.SetTrigger("fadeIn");
-                FindObjectOfType<audioManager>().Play(sound);
+                sounds.Play(sound, sounds.EnvironmentEffects);
                 StartCoroutine("FadeOut");
 
             }

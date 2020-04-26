@@ -62,18 +62,20 @@ public class PlayerIndicator : MonoBehaviour
         
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Enemy")
         {
-            for (int i = 0; i <enemies.Length; i++)
+            for (int i = 0; i < enemies.Length; i++)
             {
+                if (other.gameObject == enemies[i]) break;
+                
                 if (enemies[i] == null)
                 {
                     enemies[i] = other.gameObject;
                     break;
                 }
+                
             }
         }
     }

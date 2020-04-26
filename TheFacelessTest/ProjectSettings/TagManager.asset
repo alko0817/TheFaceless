@@ -10,6 +10,7 @@ TagManager:
   - Health
   - Enemy
   - Detector
+  - AudioManager
   layers:
   - Default
   - TransparentFX
