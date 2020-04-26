@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Invector.vCharacterController;
 
-[RequireComponent(typeof(TimeManager))]
 public class playerController : MonoBehaviour
 {
     public Animator anim;
@@ -35,6 +34,7 @@ public class playerController : MonoBehaviour
     public float attackDelay1 = 1.5f;
     public float attackDelay2 = 1.5f;
     public float attackDelay3 = 1.5f;
+    public float attackDelay4 = 1.5f;
     [Space]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
@@ -56,6 +56,7 @@ public class playerController : MonoBehaviour
     public float hitLight1 = 0f;
     public float hitLight2 = 0f;
     public float hitLight3 = 0f;
+    public float hitLight4 = 0f;
     [Space]
     public float hitHeavy = 0f;
     [Space]
@@ -75,6 +76,7 @@ public class playerController : MonoBehaviour
     public int slashDamage = 20;
     public int slash2Damage = 25;
     public int slash3Damage = 25;
+    public int slash4Damage = 25;
     [Space]
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
@@ -118,7 +120,7 @@ public class playerController : MonoBehaviour
     internal float lastCharge = 0f;
     internal Image swordFill;
 
-    
+
     internal bool canDischarge = false;
     internal bool discharging = false;
 
@@ -137,6 +139,7 @@ public class playerController : MonoBehaviour
     public string lightAttack1Sound;
     public string lightAttack2Sound;
     public string lightAttack3Sound;
+    public string lightAttack4Sound;
     [Space]
     public string heavyAttackSound;
     [Space]
@@ -151,14 +154,14 @@ public class playerController : MonoBehaviour
 
     internal float originSpeed;
     internal float originTimeReset;
-    
-    
+
+
 
     private void Awake()
     {
         //ORIGINAL MOVEMENT SPEED SET
         originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
-        
+
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -228,3 +231,4 @@ public class playerController : MonoBehaviour
         health.Damage(damage);
     }
 }
+

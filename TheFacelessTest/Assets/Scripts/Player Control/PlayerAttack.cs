@@ -24,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
     float attackDelay1;
     float attackDelay2;
     float attackDelay3;
+    float attackDelay4;
 
     float heavyDelay1;
 
@@ -43,6 +44,7 @@ public class PlayerAttack : MonoBehaviour
     float hitLight1;
     float hitLight2;
     float hitLight3;
+    float hitLight4;
 
     float hitHeavy;
 
@@ -55,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
     int slashDamage;
     int slash2Damage;
     int slash3Damage;
+    int slash4Damage;
 
     int heavyDamage;
 
@@ -78,6 +81,7 @@ public class PlayerAttack : MonoBehaviour
         attackDelay1 = controller.attackDelay1;
         attackDelay2 = controller.attackDelay2;
         attackDelay3 = controller.attackDelay3;
+        attackDelay4 = controller.attackDelay4;
 
         heavyDelay1 = controller.heavyDelay1;
         dischargeDelay = controller.dischargeDelay;
@@ -95,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
         hitLight1 = controller.hitLight1;
         hitLight2 = controller.hitLight2;
         hitLight3 = controller.hitLight3;
+        hitLight4 = controller.hitLight4;
 
         hitHeavy = controller.hitHeavy;
         hitDischarge = controller.hitDischarge;
@@ -106,6 +111,7 @@ public class PlayerAttack : MonoBehaviour
         slashDamage = controller.slashDamage;
         slash2Damage = controller.slash2Damage;
         slash3Damage = controller.slash3Damage;
+        slash4Damage = controller.slash4Damage;
 
         heavyDamage = controller.heavyDamage;
         dischargeDamage = controller.dischargeDamage;
@@ -164,9 +170,16 @@ public class PlayerAttack : MonoBehaviour
 
             else if (Input.GetButtonUp("Fire1") && (combos == 2))
             {
-                combos = 0;
+                combos = 3;
                 Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", controller.detectPoint.position, controller.attackRadius, nextAttack);
                 StartCoroutine(AttackSound(hitLight3, controller.lightAttack3Sound));
+            }
+
+            else if (Input.GetButtonUp("Fire1") && (combos == 3))
+            {
+                combos = 0;
+                Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                StartCoroutine(AttackSound(hitLight4, controller.lightAttack4Sound));
             }
         }
 
