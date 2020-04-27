@@ -6,6 +6,13 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     Image healthOverlay;
+    Color tempAlpha;
+    playerController player;
+    public GameObject deathScreen;
+
+    [HideInInspector]
+    public float currentHealth;
+
     public float maxHealth = 100f;
     public float healingRate = 2f;
     public float healingDelay = 1f;
@@ -13,15 +20,15 @@ public class PlayerHealth : MonoBehaviour
     [Range(0f, .9f)]
     public float blockMitigation = .5f;
 
-    [HideInInspector]
-    public float currentHealth;
+    
 
     public int testDamage = 10;
     public float intensity = 1f;
     bool canRegen = true;
-    Color tempAlpha;
-    playerController player;
+    internal bool dead = false;
     internal bool immortal = false;
+
+    
 
     private void Start()
     {
@@ -29,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
         healthOverlay = GetComponent<Image>();
         tempAlpha = healthOverlay.color;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+        //deathScreen = GameObject.FindGameObjectWithTag("Death Screen");
 
 
     }
@@ -106,11 +114,16 @@ public class PlayerHealth : MonoBehaviour
 
     void Death ()
     {
+        if (!player.canDie) return;
         canRegen = false;
+        dead = true;
         player.sounds.Play(player.DeathSound, player.sounds.PlayerEffects);
-
+        deathScreen.SetActive(true);
         //death animation
+
+        
     }
+    
 
     IEnumerator HealingDelay()
     {

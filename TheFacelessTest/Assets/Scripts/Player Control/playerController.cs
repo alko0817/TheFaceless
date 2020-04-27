@@ -20,7 +20,8 @@ public class playerController : MonoBehaviour
     public float attackRadius = .5f;
     [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
-
+    [Space]
+    public bool canDie = false;
     [Header("- Slow Motion & Camera FX")]
     public TimeManager timeManager;
     public camFov foving;
