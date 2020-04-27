@@ -10453,7 +10453,7 @@ MonoBehaviour:
   pursueDelay: 0.3
   attackPoint: {fileID: 4247952540417507793}
   attackHitBox: 3
-  dodgeChanceOutOf10: 2
+  dodgeChanceOutOf10: 1
   blockChanceOutOf10: 2
   attackDamage: 10
   ReceiveDmgSound: Enemy_Take_DMG_5
