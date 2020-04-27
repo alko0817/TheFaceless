@@ -10456,7 +10456,7 @@ MonoBehaviour:
   dodgeChanceOutOf10: 2
   blockChanceOutOf10: 2
   attackDamage: 10
-  ReceiveDmgSound: 
+  ReceiveDmgSound: Enemy_Take_DMG_5
   DealDmgSound: 
   ShootSound: 
   BlockSound: 
