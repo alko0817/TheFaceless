@@ -63,9 +63,18 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(int damage)
     {
         if (immortal) return;
-        if (!player.blocking) currentHealth -= damage;
 
-        else currentHealth -= damage * blockMitigation;
+        if (!player.blocking)
+        {
+            currentHealth -= damage;
+            player.sounds.Play(player.ReceiveDmgSound, player.sounds.PlayerEffects);
+        }
+
+        else
+        {
+            currentHealth -= damage * blockMitigation;
+            player.sounds.Play(player.BlockSound, player.sounds.PlayerEffects);
+        }
 
         StopCoroutine("HealingDelay");
         canRegen = false;
@@ -98,6 +107,7 @@ public class PlayerHealth : MonoBehaviour
     void Death ()
     {
         canRegen = false;
+        player.sounds.Play(player.DeathSound, player.sounds.PlayerEffects);
         //death animation
     }
 

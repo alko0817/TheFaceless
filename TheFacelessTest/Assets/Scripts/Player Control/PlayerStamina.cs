@@ -8,7 +8,9 @@ public class PlayerStamina : MonoBehaviour
 {
     public Image bar;
     [Tooltip("Rate at which stamina depletes while blocking")]
-    public float depleteRate = 1f;
+    public float blockDepleteRate = 1f;
+    [Tooltip("Rate at which stamina depletes while sprinting")]
+    public float sprintDepleteRate = .5f;
     [Tooltip("Rate at which stamina recharges")]
     public float rechargeRate = 1f;
     [Tooltip("Delay before stamina starts recharging")]
@@ -32,7 +34,7 @@ public class PlayerStamina : MonoBehaviour
             canRecharge = false;
             if (bar.fillAmount > 0)
             {
-                bar.fillAmount -= Time.deltaTime * depleteRate;
+                bar.fillAmount -= Time.deltaTime * blockDepleteRate;
             }
 
             if (bar.fillAmount == 0)
@@ -55,7 +57,10 @@ public class PlayerStamina : MonoBehaviour
             Regen();
         }
 
+        if (controller.sprinting)
+        {
 
+        }
     }
 
     IEnumerator Delay ()

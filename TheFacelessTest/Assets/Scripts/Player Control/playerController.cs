@@ -6,6 +6,7 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
+    internal audioManager sounds;
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
@@ -29,6 +30,7 @@ public class playerController : MonoBehaviour
     internal int combos = 0;
     internal int combosBlock = 0;
     internal float lastClick = 0f;
+    internal bool sprinting = false;
 
     [Header("- Attack Intervals")]
     public float attackDelay1 = 1.5f;
@@ -146,7 +148,20 @@ public class playerController : MonoBehaviour
     public string blockAttack1Sound;
     public string blockAttack2Sound;
     [Space]
-    public string enemyHitSound;
+    public string BlockSound;
+    public string DodgeSound;
+    public string FullCharge;
+    [Space]
+    public string ReceiveDmgSound;
+    public string DeathSound;
+    [Space]
+    public string MoveSound;
+    public string SprintSound;
+    [Header("- Heartbeat effect")]
+    public string SlowBeat;
+    public string MediumSlowBeat;
+    public string MediumFastBeat;
+    public string FastBeat;
     [Space]
     public string[] otherSounds;
     public int otherSoundsIndex;
@@ -176,8 +191,16 @@ public class playerController : MonoBehaviour
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
     }
 
+    private void Start()
+    {
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
+    }
+
     void Update()
     {
+        //CHECKS
+        sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
+
         //UI SWORD CHARGE
         if (currentCharge > lastCharge && !discharging)
         {
@@ -211,7 +234,7 @@ public class playerController : MonoBehaviour
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
-            //Put Sound here if you want to play a sound when sword is fully charged!
+            sounds.Play(FullCharge, sounds.PlayerEffects);
 
         }
 
