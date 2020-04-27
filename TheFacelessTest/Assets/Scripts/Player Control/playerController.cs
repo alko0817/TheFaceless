@@ -201,6 +201,11 @@ public class playerController : MonoBehaviour
         //CHECKS
         sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
 
+        if (stamina.bar.fillAmount <= 0 )
+        {
+            gameObject.GetComponent<vThirdPersonMotor>().isSprinting = false;
+        }
+
         //UI SWORD CHARGE
         if (currentCharge > lastCharge && !discharging)
         {

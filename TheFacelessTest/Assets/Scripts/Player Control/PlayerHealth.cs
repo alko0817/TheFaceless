@@ -108,6 +108,7 @@ public class PlayerHealth : MonoBehaviour
     {
         canRegen = false;
         player.sounds.Play(player.DeathSound, player.sounds.PlayerEffects);
+
         //death animation
     }
 
