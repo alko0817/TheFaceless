@@ -644,7 +644,7 @@ public class AIBehaviour : MonoBehaviour
         else
         {
             print("attack blocked");
-            FindObjectOfType<audioManager>().Play("Enemy_Block_Sound_1");
+            FindObjectOfType<audioManager>().Play("Enemy_Block_Sound_1", FindObjectOfType<audioManager>().EnemyEffects);
             StartCoroutine(ResetBlock());
         }
         //HURT ANIMATIONS
