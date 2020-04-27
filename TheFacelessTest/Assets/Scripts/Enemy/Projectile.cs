@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     Vector3 direction;
     public Vector3 startingPosition;
+    GameObject detector;
     public float speed;
     public int damage;
 
@@ -13,9 +14,11 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        detector = GameObject.FindGameObjectWithTag("Detector");
+
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -34,7 +37,7 @@ public class Projectile : MonoBehaviour
 
 
 
-       private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {

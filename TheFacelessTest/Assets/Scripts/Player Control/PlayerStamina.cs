@@ -27,7 +27,7 @@ public class PlayerStamina : MonoBehaviour
     private void Update()
     {
 
-        if (controller.blocking && canBlock)
+        if (controller.blocking && canBlock && !controller.attacking)
         {
             canRecharge = false;
             if (bar.fillAmount > 0)
@@ -44,7 +44,7 @@ public class PlayerStamina : MonoBehaviour
 
         }
         
-        if (!controller.blocking && !canRecharge)
+        if ((!controller.blocking && !canRecharge) || (controller.blocking && controller.attacking))
         {
             StartCoroutine(Delay());
         }

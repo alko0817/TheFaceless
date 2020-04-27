@@ -8,6 +8,9 @@ TagManager:
   - Map
   - Stamina
   - Health
+  - Enemy
+  - Detector
+  - AudioManager
   layers:
   - Default
   - TransparentFX

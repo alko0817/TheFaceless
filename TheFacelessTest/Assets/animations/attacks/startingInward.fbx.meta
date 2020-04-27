@@ -38,8 +38,8 @@ ModelImporter:
       name: inwardSlash
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 66
+      firstFrame: 5
+      lastFrame: 51
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

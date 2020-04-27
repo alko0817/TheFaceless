@@ -7,13 +7,17 @@ public class startingMenu : MonoBehaviour
 {
     public Animator animator;
     public levelLoader loader;
+    audioManager sounds;
 
-    
+    private void Start()
+    {
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
+
+        sounds.Play("intro", sounds.Music);
+    }
     public void PlayGame ()
     {
         StartCoroutine("Delay");
-        
-
     }
 
     IEnumerator Delay ()
@@ -26,11 +30,5 @@ public class startingMenu : MonoBehaviour
     public void QuitGame ()
     {
         Application.Quit();
-    }
-
-
-    private void Start()
-    {
-        FindObjectOfType<audioManager>().Play("intro");
     }
 }
