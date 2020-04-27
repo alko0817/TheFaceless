@@ -328,10 +328,13 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator Discharge ()
     {
-        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        //gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         controller.health.Immortality(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(.3f);
+
         controller.discharging = true;
         controller.explosion.Play();
         sounds.Play("Discharge_First", sounds.PlayerEffects);

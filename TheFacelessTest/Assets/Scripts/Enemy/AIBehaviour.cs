@@ -573,6 +573,8 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         attackThrown = true;
+        transform.LookAt(player.transform);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         anim.SetTrigger("attack");
         yield return new WaitForSeconds(attackDelay);
         if (!CanAttack())
