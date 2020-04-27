@@ -20,6 +20,7 @@ public class AIBehaviour : MonoBehaviour
         FLEE
     }
 
+    public LayerMask playerMask;
     NavMeshAgent navMeshAgent;
     BEHAVIOUR_STATE state;
     EnemyBlackboard blackboard;
@@ -594,7 +595,7 @@ public class AIBehaviour : MonoBehaviour
     {
         if (canHitPlayer)
         {
-            if (Physics.CheckSphere(attackPoint.position, attackHitBox))
+            if (Physics.CheckSphere(attackPoint.position, attackHitBox, playerMask))
                 return true;
             else
                 return false;
