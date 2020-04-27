@@ -71,6 +71,7 @@ public class AIBehaviour : MonoBehaviour
     [Tooltip("The health bar image associated with this enemy")]
     public Image healthBar;
     internal bool dying = false;
+    public ParticleSystem electricStun;
 
     #endregion
 
@@ -116,8 +117,27 @@ public class AIBehaviour : MonoBehaviour
     private float initialSpeed;
 
     SpawnEffect dissolving;
-  //  Animator anim;
+    //  Animator anim;
     #endregion
+
+    #region Sounds
+    audioManager sounds;
+    [Header("Sound FX")]
+    [Space]
+    public string ReceiveDmgSound;
+    public string DealDmgSound;
+    public string ShootSound;
+    [Space]
+    public string BlockSound;
+    public string DodgeSound;
+    public string StunnedSound;
+    public string DeathSound;
+    [Space]
+    public string MoveSound;
+    public string StaticSound;
+    public string ChatterSound;
+    #endregion
+
     void Start()
     {
 
@@ -156,6 +176,7 @@ public class AIBehaviour : MonoBehaviour
 
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
 
         for (int i = 0; i < projectiles.Length; i++)
         {
@@ -511,7 +532,7 @@ public class AIBehaviour : MonoBehaviour
     {
         navMeshAgent.destination = location;
         navMeshAgent.isStopped = false;
-
+        sounds.Play(MoveSound, sounds.EnemyEffects);
     }
 
     void Flee()
@@ -526,6 +547,7 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Dodge()
     {
         print("dodge");
+        sounds.Play(DodgeSound, sounds.EnemyEffects);
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
 ;
@@ -537,6 +559,7 @@ public class AIBehaviour : MonoBehaviour
     void Stop()
     {
         navMeshAgent.isStopped = true;
+        sounds.StopPlaying(MoveSound, sounds.EnemyEffects);
     }
     #endregion
 
@@ -595,7 +618,9 @@ public class AIBehaviour : MonoBehaviour
 
     IEnumerator Stun()
     {
+        electricStun.Play();
         yield return new WaitForSeconds(3);
+        electricStun.Stop();
         stunned = false;
     }
 
@@ -625,6 +650,7 @@ public class AIBehaviour : MonoBehaviour
                     projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
+                    sounds.Play(ShootSound, sounds.EnemyEffects);
                     shooting = false;
                     break;
                     
@@ -640,11 +666,12 @@ public class AIBehaviour : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
+            sounds.Play(ReceiveDmgSound, sounds.EnemyEffects);
         }
         else
         {
             print("attack blocked");
-            FindObjectOfType<audioManager>().Play("Enemy_Block_Sound_1", FindObjectOfType<audioManager>().EnemyEffects);
+            sounds.Play(BlockSound, sounds.EnemyEffects);
             StartCoroutine(ResetBlock());
         }
         //HURT ANIMATIONS
@@ -654,6 +681,7 @@ public class AIBehaviour : MonoBehaviour
     void Die()
     {
         dying = true;
+        sounds.Play(DeathSound, sounds.EnemyEffects);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();

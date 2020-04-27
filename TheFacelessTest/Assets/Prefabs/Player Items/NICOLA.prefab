@@ -291,7 +291,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   lockCamera: 0
-  rightOffset: 0
+  rightOffset: 0.2
   defaultDistance: 3
   height: 1.8
   smoothFollow: 10
@@ -664,7 +664,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackRadius: 1.9
-  aoeRadius: 8
+  aoeRadius: 12
   timeManager: {fileID: 0}
   foving: {fileID: 2001581130}
   attackDelay1: 0.2
@@ -694,7 +694,7 @@ MonoBehaviour:
   slash4Damage: 22
   heavyDamage: 30
   heavy2Damage: 40
-  dischargeDamage: 90
+  dischargeDamage: 30
   blockAttack1Dmg: 30
   blockAttack2Dmg: 30
   dodgeCooldown: 1

@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     bool attacking = false;
     bool attackThrown = false;
     bool holding = false;
-    float blockHolding = 0f;
+    bool isDischarge = false;
 
     //TIMERS 
     int combos = 0;
@@ -150,7 +150,7 @@ public class PlayerAttack : MonoBehaviour
             //DISCHARGE
             if (Input.GetButton("discharge") && controller.canDischarge)
             {
-                
+                isDischarge = true;
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
 
                 StartCoroutine(Discharge());
@@ -316,6 +316,12 @@ public class PlayerAttack : MonoBehaviour
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
             controller.Charge();
+            if (isDischarge)
+            {
+                enemy.GetComponent<AIBehaviour>().SetStunned(true);
+                isDischarge = false;
+            }
+
         }
     }
 
