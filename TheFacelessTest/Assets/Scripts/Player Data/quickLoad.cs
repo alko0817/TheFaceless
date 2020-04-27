@@ -9,10 +9,19 @@ public class quickLoad : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact"))
+        if (health.dead)
         {
-            loader.LoadPlayer();
-            health.ResetHealth();
+            StartCoroutine(Ressurect());
         }
+    }
+
+    IEnumerator Ressurect()
+    {
+        yield return new WaitForSeconds(2f);
+        health.deathScreen.SetActive(false);
+        health.ResetHealth();
+        health.dead = false;
+        loader.LoadPlayer();
+        
     }
 }

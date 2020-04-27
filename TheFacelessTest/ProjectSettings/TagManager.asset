@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Detector
   - AudioManager
+  - Death Screen
   layers:
   - Default
   - TransparentFX
