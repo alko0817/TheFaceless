@@ -315,6 +315,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
+
             controller.Charge();
             if (isDischarge)
             {
