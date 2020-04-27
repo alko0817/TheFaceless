@@ -197,20 +197,24 @@ public class AIBehaviour : MonoBehaviour
         Vector3 vectorToPlayer = player.transform.position - transform.position;
         distanceToPlayer = vectorToPlayer.magnitude;
 
-        if (senseTimer > senseFrequency)
-        {
-            senseTimer = 0.0f;
-            Sense();
-
-        }
-        Decide();
-        Act();
-
-
         if (currentHealth <= 0)
         {
             Die();
         }
+
+        if (!dying)
+        {
+            if (senseTimer > senseFrequency)
+            {
+                senseTimer = 0.0f;
+                Sense();
+
+            }
+            Decide();
+            Act();
+        }
+
+      
 
 
         UpdateTimers();
@@ -661,7 +665,7 @@ public class AIBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-
+        if (dying) return;
         if (!blocking)
         {
             currentHealth -= damage;

@@ -10459,12 +10459,12 @@ MonoBehaviour:
   ReceiveDmgSound: Enemy_Take_DMG_5
   DealDmgSound: 
   ShootSound: 
-  BlockSound: 
+  BlockSound: Enemy_Block_1
   DodgeSound: 
   StunnedSound: 
   DeathSound: 
   MoveSound: 
-  StaticSound: 
+  StaticSound: Statis_Enemy_1
   ChatterSound: 
 --- !u!195 &432931987
 NavMeshAgent:
