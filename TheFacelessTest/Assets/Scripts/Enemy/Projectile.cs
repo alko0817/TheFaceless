@@ -9,22 +9,29 @@ public class Projectile : MonoBehaviour
     GameObject detector;
     public float speed;
     public int damage;
+    internal bool hit;
 
 
     // Start is called before the first frame update
     void Start()
     {
         detector = GameObject.FindGameObjectWithTag("Detector");
-
+        hit = false;
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
     }
 
     void Update()
     {
         Move();
+        StartCoroutine(NotHitting());
+
     }
 
-
+    IEnumerator NotHitting ()
+    {
+        yield return new WaitForSeconds(2f);
+        if (!hit) ResetProjectile();
+    }
     void Move()
     {
         transform.position = transform.position + (direction * speed * Time.deltaTime);
@@ -42,7 +49,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<playerController>().TakeDamage(damage);
-
+            hit = true;
         }
         ResetProjectile();
     }
