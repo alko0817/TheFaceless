@@ -104,6 +104,7 @@ public class AIBehaviour : MonoBehaviour
     #region Combat Parameters
     public Transform attackPoint;
     public float attackHitBox = 1f;
+    public float attackDelay = 1f;
 
     public int dodgeChanceOutOf10;
     public int blockChanceOutOf10;
@@ -572,7 +573,7 @@ public class AIBehaviour : MonoBehaviour
     {
         attackThrown = true;
         anim.SetTrigger("attack");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(attackDelay);
         if (!CanAttack())
             yield break;
 

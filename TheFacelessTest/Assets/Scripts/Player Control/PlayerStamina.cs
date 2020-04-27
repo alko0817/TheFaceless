@@ -103,7 +103,7 @@ public class PlayerStamina : MonoBehaviour
     public void Regen()
     {
         bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * rechargeRate));
-        if (bar.fillAmount > 0)
+        if (bar.fillAmount > 0.6f)
         {
             canBlock = true;
             canSprint = true;
