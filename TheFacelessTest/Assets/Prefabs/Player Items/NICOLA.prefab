@@ -709,17 +709,27 @@ MonoBehaviour:
   camShake: {fileID: 2623165044700509559}
   shakeDuration: 0.5
   shakeMagnitude: 0.2
-  dischargeSlowDuration: 2
+  dischargeSlowDuration: 0.5
   electricityCharge: {fileID: 3618803109414547758}
   burst: {fileID: 2688521558888931655}
-  lightAttack1Sound: Light_Slash_10
-  lightAttack2Sound: Light_Slash_2
-  lightAttack3Sound: 
-  lightAttack4Sound: 
-  heavyAttackSound: 
-  blockAttack1Sound: 
-  blockAttack2Sound: 
-  enemyHitSound: 
+  lightAttack1Sound: Light_Slash_7
+  lightAttack2Sound: Light_Slash_8
+  lightAttack3Sound: Light_Slash_5
+  lightAttack4Sound: Light_Slash_8
+  heavyAttackSound: Heavy_Attack_1
+  blockAttack1Sound: Light_Slash_1
+  blockAttack2Sound: Light_Slash_10
+  BlockSound: 
+  DodgeSound: 
+  FullCharge: 
+  ReceiveDmgSound: Nicola_Take_DMG_1
+  DeathSound: 
+  MoveSound: 
+  SprintSound: 
+  SlowBeat: 
+  MediumSlowBeat: 
+  MediumFastBeat: 
+  FastBeat: 
   otherSounds: []
   otherSoundsIndex: 0
 --- !u!114 &2106645172
