@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     bool canRegen = true;
     Color tempAlpha;
     playerController player;
+    internal bool immortal = false;
 
     private void Start()
     {
@@ -61,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if (immortal) return;
         if (!player.blocking) currentHealth -= damage;
 
         else currentHealth -= damage * blockMitigation;
@@ -86,6 +88,11 @@ public class PlayerHealth : MonoBehaviour
         tempAlpha.a = 0;
         healthOverlay.color = tempAlpha;
         canRegen = true;
+    }
+
+    public void Immortality (bool value)
+    {
+        immortal = value;
     }
 
     void Death ()

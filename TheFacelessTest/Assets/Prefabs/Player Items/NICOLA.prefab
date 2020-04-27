@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982588620250213712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.33, z: 1.38}
+  m_LocalPosition: {x: 0, y: 0.145, z: 1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1887002956144366484}
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef7595e6bce52845ab4bab7dce178b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomRate: 3
-  maxDistance: 6
+  zoomRate: 5
+  maxDistance: 7
 --- !u!1 &2623165043583785884
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ Camera:
     height: 1
   near clip plane: 0.03
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -291,9 +291,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   lockCamera: 0
-  rightOffset: 0.6
+  rightOffset: 0
   defaultDistance: 3
-  height: 1.5
+  height: 1.8
   smoothFollow: 10
   xMouseSensitivity: 2
   yMouseSensitivity: 2
@@ -669,17 +669,20 @@ MonoBehaviour:
   foving: {fileID: 2001581130}
   attackDelay1: 0.2
   attackDelay2: 0.2
-  attackDelay3: 0.7
+  attackDelay3: 0.5
+  attackDelay4: 0.5
   heavyDelay1: 1.8
   heavyDelay2: 1.5
   dischargeDelay: 2
   blockAttackDelay1: 0.8
   blockAttackDelay2: 0.9
-  nextAttack: 1.3
+  nextAttack: 0.9
   nextHeavyAttack: 1.8
   nextBlockAttack: 1.2
   hitLight1: 0.25
   hitLight2: 0.25
+  hitLight3: 0.4
+  hitLight4: 0.4
   hitHeavy: 1
   hitDischarge: 2.3
   hitBlock1: 1
@@ -687,6 +690,8 @@ MonoBehaviour:
   holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 15
+  slash3Damage: 20
+  slash4Damage: 22
   heavyDamage: 30
   heavy2Damage: 40
   dischargeDamage: 90
@@ -701,7 +706,6 @@ MonoBehaviour:
   chargeRate: 50
   UIChargeMultiplier: 50
   explosion: {fileID: 2217211499414372651}
-  canDischarge: 0
   camShake: {fileID: 2623165044700509559}
   shakeDuration: 0.5
   shakeMagnitude: 0.2
@@ -710,6 +714,8 @@ MonoBehaviour:
   burst: {fileID: 2688521558888931655}
   lightAttack1Sound: Light_Slash_10
   lightAttack2Sound: Light_Slash_2
+  lightAttack3Sound: 
+  lightAttack4Sound: 
   heavyAttackSound: 
   blockAttack1Sound: 
   blockAttack2Sound: 
@@ -5881,7 +5887,10 @@ MonoBehaviour:
   - {fileID: 1281437438}
   - {fileID: 4633959328670477884}
   - {fileID: 4319520861605291611}
-  enemies: []
+  enemies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   indicators:
   - {fileID: 2100000, guid: 8246ea23f0559e042a620412e35adfa6, type: 2}
   - {fileID: 2100000, guid: fad7e26e3ff518e499e6f0893b44920f, type: 2}
@@ -11862,7 +11871,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 500
+        scalar: 150
         minScalar: 30
         maxCurve:
           serializedVersion: 2

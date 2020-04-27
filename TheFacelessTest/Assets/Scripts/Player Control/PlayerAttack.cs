@@ -322,8 +322,9 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Discharge ()
     {
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        controller.health.Immortality(true);
 
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(1f);
         controller.discharging = true;
         controller.explosion.Play();
         sounds.Play("Discharge_First", sounds.PlayerEffects);
@@ -334,7 +335,7 @@ public class PlayerAttack : MonoBehaviour
         }
         controller.foving.FovOut();
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(.7f);
         controller.electricityCharge.Stop();
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         controller.burst.Play();
@@ -343,6 +344,8 @@ public class PlayerAttack : MonoBehaviour
         controller.foving.FovIn();
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+
+        controller.health.Immortality(false);
 
         controller.discharging = false;
         controller.canDischarge = false;
