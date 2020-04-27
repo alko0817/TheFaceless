@@ -61,6 +61,7 @@ public class PlayerDodge : MonoBehaviour
     {
         dodgeCd = dodgeCooldown;
         controller.stamina.bar.fillAmount -= controller.dodgeCost;
+        controller.stamina.drainingDodge = true;
         controller.stamina.canRecharge = false;
         controller.sounds.Play(controller.DodgeSound, controller.sounds.PlayerEffects);
         controller.anim.SetTrigger(side);
@@ -68,7 +69,7 @@ public class PlayerDodge : MonoBehaviour
 
         yield return new WaitForSeconds(.7f);
 
-        controller.stamina.canRecharge = true;
+        controller.stamina.drainingDodge = false;
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
     }
 }

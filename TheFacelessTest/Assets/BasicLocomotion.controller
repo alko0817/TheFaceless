@@ -402,7 +402,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dodgeRoll
-  m_Speed: 1.6
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5899960806054530016}
@@ -1291,14 +1291,14 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 3374849151539679017}
-    second:
-    - {fileID: -8914213806341988699}
+  - first: {fileID: 0}
+    second: []
   - first: {fileID: -4948739959774924354}
     second:
     - {fileID: 3172581308784439009}
-  - first: {fileID: 0}
-    second: []
+  - first: {fileID: 3374849151539679017}
+    second:
+    - {fileID: -8914213806341988699}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -528, y: 60, z: 0}
   m_EntryPosition: {x: -528, y: 24, z: 0}
@@ -1533,7 +1533,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dodgeBack
-  m_Speed: 1.5
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6936946168110449337}
@@ -17277,15 +17277,15 @@ AnimatorStateMachine:
   - {fileID: 1652237422456136173}
   - {fileID: 5741252740282741874}
   m_StateMachineTransitions:
+  - first: {fileID: 0}
+    second:
+    - {fileID: 1527656701693648098}
   - first: {fileID: -8816033351480708661}
     second:
     - {fileID: -5227364833554296546}
   - first: {fileID: 7279186314866045760}
     second:
     - {fileID: -3879345962336555995}
-  - first: {fileID: 0}
-    second:
-    - {fileID: 1527656701693648098}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 108, y: 240, z: 0}
   m_EntryPosition: {x: 108, y: 192, z: 0}
@@ -21391,7 +21391,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dodgeRight
-  m_Speed: 1.5
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4003497319140361756}
@@ -22412,7 +22412,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dodge
-  m_Speed: 1.5
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8322335632870390841}
