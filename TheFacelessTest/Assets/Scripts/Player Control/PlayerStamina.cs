@@ -18,7 +18,11 @@ public class PlayerStamina : MonoBehaviour
 
     playerController controller;
     internal bool canBlock = true;
+    internal bool canSprint = true;
     internal bool canRecharge = true;
+    internal bool drainingBlock = false;
+    internal bool drainingSprint = false;
+    internal bool drainingDodge = false;
 
     private void Start()
     {
@@ -31,6 +35,10 @@ public class PlayerStamina : MonoBehaviour
 
         if (controller.blocking && canBlock && !controller.attacking)
         {
+            
+            
+            drainingBlock = true;
+            StopCoroutine(ChargeDelay());
             canRecharge = false;
             if (bar.fillAmount > 0)
             {
@@ -41,14 +49,36 @@ public class PlayerStamina : MonoBehaviour
             {
                 canBlock = false;
                 controller.blocking = false;
+                drainingBlock = false;
                 controller.anim.SetBool("blocking", false);
             }
 
         }
-        
-        if ((!controller.blocking && !canRecharge) || (controller.blocking && controller.attacking))
+        else drainingBlock = false;
+
+        if (controller.sprinting && canSprint)
         {
-            StartCoroutine(Delay());
+            
+            
+            drainingSprint = true;
+            StopCoroutine(ChargeDelay());
+            canRecharge = false;
+            if (bar.fillAmount > 0)
+            {
+                bar.fillAmount -= Time.deltaTime * sprintDepleteRate;
+            }
+
+            if (bar.fillAmount == 0)
+            {
+                canSprint = false;
+                drainingSprint = false;
+            }
+        }
+        else drainingSprint = false;
+
+        if (!drainingBlock && !drainingSprint && !drainingDodge) //((!controller.blocking && !canRecharge) || (controller.blocking && controller.attacking) || (!controller.sprinting && !canRecharge))
+        {
+            StartCoroutine(ChargeDelay());
         }
 
 
@@ -57,22 +87,27 @@ public class PlayerStamina : MonoBehaviour
             Regen();
         }
 
-        if (controller.sprinting)
-        {
-
-        }
+        
     }
 
-    IEnumerator Delay ()
+    IEnumerator ChargeDelay ()
     {
-        yield return new WaitForSeconds(chargeDelay);
-        canRecharge = true;
+        if (!canRecharge)
+        {
+            yield return new WaitForSeconds(chargeDelay);
+            canRecharge = true;
+        }
 
     }
 
     public void Regen()
     {
         bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * rechargeRate));
-        if (bar.fillAmount > 0) canBlock = true;
+        if (bar.fillAmount > 0)
+        {
+            canBlock = true;
+            canSprint = true;
+        }
+
     }
 }

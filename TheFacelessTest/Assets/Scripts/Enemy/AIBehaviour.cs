@@ -23,6 +23,7 @@ public class AIBehaviour : MonoBehaviour
     NavMeshAgent navMeshAgent;
     BEHAVIOUR_STATE state;
     EnemyBlackboard blackboard;
+    Animator anim;
 
     #region Shooter Parameters
     [Header("- Shooter Parameters")]
@@ -187,8 +188,7 @@ public class AIBehaviour : MonoBehaviour
             projectiles[i].SetActive(false);
         }
 
-
-     //   anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -567,7 +567,7 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Attack()
     {
         attackThrown = true;
-       // anim.SetTrigger("attack");
+        anim.SetTrigger("attack");
         yield return new WaitForSeconds(3f);
         if (!CanAttack())
             yield break;
@@ -667,9 +667,12 @@ public class AIBehaviour : MonoBehaviour
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
             sounds.Play(ReceiveDmgSound, sounds.EnemyEffects);
+            anim.SetTrigger("hit");
         }
         else
         {
+
+            anim.SetTrigger("hit");
             print("attack blocked");
             sounds.Play(BlockSound, sounds.EnemyEffects);
             StartCoroutine(ResetBlock());

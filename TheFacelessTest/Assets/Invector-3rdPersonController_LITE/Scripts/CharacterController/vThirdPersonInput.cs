@@ -5,7 +5,7 @@ namespace Invector.vCharacterController
     public class vThirdPersonInput : MonoBehaviour
     {
         #region Variables       
-
+        playerController controller;
         [Header("Controller Input")]
         public string horizontalInput = "Horizontal";
         public string verticallInput = "Vertical";
@@ -27,6 +27,7 @@ namespace Invector.vCharacterController
         {
             InitilizeController();
             InitializeTpCamera();
+            controller = GetComponent<playerController>();
         }
 
         protected virtual void FixedUpdate()
@@ -122,7 +123,10 @@ namespace Invector.vCharacterController
         protected virtual void SprintInput()
         {
             if (Input.GetKeyDown(sprintInput))
+            {
+                if (controller.stamina.canSprint)
                 cc.Sprint(true);
+            }
             else if (Input.GetKeyUp(sprintInput))
                 cc.Sprint(false);
         }
