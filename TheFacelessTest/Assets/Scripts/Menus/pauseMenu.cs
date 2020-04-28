@@ -6,11 +6,20 @@ public class pauseMenu : MonoBehaviour
 {
     public GameObject menu;
     public GameObject[] otherUI;
-    public TimeManager timeManager;
+    TimeManager timeManager;
     bool paused = false;
 
+
+    private void Start()
+    {
+        timeManager = GameObject.FindGameObjectWithTag("Time Manager").GetComponent<TimeManager>();
+    }
     private void Update()
     {
+        if (timeManager == null)
+        {
+            Debug.LogWarning("There is no time manager in the scene! The game will break without it!");
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!paused)
