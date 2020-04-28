@@ -31,7 +31,7 @@ public class levelLoader : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / .9f);
             Debug.Log(progress);
             loaderFill.fillAmount = progress;
-            textProgress.text = "Loading " + progress * 100 + "%";
+            textProgress.text = "Loading " + Mathf.RoundToInt(progress) * 100 + "%";
 
             yield return null;
         }

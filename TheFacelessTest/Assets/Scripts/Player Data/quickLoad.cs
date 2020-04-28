@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class quickLoad : MonoBehaviour
 {
-    public saveLoader loader;
-    public PlayerHealth health;
+    saveLoader loader;
+    PlayerHealth health;
+
+    private void Start()
+    {
+        loader = GameObject.FindGameObjectWithTag("Saver").GetComponent<saveLoader>();
+        health = GameObject.FindGameObjectWithTag("Player Health").GetComponent<PlayerHealth>();
+    }
 
     private void Update()
     {

@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 420907641}
   m_Layer: 5
   m_Name: stateOfHealth
-  m_TagString: Untagged
+  m_TagString: Player Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

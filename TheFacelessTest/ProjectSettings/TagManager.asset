@@ -12,6 +12,9 @@ TagManager:
   - Detector
   - AudioManager
   - Death Screen
+  - Time Manager
+  - Saver
+  - Player Health
   layers:
   - Default
   - TransparentFX

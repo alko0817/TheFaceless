@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class saving : MonoBehaviour
 {
-    public saveLoader saver;
+    saveLoader saver;
     GameObject player;
 
     private void Start()
     {
+        saver = GameObject.FindGameObjectWithTag("Saver").GetComponent<saveLoader>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
