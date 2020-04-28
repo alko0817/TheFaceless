@@ -148,7 +148,7 @@ public class PlayerAttack : MonoBehaviour
 
 
             //DISCHARGE
-            if (Input.GetButton("discharge") && controller.canDischarge)
+            if (Input.GetButton("discharge") && controller.canDischarge && controller.GetComponent<vThirdPersonMotor>().isGrounded)
             {
                 isDischarge = true;
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
