@@ -10458,7 +10458,7 @@ MonoBehaviour:
   attackHitBox: 0.5
   attackDelay: 0.6
   dodgeChanceOutOf10: 2
-  blockChanceOutOf10: 1
+  blockChanceOutOf10: 2
   attackDamage: 10
   ReceiveDmgSound: Enemy_Take_DMG_5
   DealDmgSound: 
