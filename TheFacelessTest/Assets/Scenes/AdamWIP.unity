@@ -6585,7 +6585,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnArea
       value: 
-      objectReference: {fileID: 1877445396}
+      objectReference: {fileID: 1314151112}
     - target: {fileID: 3171515996035514055, guid: 282ee8d40075e0f4b8abb739df5b9ded,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11735,6 +11735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyProp
       objectReference: {fileID: 0}
+    - target: {fileID: 6215925132303965928, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6215925132303965932, guid: 59a9749ac0d131742bc5b2b2e8d6badd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15786,7 +15791,7 @@ PrefabInstance:
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.9
+      value: 33.1
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
@@ -15796,7 +15801,7 @@ PrefabInstance:
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 48.5
+      value: 50.9
       objectReference: {fileID: 0}
     - target: {fileID: 2623165045082957695, guid: 93b4ed3211f1b834ca8352c635869afa,
         type: 3}
