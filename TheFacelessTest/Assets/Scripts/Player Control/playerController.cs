@@ -133,7 +133,8 @@ public class playerController : MonoBehaviour
     [Tooltip("Slow motion duration")]
     public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
-    public ParticleSystem burst;
+    public GameObject burst;
+    public Transform burstPoint;
     #endregion
 
     #region SOUNDS
