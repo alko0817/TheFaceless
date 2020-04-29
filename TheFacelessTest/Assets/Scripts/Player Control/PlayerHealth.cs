@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
             Damage(testDamage);
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
             Death();
         }
@@ -117,9 +117,9 @@ public class PlayerHealth : MonoBehaviour
         if (!player.canDie) return;
         canRegen = false;
         dead = true;
+        player.anim.SetTrigger("die");
         player.sounds.Play(player.DeathSound, player.sounds.PlayerEffects);
         deathScreen.SetActive(true);
-        //death animation
 
         
     }

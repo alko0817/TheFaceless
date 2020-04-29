@@ -11,6 +11,8 @@ public class PlayerDodge : MonoBehaviour
     private float dodgeDashBoost = 4f;
     private float axisThreshold = .1f;
     private float dodgeCd = 0;
+    float inputX;
+    float inputZ;
 
     private void Start()
     {
@@ -26,8 +28,8 @@ public class PlayerDodge : MonoBehaviour
     {
         dodgeCd -= Time.deltaTime;
 
-        float inputZ = Input.GetAxis("Vertical");
-        float inputX = Input.GetAxis("Horizontal");
+        inputZ = Input.GetAxis("Vertical");
+        inputX = Input.GetAxis("Horizontal");
 
         //CHECK FOR LAST TIME DODGED
         if (dodgeCd <= 0)
