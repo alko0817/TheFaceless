@@ -108,6 +108,13 @@ MonoBehaviour:
     loop: 0
     mute: 0
     source: {fileID: 0}
+  - name: Heavy_Attack_1
+    clip: {fileID: 8300000, guid: 15d29a794e334b0419c2be4d098b4f67, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
   EnemyEffects:
   - name: Enemy_Take_DMG_5
     clip: {fileID: 8300000, guid: 5b8b586425ea47746a2c5b28d7afc850, type: 3}
@@ -172,21 +179,21 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: Hallway 2
     clip: {fileID: 8300000, guid: ce17eb36774164740b8e26186fff4c0d, type: 3}
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: Hallway 3
     clip: {fileID: 8300000, guid: 8a4c51fc8ea63ea4e8f50c7ad737dff2, type: 3}
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: EndlessFalling
     clip: {fileID: 8300000, guid: 825ebd5db736ae848915455ed97e114e, type: 3}
@@ -199,7 +206,7 @@ MonoBehaviour:
   PlayAmbient: 1
   muteAll: 0
   useMasterControls: 0
-  MusicVolume: 1
+  MusicVolume: 0
   PlayerEffectsVolume: 1
   EnemyEffectsVolume: 1
   EnvironmentEffectsVolume: 1

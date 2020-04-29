@@ -24,9 +24,11 @@ public class quickLoad : MonoBehaviour
     IEnumerator Ressurect()
     {
         yield return new WaitForSeconds(2f);
+
+        GetComponent<playerController>().anim.SetBool("dead", false);
         health.deathScreen.SetActive(false);
-        health.ResetHealth();
         health.dead = false;
+        health.ResetHealth();
         loader.LoadPlayer();
         
     }

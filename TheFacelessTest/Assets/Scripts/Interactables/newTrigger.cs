@@ -12,6 +12,7 @@ public class newTrigger : MonoBehaviour
     float fadeOutDelay;
     string sound;
     bool triggered = false;
+    internal bool wait = false;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class newTrigger : MonoBehaviour
             if (other.gameObject.tag == player.tag)
             {
                 triggered = true;
+                wait = true;
                 UIAnim.SetTrigger("fadeIn");
                 sounds.Play(sound, sounds.EnvironmentEffects);
                 StartCoroutine("FadeOut");
@@ -40,7 +42,7 @@ public class newTrigger : MonoBehaviour
     IEnumerator FadeOut()
     {
         yield return new WaitForSeconds(fadeOutDelay);
-
+        wait = false;
         UIAnim.SetTrigger("fadeOut");
     }
 }
