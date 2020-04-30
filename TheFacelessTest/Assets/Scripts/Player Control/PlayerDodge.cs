@@ -65,7 +65,7 @@ public class PlayerDodge : MonoBehaviour
         controller.stamina.bar.fillAmount -= controller.dodgeCost;
         controller.stamina.drainingDodge = true;
         controller.stamina.canRecharge = false;
-        controller.sounds.Play(controller.DodgeSound, controller.sounds.PlayerEffects);
+        controller.sound.PlayOneShot(controller.DodgeSound);
         controller.anim.SetTrigger(side);
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 
