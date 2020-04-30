@@ -5,7 +5,7 @@ using UnityEngine;
 public class newTrigger : MonoBehaviour
 {
     public int localIndex;
-    public fbManager manager;
+    fbManager manager;
     GameObject player;
     audioManager sounds;
     Animator UIAnim;
@@ -16,6 +16,7 @@ public class newTrigger : MonoBehaviour
 
     private void Start()
     {
+        manager = GameObject.Find("Flashbacks Manager").GetComponent<fbManager>();
         fadeOutDelay = manager.triggers[localIndex].duration;
         UIAnim = manager.triggers[localIndex].animator;
         sound = manager.triggers[localIndex].sound;
