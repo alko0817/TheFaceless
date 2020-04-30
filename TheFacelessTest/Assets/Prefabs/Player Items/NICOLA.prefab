@@ -882,7 +882,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!82 &5655155430571765306
+--- !u!82 &460444468
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -892,15 +892,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 425df81ddd40bfe438b1b83046d69e4b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.05
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 116
+  Priority: 128
   DopplerLevel: 5
   MinDistance: 1
   MaxDistance: 500
@@ -978,7 +978,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &460444468
+--- !u!82 &5655155430571765306
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -988,15 +988,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 425df81ddd40bfe438b1b83046d69e4b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.4
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 116
   DopplerLevel: 5
   MinDistance: 1
   MaxDistance: 500
@@ -6585,7 +6585,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 99b6ba3974a1a90419e6036742c8593c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8dd0c03dc4b4a89499ee8d760c3bdc1f, type: 2}
     - target: {fileID: -6057140222963153312, guid: 9eb9dbfb2988a0b458d82d6410a87ba0,
         type: 3}
       propertyPath: m_Avatar
