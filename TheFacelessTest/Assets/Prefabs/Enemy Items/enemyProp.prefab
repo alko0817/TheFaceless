@@ -10461,16 +10461,16 @@ MonoBehaviour:
   dodgeChanceOutOf10: 2
   blockChanceOutOf10: 2
   attackDamage: 10
-  ReceiveDmgSound: Enemy_Take_DMG_5
-  DealDmgSound: 
-  ShootSound: 
-  BlockSound: Enemy_Block_1
-  DodgeSound: 
-  StunnedSound: 
-  DeathSound: 
-  MoveSound: 
-  StaticSound: Statis_Enemy_1
-  ChatterSound: 
+  ReceiveDmgSound: {fileID: 8300000, guid: 5b8b586425ea47746a2c5b28d7afc850, type: 3}
+  DealDmgSound: {fileID: 0}
+  ShootSound: {fileID: 0}
+  BlockSound: {fileID: 8300000, guid: cc6fe8b05669bd9469e140aeedd0234e, type: 3}
+  DodgeSound: {fileID: 0}
+  StunnedSound: {fileID: 0}
+  DeathSound: {fileID: 8300000, guid: 4570d9a7fd1778e45b44e23778fe95f3, type: 3}
+  MoveSound: {fileID: 0}
+  StaticSound: {fileID: 8300000, guid: 1341b9a9fa5d7194488d7656b4abf551, type: 3}
+  ChatterSound: {fileID: 0}
 --- !u!195 &432931987
 NavMeshAgent:
   m_ObjectHideFlags: 0

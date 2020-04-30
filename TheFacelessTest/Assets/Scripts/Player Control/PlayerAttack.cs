@@ -290,7 +290,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(connectDelay);
         //sounds.Play(sound, sounds.PlayerEffects);
-        controller.sound.PlayOneShot(sound);
+        controller.SwordSounds.PlayOneShot(sound);
     }
 
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
@@ -334,13 +334,13 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(.7f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
-        controller.fullCharge.Stop();
 
         yield return new WaitForSeconds(.3f);
 
+        controller.fullCharge.Stop();
         controller.discharging = true;
         controller.explosion.Play();
-        controller.sound.PlayOneShot(controller.DischargeFirst);
+        controller.SwordSounds.PlayOneShot(controller.DischargeFirst);
 
         if(controller.timeManager != null)
         {
@@ -357,7 +357,7 @@ public class PlayerAttack : MonoBehaviour
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
         //sounds.Play("Discharge_Second", sounds.PlayerEffects);
-        controller.sound.PlayOneShot(controller.DischargeSecond);
+        controller.SwordSounds.PlayOneShot(controller.DischargeSecond);
 
         
 

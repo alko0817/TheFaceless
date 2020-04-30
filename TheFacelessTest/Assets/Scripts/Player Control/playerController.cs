@@ -6,8 +6,7 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
-    internal audioManager sounds;
-    public AudioSource sound;
+    
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
@@ -140,8 +139,10 @@ public class playerController : MonoBehaviour
     #endregion
 
     #region SOUNDS
-    [Header("- Sound Clips")]
-    [Tooltip("Copy-paste the clip name from the Audio Manager")]
+    [Header("- Sounds")]
+    public AudioSource SwordSounds;
+    public AudioSource MotionSounds;
+    [Space]
     public AudioClip lightAttack1Sound;
     public AudioClip lightAttack2Sound;
     public AudioClip lightAttack3Sound;
@@ -175,6 +176,7 @@ public class playerController : MonoBehaviour
 
     internal float originSpeed;
     internal float originTimeReset;
+    bool played = false;
 
 
 
@@ -197,15 +199,14 @@ public class playerController : MonoBehaviour
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
     }
 
-    private void Start()
-    {
-        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
-    }
 
     void Update()
     {
         //CHECKS
         sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
+
+        if (sprinting && !MotionSounds.isPlaying) MotionSounds.Play();
+        else if (!sprinting) MotionSounds.Stop();
 
         if (stamina.bar.fillAmount <= 0 )
         {
@@ -219,6 +220,12 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
+        if (currentCharge == maxCharge && !played)
+        {
+            fullCharge.Play();
+            played = true;
+        }
+
         // MAKE SWORD DISCHARGE GRADUALLY
         if (discharging)
         {
@@ -227,6 +234,7 @@ public class playerController : MonoBehaviour
                 lastCharge -= Time.deltaTime * UIChargeMultiplier;
                 swordFill.fillAmount = lastCharge / maxCharge;
                 currentCharge = lastCharge;
+                played = false;
 
             }
         }
@@ -243,8 +251,6 @@ public class playerController : MonoBehaviour
         if (currentCharge < maxCharge) currentCharge += chargeRate;
         else if (currentCharge >= maxCharge)
         {
-
-            fullCharge.Play();
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
