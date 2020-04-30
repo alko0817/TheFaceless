@@ -616,8 +616,8 @@ MonoBehaviour:
   electricityCharge: {fileID: 3618803109414547758}
   burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   burstPoint: {fileID: 7098631735104749039}
-  SwordSounds: {fileID: 5655155430571765306}
-  MotionSounds: {fileID: 2106645165}
+  SwordSounds: {fileID: 0}
+  MotionSounds: {fileID: 0}
   lightAttack1Sound: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
   lightAttack2Sound: {fileID: 8300000, guid: 0f51666af62543e4391248200ef9a761, type: 3}
   lightAttack3Sound: {fileID: 8300000, guid: 720ddb630da3a0b42b038c6f248cebd1, type: 3}
@@ -631,8 +631,8 @@ MonoBehaviour:
   DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
   ReceiveDmgSound: {fileID: 8300000, guid: 01c7422e46c896e41b0b90e90bc20ae1, type: 3}
   DeathSound: {fileID: 0}
-  MoveSound: {fileID: 8300000, guid: affc69a5a7a915c45ba2606569dc8adf, type: 3}
-  SprintSound: {fileID: 0}
+  MoveSound: {fileID: 8300000, guid: 5dd4942a2d4615743b031c3b4df904d2, type: 3}
+  SprintSound: {fileID: 8300000, guid: affc69a5a7a915c45ba2606569dc8adf, type: 3}
   SlowBeat: {fileID: 8300000, guid: aaae0ab5dd5f8e2418fd0ebf6b80d6a1, type: 3}
   MediumSlowBeat: {fileID: 8300000, guid: 70a306b967a9ed84788a5f802d3c3be4, type: 3}
   MediumFastBeat: {fileID: 8300000, guid: af8b541573145a84db03ef206fa1d360, type: 3}

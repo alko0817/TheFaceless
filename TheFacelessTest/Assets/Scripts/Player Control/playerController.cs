@@ -178,6 +178,8 @@ public class playerController : MonoBehaviour
     internal float originTimeReset;
     bool played = false;
 
+    Rigidbody rb;
+    float speed;
 
 
     private void Awake()
@@ -197,6 +199,8 @@ public class playerController : MonoBehaviour
 
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
+
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -204,8 +208,23 @@ public class playerController : MonoBehaviour
     {
         //CHECKS
         sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
+        speed = rb.velocity.magnitude;
 
-        if (sprinting && !MotionSounds.isPlaying) MotionSounds.Play();
+        //FOOTSTEPS
+        //if (speed > 2f && speed < 6f && !MotionSounds.isPlaying)
+        //{
+        //    MotionSounds.clip = MoveSound;
+        //    MotionSounds.Play();
+        //}
+
+        //else MotionSounds.Stop();
+
+        if (sprinting && !MotionSounds.isPlaying)
+        {
+            MotionSounds.clip = SprintSound;
+            MotionSounds.Play();
+        }
+
         else if (!sprinting) MotionSounds.Stop();
 
         if (stamina.bar.fillAmount <= 0 )
