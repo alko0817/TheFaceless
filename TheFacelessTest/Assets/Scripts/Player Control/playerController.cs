@@ -7,6 +7,7 @@ using Invector.vCharacterController;
 public class playerController : MonoBehaviour
 {
     internal audioManager sounds;
+    public AudioSource sound;
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
@@ -122,6 +123,7 @@ public class playerController : MonoBehaviour
     internal float currentCharge = 0f;
     internal float lastCharge = 0f;
     internal Image swordFill;
+    public AudioSource fullCharge;
 
 
     internal bool canDischarge = false;
@@ -140,32 +142,34 @@ public class playerController : MonoBehaviour
     #region SOUNDS
     [Header("- Sound Clips")]
     [Tooltip("Copy-paste the clip name from the Audio Manager")]
-    public string lightAttack1Sound;
-    public string lightAttack2Sound;
-    public string lightAttack3Sound;
-    public string lightAttack4Sound;
+    public AudioClip lightAttack1Sound;
+    public AudioClip lightAttack2Sound;
+    public AudioClip lightAttack3Sound;
+    public AudioClip lightAttack4Sound;
     [Space]
-    public string heavyAttackSound;
+    public AudioClip heavyAttackSound;
     [Space]
-    public string blockAttack1Sound;
-    public string blockAttack2Sound;
+    public AudioClip blockAttack1Sound;
+    public AudioClip blockAttack2Sound;
     [Space]
-    public string BlockSound;
-    public string DodgeSound;
-    public string FullCharge;
+    public AudioClip BlockSound;
+    public AudioClip DodgeSound;
     [Space]
-    public string ReceiveDmgSound;
-    public string DeathSound;
+    public AudioClip DischargeFirst;
+    public AudioClip DischargeSecond;
     [Space]
-    public string MoveSound;
-    public string SprintSound;
+    public AudioClip ReceiveDmgSound;
+    public AudioClip DeathSound;
+    [Space]
+    public AudioClip MoveSound;
+    public AudioClip SprintSound;
     [Header("- Heartbeat effect")]
-    public string SlowBeat;
-    public string MediumSlowBeat;
-    public string MediumFastBeat;
-    public string FastBeat;
+    public AudioClip SlowBeat;
+    public AudioClip MediumSlowBeat;
+    public AudioClip MediumFastBeat;
+    public AudioClip FastBeat;
     [Space]
-    public string[] otherSounds;
+    public AudioClip[] otherSounds;
     public int otherSoundsIndex;
     #endregion
 
@@ -223,6 +227,7 @@ public class playerController : MonoBehaviour
                 lastCharge -= Time.deltaTime * UIChargeMultiplier;
                 swordFill.fillAmount = lastCharge / maxCharge;
                 currentCharge = lastCharge;
+
             }
         }
 
@@ -238,10 +243,11 @@ public class playerController : MonoBehaviour
         if (currentCharge < maxCharge) currentCharge += chargeRate;
         else if (currentCharge >= maxCharge)
         {
+
+            fullCharge.Play();
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
-            sounds.Play(FullCharge, sounds.PlayerEffects);
 
         }
 

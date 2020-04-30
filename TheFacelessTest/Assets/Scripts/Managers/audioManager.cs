@@ -8,15 +8,11 @@ public class audioManager : MonoBehaviour
 
 
     public sound[] Music;
-    public sound[] PlayerEffects;
-    public sound[] EnemyEffects;
-    public sound[] EnvironmentEffects;
+    public sound[] Flashbacks;
     public sound[] Ambient;
     [Space]
-    [Tooltip("The music/ambience playing in the background at all times")]
-    public string Background;
-    [Tooltip("If the background sound is ambient, click this")]
-    public bool PlayAmbient;
+    public string BackgroundMusic;
+    public string BackgroundAmbient;
     [Space]
     [Tooltip("Disables all sounds")]
     public bool muteAll;
@@ -26,11 +22,7 @@ public class audioManager : MonoBehaviour
     [Range(0f, 1f)]
     public float MusicVolume;
     [Range(0f, 1f)]
-    public float PlayerEffectsVolume;
-    [Range(0f, 1f)]
-    public float EnemyEffectsVolume;
-    [Range(0f, 1f)]
-    public float EnvironmentEffectsVolume;
+    public float FlashBacksVolume;
     [Range(0f, 1f)]
     public float AmbientVolume;
 
@@ -51,26 +43,21 @@ public class audioManager : MonoBehaviour
 
 
         SetSounds(Music, MusicVolume);
-        SetSounds(PlayerEffects, PlayerEffectsVolume);
-        SetSounds(EnemyEffects, EnemyEffectsVolume);
-        SetSounds(EnvironmentEffects, EnvironmentEffectsVolume);
+        SetSounds(Flashbacks, FlashBacksVolume);
         SetSounds(Ambient, AmbientVolume);
     }
 
     private void Start()
     {
-        if (PlayAmbient) Play(Background, Ambient);
-
-        Play(Background, Music);
+        Play(BackgroundAmbient, Ambient);
+        Play(BackgroundMusic, Music);
     }
 
     private void Update()
     {
         if (!useMasterControls) return;
         MasterVolume(Music, MusicVolume);
-        MasterVolume(PlayerEffects, PlayerEffectsVolume);
-        MasterVolume(EnemyEffects, EnemyEffectsVolume);
-        MasterVolume(EnvironmentEffects, EnvironmentEffectsVolume);
+        MasterVolume(Flashbacks, FlashBacksVolume);
         MasterVolume(Ambient, AmbientVolume);
     }
 

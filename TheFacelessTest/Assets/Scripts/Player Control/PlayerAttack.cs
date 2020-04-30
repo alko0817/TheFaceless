@@ -286,10 +286,11 @@ public class PlayerAttack : MonoBehaviour
         holding = true;
     }
 
-    IEnumerator AttackSound (float connectDelay, string sound)
+    IEnumerator AttackSound (float connectDelay, AudioClip sound)
     {
         yield return new WaitForSeconds(connectDelay);
-        sounds.Play(sound, sounds.PlayerEffects);
+        //sounds.Play(sound, sounds.PlayerEffects);
+        controller.sound.PlayOneShot(sound);
     }
 
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
@@ -327,16 +328,20 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator Discharge ()
     {
-        //gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        
         controller.health.Immortality(true);
+        controller.canDischarge = false;
 
         yield return new WaitForSeconds(.7f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        controller.fullCharge.Stop();
+
         yield return new WaitForSeconds(.3f);
 
         controller.discharging = true;
         controller.explosion.Play();
-        sounds.Play("Discharge_First", sounds.PlayerEffects);
+        controller.sound.PlayOneShot(controller.DischargeFirst);
+
         if(controller.timeManager != null)
         {
             controller.timeManager.GetComponent<TimeManager>().slowmoDuration = controller.dischargeSlowDuration;
@@ -351,7 +356,8 @@ public class PlayerAttack : MonoBehaviour
         //controller.burst.Play();
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
-        sounds.Play("Discharge_Second", sounds.PlayerEffects);
+        //sounds.Play("Discharge_Second", sounds.PlayerEffects);
+        controller.sound.PlayOneShot(controller.DischargeSecond);
 
         
 
@@ -363,7 +369,6 @@ public class PlayerAttack : MonoBehaviour
         controller.health.Immortality(false);
 
         controller.discharging = false;
-        controller.canDischarge = false;
     }
 
     public bool GetAttacking ()

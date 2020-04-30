@@ -32,7 +32,7 @@ public class newTrigger : MonoBehaviour
                 triggered = true;
                 wait = true;
                 UIAnim.SetTrigger("fadeIn");
-                sounds.Play(sound, sounds.EnvironmentEffects);
+                sounds.Play(sound, sounds.Flashbacks);
                 StartCoroutine("FadeOut");
 
             }

@@ -125,20 +125,21 @@ public class AIBehaviour : MonoBehaviour
 
     #region Sounds
     audioManager sounds;
+    AudioSource sound;
     [Header("Sound FX")]
     [Space]
-    public string ReceiveDmgSound;
-    public string DealDmgSound;
-    public string ShootSound;
+    public AudioClip ReceiveDmgSound;
+    public AudioClip DealDmgSound;
+    public AudioClip ShootSound;
     [Space]
-    public string BlockSound;
-    public string DodgeSound;
-    public string StunnedSound;
-    public string DeathSound;
+    public AudioClip BlockSound;
+    public AudioClip DodgeSound;
+    public AudioClip StunnedSound;
+    public AudioClip DeathSound;
     [Space]
-    public string MoveSound;
-    public string StaticSound;
-    public string ChatterSound;
+    public AudioClip MoveSound;
+    public AudioClip StaticSound;
+    public AudioClip ChatterSound;
     #endregion
 
     void Start()
@@ -179,7 +180,8 @@ public class AIBehaviour : MonoBehaviour
 
         blackboard = GameObject.FindWithTag("Blackboard").GetComponent<EnemyBlackboard>();
         dissolving = GetComponent<SpawnEffect>();
-        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
+        //sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
+        sound = GetComponent<AudioSource>();
 
         for (int i = 0; i < projectiles.Length; i++)
         {
@@ -538,7 +540,7 @@ public class AIBehaviour : MonoBehaviour
     {
         navMeshAgent.destination = location;
         navMeshAgent.isStopped = false;
-        sounds.Play(MoveSound, sounds.EnemyEffects);
+        sound.PlayOneShot(MoveSound);
     }
 
     void Flee()
@@ -553,7 +555,7 @@ public class AIBehaviour : MonoBehaviour
     IEnumerator Dodge()
     {
         print("dodge");
-        sounds.Play(DodgeSound, sounds.EnemyEffects);
+        sound.PlayOneShot(DodgeSound);
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
 ;
@@ -565,7 +567,7 @@ public class AIBehaviour : MonoBehaviour
     void Stop()
     {
         navMeshAgent.isStopped = true;
-        sounds.StopPlaying(MoveSound, sounds.EnemyEffects);
+        sound.Stop();
     }
     #endregion
 
@@ -658,7 +660,7 @@ public class AIBehaviour : MonoBehaviour
                     projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
-                    sounds.Play(ShootSound, sounds.EnemyEffects);
+                    sound.PlayOneShot(ShootSound);
                     shooting = false;
                     break;
                     
@@ -674,7 +676,7 @@ public class AIBehaviour : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
-            sounds.Play(ReceiveDmgSound, sounds.EnemyEffects);
+            sound.PlayOneShot(ReceiveDmgSound);
             anim.SetTrigger("hit");
         }
         else
@@ -682,7 +684,7 @@ public class AIBehaviour : MonoBehaviour
 
             anim.SetTrigger("hit");
             print("attack blocked");
-            sounds.Play(BlockSound, sounds.EnemyEffects);
+            sound.PlayOneShot(BlockSound);
             StartCoroutine(ResetBlock());
         }
         //HURT ANIMATIONS
@@ -692,7 +694,7 @@ public class AIBehaviour : MonoBehaviour
     void Die()
     {
         dying = true;
-        sounds.Play(DeathSound, sounds.EnemyEffects);
+        sound.PlayOneShot(DeathSound);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
