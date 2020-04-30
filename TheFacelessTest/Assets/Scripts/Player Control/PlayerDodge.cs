@@ -36,24 +36,34 @@ public class PlayerDodge : MonoBehaviour
         {
             if (controller.stamina.bar.fillAmount >= controller.dodgeCost)
             {
-                if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
+                if (!controller.sprinting)
                 {
-                    StartCoroutine(Dodge("dodgingLeft"));
-                }
+                    if (Input.GetButtonDown("Dodge") && inputX < -axisThreshold)
+                    {
+                        StartCoroutine(Dodge("dodgingLeft"));
+                    }
 
-                if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
-                {
-                    StartCoroutine(Dodge("dodgingRight"));
-                }
+                    if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
+                    {
+                        StartCoroutine(Dodge("dodgingRight"));
+                    }
 
-                if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
-                {
-                    StartCoroutine(Dodge("dodgingBack"));
-                }
+                    if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
+                    {
+                        StartCoroutine(Dodge("dodgingBack"));
+                    }
 
-                if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+                    if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+                    {
+                        StartCoroutine(Dodge("dodgingRoll"));
+                    }
+                }
+                else
                 {
-                    StartCoroutine(Dodge("dodgingRoll"));
+                    if (Input.GetButtonDown("Dodge"))
+                    {
+                        StartCoroutine(Dodge("dodgingRoll"));
+                    }
                 }
             }
         }
@@ -65,7 +75,7 @@ public class PlayerDodge : MonoBehaviour
         controller.stamina.bar.fillAmount -= controller.dodgeCost;
         controller.stamina.drainingDodge = true;
         controller.stamina.canRecharge = false;
-        controller.sound.PlayOneShot(controller.DodgeSound);
+        controller.SwordSounds.PlayOneShot(controller.DodgeSound);
         controller.anim.SetTrigger(side);
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 

@@ -75,13 +75,13 @@ public class PlayerHealth : MonoBehaviour
         if (!player.blocking)
         {
             currentHealth -= damage;
-            player.sound.PlayOneShot(player.ReceiveDmgSound);
+            player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
         }
 
         else
         {
             currentHealth -= damage * blockMitigation;
-            player.sound.PlayOneShot(player.BlockSound);
+            player.SwordSounds.PlayOneShot(player.BlockSound);
         }
 
         StopCoroutine("HealingDelay");
@@ -118,7 +118,7 @@ public class PlayerHealth : MonoBehaviour
         canRegen = false;
         dead = true;
         player.anim.SetTrigger("die");
-        player.sound.PlayOneShot(player.DeathSound);
+        player.SwordSounds.PlayOneShot(player.DeathSound);
         deathScreen.SetActive(true);
 
         

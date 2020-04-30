@@ -82,7 +82,7 @@ MonoBehaviour:
     mute: 0
     source: {fileID: 0}
   BackgroundMusic: 
-  BackgroundAmbient: Hallway 3
+  BackgroundAmbient: Hallway
   muteAll: 0
   useMasterControls: 1
   MusicVolume: 0
