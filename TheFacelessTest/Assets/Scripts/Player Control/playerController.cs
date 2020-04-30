@@ -6,7 +6,7 @@ using Invector.vCharacterController;
 
 public class playerController : MonoBehaviour
 {
-    internal audioManager sounds;
+    
     public Animator anim;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
@@ -122,6 +122,7 @@ public class playerController : MonoBehaviour
     internal float currentCharge = 0f;
     internal float lastCharge = 0f;
     internal Image swordFill;
+    public AudioSource fullCharge;
 
 
     internal bool canDischarge = false;
@@ -133,43 +134,49 @@ public class playerController : MonoBehaviour
     [Tooltip("Slow motion duration")]
     public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
-    public ParticleSystem burst;
+    public GameObject burst;
+    public Transform burstPoint;
     #endregion
 
     #region SOUNDS
-    [Header("- Sound Clips")]
-    [Tooltip("Copy-paste the clip name from the Audio Manager")]
-    public string lightAttack1Sound;
-    public string lightAttack2Sound;
-    public string lightAttack3Sound;
-    public string lightAttack4Sound;
+    [Header("- Sounds")]
+    public AudioSource SwordSounds;
+    public AudioSource MotionSounds;
     [Space]
-    public string heavyAttackSound;
+    public AudioClip lightAttack1Sound;
+    public AudioClip lightAttack2Sound;
+    public AudioClip lightAttack3Sound;
+    public AudioClip lightAttack4Sound;
     [Space]
-    public string blockAttack1Sound;
-    public string blockAttack2Sound;
+    public AudioClip heavyAttackSound;
     [Space]
-    public string BlockSound;
-    public string DodgeSound;
-    public string FullCharge;
+    public AudioClip blockAttack1Sound;
+    public AudioClip blockAttack2Sound;
     [Space]
-    public string ReceiveDmgSound;
-    public string DeathSound;
+    public AudioClip BlockSound;
+    public AudioClip DodgeSound;
     [Space]
-    public string MoveSound;
-    public string SprintSound;
+    public AudioClip DischargeFirst;
+    public AudioClip DischargeSecond;
+    [Space]
+    public AudioClip ReceiveDmgSound;
+    public AudioClip DeathSound;
+    [Space]
+    public AudioClip MoveSound;
+    public AudioClip SprintSound;
     [Header("- Heartbeat effect")]
-    public string SlowBeat;
-    public string MediumSlowBeat;
-    public string MediumFastBeat;
-    public string FastBeat;
+    public AudioClip SlowBeat;
+    public AudioClip MediumSlowBeat;
+    public AudioClip MediumFastBeat;
+    public AudioClip FastBeat;
     [Space]
-    public string[] otherSounds;
+    public AudioClip[] otherSounds;
     public int otherSoundsIndex;
     #endregion
 
     internal float originSpeed;
     internal float originTimeReset;
+    bool played = false;
 
 
 
@@ -192,15 +199,14 @@ public class playerController : MonoBehaviour
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
     }
 
-    private void Start()
-    {
-        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
-    }
 
     void Update()
     {
         //CHECKS
         sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
+
+        if (sprinting && !MotionSounds.isPlaying) MotionSounds.Play();
+        else if (!sprinting) MotionSounds.Stop();
 
         if (stamina.bar.fillAmount <= 0 )
         {
@@ -214,6 +220,12 @@ public class playerController : MonoBehaviour
             swordFill.fillAmount = lastCharge / maxCharge;
         }
 
+        if (currentCharge == maxCharge && !played)
+        {
+            fullCharge.Play();
+            played = true;
+        }
+
         // MAKE SWORD DISCHARGE GRADUALLY
         if (discharging)
         {
@@ -222,6 +234,8 @@ public class playerController : MonoBehaviour
                 lastCharge -= Time.deltaTime * UIChargeMultiplier;
                 swordFill.fillAmount = lastCharge / maxCharge;
                 currentCharge = lastCharge;
+                played = false;
+
             }
         }
 
@@ -240,7 +254,6 @@ public class playerController : MonoBehaviour
             currentCharge = maxCharge;
             canDischarge = true;
             electricityCharge.Play();
-            sounds.Play(FullCharge, sounds.PlayerEffects);
 
         }
 

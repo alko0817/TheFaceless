@@ -51,142 +51,28 @@ MonoBehaviour:
     loop: 1
     mute: 0
     source: {fileID: 0}
-  PlayerEffects:
-  - name: Discharge_First
-    clip: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
-    volume: 0.8
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Discharge_Second
-    clip: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
-    volume: 0.8
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Light_Slash_7
-    clip: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Light_Slash_8
-    clip: {fileID: 8300000, guid: 0f51666af62543e4391248200ef9a761, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Light_Slash_1
-    clip: {fileID: 8300000, guid: 96856b22b11edb1438a0ebe925a5b09c, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Light_Slash_10
-    clip: {fileID: 8300000, guid: 10597d74e6328a0479622265494fac5b, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Light_Slash_5
-    clip: {fileID: 8300000, guid: 720ddb630da3a0b42b038c6f248cebd1, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Nicola_Take_DMG_1
-    clip: {fileID: 8300000, guid: 01c7422e46c896e41b0b90e90bc20ae1, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  EnemyEffects:
-  - name: Enemy_Take_DMG_5
-    clip: {fileID: 8300000, guid: 5b8b586425ea47746a2c5b28d7afc850, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: Enemy_Block_1
-    clip: {fileID: 8300000, guid: 724f5d22a87c963438a10aed704179e5, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  EnvironmentEffects:
-  - name: creak2
-    clip: {fileID: 8300000, guid: 8dc7d14c72eac7f4abf3d4f28fcdf536, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: creak3
-    clip: {fileID: 8300000, guid: d0dcfce274e6a7c4fa7f8f709fe46a5e, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: impact1
-    clip: {fileID: 8300000, guid: b3d2841f382185d40b59f3514502e187, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: rattle5
-    clip: {fileID: 8300000, guid: 6b4829824845a2341b9a598b1e4eb6bc, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
-  - name: slidingDoor
-    clip: {fileID: 8300000, guid: aef2656c6d9992d4e8b91bac5971ed32, type: 3}
-    volume: 0
-    pitch: 0
-    loop: 0
-    mute: 0
-    source: {fileID: 0}
+  Flashbacks: []
   Ambient:
   - name: Hallway
     clip: {fileID: 8300000, guid: 94ea95a11b0eba54591104dae2959e47, type: 3}
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: Hallway 2
     clip: {fileID: 8300000, guid: ce17eb36774164740b8e26186fff4c0d, type: 3}
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: Hallway 3
     clip: {fileID: 8300000, guid: 8a4c51fc8ea63ea4e8f50c7ad737dff2, type: 3}
     volume: 1
     pitch: 1
     loop: 1
-    mute: 0
+    mute: 1
     source: {fileID: 0}
   - name: EndlessFalling
     clip: {fileID: 8300000, guid: 825ebd5db736ae848915455ed97e114e, type: 3}
@@ -195,12 +81,10 @@ MonoBehaviour:
     loop: 1
     mute: 0
     source: {fileID: 0}
-  Background: Hallway 3
-  PlayAmbient: 1
+  BackgroundMusic: 
+  BackgroundAmbient: Hallway
   muteAll: 0
-  useMasterControls: 0
-  MusicVolume: 1
-  PlayerEffectsVolume: 1
-  EnemyEffectsVolume: 1
-  EnvironmentEffectsVolume: 1
+  useMasterControls: 1
+  MusicVolume: 0
+  FlashBacksVolume: 1
   AmbientVolume: 1
