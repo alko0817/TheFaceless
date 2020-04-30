@@ -356,13 +356,16 @@ public class PlayerAttack : MonoBehaviour
         //controller.burst.Play();
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
-        //sounds.Play("Discharge_Second", sounds.PlayerEffects);
+        float temp = controller.SwordSounds.volume;
+        controller.SwordSounds.volume += .4f;
         controller.SwordSounds.PlayOneShot(controller.DischargeSecond);
 
-        
+
 
         yield return new WaitForSeconds(.8f);
         controller.foving.FovIn();
+
+        controller.SwordSounds.volume = temp;
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
