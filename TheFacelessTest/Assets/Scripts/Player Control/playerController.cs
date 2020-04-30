@@ -31,7 +31,6 @@ public class playerController : MonoBehaviour
     internal int combos = 0;
     internal int combosBlock = 0;
     internal float lastClick = 0f;
-    internal bool sprinting = false;
 
     [Header("- Attack Intervals")]
     public float attackDelay1 = 1.5f;
@@ -176,10 +175,13 @@ public class playerController : MonoBehaviour
 
     internal float originSpeed;
     internal float originTimeReset;
+    internal bool sprinting = false;
+    internal bool jumping = false;
+
     bool played = false;
 
     Rigidbody rb;
-    float speed;
+    internal float speed;
 
 
     private void Awake()
@@ -208,24 +210,18 @@ public class playerController : MonoBehaviour
     {
         //CHECKS
         sprinting = gameObject.GetComponent<vThirdPersonMotor>().isSprinting;
+        jumping = !gameObject.GetComponent<vThirdPersonMotor>().isGrounded;
         speed = rb.velocity.magnitude;
 
-        //FOOTSTEPS
-        //if (speed > 2f && speed < 6f && !MotionSounds.isPlaying)
+        
+
+        //if (sprinting && !MotionSounds.isPlaying)
         //{
-        //    MotionSounds.clip = MoveSound;
+        //    MotionSounds.clip = SprintSound;
         //    MotionSounds.Play();
         //}
 
-        //else MotionSounds.Stop();
-
-        if (sprinting && !MotionSounds.isPlaying)
-        {
-            MotionSounds.clip = SprintSound;
-            MotionSounds.Play();
-        }
-
-        else if (!sprinting) MotionSounds.Stop();
+        //else if (!sprinting) MotionSounds.Stop();
 
         if (stamina.bar.fillAmount <= 0 )
         {
