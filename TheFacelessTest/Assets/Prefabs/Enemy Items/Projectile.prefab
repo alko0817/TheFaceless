@@ -71,7 +71,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPosition: {x: 0, y: 0, z: 0}
-  speed: 40
-  damage: 15
+  speed: 20
+  damage: 10
 --- !u!54 &3093915149218573002
 Rigidbody:
   m_ObjectHideFlags: 0
