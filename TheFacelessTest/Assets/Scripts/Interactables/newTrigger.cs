@@ -21,6 +21,7 @@ public class newTrigger : MonoBehaviour
         sound = manager.triggers[localIndex].sound;
         player = GameObject.FindGameObjectWithTag("Player");
         sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
+        manager = GameObject.FindGameObjectWithTag("Flashbacks").GetComponent<fbManager>();
     }
 
     private void OnTriggerEnter(Collider other)
