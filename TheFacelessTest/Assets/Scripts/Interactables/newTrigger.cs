@@ -5,7 +5,7 @@ using UnityEngine;
 public class newTrigger : MonoBehaviour
 {
     public int localIndex;
-    public fbManager manager;
+    internal fbManager manager;
     GameObject player;
     audioManager sounds;
     Animator UIAnim;
