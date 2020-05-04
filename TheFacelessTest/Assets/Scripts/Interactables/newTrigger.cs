@@ -5,10 +5,10 @@ using UnityEngine;
 public class newTrigger : MonoBehaviour
 {
     public int localIndex;
-    public fbManager manager;
     GameObject player;
     audioManager sounds;
     Animator UIAnim;
+    fbManager manager;
     float fadeOutDelay;
     string sound;
     bool triggered = false;
@@ -16,12 +16,14 @@ public class newTrigger : MonoBehaviour
 
     private void Start()
     {
-        fadeOutDelay = manager.triggers[localIndex].duration;
-        UIAnim = manager.triggers[localIndex].animator;
-        sound = manager.triggers[localIndex].sound;
+        
         player = GameObject.FindGameObjectWithTag("Player");
         sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
         manager = GameObject.FindGameObjectWithTag("Flashbacks").GetComponent<fbManager>();
+
+        fadeOutDelay = manager.triggers[localIndex].duration;
+        UIAnim = manager.triggers[localIndex].animator;
+        sound = manager.triggers[localIndex].sound;
     }
 
     private void OnTriggerEnter(Collider other)
