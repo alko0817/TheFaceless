@@ -15,6 +15,7 @@ TagManager:
   - Time Manager
   - Saver
   - Player Health
+  - Flashbacks
   layers:
   - Default
   - TransparentFX
