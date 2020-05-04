@@ -5,13 +5,16 @@ using UnityEngine;
 public class autoDoor : MonoBehaviour
 {
     Animator DoorAnim;
-    GameObject player;
+    GameObject player, detector;
     //bool isOpen = false;
 
     private void Start()
     {
         DoorAnim = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        detector = GameObject.FindGameObjectWithTag("Detector");
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
     }
 
     private void OnTriggerEnter(Collider other)

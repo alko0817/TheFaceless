@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Invector.vCharacterController;
 
+[System.Serializable]
 public class playerController : MonoBehaviour
 {
     
