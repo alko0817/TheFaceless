@@ -151,6 +151,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButton("discharge") && controller.canDischarge && controller.GetComponent<vThirdPersonMotor>().isGrounded)
             {
                 isDischarge = true;
+                controller.canDischarge = false;
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
 
                 StartCoroutine(Discharge());
@@ -316,13 +317,12 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
-
-            controller.Charge();
             if (isDischarge)
             {
                 enemy.GetComponent<AIBehaviour>().SetStunned(true);
                 isDischarge = false;
             }
+            else controller.Charge();
         }
     }
 
@@ -330,7 +330,6 @@ public class PlayerAttack : MonoBehaviour
     {
         
         controller.health.Immortality(true);
-        controller.canDischarge = false;
 
         yield return new WaitForSeconds(.7f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
@@ -356,13 +355,16 @@ public class PlayerAttack : MonoBehaviour
         //controller.burst.Play();
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
-        //sounds.Play("Discharge_Second", sounds.PlayerEffects);
+        float temp = controller.SwordSounds.volume;
+        controller.SwordSounds.volume += .4f;
         controller.SwordSounds.PlayOneShot(controller.DischargeSecond);
 
-        
+
 
         yield return new WaitForSeconds(.8f);
         controller.foving.FovIn();
+
+        controller.SwordSounds.volume = temp;
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 

@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
         StartCoroutine(NotHitting());

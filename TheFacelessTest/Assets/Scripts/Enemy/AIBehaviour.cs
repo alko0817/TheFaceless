@@ -558,7 +558,6 @@ public class AIBehaviour : MonoBehaviour
         sound.PlayOneShot(DodgeSound);
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
-;
         navMeshAgent.Move(direction / 5f);
         yield return new WaitForSeconds(0.5f);
         dodge = false;

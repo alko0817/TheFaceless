@@ -43,17 +43,17 @@ public class PlayerDodge : MonoBehaviour
                         StartCoroutine(Dodge("dodgingLeft"));
                     }
 
-                    if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
+                    else if (Input.GetButtonDown("Dodge") && inputX > axisThreshold)
                     {
                         StartCoroutine(Dodge("dodgingRight"));
                     }
 
-                    if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
+                    else if (Input.GetButtonDown("Dodge") && inputZ < -axisThreshold)
                     {
                         StartCoroutine(Dodge("dodgingBack"));
                     }
 
-                    if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
+                    else if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
                     {
                         StartCoroutine(Dodge("dodgingRoll"));
                     }
@@ -71,6 +71,7 @@ public class PlayerDodge : MonoBehaviour
 
     IEnumerator Dodge (string side)
     {
+        controller.health.Immortality(true);
         dodgeCd = dodgeCooldown;
         controller.stamina.bar.fillAmount -= controller.dodgeCost;
         controller.stamina.drainingDodge = true;
@@ -80,7 +81,7 @@ public class PlayerDodge : MonoBehaviour
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 
         yield return new WaitForSeconds(.7f);
-
+        controller.health.Immortality(false);
         controller.stamina.drainingDodge = false;
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
     }
