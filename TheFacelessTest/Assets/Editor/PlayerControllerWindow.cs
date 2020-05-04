@@ -111,7 +111,7 @@ public class PlayerControllerWindow : EditorWindow
         dodge = EditorGUILayout.Foldout(dodge, "Dodging");
         if (dodge)
         {
-            controller.dodgeCooldown = EditorGUILayout.MinMaxSlider(controller.dodgeCooldown, 1f, 2f);
+            controller.dodgeCooldown = EditorGUILayout.Slider(controller.dodgeCooldown, 1f, 2f);
         }
 
 
