@@ -43,7 +43,7 @@ public class PlayerControllerWindow : EditorWindow
         
         
         EditorGUILayout.EndHorizontal();
-
+        EditorGUILayout.Space();
         scroll = GUILayout.BeginScrollView(scroll);
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("AREA OF EFFECTS", EditorStyles.boldLabel);
@@ -111,7 +111,15 @@ public class PlayerControllerWindow : EditorWindow
         dodge = EditorGUILayout.Foldout(dodge, "Dodging");
         if (dodge)
         {
-            controller.dodgeCooldown = EditorGUILayout.Slider(controller.dodgeCooldown, 1f, 2f);
+            controller.dodgeCooldown = EditorGUILayout.Slider("Cooldown", controller.dodgeCooldown, 1f, 2f);
+            controller.dodgeCost = EditorGUILayout.Slider("Stamina cost", controller.dodgeCost, .1f, .8f);
+            controller.dodgeDashBoost = EditorGUILayout.Slider("Dash Boost", controller.dodgeDashBoost, 1f, 5f);
+        }
+
+        block = EditorGUILayout.Foldout(block, "Blocking");
+        if (block)
+        {
+            controller.blockingSpeed = EditorGUILayout.FloatField("Blocking move speed", controller.blockingSpeed);
         }
 
 

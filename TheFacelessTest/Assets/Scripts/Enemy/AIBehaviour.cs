@@ -321,7 +321,7 @@ public class AIBehaviour : MonoBehaviour
                 if (player.GetComponent<PlayerAttack>().GetAttacking())
                 {
 
-                rand = UnityEngine.Random.Range(0, 10);
+                rand = 0;//UnityEngine.Random.Range(0, 10);
                 print(rand);
 
                     if (0 <= rand && rand < dodgeChanceOutOf10)
