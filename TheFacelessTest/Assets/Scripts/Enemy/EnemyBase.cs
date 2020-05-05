@@ -11,9 +11,7 @@ public class EnemyBase : MonoBehaviour
         PATROL,
         SUSPICIOUS,
         PURSUE,
-        ATTACK,
-        BLOCK,
-        DODGE,
+        IN_COMBAT,
         STUNNED,
         FLEE
     }
@@ -35,7 +33,7 @@ public class EnemyBase : MonoBehaviour
 
     #region TIMERS
     protected float timeSinceLastSawPlayer;
-    protected float senseTimer;
+    //protected float senseTimer;
     #endregion
 
     #region BOOLEANS
@@ -43,6 +41,7 @@ public class EnemyBase : MonoBehaviour
     protected bool dying;
     protected bool stunned;
     protected bool engaging;
+    protected bool blocking;
     #endregion
 
     #region LIFE PARAMETERS
@@ -64,17 +63,17 @@ public class EnemyBase : MonoBehaviour
     public float initialSpeed;
 
     #region SOUND
-    [Header("Sound FX")]
-    [Space]
-    public AudioClip ReceiveDmgSound;
-    public AudioClip DealDmgSound;
-    [Space]
-    public AudioClip StunnedSound;
-    public AudioClip DeathSound;
-    [Space]
-    public AudioClip MoveSound;
-    public AudioClip StaticSound;
-    public AudioClip ChatterSound;
+    //[Header("Sound FX")]
+    //[Space]
+    //public AudioClip ReceiveDmgSound;
+    //public AudioClip DealDmgSound;
+    //[Space]
+    //public AudioClip StunnedSound;
+    //public AudioClip DeathSound;
+    //[Space]
+    //public AudioClip MoveSound;
+    //public AudioClip StaticSound;
+    //public AudioClip ChatterSound;
     #endregion
 
     protected virtual void Start()
@@ -83,8 +82,8 @@ public class EnemyBase : MonoBehaviour
         dying = false;
         engaging = false;
         stunned = false;
+        blocking = false;
 
-        senseTimer = 0.0f;
         timeSinceLastSawPlayer = Mathf.Infinity;
 
         currentHealth = maxHealth;
@@ -116,12 +115,7 @@ public class EnemyBase : MonoBehaviour
 
         if (!dying)
         {
-            if (senseTimer > senseFrequency)
-            {
-                senseTimer = 0.0f;
-                Sense();
-
-            }
+            Sense();
             Decide();
             Act();
         }
@@ -134,7 +128,6 @@ public class EnemyBase : MonoBehaviour
     protected virtual void UpdateTimers()
     {
         timeSinceLastSawPlayer += Time.deltaTime;
-        senseTimer += Time.deltaTime;
     }
 
     protected virtual void Sense()
@@ -218,19 +211,39 @@ public class EnemyBase : MonoBehaviour
         navMeshAgent.speed = speed;
         navMeshAgent.destination = location;     
         navMeshAgent.isStopped = false;
-        audioSource.PlayOneShot(MoveSound);
+        //audioSource.PlayOneShot(MoveSound);
     }
 
     protected virtual void Stop()
     {
+        navMeshAgent.speed = 0;
         navMeshAgent.isStopped = true;
         audioSource.Stop();
     }
 
+    public virtual void TakeDamage(int damage)
+    {
+        if (dying) return;
+        if (!blocking)
+        {
+            currentHealth -= damage;
+            healthBar.fillAmount = currentHealth / maxHealth;
+        }
+        else
+        {
+
+            print("attack blocked");
+        }
+        //HURT ANIMATIONS
+
+    }
+
+
+
     protected virtual void Die()
     {
         dying = true;
-        audioSource.PlayOneShot(DeathSound);
+       // audioSource.PlayOneShot(DeathSound);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();

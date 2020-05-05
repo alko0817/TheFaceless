@@ -37,7 +37,7 @@ public class EnemyBlackboard : MonoBehaviour
                 {
                     enemiesPursuingPlayer.Add(enemiesInSightOfPlayer.ElementAt(0));
                     enemiesInSightOfPlayer.RemoveAt(0);
-                    enemiesPursuingPlayer.ElementAt(enemiesPursuingPlayer.Count - 1).GetComponent<AIBehaviour>().SetPursuing(true);
+                    enemiesPursuingPlayer.ElementAt(enemiesPursuingPlayer.Count - 1).GetComponent<EnemyBase>().SetEngaging(true);
                 }
             }
             
@@ -50,7 +50,7 @@ public class EnemyBlackboard : MonoBehaviour
     {
         if (enemiesPursuingPlayer.Contains(enemy))
         {
-            enemy.GetComponent<AIBehaviour>().SetPursuing(false);
+            enemy.GetComponent<EnemyBase>().SetEngaging(false);
             enemiesPursuingPlayer.Remove(enemy);
         }
         else

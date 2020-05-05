@@ -12,23 +12,20 @@ public class MeleeEnemy : EnemyBase
     public float pursueSpeed;
 
     #region SOUND
-    public AudioClip BlockSound;
-    public AudioClip DodgeSound;
+    //public AudioClip BlockSound;
+    //public AudioClip DodgeSound;
     #endregion
 
     #region BOOLEANS
     private bool canHitPlayer;
     private bool attackThrown;
-    private bool blocking;
-    private bool dodge;
-    private bool block;
+    private bool combatActionInProgress;
     #endregion
 
     #region PATROLLING VARIABLES
     public float waypointTolerance;
     public float waypointWaitTime;
     private int currentWaypointIndex;
-    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     #endregion
 
     #region COMBAT VARIABLES
@@ -39,6 +36,7 @@ public class MeleeEnemy : EnemyBase
 
     public int dodgeChanceOutOf10;
     public int blockChanceOutOf10;
+
     #endregion
 
 
@@ -47,6 +45,7 @@ public class MeleeEnemy : EnemyBase
     public float pursueDelay;
     private float pursueDelayTimer;
     public float suspicionTime;
+    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     #endregion
 
     // Start is called before the first frame update
@@ -54,10 +53,14 @@ public class MeleeEnemy : EnemyBase
     {
         base.Start();
 
-        attackPoint = transform.GetChild(1).transform;
+        attackPoint = transform.GetChild(0).transform;
 
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
+
+        canHitPlayer = true;
+        attackThrown = false;
+        combatActionInProgress = false;
 
         state_ = STATE.PATROL;
     }
@@ -69,7 +72,26 @@ public class MeleeEnemy : EnemyBase
 
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+
+        Gizmos.DrawWireSphere(transform.position, sightDistance);
+
+    }
+
     #region AI LOOP
+
+    protected override void Sense()
+    {
+        base.Sense();
+        if (blocking || stunned)
+        {
+            canHitPlayer = false;
+        }
+        else
+            canHitPlayer = true;
+    }
     protected override void Decide()
     {
         base.Decide();
@@ -87,66 +109,12 @@ public class MeleeEnemy : EnemyBase
             state_ = STATE.PURSUE;
         }
 
-        if (distanceToPlayer < attackDistance && !blocking && !stunned)
-        {
-            canHitPlayer = true;
-        }
-        else
-        {
-            canHitPlayer = false;
-        }
-
-
         if (CanAttack())
         {
-            int rand = -1;
-            if (player.GetComponent<PlayerAttack>().GetAttacking())
-            {
-
-                rand = UnityEngine.Random.Range(0, 10);
-                print(rand);
-
-                if (0 <= rand && rand < dodgeChanceOutOf10)
-                {
-                    dodge = true;
-                    block = false;
-                }
-                else if (dodgeChanceOutOf10 <= rand && rand < dodgeChanceOutOf10 + blockChanceOutOf10)
-                {
-                    dodge = false;
-                    block = true;
-                }
-                else if (rand >= blockChanceOutOf10 + dodgeChanceOutOf10)
-                {
-                    print("neither");
-                    dodge = false;
-                    block = false;
-                }
-
-            }
-
-        }
-        else if (!CanAttack())
-        {
-            dodge = false;
-            block = false;
+            state_ = STATE.IN_COMBAT;
         }
 
-        if (CanAttack() && !dodge && !block)
-        {
-            state_ = STATE.ATTACK;
-        }
-
-        else if (dodge)
-        {
-            state_ = STATE.DODGE;
-        }
-
-        else if (block)
-        {
-            state_ = STATE.BLOCK;
-        }
-
+        print("State: " + state_);
     }
 
     protected override void Act()
@@ -177,50 +145,17 @@ public class MeleeEnemy : EnemyBase
 
         }
 
-        if (state_ == STATE.ATTACK)
+        if(state_ == STATE.IN_COMBAT)
         {
-            Stop();
-
-            pursueDelayTimer = 0f;
-
-            if (!attackThrown)
-            {
-                StartCoroutine(Attack());
-            }
-
+            ResolveCombatAction();
         }
-
-
-        if (state_ == STATE.DODGE)
-        {
-
-            pursueDelayTimer = 0f;
-
-            StartCoroutine(Dodge());
-        }
-
-
-        if (state_ == STATE.BLOCK)
-        {
-
-            pursueDelayTimer = 0f;
-
-            Stop();
-            if (!blocking)
-            {
-                StartCoroutine(Block());
-            }
-        }
-
-
     }
     #endregion
-
     private bool CanAttack()
     {
         if (canHitPlayer)
         {
-            if (Physics.CheckSphere(attackPoint.position, attackHitBox, playerMask))
+            if (distanceToPlayer < attackDistance)
                 return true;
             else
                 return false;
@@ -228,45 +163,121 @@ public class MeleeEnemy : EnemyBase
         else
             return false;
     }
-
     #region ACTIONS
+    //IEnumerator Attack()
+    //{
+    //    combatActionCompleted = false;
+    //    attackThrown = true;
+    //    transform.LookAt(player.transform);
+    //    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+    //    anim.SetTrigger("attack");
+    //    yield return new WaitForSeconds(attackDelay);
+    //    if (!CanAttack())
+    //        yield break;
+
+
+    //    player.GetComponent<playerController>().TakeDamage(attackDamage);
+    //    combatActionCompleted = true;
+
+    //    yield return new WaitForSeconds(2f);
+    //    attackThrown = false;
+
+    //}
+
+    //IEnumerator Dodge()
+    //{
+    //    combatActionCompleted = false;
+    //    print("dodge");
+    //    //audioSource.PlayOneShot(DodgeSound);
+    //    Vector3 direction = (player.transform.position - transform.position) * -1;
+    //    direction.Normalize();
+
+    //    navMeshAgent.Move(direction / 5f);
+    //    yield return new WaitForSeconds(0.5f);
+    //    dodge = false;
+    //    combatActionCompleted = true;
+    //}
+
+    //IEnumerator Block()
+    //{
+    //    combatActionCompleted = false;
+    //    blocking = true;
+    //    print(gameObject.name + " is blocking");
+    //    yield return new WaitForSeconds(2f);
+    //    blocking = false;
+    //    block = false;
+    //    combatActionCompleted = true;
+    //}
+
+    void ResolveCombatAction()
+    {
+        int rand = -1;
+
+        if (!combatActionInProgress)
+        {
+            print(player.GetComponent<PlayerAttack>().GetAttacking());
+            if (player.GetComponent<PlayerAttack>().GetAttacking())
+            {
+                rand = UnityEngine.Random.Range(0, 10);
+                print(rand);
+
+                if (0 <= rand && rand < dodgeChanceOutOf10)
+                {
+                    StartCoroutine(Dodge());
+                }
+                else if (dodgeChanceOutOf10 <= rand && rand < dodgeChanceOutOf10 + blockChanceOutOf10)
+                {
+                    StartCoroutine(Block());
+                }
+                else if (rand >= blockChanceOutOf10 + dodgeChanceOutOf10)
+                {
+                    StartCoroutine(Attack());
+                }
+
+            }
+            else
+            {
+                StartCoroutine(Attack());
+            }
+        }
+
+    }
+
     IEnumerator Attack()
     {
+        Stop();
         attackThrown = true;
-        //transform.LookAt(player.transform);
-        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        combatActionInProgress = true;
         anim.SetTrigger("attack");
         yield return new WaitForSeconds(attackDelay);
-        if (!CanAttack())
-            yield break;
-
-
-        player.GetComponent<playerController>().TakeDamage(attackDamage);
-
-        yield return new WaitForSeconds(2f);
+        if (Physics.CheckSphere(attackPoint.position, attackHitBox, playerMask))
+        {
+            player.GetComponent<playerController>().TakeDamage(attackDamage);
+        }
+        yield return new WaitForSeconds(1f);
         attackThrown = false;
-
+        combatActionInProgress = false;
 
     }
 
     IEnumerator Dodge()
     {
-        print("dodge");
-        audioSource.PlayOneShot(DodgeSound);
+        combatActionInProgress = true;
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
-        
-        navMeshAgent.Move(direction / 5f);
-        yield return new WaitForSeconds(0.5f);
-        dodge = false;
+        navMeshAgent.Move(direction);
+        yield return new WaitForSeconds(1f);
+        combatActionInProgress = false;
     }
 
     IEnumerator Block()
     {
+        combatActionInProgress = true;
         blocking = true;
         print(gameObject.name + " is blocking");
         yield return new WaitForSeconds(2f);
         blocking = false;
+        combatActionInProgress = false;
 
     }
 
@@ -323,4 +334,6 @@ public class MeleeEnemy : EnemyBase
     }
 
     #endregion
+
+
 }
