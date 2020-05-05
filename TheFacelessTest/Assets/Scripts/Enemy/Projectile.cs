@@ -15,9 +15,9 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        detector = GameObject.FindGameObjectWithTag("Detector");
+        //detector = GameObject.FindGameObjectWithTag("Detector");
         hit = false;
-        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
+        //Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
     }
 
     void FixedUpdate()
