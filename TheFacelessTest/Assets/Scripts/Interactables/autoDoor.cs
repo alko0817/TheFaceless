@@ -14,7 +14,10 @@ public class autoDoor : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         detector = GameObject.FindGameObjectWithTag("Detector");
-        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
+        if (detector != null)
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

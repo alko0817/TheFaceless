@@ -69,7 +69,7 @@ public class AIBehaviour : MonoBehaviour
     [Header("- Health Parameters")]
     [Tooltip("The max health of this enemy.")]
     public float maxHealth;
-    private float currentHealth;
+    internal float currentHealth;
     [Tooltip("The health bar image associated with this enemy")]
     public Image healthBar;
     internal bool dying = false;
