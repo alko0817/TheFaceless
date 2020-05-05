@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour
     [Space]
     public bool canDie = false;
     [Header("- Slow Motion & Camera FX")]
-    public TimeManager timeManager;
+    internal TimeManager timeManager;
     public camFov foving;
 
     #region COMBAT_VARIABLES
@@ -187,6 +187,12 @@ public class playerController : MonoBehaviour
 
     private void Awake()
     {
+        timeManager = GameObject.FindGameObjectWithTag("Time Manager").GetComponent<TimeManager>();
+        health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
+        stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
+        swordFill = GameObject.Find("swordChargeFill").GetComponent<Image>();
+        rb = GetComponent<Rigidbody>();
+
         //ORIGINAL MOVEMENT SPEED SET
         originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
 
@@ -194,16 +200,10 @@ public class playerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //OTHER STUFF
-        swordFill = GameObject.Find("swordChargeFill").GetComponent<Image>();
-
         //ORIGINAL TIME RESET RATE
         originTimeReset = timeManager.GetComponent<TimeManager>().slowmoDuration;
 
-        health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
-        stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
-
-        rb = GetComponent<Rigidbody>();
+        
     }
 
 

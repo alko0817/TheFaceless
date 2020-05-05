@@ -16,6 +16,7 @@ TagManager:
   - Saver
   - Player Health
   - Flashbacks
+  - Post
   layers:
   - Default
   - TransparentFX

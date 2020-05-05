@@ -10,13 +10,14 @@ public class healthFX : MonoBehaviour
     float maxHealth;
     float healthClamp;
     float healthReverse;
-    public PostProcessVolume post;
+    internal PostProcessVolume post;
     public float satIntensity;
     ColorGrading saturation;
     ChromaticAberration aberration;
 
     private void Start()
     {
+        post = GameObject.FindGameObjectWithTag("Post").GetComponent<PostProcessVolume>();
         state = GetComponent<PlayerHealth>();
         post.profile.TryGetSettings(out saturation);
         post.profile.TryGetSettings(out aberration);
