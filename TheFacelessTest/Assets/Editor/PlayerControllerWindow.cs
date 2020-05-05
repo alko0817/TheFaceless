@@ -19,6 +19,8 @@ public class PlayerControllerWindow : EditorWindow
     bool dodge;
     bool block;
 
+    bool discharge;
+
 
 
 
@@ -122,8 +124,15 @@ public class PlayerControllerWindow : EditorWindow
             controller.blockingSpeed = EditorGUILayout.FloatField("Blocking move speed", controller.blockingSpeed);
         }
 
-
-
+        EditorGUILayout.Space();
+        discharge = EditorGUILayout.Foldout(discharge, "DISCHARGE MECHANIC", EditorStyles.boldLabel);
+        if (discharge)
+        {
+            controller.maxCharge = EditorGUILayout.FloatField("Max sword charge", controller.maxCharge);
+            controller.chargeRate = EditorGUILayout.FloatField("Charge rate", controller.chargeRate);
+            controller.UIChargeMultiplier = EditorGUILayout.FloatField("UI charge rate", controller.UIChargeMultiplier);
+        }
+        
 
 
 
