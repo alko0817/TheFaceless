@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: slash 4
-  m_Speed: 1.5
+  m_Speed: 1.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6119942810890728644}
@@ -14152,7 +14152,7 @@ AnimatorStateMachine:
     m_Position: {x: 510, y: 810, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1725151948308024836}
-    m_Position: {x: 500, y: 100, z: 0}
+    m_Position: {x: 500, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8603683248471556447}
     m_Position: {x: 500, y: 50, z: 0}
@@ -22479,7 +22479,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: slash 3
-  m_Speed: 1.8
+  m_Speed: 1.9
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3719340997917981209}
@@ -22579,7 +22579,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: jumpAttack
-  m_Speed: 1.2
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 629106717475908126}

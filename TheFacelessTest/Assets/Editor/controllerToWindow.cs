@@ -5,7 +5,7 @@ using UnityEditor;
 [CustomEditor(typeof(playerController))]
 public class controllerToWindow : Editor
 {
-    bool showInsp; 
+    bool showInsp = true; 
     public override void OnInspectorGUI()
     {
         if (showInsp)

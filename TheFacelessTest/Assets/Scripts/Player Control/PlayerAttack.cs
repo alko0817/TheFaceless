@@ -178,9 +178,17 @@ public class PlayerAttack : MonoBehaviour
 
             else if (Input.GetButtonUp("Fire1") && (combos == 3))
             {
-                combos = 0;
+                combos = 4;
                 Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", controller.detectPoint.position, controller.attackRadius, nextAttack);
                 StartCoroutine(AttackSound(hitLight4, controller.lightAttack4Sound));
+            }
+
+            else if (Input.GetButtonUp("Fire1") && (combos == 4))
+            {
+                combos = 0;
+                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
+                StartCoroutine(EpicLand(.6f, controller.dischargeSlowDuration));
             }
         }
 
@@ -226,18 +234,17 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonDown("Fire2"))
             {
 
-                controller.blocking = true;
-                controller.anim.SetBool("blocking", controller.blocking);
-                controller.anim.SetTrigger("startBlock");
+                StartCoroutine("Blocking");
 
             }
 
             //IF BUTTON RELEASED STOP BLOCKING
             if (Input.GetButtonUp("Fire2"))
             {
+                StopCoroutine("Blocking");
                 gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
                 controller.blocking = false;
-                controller.anim.SetBool("blocking", controller.blocking);
+                controller.anim.SetBool("blocking", false);
             }
 
             //WHILE BUTTON IS PRESSED 
@@ -249,32 +256,6 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
 
-            //IF ATTACKING THROUGH BLOCK
-            if (lastClick <= 0 && controller.blocking)
-            {
-                if (Input.GetButtonDown("Fire1") && (combosBlock == 0))
-                {
-                    Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
-                    controller.anim.SetBool("blocking", !controller.blocking);
-                    combosBlock = 1;
-                    nextCombo = nextBlockAttack;
-
-                }
-            }
-            //BLOCK ATTACK COMBO
-            if (lastClick <= 0 && nextCombo > 0)
-            {
-                if (Input.GetButtonDown("Fire1") && (combosBlock == 1))
-                {
-                    Attack(hitBlock2, blockAttackDelay2, blockAttack2Dmg, "blockAttack2", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
-                    StartCoroutine(AttackSound(hitBlock2, controller.blockAttack2Sound));
-                    controller.anim.SetBool("blocking", !controller.blocking);
-                    combosBlock = 0;
-
-
-                }
-            }
         }
 
         else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
@@ -285,6 +266,21 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(holdForHeavy);
         holding = true;
+    }
+
+    IEnumerator Blocking()
+    {
+        yield return new WaitForSeconds(.2f);
+        controller.blocking = true;
+        controller.anim.SetBool("blocking", controller.blocking);
+        controller.anim.SetTrigger("startBlock");
+    }
+
+    IEnumerator EpicLand(float delay, float duration)
+    {
+        yield return new WaitForSeconds(delay);
+        controller.timeManager.slowmoDuration = duration;
+        controller.timeManager.Slowmo();
     }
 
     IEnumerator AttackSound (float connectDelay, AudioClip sound)
@@ -343,7 +339,7 @@ public class PlayerAttack : MonoBehaviour
 
         if(controller.timeManager != null)
         {
-            controller.timeManager.GetComponent<TimeManager>().slowmoDuration = controller.dischargeSlowDuration;
+            controller.timeManager.slowmoDuration = controller.dischargeSlowDuration;
             controller.timeManager.Slowmo();
         }
         controller.foving.FovOut();
