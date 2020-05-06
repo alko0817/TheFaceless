@@ -188,7 +188,7 @@ public class PlayerAttack : MonoBehaviour
                 combos = 0;
                 Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
                 StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
-                StartCoroutine(EpicLand(.6f, controller.dischargeSlowDuration));
+                //StartCoroutine(EpicLand(.6f, controller.dischargeSlowDuration));
             }
         }
 
