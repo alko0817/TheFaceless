@@ -23,6 +23,7 @@ public class HealthState : MonoBehaviour
 
     private void Update()
     {
+        if (controller.dying) healthFace.enabled = false;
         //MATH
         health = controller.currentHealth / controller.maxHealth; // return a value 1 - 0 
         reverse = 1 - health; // return a value 0 - 1
@@ -33,5 +34,7 @@ public class HealthState : MonoBehaviour
 
         //APPLY TO FACE
         healthFace.color = color;
+
+        
     }
 }

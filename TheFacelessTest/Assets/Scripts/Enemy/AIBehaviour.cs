@@ -26,6 +26,8 @@ public class AIBehaviour : MonoBehaviour
     EnemyBlackboard blackboard;
     Animator anim;
 
+    public ParticleSystem deflect;
+
     #region Shooter Parameters
     [Header("- Shooter Parameters")]
     public bool shooter;
@@ -673,6 +675,7 @@ public class AIBehaviour : MonoBehaviour
         if (dying) return;
         if (!blocking)
         {
+            deflect.Emit(1);
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
             sound.PlayOneShot(ReceiveDmgSound);

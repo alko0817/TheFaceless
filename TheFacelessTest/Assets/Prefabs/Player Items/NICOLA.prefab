@@ -711,12 +711,12 @@ MonoBehaviour:
   foving: {fileID: 2001581130}
   attackDelay1: 0.2
   attackDelay2: 0.2
-  attackDelay3: 0.5
-  attackDelay4: 0.5
+  attackDelay3: 0.45
+  attackDelay4: 0.55
   heavyDelay1: 1.8
   heavyDelay2: 1.5
   dischargeDelay: 2
-  blockAttackDelay1: 0.8
+  blockAttackDelay1: 1
   blockAttackDelay2: 0.9
   nextAttack: 0.9
   nextHeavyAttack: 1.8
@@ -726,18 +726,18 @@ MonoBehaviour:
   hitLight3: 0.4
   hitLight4: 0.4
   hitHeavy: 1
-  hitDischarge: 2.3
-  hitBlock1: 1
+  hitDischarge: 1.8
+  hitBlock1: 0.9
   hitBlock2: 0.8
   holdForHeavy: 0.2
-  slashDamage: 10
-  slash2Damage: 15
-  slash3Damage: 20
-  slash4Damage: 22
-  heavyDamage: 30
+  slashDamage: 8
+  slash2Damage: 10
+  slash3Damage: 12
+  slash4Damage: 15
+  heavyDamage: 20
   heavy2Damage: 40
-  dischargeDamage: 30
-  blockAttack1Dmg: 30
+  dischargeDamage: 25
+  blockAttack1Dmg: 25
   blockAttack2Dmg: 30
   dodgeCooldown: 1
   dodgeDashBoost: 3
