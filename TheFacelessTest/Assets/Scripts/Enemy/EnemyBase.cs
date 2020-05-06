@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour
         FLEE
     }
 
+    [Header("Base Properties")]
     protected STATE state_;
     public LayerMask playerMask;
     protected audioManager audioManager;
@@ -33,7 +34,6 @@ public class EnemyBase : MonoBehaviour
 
     #region TIMERS
     protected float timeSinceLastSawPlayer;
-    //protected float senseTimer;
     #endregion
 
     #region BOOLEANS
@@ -57,7 +57,6 @@ public class EnemyBase : MonoBehaviour
 
     #region SENSING PARAMETERS
     public float sightDistance;
-    public float senseFrequency;
     #endregion
 
     public float initialSpeed;

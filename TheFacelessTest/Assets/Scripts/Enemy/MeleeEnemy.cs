@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 public class MeleeEnemy : EnemyBase
 {
+
+    [Header("Unique Properties")]
+
     Transform attackPoint;
 
     public PatrolRoute patrolPath;
