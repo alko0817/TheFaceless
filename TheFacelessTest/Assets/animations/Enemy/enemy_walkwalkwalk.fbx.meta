@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 77935b853358dc3458eae3051f9fcbdb
+guid: 5fcabe7231e4eef47a25e41de70ee780
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: -6013803839891777673
-    second: enemy_idle_lookaround
+      74: -2361844699832055543
+    second: enemy_walk_done
   externalObjects: {}
   materials:
     materialImportMode: 1
