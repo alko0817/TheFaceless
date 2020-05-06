@@ -32,7 +32,7 @@ public class PlayerDodge : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
 
         //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <= 0)
+        if (dodgeCd <= 0 && !controller.attacking)
         {
             if (controller.stamina.bar.fillAmount >= controller.dodgeCost)
             {
@@ -71,6 +71,7 @@ public class PlayerDodge : MonoBehaviour
 
     IEnumerator Dodge (string side)
     {
+        controller.dodging = true;
         controller.health.Immortality(true);
         dodgeCd = dodgeCooldown;
         controller.stamina.bar.fillAmount -= controller.dodgeCost;
@@ -81,6 +82,7 @@ public class PlayerDodge : MonoBehaviour
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 
         yield return new WaitForSeconds(.7f);
+        controller.dodging = false;
         controller.health.Immortality(false);
         controller.stamina.drainingDodge = false;
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;

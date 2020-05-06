@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +15,9 @@ public class HealthState : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<AIBehaviour>();
-        color.r = 0;
+        color.r = 1f;
         color.g = 1f;
-        color.b = 0f;
+        color.b = 1f;
         color.a = 1f;
         healthFace.color = color;
     }
@@ -24,12 +25,15 @@ public class HealthState : MonoBehaviour
     private void Update()
     {
         if (controller.dying) healthFace.enabled = false;
+
         //MATH
         health = controller.currentHealth / controller.maxHealth; // return a value 1 - 0 
-        reverse = 1 - health; // return a value 0 - 1
+        reverse = 1 - health;                                     // return a value 0 - 1
+
+        
 
         //COLOR APPLICATION
-        color.r = reverse;
+        color.b = health;
         color.g = health;
 
         //APPLY TO FACE

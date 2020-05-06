@@ -677,7 +677,7 @@ public class AIBehaviour : MonoBehaviour
         {
             deflect.Emit(1);
             currentHealth -= damage;
-            healthBar.fillAmount = currentHealth / maxHealth;
+            //healthBar.fillAmount = currentHealth / maxHealth;
             sound.PlayOneShot(ReceiveDmgSound);
             anim.SetTrigger("hit");
         }
@@ -700,11 +700,18 @@ public class AIBehaviour : MonoBehaviour
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
-        dissolving.enabled = true;
-        Destroy(gameObject, 2f);
+
+        StartCoroutine("Dissolve");
+        Destroy(gameObject, 2.5f);
         //DIE ANIMATION
     }
     #endregion
+
+    IEnumerator Dissolve()
+    {
+        yield return new WaitForSeconds(1f);
+        dissolving.enabled = true;
+    }
 
     public bool GetBlocking()
     {
