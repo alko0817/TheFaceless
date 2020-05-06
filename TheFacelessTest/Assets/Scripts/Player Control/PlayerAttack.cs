@@ -130,7 +130,7 @@ public class PlayerAttack : MonoBehaviour
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !controller.blocking)
+        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging)
         {
 
 

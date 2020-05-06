@@ -74,6 +74,7 @@ public class playerController : MonoBehaviour
 
     internal bool holding = false;
     internal bool attacking = false;
+    internal bool dodging = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
