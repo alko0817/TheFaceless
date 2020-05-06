@@ -37,7 +37,7 @@ public class vThirdPersonCamera : MonoBehaviour
     [HideInInspector]
     public Vector2 movementSpeed;
 
-    [HideInInspector]
+    //[HideInInspector]
     public Transform targetLookAt;
     private Vector3 currentTargetPos;
     private Vector3 lookPoint;
@@ -73,7 +73,7 @@ public class vThirdPersonCamera : MonoBehaviour
         currentTarget = target;
         currentTargetPos = new Vector3(currentTarget.position.x, currentTarget.position.y + offSetPlayerPivot, currentTarget.position.z);
 
-        targetLookAt = new GameObject("targetLookAt").transform;
+        //targetLookAt = new GameObject("targetLookAt").transform;
         targetLookAt.position = currentTarget.position;
         //targetLookAt.hideFlags = HideFlags.HideInHierarchy;
         targetLookAt.rotation = currentTarget.rotation;
