@@ -702,14 +702,14 @@ public class AIBehaviour : MonoBehaviour
         Stop();
 
         StartCoroutine("Dissolve");
-        Destroy(gameObject, 2.5f);
+        Destroy(gameObject, 4f);
         //DIE ANIMATION
     }
     #endregion
 
     IEnumerator Dissolve()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         dissolving.enabled = true;
     }
 

@@ -306,7 +306,7 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForEndOfFrame();
         attackThrown = false;
         yield return new WaitForSeconds(delay);
-
+        attacking = false;
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
 
         //APPLY DPS
