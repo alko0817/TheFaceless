@@ -9,7 +9,6 @@ public class newTrigger : MonoBehaviour
     GameObject player;
     audioManager sounds;
     Animator UIAnim;
-    fbManager manager;
     float fadeOutDelay;
     string sound;
     bool triggered = false;
