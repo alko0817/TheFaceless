@@ -163,14 +163,5 @@ public class ShooterEnemy : EnemyBase
 
     }
 
-    void Guard()
-    {
-        Vector3 vectorToInitialPos = initialPosition - transform.position;
-        float dist = vectorToInitialPos.magnitude;
 
-        if (Math.Abs(dist) > 2f)
-            MoveTo(initialPosition, initialSpeed);
-        else
-            Stop();
-    }
 }
