@@ -7,30 +7,24 @@ using UnityEngine;
 public class AIAnimator : MonoBehaviour
 {
     //Reference to AI 
-    internal Animator an;
-    private AIBehaviour controller;
+    protected Animator an;
+    protected EnemyBase controller;
 
     //might use the ones from AI
-    float speed = 1f;
-    bool movement;
-
-    bool shoot;
-    bool attack;
-    bool block;
-    bool dead = false;
-
-
+    private float speed = 1f;
+    private bool dead = false;
 
     public float animSmooth;
 
-    private void Start()
-    {
-        an = GetComponent<Animator>();
-        controller = GetComponent<AIBehaviour>();
-    }
 
-    private void Update()
+    protected virtual void Start()
     {
+        controller = GetComponent<EnemyBase>();
+        an = controller.anim;
+    }
+    protected virtual void Update()
+    {
+        
         //DEATH
         if (controller.dying && !dead)
         {
@@ -41,12 +35,11 @@ public class AIAnimator : MonoBehaviour
         if (dead) return;
 
         //LOCOMOTION
+        speed = controller.navMeshAgent.speed;
+
         an.SetFloat(Animate.speed, speed, animSmooth, Time.deltaTime);
 
         //ACTIONS
-        if (shoot) an.SetTrigger(Animate.shoot);
-        if (block) an.SetTrigger(Animate.hit);
-        if (attack) an.SetTrigger(Animate.attack);
     }
 
     public static partial class Animate 
@@ -57,5 +50,6 @@ public class AIAnimator : MonoBehaviour
         public static int hit = Animator.StringToHash("hit");
         public static int speed = Animator.StringToHash("speed");
         public static int die = Animator.StringToHash("die");
+        public static int dodge = Animator.StringToHash("dodge");
     }
 }
