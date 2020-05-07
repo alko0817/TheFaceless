@@ -7,7 +7,7 @@ public class PlayerIndicator : MonoBehaviour
     public GameObject[] anchors;
     public GameObject[] enemies;
     public Material[] indicators;
-    AIBehaviour enemyController;
+    EnemyBase enemyController;
     internal Color intensity;
     
     private void Start()
@@ -55,7 +55,7 @@ public class PlayerIndicator : MonoBehaviour
                 Track(enemy, anchors[i], indicators[i]);
             }
 
-            else if (enemy == null || enemy.GetComponent<AIBehaviour>().dying) Untrack(anchors[i], indicators[i]);
+            else if (enemy == null || enemy.GetComponent<EnemyBase>().dying) Untrack(anchors[i], indicators[i]);
             i++;
         }
 
@@ -99,8 +99,8 @@ public class PlayerIndicator : MonoBehaviour
         anchor.transform.LookAt(target.transform);
 
         //TRACK ENEMY SHOT CHARGE
-        enemyController = target.GetComponent<AIBehaviour>();
-        intensity.g = Mathf.Abs((enemyController.shootTimer / enemyController.fireRate) - 1);
+        enemyController = target.GetComponent<EnemyBase>();
+        //intensity.g = Mathf.Abs((enemyController.shootTimer / enemyController.fireRate) - 1);
         indicator.SetColor("_EmissionColor", intensity);
     }
 

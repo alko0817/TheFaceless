@@ -20,7 +20,7 @@ public class AIAnimator : MonoBehaviour
     protected virtual void Start()
     {
         controller = GetComponent<EnemyBase>();
-        an = controller.anim;
+        an = GetComponent<Animator>();
     }
     protected virtual void Update()
     {

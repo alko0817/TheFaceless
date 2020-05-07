@@ -316,7 +316,7 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyBase>().TakeDamage(damage);
             if (isDischarge)
             {
-                enemy.GetComponent<AIBehaviour>().SetStunned(true);
+                
                 isDischarge = false;
             }
             else controller.Charge();
