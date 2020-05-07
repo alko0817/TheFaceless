@@ -98,14 +98,6 @@ public class MeleeEnemy : EnemyBase
     protected override void Decide()
     {
         base.Decide();
-        //if (!playerDetected && timeSinceLastSawPlayer > suspicionTime)
-        //{
-        //    state_ = STATE.PATROL;
-        //}
-        //if (!playerDetected && timeSinceLastSawPlayer < suspicionTime)
-        //{
-        //    state_ = STATE.SUSPICIOUS;
-        //}
 
         if (!engaging)
         {
