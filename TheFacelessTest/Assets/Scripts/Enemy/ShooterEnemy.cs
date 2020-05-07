@@ -23,7 +23,7 @@ public class ShooterEnemy : EnemyBase
     public float fireRate;
     #endregion
 
-    
+
     public float fleeDistance;
 
     public float fleeSpeed;
@@ -67,7 +67,20 @@ public class ShooterEnemy : EnemyBase
 
     protected override void Sense()
     {
-        base.Sense();
+        if (distanceToPlayer < sightDistance && IsPlayerVisible())
+        {
+            lastKnownPlayerLocation = player.transform.position;
+
+            timeSinceLastSawPlayer = 0.0f;
+
+            playerDetected = true;
+
+        }
+        else
+        {
+            playerDetected = false;
+        }
+
         if (distanceToPlayer < fleeDistance)
         {
             fleeTimer = 0f;
@@ -98,17 +111,17 @@ public class ShooterEnemy : EnemyBase
     protected override void Act()
     {
         base.Act();
-        if(state_ == STATE.IN_COMBAT)
+        if (state_ == STATE.IN_COMBAT)
         {
             Shoot();
         }
 
-        if(state_ == STATE.FLEE)
+        if (state_ == STATE.FLEE)
         {
             Flee();
         }
 
-        if(state_ == STATE.IDLE)
+        if (state_ == STATE.IDLE)
         {
             Guard();
         }

@@ -133,13 +133,14 @@ public class EnemyBase : MonoBehaviour
     {
         if (distanceToPlayer < sightDistance && IsPlayerVisible())
         {
-            if (!engaging)
-                blackboard.AddEnemyInSight(this.gameObject);
-
             lastKnownPlayerLocation = player.transform.position;
 
+            if (!engaging)
+                blackboard.AddEnemyInSight(this.gameObject);
+            else
+                timeSinceLastSawPlayer = 0.0f;
+
             playerDetected = true;
-            timeSinceLastSawPlayer = 0.0f;
 
         }
         else

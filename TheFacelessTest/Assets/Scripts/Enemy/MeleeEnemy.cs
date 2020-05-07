@@ -98,26 +98,40 @@ public class MeleeEnemy : EnemyBase
     protected override void Decide()
     {
         base.Decide();
-        if (!playerDetected && timeSinceLastSawPlayer > suspicionTime)
+        //if (!playerDetected && timeSinceLastSawPlayer > suspicionTime)
+        //{
+        //    state_ = STATE.PATROL;
+        //}
+        //if (!playerDetected && timeSinceLastSawPlayer < suspicionTime)
+        //{
+        //    state_ = STATE.SUSPICIOUS;
+        //}
+
+        if (!engaging)
         {
-            state_ = STATE.PATROL;
-        }
-        if (!playerDetected && timeSinceLastSawPlayer < suspicionTime)
-        {
-            state_ = STATE.SUSPICIOUS;
+            if (timeSinceLastSawPlayer > suspicionTime)
+            {
+                state_ = STATE.PATROL;
+            }
+            if (timeSinceLastSawPlayer < suspicionTime)
+            {
+                state_ = STATE.SUSPICIOUS;
+            }
         }
 
-        if (playerDetected && distanceToPlayer > attackDistance && engaging)
+        if (engaging)
         {
-            state_ = STATE.PURSUE;
-        }
+            if (distanceToPlayer > attackDistance && !combatActionInProgress)
+            {
+                state_ = STATE.PURSUE;
+            }
 
-        if (CanAttack())
-        {
-            state_ = STATE.IN_COMBAT;
+            if (CanAttack())
+            {
+                state_ = STATE.IN_COMBAT;
+            }
         }
-
-        print("State: " + state_);
+        print("State of " + gameObject.name + ": " + state_);
     }
 
     protected override void Act()
@@ -148,69 +162,29 @@ public class MeleeEnemy : EnemyBase
 
         }
 
-        if(state_ == STATE.IN_COMBAT)
+        if (state_ == STATE.IN_COMBAT)
         {
+            Stop();
             ResolveCombatAction();
         }
     }
     #endregion
     private bool CanAttack()
     {
-        if (canHitPlayer)
+        if (canHitPlayer && engaging)
         {
             if (distanceToPlayer < attackDistance)
+            {
+                transform.LookAt(player.transform);
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+
                 return true;
-            else
-                return false;
+            }
         }
-        else
-            return false;
+
+        return false;
     }
     #region ACTIONS
-    //IEnumerator Attack()
-    //{
-    //    combatActionCompleted = false;
-    //    attackThrown = true;
-    //    transform.LookAt(player.transform);
-    //    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
-    //    anim.SetTrigger("attack");
-    //    yield return new WaitForSeconds(attackDelay);
-    //    if (!CanAttack())
-    //        yield break;
-
-
-    //    player.GetComponent<playerController>().TakeDamage(attackDamage);
-    //    combatActionCompleted = true;
-
-    //    yield return new WaitForSeconds(2f);
-    //    attackThrown = false;
-
-    //}
-
-    //IEnumerator Dodge()
-    //{
-    //    combatActionCompleted = false;
-    //    print("dodge");
-    //    //audioSource.PlayOneShot(DodgeSound);
-    //    Vector3 direction = (player.transform.position - transform.position) * -1;
-    //    direction.Normalize();
-
-    //    navMeshAgent.Move(direction / 5f);
-    //    yield return new WaitForSeconds(0.5f);
-    //    dodge = false;
-    //    combatActionCompleted = true;
-    //}
-
-    //IEnumerator Block()
-    //{
-    //    combatActionCompleted = false;
-    //    blocking = true;
-    //    print(gameObject.name + " is blocking");
-    //    yield return new WaitForSeconds(2f);
-    //    blocking = false;
-    //    block = false;
-    //    combatActionCompleted = true;
-    //}
 
     void ResolveCombatAction()
     {
@@ -268,9 +242,10 @@ public class MeleeEnemy : EnemyBase
         combatActionInProgress = true;
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
-        navMeshAgent.Move(direction);
+        navMeshAgent.Move(direction * 2);
         yield return new WaitForSeconds(1f);
         combatActionInProgress = false;
+
     }
 
     IEnumerator Block()
@@ -291,6 +266,7 @@ public class MeleeEnemy : EnemyBase
         {
             if (AtWaypoint())
             {
+                Stop();
                 timeSinceArrivedAtWaypoint = 0;
                 CycleWaypoint();
 

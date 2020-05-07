@@ -59,27 +59,43 @@ public class StretchyJones : EnemyBase
 
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(hitPoint.position, hitRadius);
+        Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
+
+        Gizmos.DrawWireSphere(transform.position, sightDistance);
+
+    }
 
     protected override void Decide()
     {
-        if (!playerDetected && timeSinceLastSawPlayer > suspicionTime)
+
+        if (!engaging)
         {
-            state_ = STATE.PATROL;
-        }
-        if (!playerDetected && timeSinceLastSawPlayer < suspicionTime)
-        {
-            state_ = STATE.SUSPICIOUS;
+            if (timeSinceLastSawPlayer > suspicionTime)
+            {
+                state_ = STATE.PATROL;
+            }
+            if (timeSinceLastSawPlayer < suspicionTime)
+            {
+                state_ = STATE.SUSPICIOUS;
+            }
         }
 
-        if (playerDetected && distanceToPlayer > attackDistance && engaging)
+        if (engaging)
         {
-            state_ = STATE.PURSUE;
-        }
+            if (distanceToPlayer > attackDistance && !discharging)
+            {
+                state_ = STATE.PURSUE;
+            }
 
-        if (CanAttack())
-        {
-            state_ = STATE.IN_COMBAT;
+            if (CanAttack())
+            {
+                state_ = STATE.IN_COMBAT;
+            }
         }
+        print("State of " + gameObject.name + ": " + state_);
     }
 
     protected override void Act()
@@ -123,23 +139,25 @@ public class StretchyJones : EnemyBase
         Stop();
         discharging = true;
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(1f);
 
-        explosion.Play();
+        //explosion.Play();
 
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(1f);
 
-        Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
+        //Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
         if(Physics.CheckSphere(aoePoint.position, aoeRadius, playerMask))
         {
             player.GetComponent<playerController>().Stun();
+            print("player stunned");
         }
         if (Physics.CheckSphere(hitPoint.position, hitRadius, playerMask))
         {
             player.GetComponent<playerController>().TakeDamage(attackDamage);
+            print("player damaged");
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
 
         discharging = false;
 
