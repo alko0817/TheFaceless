@@ -12679,7 +12679,7 @@ MonoBehaviour:
   attackDistance: 3
   dodgeChanceOutOf10: 1
   blockChanceOutOf10: 2
-  attackDelay: 1
+  attackDelay: 0.7
   pursueDelay: 1
   suspicionTime: 3
 --- !u!114 &3435207733819755351

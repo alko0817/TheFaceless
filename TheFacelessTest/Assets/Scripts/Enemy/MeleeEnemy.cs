@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
+
 public class MeleeEnemy : EnemyBase
 {
 
@@ -55,7 +57,7 @@ public class MeleeEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
-
+        initialPosition = transform.position;
         attackPoint = transform.GetChild(0).transform;
 
         currentWaypointIndex = 0;
@@ -65,7 +67,10 @@ public class MeleeEnemy : EnemyBase
         attackThrown = false;
         combatActionInProgress = false;
 
-        state_ = STATE.PATROL;
+        if (patrolPath == null)
+            state_ = STATE.IDLE;
+        else
+            state_ = STATE.PATROL;
     }
 
     protected override void UpdateTimers()
@@ -101,10 +106,15 @@ public class MeleeEnemy : EnemyBase
 
         if (!engaging)
         {
-            if (timeSinceLastSawPlayer > suspicionTime)
+            if (patrolPath == null)
+            {
+                state_ = STATE.IDLE;
+            }
+            else if (timeSinceLastSawPlayer > suspicionTime)
             {
                 state_ = STATE.PATROL;
             }
+
             if (timeSinceLastSawPlayer < suspicionTime)
             {
                 state_ = STATE.SUSPICIOUS;
@@ -129,6 +139,10 @@ public class MeleeEnemy : EnemyBase
     protected override void Act()
     {
         base.Act();
+        if(state_ == STATE.IDLE)
+        {
+            Guard();
+        }
         if (state_ == STATE.PATROL)
         {
             pursueDelayTimer = 0f;
@@ -275,6 +289,17 @@ public class MeleeEnemy : EnemyBase
         }
 
     }
+    void Guard()
+    {
+        Vector3 vectorToInitialPos = initialPosition - transform.position;
+        float dist = vectorToInitialPos.magnitude;
+
+        if (Math.Abs(dist) > 2f)
+            MoveTo(initialPosition, initialSpeed);
+        else
+            Stop();
+    }
+
     #endregion
 
     #region WAYPOINT FINDERS

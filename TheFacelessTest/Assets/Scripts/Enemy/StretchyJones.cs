@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,12 +42,17 @@ public class StretchyJones : EnemyBase
     protected override void Start()
     {
         base.Start();
+        initialPosition = transform.position;
         aoePoint = transform.GetChild(0).transform;
         hitPoint = transform.GetChild(1).transform;
         currentWaypointIndex = 0;
         transform.position = GetCurrentWaypoint();
 
-        state_ = STATE.PATROL;
+
+        if (patrolPath == null)
+            state_ = STATE.IDLE;
+        else
+            state_ = STATE.PATROL;
 
         discharging = false;
 
@@ -100,6 +106,11 @@ public class StretchyJones : EnemyBase
 
     protected override void Act()
     {
+        if (state_ == STATE.IDLE)
+        {
+            Guard();
+        }
+
         if (state_ == STATE.PATROL)
         {
             pursueDelayTimer = 0f;
@@ -193,6 +204,17 @@ public class StretchyJones : EnemyBase
         }
 
     }
+    void Guard()
+    {
+        Vector3 vectorToInitialPos = initialPosition - transform.position;
+        float dist = vectorToInitialPos.magnitude;
+
+        if (Math.Abs(dist) > 2f)
+            MoveTo(initialPosition, initialSpeed);
+        else
+            Stop();
+    }
+
 
 
     #region WAYPOINT FINDERS
