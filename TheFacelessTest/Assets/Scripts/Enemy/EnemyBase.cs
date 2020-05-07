@@ -60,6 +60,7 @@ public class EnemyBase : MonoBehaviour
     #endregion
 
     public float initialSpeed;
+    protected Vector3 initialPosition;
 
     #region SOUND
     //[Header("Sound FX")]

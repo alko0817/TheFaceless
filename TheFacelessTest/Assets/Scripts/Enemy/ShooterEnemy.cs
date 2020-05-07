@@ -7,7 +7,6 @@ public class ShooterEnemy : EnemyBase
 {
 
     [Header("Unique Properties")]
-    Vector3 initialPosition;
     Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
