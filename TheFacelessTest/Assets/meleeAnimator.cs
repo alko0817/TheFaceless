@@ -19,7 +19,5 @@ public class meleeAnimator : AIAnimator
         if (control.dodging) an.SetTrigger(Animate.dodge);
         if (control.blocking) an.SetTrigger(Animate.block);
 
-
-
     }
 }

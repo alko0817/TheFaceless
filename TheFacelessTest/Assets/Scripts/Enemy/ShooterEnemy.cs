@@ -12,11 +12,11 @@ public class ShooterEnemy : EnemyBase
     public GameObject[] projectiles;
 
     #region BOOLEANS
-    private bool shooting;
+    internal bool shooting;
     #endregion
 
     #region TIME & TIMERS
-    private float shootTimer;
+    internal float shootTimer;
     private float fleeTimer;
     public float fleeTime;
     public float fireRate;
@@ -136,7 +136,7 @@ public class ShooterEnemy : EnemyBase
         if (shootTimer > fireRate)
         {
             shootTimer = 0f;
-
+            shooting = true;
 
             for (int i = 0; i < projectiles.Length; i++)
             {
@@ -146,6 +146,7 @@ public class ShooterEnemy : EnemyBase
                     projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
+                    shooting = false;
                     break;
 
                 }

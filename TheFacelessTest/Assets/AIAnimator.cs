@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Derive from AI?
 public class AIAnimator : MonoBehaviour
 {
     //Reference to AI 
     protected Animator an;
     protected EnemyBase controller;
 
-    //might use the ones from AI
     private float speed = 1f;
     private bool dead = false;
 
