@@ -98,7 +98,7 @@ public class AIBehaviour : MonoBehaviour
     [Tooltip("The frequency that this enemy gathers information about the player. The number of seconds between each Sense() action.")]
     public float senseFrequency;
     private float senseTimer;
-    private bool pursuing;
+    internal bool pursuing;
     public float pursueDelay;
     private float pursueDelayTimer;
 
