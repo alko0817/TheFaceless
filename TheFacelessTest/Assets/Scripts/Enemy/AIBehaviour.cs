@@ -198,7 +198,7 @@ public class AIBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         Vector3 vectorToPlayer = player.transform.position - transform.position;
         distanceToPlayer = vectorToPlayer.magnitude;
@@ -621,6 +621,10 @@ public class AIBehaviour : MonoBehaviour
         blocking = false;
     }
 
+    public void SetStunned(bool value)
+    {
+        stunned = value;
+    }
     private void Stunned()
     {
         Stop();
@@ -635,10 +639,6 @@ public class AIBehaviour : MonoBehaviour
         stunned = false;
     }
 
-    public void SetStunned(bool value)
-    {
-        stunned = value;
-    }
 
     void Shoot()
     {

@@ -303,16 +303,17 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator AttackConnection (float delay, int damage, Vector3 aoe, float aoeRadius)
     {
-        yield return new WaitForEndOfFrame();
-        attackThrown = false;
+        //yield return new WaitForEndOfFrame();
+        //attackThrown = false;
         yield return new WaitForSeconds(delay);
+        attackThrown = false;
 
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
 
         //APPLY DPS
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<AIBehaviour>().TakeDamage(damage);
+            enemy.GetComponent<EnemyBase>().TakeDamage(damage);
             if (isDischarge)
             {
                 enemy.GetComponent<AIBehaviour>().SetStunned(true);
@@ -373,4 +374,5 @@ public class PlayerAttack : MonoBehaviour
     {
         return attackThrown;
     }
+
 }

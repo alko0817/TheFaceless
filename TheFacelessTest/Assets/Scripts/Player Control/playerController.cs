@@ -289,5 +289,10 @@ public class playerController : MonoBehaviour
     {
         health.Damage(damage);
     }
+
+    public void Stun()
+    {
+        // stun code;
+    }
 }
 
