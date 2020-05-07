@@ -27,8 +27,8 @@ public class EnemyBase : MonoBehaviour
     #region COMPONENETS
     public ParticleSystem electricStun;
     protected SpawnEffect dissolving;
-    protected NavMeshAgent navMeshAgent;
-    protected Animator anim;
+    internal NavMeshAgent navMeshAgent;
+    internal Animator anim;
     protected AudioSource audioSource;
     #endregion
 
@@ -38,10 +38,10 @@ public class EnemyBase : MonoBehaviour
 
     #region BOOLEANS
     protected bool playerDetected;
-    protected bool dying;
+    internal bool dying;
     protected bool stunned;
-    protected bool engaging;
-    protected bool blocking;
+    internal bool engaging;
+    internal bool blocking;
     #endregion
 
     #region LIFE PARAMETERS

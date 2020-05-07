@@ -23,7 +23,8 @@ public class MeleeEnemy : EnemyBase
 
     #region BOOLEANS
     private bool canHitPlayer;
-    private bool attackThrown;
+    internal bool attackThrown;
+    internal bool dodging = false;
     private bool combatActionInProgress;
     #endregion
 
@@ -246,10 +247,12 @@ public class MeleeEnemy : EnemyBase
     IEnumerator Dodge()
     {
         combatActionInProgress = true;
+        dodging = true;
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
         navMeshAgent.Move(direction * 2);
         yield return new WaitForSeconds(1f);
+        dodging = false;
         combatActionInProgress = false;
 
     }
