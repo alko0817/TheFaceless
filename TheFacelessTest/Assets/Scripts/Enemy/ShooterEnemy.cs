@@ -10,13 +10,14 @@ public class ShooterEnemy : EnemyBase
     Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
+    shootAnimator anim;
 
     #region BOOLEANS
-    private bool shooting;
+    internal bool shooting;
     #endregion
 
     #region TIME & TIMERS
-    private float shootTimer;
+    internal float shootTimer;
     private float fleeTimer;
     public float fleeTime;
     public float fireRate;
@@ -31,6 +32,7 @@ public class ShooterEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<shootAnimator>();
         shootTimer = 0f;
         fleeTimer = Mathf.Infinity;
         shooting = false;
@@ -133,10 +135,16 @@ public class ShooterEnemy : EnemyBase
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
         shootTimer += Time.deltaTime;
+        if (shootTimer > (fireRate / 3)*2 && !shooting)
+        {
+            shooting = true;
+            anim.Shot();
+        }
+
         if (shootTimer > fireRate)
         {
             shootTimer = 0f;
-
+            shooting = false; 
 
             for (int i = 0; i < projectiles.Length; i++)
             {

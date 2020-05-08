@@ -23,6 +23,7 @@ public class EnemyBase : MonoBehaviour
     protected EnemyBlackboard blackboard;
 
     public Image healthBar;
+    public ParticleSystem hit;
 
     #region COMPONENETS
     public ParticleSystem electricStun;
@@ -46,7 +47,7 @@ public class EnemyBase : MonoBehaviour
 
     #region LIFE PARAMETERS
     public float maxHealth;
-    protected float currentHealth;
+    internal float currentHealth;
     #endregion
 
     #region PLAYER SENSING PARAMETERS
@@ -235,6 +236,8 @@ public class EnemyBase : MonoBehaviour
 
             print("attack blocked");
         }
+        hit.Emit(1);
+
         //HURT ANIMATIONS
 
     }
@@ -248,8 +251,14 @@ public class EnemyBase : MonoBehaviour
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
-        dissolving.enabled = true;
-        Destroy(gameObject, 2f);
+        StartCoroutine("Dissolve");
+        Destroy(gameObject, 4f);
 
+    }
+
+    IEnumerator Dissolve ()
+    {
+        yield return new WaitForSeconds(2f);
+        dissolving.enabled = true;
     }
 }

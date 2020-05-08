@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HealthState : MonoBehaviour
 {
-    AIBehaviour controller;
+    EnemyBase controller;
     public Image healthFace;
     private Color color;
     private float health;
@@ -14,7 +14,7 @@ public class HealthState : MonoBehaviour
 
     private void Start()
     {
-        controller = GetComponent<AIBehaviour>();
+        controller = GetComponent<EnemyBase>();
         color.r = 1f;
         color.g = 1f;
         color.b = 1f;

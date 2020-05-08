@@ -5,11 +5,11 @@ using UnityEngine;
 public class Indicator : MonoBehaviour
 {
     public GameObject[] bolts;
-    AIBehaviour controller;
+    ShooterEnemy controller;
 
     private void Start()
     {
-        controller = GetComponentInParent<AIBehaviour>();
+        controller = GetComponentInParent<ShooterEnemy>();
     }
 
     private void Update()
@@ -25,11 +25,11 @@ public class Indicator : MonoBehaviour
 
         if (controller.shooting)
         {
-            if (controller.shootTimer >= 0.1f) bolts[0].SetActive(true);
+            if (controller.shootTimer >= (controller.fireRate / 3) * 2) bolts[0].SetActive(true);
 
-            if (controller.shootTimer >= 1.2f) bolts[1].SetActive(true);
+            if (controller.shootTimer >= (controller.fireRate / 3) * 2.5f) bolts[1].SetActive(true);
 
-            if (controller.shootTimer >= controller.fireRate - .3f) bolts[2].SetActive(true);
+            if (controller.shootTimer >= controller.fireRate - .2f) bolts[2].SetActive(true);
         }
     }
 }
