@@ -10,6 +10,7 @@ public class ShooterEnemy : EnemyBase
     Transform projectileSpawn;
     public GameObject projectile;
     public GameObject[] projectiles;
+    shootAnimator anim;
 
     #region BOOLEANS
     internal bool shooting;
@@ -31,6 +32,7 @@ public class ShooterEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<shootAnimator>();
         shootTimer = 0f;
         fleeTimer = Mathf.Infinity;
         shooting = false;
@@ -133,10 +135,16 @@ public class ShooterEnemy : EnemyBase
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
         shootTimer += Time.deltaTime;
+        if (shootTimer > (fireRate / 3)*2 && !shooting)
+        {
+            shooting = true;
+            anim.Shot();
+        }
+
         if (shootTimer > fireRate)
         {
             shootTimer = 0f;
-            shooting = true;
+            shooting = false; 
 
             for (int i = 0; i < projectiles.Length; i++)
             {
@@ -146,7 +154,6 @@ public class ShooterEnemy : EnemyBase
                     projectiles[i].transform.rotation = projectileSpawn.rotation;
                     projectiles[i].GetComponent<Projectile>().SetDirection(transform.forward);
                     projectiles[i].SetActive(true);
-                    shooting = false;
                     break;
 
                 }

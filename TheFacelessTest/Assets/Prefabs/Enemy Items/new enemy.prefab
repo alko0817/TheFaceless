@@ -22328,7 +22328,7 @@ MonoBehaviour:
   hit: {fileID: 2513236989849174248}
   electricStun: {fileID: 8786287313566629159}
   maxHealth: 150
-  sightDistance: 10
+  sightDistance: 20
   initialSpeed: 2
   patrolPath: {fileID: 0}
   pursueSpeed: 4

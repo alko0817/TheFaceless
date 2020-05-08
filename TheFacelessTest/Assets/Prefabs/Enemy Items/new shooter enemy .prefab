@@ -31242,7 +31242,7 @@ MonoBehaviour:
   hit: {fileID: 7663280570499983415}
   electricStun: {fileID: 7315947886205480717}
   maxHealth: 100
-  sightDistance: 20
+  sightDistance: 15
   initialSpeed: 2
   projectile: {fileID: 8871684046561928921, guid: d57a3cb9292df244db4fef29c4d70e89,
     type: 3}
@@ -31253,7 +31253,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   fleeTime: 1.5
-  fireRate: 4
+  fireRate: 2
   fleeDistance: 6
   fleeSpeed: 6
 --- !u!114 &7315947886663085777
@@ -31306,6 +31306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a7d46bdc0bb9447b8f67731ccdae2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animSmooth: 1
 --- !u!1 &7315947886664542701
 GameObject:
   m_ObjectHideFlags: 0

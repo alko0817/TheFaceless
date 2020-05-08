@@ -5,6 +5,7 @@ using UnityEngine;
 public class shootAnimator : AIAnimator
 {
     private ShooterEnemy control;
+    bool shoot;
 
     protected override void Start()
     {
@@ -16,11 +17,10 @@ public class shootAnimator : AIAnimator
     {
         base.Update();
 
-        if (control.shootTimer > control.fireRate)
-        {
-            an.SetTrigger(Animate.shoot);
-            Debug.Log("Im in here!");
-        }
+    }
 
+    public void Shot()
+    {
+        an.SetTrigger(Animate.shoot);
     }
 }
