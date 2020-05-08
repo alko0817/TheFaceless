@@ -949,6 +949,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3435207733819755350, guid: 712a590114f86854282c5310d9d648b4,
+        type: 3}
+      propertyPath: useGlobalSettings
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 712a590114f86854282c5310d9d648b4, type: 3}
 --- !u!1001 &414666321
@@ -2817,6 +2822,106 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeSightDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeAttackDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeMaxHealth
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeInitialSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleePursueSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeAttackDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: DodgeChanceOutOf10
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: BlockChanceOutOf10
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleePusueDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeSuspicionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeWaypointTolerance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: MeleeWaypointWaitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterSightDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterMaxHealth
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterInitialSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterFleeSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterFleeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterFleeDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293140196684544984, guid: 2bea691123663b34f9877882f52dca5e,
+        type: 3}
+      propertyPath: ShooterFireRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5293140196684544985, guid: 2bea691123663b34f9877882f52dca5e,
         type: 3}

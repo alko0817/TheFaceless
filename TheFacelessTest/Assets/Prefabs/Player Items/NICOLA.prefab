@@ -730,14 +730,14 @@ MonoBehaviour:
   hitBlock1: 0.9
   hitBlock2: 0.8
   holdForHeavy: 0.2
-  slashDamage: 8
-  slash2Damage: 9
-  slash3Damage: 10
-  slash4Damage: 11
+  slashDamage: 10
+  slash2Damage: 12
+  slash3Damage: 14
+  slash4Damage: 16
   heavyDamage: 20
   heavy2Damage: 40
   dischargeDamage: 25
-  blockAttack1Dmg: 20
+  blockAttack1Dmg: 25
   blockAttack2Dmg: 30
   dodgeCooldown: 1
   dodgeDashBoost: 3
