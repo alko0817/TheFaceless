@@ -28317,8 +28317,10 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
+  electricStun: {fileID: 6109281175451660066}
   healthBar: {fileID: 6109281174956035498}
   hit: {fileID: 0}
+  useGlobalSettings: 1
   electricStun: {fileID: 6109281175451660066}
   maxHealth: 100
   sightDistance: 15
@@ -28330,13 +28332,13 @@ MonoBehaviour:
   aoeRadius: 10
   hitRadius: 1
   attackDistance: 6
-  waypointTolerance: 1.5
-  waypointWaitTime: 1
   attackDelay: 1
   pursueDelay: 2
   suspicionTime: 5
   pursueSpeed: 1.5
   attackDamage: 10
+  waypointTolerance: 1.5
+  waypointWaitTime: 1
 --- !u!114 &6109281176069369598
 MonoBehaviour:
   m_ObjectHideFlags: 0

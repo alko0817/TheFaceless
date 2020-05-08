@@ -31313,8 +31313,10 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
+  electricStun: {fileID: 7315947886205480717}
   healthBar: {fileID: 7315947885616860549}
   hit: {fileID: 7663280570499983415}
+  useGlobalSettings: 1
   electricStun: {fileID: 7315947886205480717}
   maxHealth: 50
   sightDistance: 15
@@ -31327,10 +31329,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fleeTime: 1
-  fireRate: 2
   fleeDistance: 3
   fleeSpeed: 4
+  damage: 0
+  fleeTime: 1
+  fireRate: 2
 --- !u!114 &7315947886663085777
 MonoBehaviour:
   m_ObjectHideFlags: 0

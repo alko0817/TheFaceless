@@ -11,9 +11,56 @@ public class EnemyBlackboard : MonoBehaviour
     public List<GameObject> enemiesPursuingPlayer;
     public List<GameObject> enemiesInSightOfPlayer;
 
+    MeleeEnemy[] meleeEnemies;
+    ShooterEnemy[] shooterEnemies;
+    StretchyJones[] stretchies;
+
+    [Header("Variables for the Melee enemies")]
+    public float MeleeSightDistance;
+    public float MeleeAttackDistance;
+    public float MeleeMaxHealth;
+    public float MeleeInitialSpeed;
+    public float MeleePursueSpeed;
+    public int MeleeAttackDamage;
+    public int DodgeChanceOutOf10;
+    public int BlockChanceOutOf10;
+    public float MeleePusueDelay;
+    public float MeleeSuspicionTime;
+    public float MeleeWaypointTolerance;
+    public float MeleeWaypointWaitTime;
+
+
+    [Header("Variables for the Jones enemies")]
+    public float JonesSightDistance;
+    public float JonesAttackDistance;
+    public float JonesMaxHealth;
+    public float JonesInitialSpeed;
+    public float JonesPursueSpeed;
+    public int JonesAttackDamage;
+    public float JonesPusueDelay;
+    public float JonesSuspicionTime;
+    public float JonesAoeRadius;
+    public float JonesWaypointTolerance;
+    public float JonesWaypointWaitTime;
+
+    [Header("Variables for the Shooter enemies")]
+    public float ShooterSightDistance;
+    public float ShooterMaxHealth;
+    public float ShooterInitialSpeed;
+    public float ShooterFleeSpeed;
+    public float ShooterFleeTime;
+    [Tooltip("Distance away from the player at which the enemy will start to flee")]
+    public float ShooterFleeDistance;
+    public int ShooterDamage;
+    public float ShooterFireRate;
+
 
     private void Start()
     {
+        meleeEnemies = GameObject.FindObjectsOfType<MeleeEnemy>();
+        shooterEnemies = GameObject.FindObjectsOfType<ShooterEnemy>();
+        stretchies = GameObject.FindObjectsOfType<StretchyJones>();
+
 
     }
     // Update is called once per frame
@@ -25,6 +72,8 @@ public class EnemyBlackboard : MonoBehaviour
 
 
     }
+
+
 
 
     private void AddPursuingEnemy()

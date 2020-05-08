@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     public Vector3 startingPosition;
     GameObject detector;
     public float speed;
-    public int damage;
+    private int damage;
     internal bool hit;
 
 
@@ -56,5 +56,10 @@ public class Projectile : MonoBehaviour
     void ResetProjectile()
     {
         gameObject.SetActive(false);
+    }
+
+    public void SetDamage(int value)
+    {
+        damage = value;
     }
 }
