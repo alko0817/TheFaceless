@@ -28125,6 +28125,7 @@ GameObject:
   - component: {fileID: 6109281176069369596}
   - component: {fileID: 6109281176069369597}
   - component: {fileID: 6109281176069369598}
+  - component: {fileID: -2239552451402271432}
   m_Layer: 9
   m_Name: Stretchy Jones
   m_TagString: Enemy
@@ -28317,8 +28318,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   healthBar: {fileID: 6109281174956035498}
+  hit: {fileID: 0}
   electricStun: {fileID: 6109281175451660066}
-  maxHealth: 200
+  maxHealth: 100
   sightDistance: 15
   initialSpeed: 0.5
   burst: {fileID: 0}
@@ -28373,6 +28375,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2239552451402271432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109281176069369599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c1ee63d6572a5419b58e789d2dfa63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6109281176070007234
 GameObject:
   m_ObjectHideFlags: 0
