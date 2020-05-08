@@ -291,19 +291,7 @@ public class MeleeEnemy : EnemyBase
 
         }
 
-    }
-    void Guard()
-    {
-        Vector3 vectorToInitialPos = initialPosition - transform.position;
-        float dist = vectorToInitialPos.magnitude;
-
-        if (Math.Abs(dist) > 2f)
-            MoveTo(initialPosition, initialSpeed);
-        else
-            Stop();
-    }
-
-    #endregion
+    }    
 
     #region WAYPOINT FINDERS
     private bool AtWaypoint()
