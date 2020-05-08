@@ -31316,7 +31316,7 @@ MonoBehaviour:
   healthBar: {fileID: 7315947885616860549}
   hit: {fileID: 7663280570499983415}
   electricStun: {fileID: 7315947886205480717}
-  maxHealth: 100
+  maxHealth: 50
   sightDistance: 15
   initialSpeed: 2
   projectile: {fileID: 8871684046561928921, guid: d57a3cb9292df244db4fef29c4d70e89,

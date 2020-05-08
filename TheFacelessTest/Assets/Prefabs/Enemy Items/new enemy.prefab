@@ -22328,7 +22328,7 @@ MonoBehaviour:
   healthBar: {fileID: 3435207732930506063}
   hit: {fileID: 2513236989849174248}
   electricStun: {fileID: 8786287313566629159}
-  maxHealth: 150
+  maxHealth: 70
   sightDistance: 20
   initialSpeed: 2
   patrolPath: {fileID: 0}

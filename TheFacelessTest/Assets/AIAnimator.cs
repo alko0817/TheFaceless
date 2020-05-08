@@ -49,5 +49,6 @@ public class AIAnimator : MonoBehaviour
         public static int speed = Animator.StringToHash("speed");
         public static int die = Animator.StringToHash("die");
         public static int dodge = Animator.StringToHash("dodge");
+        public static int stun = Animator.StringToHash("stun");
     }
 }
