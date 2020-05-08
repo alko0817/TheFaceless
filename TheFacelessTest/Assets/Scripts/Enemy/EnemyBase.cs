@@ -47,7 +47,7 @@ public class EnemyBase : MonoBehaviour
 
     #region LIFE PARAMETERS
     public float maxHealth;
-    protected float currentHealth;
+    internal float currentHealth;
     #endregion
 
     #region PLAYER SENSING PARAMETERS

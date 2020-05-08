@@ -6209,7 +6209,7 @@ GameObject:
   - component: {fileID: 5341553321039162514}
   - component: {fileID: 7072184672284178052}
   m_Layer: 5
-  m_Name: Image
+  m_Name: healthState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22133,6 +22133,7 @@ GameObject:
   - component: {fileID: 3435207733819755350}
   - component: {fileID: 3435207733819755351}
   - component: {fileID: 7407983972577977705}
+  - component: {fileID: 1499853998999454777}
   m_Layer: 9
   m_Name: new enemy
   m_TagString: Enemy
@@ -22393,6 +22394,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animSmooth: 1
+--- !u!114 &1499853998999454777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435207733819755345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e9561c8f309bb49b20696659d4a913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFace: {fileID: 7072184672284178052}
 --- !u!1 &3435207734203873219
 GameObject:
   m_ObjectHideFlags: 0
@@ -22410,7 +22424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3435207734203873216
 RectTransform:
   m_ObjectHideFlags: 0
