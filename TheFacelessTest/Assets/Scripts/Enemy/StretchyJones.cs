@@ -5,39 +5,39 @@ using UnityEngine;
 
 public class StretchyJones : EnemyBase
 {
-    [Header("Unique Properties")]
-    Transform aoePoint;
-    Transform hitPoint;
+    [Header("Unique Components")]
+    [Header("- Unique Properties -")]
+    #region COMPONENETS
     public GameObject burst;
     public Transform burstPoint;
     public ParticleSystem explosion;
     public PatrolRoute patrolPath;
+    Transform aoePoint;
+    Transform hitPoint;
+    #endregion
 
-    #region DISTANCES
+    [Header("Unique Variables")]
+    #region VARIABLES
     public float aoeRadius;
     public float hitRadius;
     public float attackDistance;
-    #endregion
-
-    #region PATROLLING VARIABLES
-    public float waypointTolerance;
-    public float waypointWaitTime;
-    private int currentWaypointIndex;
-    #endregion
-
-    #region TIME AND TIMERS
     public float attackDelay = 1f;
     public float pursueDelay;
-    private float pursueDelayTimer;
     public float suspicionTime;
-    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+    public float pursueSpeed;
+    public int attackDamage;
+    public float waypointTolerance;
+    public float waypointWaitTime;
     #endregion
 
-    public float pursueSpeed;
-
+    #region INTERNAL PARAMETERS
+    private int currentWaypointIndex;
+    private float pursueDelayTimer;
+    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     private bool discharging;
+    #endregion
 
-    public int attackDamage;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -56,6 +56,10 @@ public class StretchyJones : EnemyBase
 
         discharging = false;
 
+        if (useGlobalSettings)
+        {
+            SetUp();
+        }
     }
 
     protected override void UpdateTimers()
@@ -143,7 +147,7 @@ public class StretchyJones : EnemyBase
 
         if (state_ == STATE.IN_COMBAT)
         {
-            if(!discharging)
+            if (!discharging)
                 StartCoroutine(AoeSlam());
         }
 
@@ -162,7 +166,7 @@ public class StretchyJones : EnemyBase
         yield return new WaitForSeconds(1f);
 
         //Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
-        if(Physics.CheckSphere(aoePoint.position, aoeRadius, playerMask))
+        if (Physics.CheckSphere(aoePoint.position, aoeRadius, playerMask))
         {
             player.GetComponent<playerController>().Stun();
             print("player stunned");
@@ -242,4 +246,18 @@ public class StretchyJones : EnemyBase
 
     #endregion
 
+    void SetUp()
+    {
+        sightDistance = blackboard.JonesSightDistance;
+        attackDistance = blackboard.JonesAttackDistance;
+        maxHealth = blackboard.JonesMaxHealth;
+        initialSpeed = blackboard.JonesInitialSpeed;
+        pursueSpeed = blackboard.JonesPursueSpeed;
+        attackDamage = blackboard.JonesAttackDamage;
+        pursueDelay = blackboard.JonesPusueDelay;
+        suspicionTime = blackboard.JonesSuspicionTime;
+        aoeRadius = blackboard.JonesAoeRadius;
+        waypointTolerance = blackboard.JonesWaypointTolerance;
+        waypointWaitTime = blackboard.JonesWaypointWaitTime;
+    }
 }

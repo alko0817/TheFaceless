@@ -22325,21 +22325,22 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
+  electricStun: {fileID: 8786287313566629159}
   healthBar: {fileID: 3435207732930506063}
   hit: {fileID: 2513236989849174248}
-  electricStun: {fileID: 8786287313566629159}
+  useGlobalSettings: 1
   maxHealth: 150
   sightDistance: 20
   initialSpeed: 2
   patrolPath: {fileID: 0}
   pursueSpeed: 4
-  waypointTolerance: 1.5
-  waypointWaitTime: 3
-  attackHitBox: 0.7
   attackDamage: 10
   attackDistance: 3
+  attackHitBox: 0.7
   dodgeChanceOutOf10: 1
   blockChanceOutOf10: 2
+  waypointTolerance: 1.5
+  waypointWaitTime: 3
   attackDelay: 0.7
   pursueDelay: 1
   suspicionTime: 3

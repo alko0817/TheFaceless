@@ -5,29 +5,29 @@ using UnityEngine;
 
 public class ShooterEnemy : EnemyBase
 {
-
-    [Header("Unique Properties")]
-    Transform projectileSpawn;
+    [Header("Unique Components")]
+    [Header("- Unique Properties -")]
+    #region COMPONENETS
     public GameObject projectile;
     public GameObject[] projectiles;
     shootAnimator anim;
-
-    #region BOOLEANS
-    internal bool shooting;
+    Transform projectileSpawn;
     #endregion
 
-    #region TIME & TIMERS
-    internal float shootTimer;
-    private float fleeTimer;
+    [Header("Unique Variables")]
+    #region VARIABLES
+    public float fleeDistance;
+    public float fleeSpeed;
+    public int damage;
     public float fleeTime;
     public float fireRate;
     #endregion
 
-
-    public float fleeDistance;
-
-    public float fleeSpeed;
-
+    #region INTERNAL PARAMETERS
+    internal float shootTimer;
+    private float fleeTimer;
+    internal bool shooting;
+    #endregion
 
     protected override void Start()
     {
@@ -41,14 +41,21 @@ public class ShooterEnemy : EnemyBase
 
         initialPosition = transform.position;
 
+        if(useGlobalSettings)
+        {
+            SetUp();
+        }
+
         for (int i = 0; i < projectiles.Length; i++)
         {
             projectiles[i] = Instantiate(projectile);
 
             projectiles[i].transform.position = projectileSpawn.position;
             projectiles[i].transform.rotation = projectileSpawn.rotation;
+            projectiles[i].GetComponent<Projectile>().SetDamage(damage);
             projectiles[i].SetActive(false);
         }
+
 
     }
 
@@ -135,7 +142,7 @@ public class ShooterEnemy : EnemyBase
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
 
         shootTimer += Time.deltaTime;
-        if (shootTimer > (fireRate / 3)*2 && !shooting)
+        if (shootTimer > (fireRate / 3) * 2 && !shooting)
         {
             shooting = true;
             anim.Shot();
@@ -144,7 +151,7 @@ public class ShooterEnemy : EnemyBase
         if (shootTimer > fireRate)
         {
             shootTimer = 0f;
-            shooting = false; 
+            shooting = false;
 
             for (int i = 0; i < projectiles.Length; i++)
             {
@@ -171,5 +178,16 @@ public class ShooterEnemy : EnemyBase
 
     }
 
+    void SetUp()
+    {
+        sightDistance = blackboard.ShooterSightDistance;
+        maxHealth = blackboard.ShooterMaxHealth;
+        initialSpeed = blackboard.ShooterInitialSpeed;
+        fleeSpeed = blackboard.ShooterFleeSpeed;
+        fleeTime = blackboard.ShooterFleeTime;
+        fleeDistance = blackboard.ShooterFleeDistance;
+        damage = blackboard.ShooterDamage;
+        fireRate = blackboard.ShooterFireRate;
 
+    }
 }

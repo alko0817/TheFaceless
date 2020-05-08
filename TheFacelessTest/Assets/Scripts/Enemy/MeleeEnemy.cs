@@ -7,18 +7,32 @@ using System;
 
 public class MeleeEnemy : EnemyBase
 {
-
-    [Header("Unique Properties")]
-
-    Transform attackPoint;
-
+    [Header("Unique Components")]
+    [Header("- Unique Properties -")]
+    #region COMPONENETS
     public PatrolRoute patrolPath;
+    Transform attackPoint;
+    #endregion
 
+    [Header("Unique Variables")]
+    #region VARIABLES
     public float pursueSpeed;
+    public int attackDamage;
+    public float attackDistance;
+    public float attackHitBox = 1f;
+    public int dodgeChanceOutOf10;
+    public int blockChanceOutOf10;
+    public float waypointTolerance;
+    public float waypointWaitTime;
+    public float attackDelay = 1f;
+    public float pursueDelay;
+    public float suspicionTime;
+    #endregion
 
-    #region SOUND
-    //public AudioClip BlockSound;
-    //public AudioClip DodgeSound;
+    #region INTERNAL PARAMETERS
+    private int currentWaypointIndex;
+    private float pursueDelayTimer;
+    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     #endregion
 
     #region BOOLEANS
@@ -28,30 +42,10 @@ public class MeleeEnemy : EnemyBase
     private bool combatActionInProgress;
     #endregion
 
-    #region PATROLLING VARIABLES
-    public float waypointTolerance;
-    public float waypointWaitTime;
-    private int currentWaypointIndex;
-    #endregion
 
-    #region COMBAT VARIABLES
-    public float attackHitBox = 1f;
-
-    public int attackDamage;
-    public float attackDistance;
-
-    public int dodgeChanceOutOf10;
-    public int blockChanceOutOf10;
-
-    #endregion
-
-
-    #region TIME AND TIMERS
-    public float attackDelay = 1f;
-    public float pursueDelay;
-    private float pursueDelayTimer;
-    public float suspicionTime;
-    private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+    #region SOUND
+    //public AudioClip BlockSound;
+    //public AudioClip DodgeSound;
     #endregion
 
     // Start is called before the first frame update
@@ -72,6 +66,11 @@ public class MeleeEnemy : EnemyBase
             state_ = STATE.IDLE;
         else
             state_ = STATE.PATROL;
+
+        if(useGlobalSettings)
+        {
+            SetUp();
+        }
     }
 
     protected override void UpdateTimers()
@@ -140,7 +139,7 @@ public class MeleeEnemy : EnemyBase
     protected override void Act()
     {
         base.Act();
-        if(state_ == STATE.IDLE)
+        if (state_ == STATE.IDLE)
         {
             Guard();
         }
@@ -199,11 +198,9 @@ public class MeleeEnemy : EnemyBase
 
         if (!combatActionInProgress)
         {
-            print(player.GetComponent<PlayerAttack>().GetAttacking());
             if (player.GetComponent<PlayerAttack>().GetAttacking())
             {
                 rand = UnityEngine.Random.Range(0, 10);
-                print(rand);
 
                 if (0 <= rand && rand < dodgeChanceOutOf10)
                 {
@@ -291,8 +288,8 @@ public class MeleeEnemy : EnemyBase
 
         }
 
-    }    
-
+    }
+    #endregion
     #region WAYPOINT FINDERS
     private bool AtWaypoint()
     {
@@ -322,5 +319,19 @@ public class MeleeEnemy : EnemyBase
 
     #endregion
 
-
+    public void SetUp()
+    {
+        sightDistance =  blackboard.MeleeSightDistance;
+        attackDistance = blackboard.MeleeAttackDistance;
+        maxHealth = blackboard.MeleeMaxHealth;
+        initialSpeed = blackboard.MeleeInitialSpeed;
+        pursueSpeed = blackboard.MeleePursueSpeed;
+        attackDamage = blackboard.MeleeAttackDamage;
+        pursueDelay = blackboard.MeleePusueDelay;
+        suspicionTime = blackboard.MeleeSuspicionTime;
+        dodgeChanceOutOf10 = blackboard.DodgeChanceOutOf10;
+        blockChanceOutOf10 = blackboard.BlockChanceOutOf10;
+        waypointTolerance = blackboard.MeleeWaypointTolerance;
+        waypointWaitTime = blackboard.MeleeWaypointWaitTime;
+    }
 }

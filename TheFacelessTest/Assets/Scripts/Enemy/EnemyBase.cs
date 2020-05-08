@@ -18,28 +18,27 @@ public class EnemyBase : MonoBehaviour
         FLEE
     }
 
-    [Header("Base Properties")]
-    protected STATE state_;
+    [Header("- Base Properties -")]
     public LayerMask playerMask;
-    protected audioManager audioManager;
-    protected EnemyBlackboard blackboard;
-
-    public Image healthBar;
-    public ParticleSystem hit;
-
+    [Space]
+    [Header("Base Components")]
     #region COMPONENETS
     public ParticleSystem electricStun;
     protected SpawnEffect dissolving;
     internal NavMeshAgent navMeshAgent;
     internal Animator anim;
     protected AudioSource audioSource;
+    protected audioManager audioManager;
+    protected EnemyBlackboard blackboard;
+    public Image healthBar;
+    public ParticleSystem hit;
     #endregion
 
-    #region TIMERS
-    protected float timeSinceLastSawPlayer;
-    #endregion
-
+    [Header("Global Settings Checkbox")]
     #region BOOLEANS
+    [Tooltip("If checked, enemy will use settings defined in the Enemy Blackboard")]
+    public bool useGlobalSettings;
+    [Space]
     protected bool playerDetected;
     internal bool dying;
     protected bool stunned;
@@ -47,23 +46,24 @@ public class EnemyBase : MonoBehaviour
     internal bool blocking;
     #endregion
 
-    #region LIFE PARAMETERS
+    [Header("Base Variables")]
+    #region VARIABLES
     public float maxHealth;
-    internal float currentHealth;
+    public float sightDistance;
+    public float initialSpeed;
     #endregion
 
-    #region PLAYER SENSING PARAMETERS
+    #region INTERENAL PARAMETERS
+    protected STATE state_;
+    internal float currentHealth;
     protected GameObject player;
     protected Vector3 lastKnownPlayerLocation;
-    protected float distanceToPlayer;
-    #endregion
-
-    #region SENSING PARAMETERS
-    public float sightDistance;
-    #endregion
-
-    public float initialSpeed;
     protected Vector3 initialPosition;
+    protected float distanceToPlayer;
+    protected float timeSinceLastSawPlayer;
+    #endregion
+
+
 
     #region SOUND
     //[Header("Sound FX")]
@@ -128,6 +128,7 @@ public class EnemyBase : MonoBehaviour
 
     }
 
+    
     protected virtual void UpdateTimers()
     {
         timeSinceLastSawPlayer += Time.deltaTime;
@@ -272,4 +273,6 @@ public class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(2f);
         dissolving.enabled = true;
     }
+
+
 }
