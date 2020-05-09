@@ -83,7 +83,7 @@ public class MeleeEnemy : EnemyBase
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
         Gizmos.DrawWireSphere(transform.position, sightDistance);
 
@@ -292,17 +292,6 @@ public class MeleeEnemy : EnemyBase
         }
 
     }
-    void Guard()
-    {
-        Vector3 vectorToInitialPos = initialPosition - transform.position;
-        float dist = vectorToInitialPos.magnitude;
-
-        if (Math.Abs(dist) > 2f)
-            MoveTo(initialPosition, initialSpeed);
-        else
-            Stop();
-    }
-
     #endregion
 
     #region WAYPOINT FINDERS

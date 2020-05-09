@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
+
 public class EnemyBase : MonoBehaviour
 {
     protected enum STATE
@@ -242,7 +244,16 @@ public class EnemyBase : MonoBehaviour
 
     }
 
+    protected virtual void Guard()
+    {
+        Vector3 vectorToInitialPos = initialPosition - transform.position;
+        float dist = vectorToInitialPos.magnitude;
 
+        if (Math.Abs(dist) > 2f)
+            MoveTo(initialPosition, initialSpeed);
+        else
+            Stop();
+    }
 
     protected virtual void Die()
     {

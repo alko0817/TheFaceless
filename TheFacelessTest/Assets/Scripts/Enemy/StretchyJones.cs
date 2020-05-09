@@ -79,7 +79,12 @@ public class StretchyJones : EnemyBase
 
         if (!engaging)
         {
-            if (timeSinceLastSawPlayer > suspicionTime)
+            if (patrolPath == null)
+            {
+                state_ = STATE.IDLE;
+            }
+
+            else if (timeSinceLastSawPlayer > suspicionTime)
             {
                 state_ = STATE.PATROL;
             }
@@ -204,16 +209,7 @@ public class StretchyJones : EnemyBase
         }
 
     }
-    void Guard()
-    {
-        Vector3 vectorToInitialPos = initialPosition - transform.position;
-        float dist = vectorToInitialPos.magnitude;
 
-        if (Math.Abs(dist) > 2f)
-            MoveTo(initialPosition, initialSpeed);
-        else
-            Stop();
-    }
 
 
 
