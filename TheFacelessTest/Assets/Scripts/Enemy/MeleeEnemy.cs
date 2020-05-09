@@ -82,7 +82,7 @@ public class MeleeEnemy : EnemyBase
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
         Gizmos.DrawWireSphere(transform.position, sightDistance);
 
