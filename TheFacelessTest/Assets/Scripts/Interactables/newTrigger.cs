@@ -16,7 +16,9 @@ public class newTrigger : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         manager = GameObject.Find("Flashbacks Manager").GetComponent<fbManager>();
+        sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
         fadeOutDelay = manager.triggers[localIndex].duration;
         UIAnim = manager.triggers[localIndex].animator;
         sound = manager.triggers[localIndex].sound;
@@ -31,8 +33,8 @@ public class newTrigger : MonoBehaviour
                 triggered = true;
                 wait = true;
                 UIAnim.SetTrigger("fadeIn");
-                sounds.Play(sound, sounds.Flashbacks);
                 StartCoroutine("FadeOut");
+                sounds.Play(sound, sounds.Flashbacks);
 
             }
         }

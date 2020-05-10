@@ -44,15 +44,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggers:
-  - name: Tutorial
+  - name: Movement_Tutorial
     index: 0
     popUp: {fileID: 0}
     duration: 5
     sound: 
     animator: {fileID: 0}
-  - name: Reflection
+  - name: Combat_Tutorial
     index: 1
     popUp: {fileID: 0}
-    duration: 5
+    duration: 10
     sound: 
+    animator: {fileID: 0}
+  - name: Discharge_Tutorial
+    index: 2
+    popUp: {fileID: 0}
+    duration: 10
+    sound: 
+    animator: {fileID: 0}
+  - name: Flashback 1
+    index: 3
+    popUp: {fileID: 0}
+    duration: 7
+    sound: Flashback 1
+    animator: {fileID: 0}
+  - name: Flashback 2
+    index: 4
+    popUp: {fileID: 0}
+    duration: 7
+    sound: Flashback 2
+    animator: {fileID: 0}
+  - name: Flashback 3
+    index: 5
+    popUp: {fileID: 0}
+    duration: 7
+    sound: Flashback 3
+    animator: {fileID: 0}
+  - name: Flashback 4
+    index: 6
+    popUp: {fileID: 0}
+    duration: 7
+    sound: Flashback 4
     animator: {fileID: 0}
