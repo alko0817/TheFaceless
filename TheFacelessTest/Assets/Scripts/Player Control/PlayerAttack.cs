@@ -316,8 +316,7 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyBase>().TakeDamage(damage);
             if (isDischarge)
             {
-                
-                isDischarge = false;
+                enemy.GetComponent<EnemyBase>().SetStunned(true);
             }
             else controller.Charge();
         }
@@ -368,6 +367,8 @@ public class PlayerAttack : MonoBehaviour
         controller.health.Immortality(false);
 
         controller.discharging = false;
+        yield return new WaitForSeconds(1f);
+        isDischarge = false;
     }
 
     public bool GetAttacking ()

@@ -26,7 +26,7 @@ public class EnemyBase : MonoBehaviour
     public ParticleSystem electricStun;
     protected SpawnEffect dissolving;
     internal NavMeshAgent navMeshAgent;
-    internal Animator anim;
+    internal AIAnimator anim;
     protected AudioSource audioSource;
     protected audioManager audioManager;
     protected EnemyBlackboard blackboard;
@@ -101,7 +101,7 @@ public class EnemyBase : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         dissolving = GetComponent<SpawnEffect>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<AIAnimator>();
 
         state_ = STATE.IDLE;
     }
@@ -194,7 +194,7 @@ public class EnemyBase : MonoBehaviour
     {
         Stop();
         electricStun.Play();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3f);
         electricStun.Stop();
         stunned = false;
     }

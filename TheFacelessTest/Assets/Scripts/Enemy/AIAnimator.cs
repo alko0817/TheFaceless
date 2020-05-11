@@ -51,4 +51,10 @@ public class AIAnimator : MonoBehaviour
         public static int dodge = Animator.StringToHash("dodge");
         public static int stun = Animator.StringToHash("stun");
     }
+
+    public void Shoot() { an.SetTrigger(Animate.shoot); }
+    public void Block() { an.SetTrigger(Animate.block); }
+    public void Dodge() { an.SetTrigger(Animate.dodge); }
+    public void Stun() { an.SetTrigger(Animate.stun); }
+    public void Attack() { an.SetTrigger(Animate.attack); }
 }

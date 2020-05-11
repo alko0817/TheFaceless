@@ -229,7 +229,7 @@ public class MeleeEnemy : EnemyBase
         Stop();
         attackThrown = true;
         combatActionInProgress = true;
-        anim.SetTrigger("attack");
+        anim.Attack();
         yield return new WaitForSeconds(attackDelay);
         if (Physics.CheckSphere(attackPoint.position, attackHitBox, playerMask))
         {
@@ -245,6 +245,7 @@ public class MeleeEnemy : EnemyBase
     {
         combatActionInProgress = true;
         dodging = true;
+        anim.Dodge();
         Vector3 direction = (player.transform.position - transform.position) * -1;
         direction.Normalize();
         navMeshAgent.Move(direction * 2);
@@ -258,6 +259,7 @@ public class MeleeEnemy : EnemyBase
     {
         combatActionInProgress = true;
         blocking = true;
+        anim.Block();
         print(gameObject.name + " is blocking");
         yield return new WaitForSeconds(2f);
         blocking = false;
