@@ -10,7 +10,6 @@ public class ShooterEnemy : EnemyBase
     #region COMPONENETS
     public GameObject projectile;
     public GameObject[] projectiles;
-    shootAnimator anim;
     Transform projectileSpawn;
     #endregion
 
@@ -32,7 +31,6 @@ public class ShooterEnemy : EnemyBase
     protected override void Start()
     {
         base.Start();
-        anim = GetComponent<shootAnimator>();
         shootTimer = 0f;
         fleeTimer = Mathf.Infinity;
         shooting = false;
@@ -145,7 +143,7 @@ public class ShooterEnemy : EnemyBase
         if (shootTimer > (fireRate / 3) * 2 && !shooting)
         {
             shooting = true;
-            anim.Shot();
+            anim.Shoot();
         }
 
         if (shootTimer > fireRate)
