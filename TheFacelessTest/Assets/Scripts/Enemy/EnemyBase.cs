@@ -224,7 +224,7 @@ public class EnemyBase : MonoBehaviour
     {
         navMeshAgent.speed = 0;
         navMeshAgent.isStopped = true;
-        audioSource.Stop();
+        //audioSource.Stop();
     }
 
     public virtual void TakeDamage(int damage)
@@ -260,7 +260,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         dying = true;
-        audioSource.PlayOneShot(DeathSound);
+        
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
@@ -272,7 +272,9 @@ public class EnemyBase : MonoBehaviour
     IEnumerator Dissolve ()
     {
         yield return new WaitForSeconds(2f);
+        audioSource.PlayOneShot(DeathSound);
         dissolving.enabled = true;
+
     }
 
 
