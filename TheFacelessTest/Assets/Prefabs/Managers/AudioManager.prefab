@@ -51,7 +51,35 @@ MonoBehaviour:
     loop: 1
     mute: 0
     source: {fileID: 0}
-  Flashbacks: []
+  Flashbacks:
+  - name: Flashback 1
+    clip: {fileID: 8300000, guid: 0bb366af98b6e174f8e812dcbba452c7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  - name: Flashback 2
+    clip: {fileID: 8300000, guid: 0c1ec33884327bb42a63e458e6fce8b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  - name: Flashback 3
+    clip: {fileID: 8300000, guid: 9d539c7e988f97e4c8b41a81cd172662, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  - name: Flashback 4
+    clip: {fileID: 8300000, guid: 7571f96f234fc64409473b75e41b59b8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
   Ambient:
   - name: Hallway
     clip: {fileID: 8300000, guid: 94ea95a11b0eba54591104dae2959e47, type: 3}
@@ -87,4 +115,4 @@ MonoBehaviour:
   useMasterControls: 1
   MusicVolume: 0
   FlashBacksVolume: 1
-  AmbientVolume: 1
+  AmbientVolume: 0.8

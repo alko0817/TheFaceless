@@ -347,7 +347,7 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(.7f);
         controller.electricityCharge.Stop();
-        StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
+        //StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
 
         //controller.burst.Play();
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
