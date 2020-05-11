@@ -32,6 +32,7 @@ public class EnemyBase : MonoBehaviour
     protected EnemyBlackboard blackboard;
     public Image healthBar;
     public ParticleSystem hit;
+    public ParticleSystem blockHit;
     #endregion
 
     [Header("Global Settings Checkbox")]
@@ -243,13 +244,14 @@ public class EnemyBase : MonoBehaviour
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
             audioSource.PlayOneShot(ReceiveDmgSound);
+            hit.Emit(1);
         }
         else
         {
-            
+            blockHit.Emit(1);
             print("attack blocked");
         }
-        hit.Emit(1);
+        
 
         //HURT ANIMATIONS
 

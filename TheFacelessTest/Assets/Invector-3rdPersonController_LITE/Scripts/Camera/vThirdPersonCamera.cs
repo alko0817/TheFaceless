@@ -61,8 +61,9 @@ public class vThirdPersonCamera : MonoBehaviour
 
     void Start()
     {
-        Init();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        Init();
+        
     }
 
     public void Init()

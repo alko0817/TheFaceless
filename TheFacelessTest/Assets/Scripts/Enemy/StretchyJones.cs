@@ -71,8 +71,8 @@ public class StretchyJones : EnemyBase
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(hitPoint.position, hitRadius);
-        Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
+        //Gizmos.DrawWireSphere(hitPoint.position, hitRadius);
+        //Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
 
         Gizmos.DrawWireSphere(transform.position, sightDistance);
 
