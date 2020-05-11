@@ -278,6 +278,7 @@ public class MeleeEnemy : EnemyBase
     {
         if (patrolPath != null)
         {
+            audioSource.PlayOneShot(StaticSound);
             if (AtWaypoint())
             {
                 Stop();

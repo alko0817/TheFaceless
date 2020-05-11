@@ -266,66 +266,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 751c2028e4407a247a6deb643f11cee8, type: 3}
---- !u!21 &162850175
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: LiberationSans SDF Material
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1001 &270147491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -849,12 +789,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &500892791 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292110267926525846, guid: a5c011aff990a4147bb7d2e38b99821a,
-    type: 3}
-  m_PrefabInstance: {fileID: 270147491}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &550050698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1623,6 +1557,11 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3629363407692070243, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: m_padding
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3855102575042882240, guid: 78245e1da84781c4491f5efe5dfac56f,
         type: 3}
       propertyPath: m_Name
@@ -1857,58 +1796,130 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'new shooter enemy '
       objectReference: {fileID: 0}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: DeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4570d9a7fd1778e45b44e23778fe95f3, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: ReceiveDmgSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b8b586425ea47746a2c5b28d7afc850, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: DealDmgSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 16c4f7177c762414fb9cf60b3c0d5c25, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: StunnedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 11fb3908bc383504abafaca36d4cca18, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: ChatterSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 11fb3908bc383504abafaca36d4cca18, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: StaticSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 11fb3908bc383504abafaca36d4cca18, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: MoveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 11fb3908bc383504abafaca36d4cca18, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 8300000, guid: 16c4f7177c762414fb9cf60b3c0d5c25, type: 3}
+    - target: {fileID: 7315947886663085778, guid: 2e769d2f3be1897469483dd5d3f89af5,
+        type: 3}
+      propertyPath: dyingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d7af2aeaf52e56a429e39f0baf7c0300, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e769d2f3be1897469483dd5d3f89af5, type: 3}
---- !u!1 &1012459137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4975347577699475373, guid: 1688cab570547e14991b3c57e0a94646,
-    type: 3}
-  m_PrefabInstance: {fileID: 1092942290}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1012459138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012459137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1bfe72fbc87d04e885296b53e91c66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smoothCameraRotation: 12
-  cullingLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  lockCamera: 0
-  rightOffset: 0.2
-  defaultDistance: 3
-  height: 1.7
-  smoothFollow: 10
-  xMouseSensitivity: 3
-  yMouseSensitivity: 3
-  yMinLimit: -40
-  yMaxLimit: 80
-  indexList: 0
-  indexLookPoint: 0
-  offSetPlayerPivot: 0
-  currentStateName: 
-  currentTarget: {fileID: 0}
-  movementSpeed: {x: 0, y: 0}
-  targetLookAt: {fileID: 0}
 --- !u!114 &1012459140 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7020169499448934236, guid: 1688cab570547e14991b3c57e0a94646,
     type: 3}
   m_PrefabInstance: {fileID: 1092942290}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012459137}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ef7595e6bce52845ab4bab7dce178b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &1025058454
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LiberationSans SDF Material
+  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee,
+          type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _FaceDilate: 0
+    - _GradientScale: 10
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _OutlineSoftness: 0
+    - _OutlineWidth: 0
+    - _PerspectiveFilter: 0.875
+    - _ScaleRatioA: 0.9
+    - _ScaleRatioB: 1
+    - _ScaleRatioC: 0.73125
+    - _ScaleX: 1
+    - _ScaleY: 1
+    - _ShaderFlags: 0
+    - _Sharpness: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TextureHeight: 1024
+    - _TextureWidth: 1024
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0
+    - _UnderlayOffsetY: 0
+    - _UnderlaySoftness: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    - _WeightBold: 0.75
+    - _WeightNormal: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1001 &1092942290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1916,26 +1927,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4975347576686165601, guid: 1688cab570547e14991b3c57e0a94646,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4975347576686165658, guid: 1688cab570547e14991b3c57e0a94646,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 500892791}
-    - target: {fileID: 4975347576686165658, guid: 1688cab570547e14991b3c57e0a94646,
-        type: 3}
-      propertyPath: targetLookAt
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4975347576686165658, guid: 1688cab570547e14991b3c57e0a94646,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4975347577699475372, guid: 1688cab570547e14991b3c57e0a94646,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -44,6 +44,7 @@ public class EnemyBase : MonoBehaviour
     protected bool stunned;
     internal bool engaging;
     internal bool blocking;
+    internal bool dead = false;
     #endregion
 
     [Header("Base Variables")]
@@ -72,6 +73,7 @@ public class EnemyBase : MonoBehaviour
     public AudioClip DealDmgSound;
     [Space]
     public AudioClip StunnedSound;
+    public AudioClip dyingSound;
     public AudioClip DeathSound;
     [Space]
     public AudioClip MoveSound;
@@ -112,9 +114,10 @@ public class EnemyBase : MonoBehaviour
         Vector3 vectorToPlayer = player.transform.position - transform.position;
         distanceToPlayer = vectorToPlayer.magnitude;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
             Die();
+            dead = true;
         }
 
         if (!dying)
@@ -224,7 +227,6 @@ public class EnemyBase : MonoBehaviour
     {
         navMeshAgent.speed = 0;
         navMeshAgent.isStopped = true;
-        audioSource.Stop();
     }
 
     public virtual void TakeDamage(int damage)
@@ -234,10 +236,11 @@ public class EnemyBase : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.fillAmount = currentHealth / maxHealth;
+            audioSource.PlayOneShot(ReceiveDmgSound);
         }
         else
         {
-
+            
             print("attack blocked");
         }
         hit.Emit(1);
@@ -260,7 +263,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         dying = true;
-        audioSource.PlayOneShot(DeathSound);
+        audioSource.PlayOneShot(dyingSound);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
@@ -272,6 +275,7 @@ public class EnemyBase : MonoBehaviour
     IEnumerator Dissolve ()
     {
         yield return new WaitForSeconds(2f);
+        audioSource.PlayOneShot(DeathSound);
         dissolving.enabled = true;
     }
 

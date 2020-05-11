@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class hazard : MonoBehaviour
 {
-    public GameObject player;
-    public PlayerHealth health;
+    private GameObject player;
+    private PlayerHealth health;
     public int damagePerTick;
     bool stepped = false;
     public float tick = 1f;
@@ -16,6 +16,8 @@ public class hazard : MonoBehaviour
     private void Start()
     {
         timer = tick;
+        player = GameObject.FindGameObjectWithTag("Player");
+        health = GameObject.FindGameObjectWithTag("Player Health").GetComponent<PlayerHealth>();
     }
 
     private void Update()
