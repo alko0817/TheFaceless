@@ -5,7 +5,7 @@ public class vThirdPersonCamera : MonoBehaviour
 {
     #region inspector properties    
 
-    public Transform target;
+    internal Transform target;
     [Tooltip("Lerp speed between Camera States")]
     public float smoothCameraRotation = 12f;
     [Tooltip("What layer will be culled")]
@@ -37,7 +37,7 @@ public class vThirdPersonCamera : MonoBehaviour
     [HideInInspector]
     public Vector2 movementSpeed;
 
-    //[HideInInspector]
+    [HideInInspector]
     public Transform targetLookAt;
     private Vector3 currentTargetPos;
     private Vector3 lookPoint;
@@ -62,6 +62,7 @@ public class vThirdPersonCamera : MonoBehaviour
     void Start()
     {
         Init();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     public void Init()
@@ -69,13 +70,13 @@ public class vThirdPersonCamera : MonoBehaviour
         if (target == null)
             return;
 
-        _camera = GetComponent<Camera>();
+        _camera = Camera.main;
         currentTarget = target;
         currentTargetPos = new Vector3(currentTarget.position.x, currentTarget.position.y + offSetPlayerPivot, currentTarget.position.z);
 
-        //targetLookAt = new GameObject("targetLookAt").transform;
+        targetLookAt = new GameObject("targetLookAt").transform;
         targetLookAt.position = currentTarget.position;
-        //targetLookAt.hideFlags = HideFlags.HideInHierarchy;
+        targetLookAt.hideFlags = HideFlags.HideInHierarchy;
         targetLookAt.rotation = currentTarget.rotation;
 
         mouseY = currentTarget.eulerAngles.x;

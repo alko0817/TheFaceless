@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using System;
+using System.Security.Permissions;
 
 public class MeleeEnemy : EnemyBase
 {
@@ -27,6 +28,9 @@ public class MeleeEnemy : EnemyBase
     public float attackDelay = 1f;
     public float pursueDelay;
     public float suspicionTime;
+    [Space]
+    public AudioClip attackSound;
+    public AudioClip blockSound;
     #endregion
 
     #region INTERNAL PARAMETERS
@@ -230,6 +234,7 @@ public class MeleeEnemy : EnemyBase
         attackThrown = true;
         combatActionInProgress = true;
         anim.Attack();
+        audioSource.PlayOneShot(attackSound);
         yield return new WaitForSeconds(attackDelay);
         if (Physics.CheckSphere(attackPoint.position, attackHitBox, playerMask))
         {
@@ -259,6 +264,7 @@ public class MeleeEnemy : EnemyBase
     {
         combatActionInProgress = true;
         blocking = true;
+        audioSource.PlayOneShot(blockSound);
         anim.Block();
         print(gameObject.name + " is blocking");
         yield return new WaitForSeconds(2f);

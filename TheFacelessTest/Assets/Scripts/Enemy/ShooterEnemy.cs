@@ -20,6 +20,7 @@ public class ShooterEnemy : EnemyBase
     public int damage;
     public float fleeTime;
     public float fireRate;
+    public AudioClip shot;
     #endregion
 
     #region INTERNAL PARAMETERS
@@ -150,7 +151,7 @@ public class ShooterEnemy : EnemyBase
         {
             shootTimer = 0f;
             shooting = false;
-
+            audioSource.PlayOneShot(shot);
             for (int i = 0; i < projectiles.Length; i++)
             {
                 if (!projectiles[i].activeInHierarchy)
