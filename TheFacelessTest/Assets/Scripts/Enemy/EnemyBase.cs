@@ -91,7 +91,6 @@ public class EnemyBase : MonoBehaviour
 
         timeSinceLastSawPlayer = Mathf.Infinity;
 
-        currentHealth = maxHealth;
 
 
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -193,7 +192,10 @@ public class EnemyBase : MonoBehaviour
         print("SetStunned() Successful");
         stunned = value;
     }
-
+    public virtual bool GetStunned()
+    {
+        return stunned;
+    }
     IEnumerator Stun()
     {
         print("Sunt() Successful");

@@ -44,6 +44,8 @@ public class ShooterEnemy : EnemyBase
         {
             SetUp();
         }
+        currentHealth = maxHealth;
+
 
         for (int i = 0; i < projectiles.Length; i++)
         {

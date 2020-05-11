@@ -74,6 +74,8 @@ public class MeleeEnemy : EnemyBase
         {
             SetUp();
         }
+        currentHealth = maxHealth;
+
     }
 
     protected override void UpdateTimers()
