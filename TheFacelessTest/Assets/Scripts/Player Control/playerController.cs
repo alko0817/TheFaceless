@@ -149,6 +149,8 @@ public class playerController : MonoBehaviour
     public AudioClip lightAttack3Sound;
     public AudioClip lightAttack4Sound;
     [Space]
+    public AudioClip wallHit;
+    [Space]
     public AudioClip heavyAttackSound;
     [Space]
     public AudioClip blockAttack1Sound;

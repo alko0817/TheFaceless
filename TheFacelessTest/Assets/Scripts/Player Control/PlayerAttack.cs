@@ -321,6 +321,18 @@ public class PlayerAttack : MonoBehaviour
             }
             else controller.Charge();
         }
+
+        if (!isDischarge)
+        {
+            Collider[] walls = Physics.OverlapSphere(aoe, aoeRadius);
+            foreach (Collider wall in walls)
+            {
+                if (wall.tag == "Map")
+                {
+                    controller.SwordSounds.PlayOneShot(controller.wallHit);
+                }
+            }
+        }
         isDischarge = false;
     }
 
