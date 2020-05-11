@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class chargeSpot : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     private bool stepped = false;
     private float originCharge;
     public float charging = .5f;
@@ -12,6 +12,7 @@ public class chargeSpot : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         originCharge = player.GetComponent<playerController>().chargeRate;
     }
     private void Update()

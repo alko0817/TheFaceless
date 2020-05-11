@@ -1,23 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class cameraShake : MonoBehaviour
 {
-
-    private void Update()
-    {
-        Debug.Log(gameObject.transform);
-    }
     public IEnumerator Shake(float duration, float magnitude)
     {
-
+        Vector3 originPos = transform.localPosition;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            float x = transform.localPosition.x * Random.Range(-1f, 1f) * magnitude;
-            float y = transform.localPosition.y * Random.Range(-1f, 1f) * magnitude;
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = new Vector3(x, y, transform.localPosition.z);
 
@@ -25,5 +21,7 @@ public class cameraShake : MonoBehaviour
 
             yield return null;
         }
+
+        transform.localPosition = originPos;
     }
 }

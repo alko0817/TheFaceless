@@ -46,3 +46,34 @@ MonoBehaviour:
   maxNumberOfPursuingEnemies: 6
   enemiesPursuingPlayer: []
   enemiesInSightOfPlayer: []
+  MeleeSightDistance: 15
+  MeleeAttackDistance: 2
+  MeleeMaxHealth: 80
+  MeleeInitialSpeed: 4
+  MeleePursueSpeed: 4
+  MeleeAttackDamage: 8
+  DodgeChanceOutOf10: 1
+  BlockChanceOutOf10: 1
+  MeleePusueDelay: 1
+  MeleeSuspicionTime: 3
+  MeleeWaypointTolerance: 1
+  MeleeWaypointWaitTime: 2
+  JonesSightDistance: 0
+  JonesAttackDistance: 0
+  JonesMaxHealth: 0
+  JonesInitialSpeed: 0
+  JonesPursueSpeed: 0
+  JonesAttackDamage: 0
+  JonesPusueDelay: 0
+  JonesSuspicionTime: 0
+  JonesAoeRadius: 0
+  JonesWaypointTolerance: 0
+  JonesWaypointWaitTime: 0
+  ShooterSightDistance: 20
+  ShooterMaxHealth: 75
+  ShooterInitialSpeed: 3
+  ShooterFleeSpeed: 3
+  ShooterFleeTime: 2
+  ShooterFleeDistance: 2
+  ShooterDamage: 15
+  ShooterFireRate: 2

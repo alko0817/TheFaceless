@@ -66,17 +66,17 @@ public class EnemyBase : MonoBehaviour
 
 
     #region SOUND
-    //[Header("Sound FX")]
-    //[Space]
-    //public AudioClip ReceiveDmgSound;
-    //public AudioClip DealDmgSound;
-    //[Space]
-    //public AudioClip StunnedSound;
-    //public AudioClip DeathSound;
-    //[Space]
-    //public AudioClip MoveSound;
-    //public AudioClip StaticSound;
-    //public AudioClip ChatterSound;
+    [Header("Sound FX")]
+    [Space]
+    public AudioClip ReceiveDmgSound;
+    public AudioClip DealDmgSound;
+    [Space]
+    public AudioClip StunnedSound;
+    public AudioClip DeathSound;
+    [Space]
+    public AudioClip MoveSound;
+    public AudioClip StaticSound;
+    public AudioClip ChatterSound;
     #endregion
 
     protected virtual void Start()
@@ -105,6 +105,7 @@ public class EnemyBase : MonoBehaviour
 
         state_ = STATE.IDLE;
     }
+
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -216,7 +217,7 @@ public class EnemyBase : MonoBehaviour
         navMeshAgent.speed = speed;
         navMeshAgent.destination = location;     
         navMeshAgent.isStopped = false;
-        //audioSource.PlayOneShot(MoveSound);
+        audioSource.PlayOneShot(MoveSound);
     }
 
     protected virtual void Stop()
@@ -259,7 +260,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         dying = true;
-       // audioSource.PlayOneShot(DeathSound);
+        audioSource.PlayOneShot(DeathSound);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();

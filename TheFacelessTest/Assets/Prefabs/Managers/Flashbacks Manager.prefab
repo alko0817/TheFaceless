@@ -65,19 +65,19 @@ MonoBehaviour:
   - name: Flashback 1
     index: 3
     popUp: {fileID: 0}
-    duration: 7
+    duration: 12
     sound: Flashback 1
     animator: {fileID: 0}
   - name: Flashback 2
     index: 4
     popUp: {fileID: 0}
-    duration: 7
+    duration: 8
     sound: Flashback 2
     animator: {fileID: 0}
   - name: Flashback 3
     index: 5
     popUp: {fileID: 0}
-    duration: 7
+    duration: 12
     sound: Flashback 3
     animator: {fileID: 0}
   - name: Flashback 4
