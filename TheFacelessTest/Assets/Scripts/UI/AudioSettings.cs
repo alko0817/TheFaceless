@@ -12,7 +12,7 @@ public class AudioSettings : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
         sliders[0].value = manager.MusicVolume;
-        sliders[2].value = manager.AmbientVolume;
+        sliders[1].value = manager.AmbientVolume;
     }
     
     public void SetMusic (float value)

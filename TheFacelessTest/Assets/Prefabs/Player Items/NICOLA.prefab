@@ -502,7 +502,7 @@ MonoBehaviour:
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
   m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623165044700509581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 246850058b3cc6149b540e1173d339e5, type: 3}
   m_Name: 
@@ -649,7 +649,7 @@ MonoBehaviour:
   horizontalInput: Horizontal
   verticallInput: Vertical
   jumpInput: 32
-  strafeInput: 256
+  strafeInput: 0
   sprintInput: 304
   rotateCameraXInput: Mouse X
   rotateCameraYInput: Mouse Y
