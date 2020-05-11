@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/EffectExamples/Goop Effects.meta
 guid: cb48b64d52755af4bbdbd15da90ea9f9
+=======
+guid: ad0b89bd2561fbd4481e8c6cd0f74c18
+>>>>>>> fred:TheFacelessTest/Assets/Props.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
