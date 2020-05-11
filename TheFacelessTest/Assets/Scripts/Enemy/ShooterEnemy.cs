@@ -97,19 +97,21 @@ public class ShooterEnemy : EnemyBase
     protected override void Decide()
     {
         base.Decide();
-        if (fleeTimer < fleeTime)
+        if (!stunned)
         {
-            state_ = STATE.FLEE;
+            if (fleeTimer < fleeTime)
+            {
+                state_ = STATE.FLEE;
+            }
+            else if (playerDetected && canHitPlayer)
+            {
+                state_ = STATE.IN_COMBAT;
+            }
+            else
+            {
+                state_ = STATE.IDLE;
+            }
         }
-        else if (playerDetected)
-        {
-            state_ = STATE.IN_COMBAT;
-        }
-        else
-        {
-            state_ = STATE.IDLE;
-        }
-
 
 
     }
@@ -186,6 +188,6 @@ public class ShooterEnemy : EnemyBase
         fleeDistance = blackboard.ShooterFleeDistance;
         damage = blackboard.ShooterDamage;
         fireRate = blackboard.ShooterFireRate;
-
+        stunDuration = blackboard.StunDuration;
     }
 }

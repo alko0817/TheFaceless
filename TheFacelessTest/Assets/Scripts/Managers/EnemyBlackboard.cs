@@ -15,6 +15,9 @@ public class EnemyBlackboard : MonoBehaviour
     ShooterEnemy[] shooterEnemies;
     StretchyJones[] stretchies;
 
+    [Header("Variables for all enemies")]
+    public float StunDuration;
+
     [Header("Variables for the Melee enemies")]
     public float MeleeSightDistance;
     public float MeleeAttackDistance;

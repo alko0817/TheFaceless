@@ -320,6 +320,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else controller.Charge();
         }
+        isDischarge = false;
     }
 
     IEnumerator Discharge ()
@@ -368,7 +369,7 @@ public class PlayerAttack : MonoBehaviour
 
         controller.discharging = false;
         yield return new WaitForSeconds(1f);
-        isDischarge = false;
+        //isDischarge = false;
     }
 
     public bool GetAttacking ()
