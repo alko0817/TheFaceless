@@ -283,6 +283,7 @@ public class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(2f);
         audioSource.PlayOneShot(DeathSound);
         dissolving.enabled = true;
+
     }
 
 
