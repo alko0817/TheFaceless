@@ -60,6 +60,8 @@ public class StretchyJones : EnemyBase
         {
             SetUp();
         }
+        currentHealth = maxHealth;
+
     }
 
     protected override void UpdateTimers()
