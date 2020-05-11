@@ -44,6 +44,7 @@ public class EnemyBase : MonoBehaviour
     protected bool stunned;
     internal bool engaging;
     internal bool blocking;
+    protected bool canHitPlayer;
     #endregion
 
     [Header("Base Variables")]
@@ -51,6 +52,7 @@ public class EnemyBase : MonoBehaviour
     public float maxHealth;
     public float sightDistance;
     public float initialSpeed;
+    public float stunDuration;
     #endregion
 
     #region INTERENAL PARAMETERS
@@ -188,16 +190,20 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void SetStunned(bool value)
     {
+        print("SetStunned() Successful");
         stunned = value;
     }
 
     IEnumerator Stun()
     {
+        print("Sunt() Successful");
         Stop();
+        canHitPlayer = false;
         electricStun.Play();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(stunDuration);
         electricStun.Stop();
         stunned = false;
+        canHitPlayer = true;
     }
 
 

@@ -40,7 +40,6 @@ public class MeleeEnemy : EnemyBase
     #endregion
 
     #region BOOLEANS
-    private bool canHitPlayer;
     internal bool attackThrown;
     internal bool dodging = false;
     private bool combatActionInProgress;
@@ -108,33 +107,36 @@ public class MeleeEnemy : EnemyBase
     {
         base.Decide();
 
-        if (!engaging)
+        if (!stunned)
         {
-            if (patrolPath == null)
+            if (!engaging)
             {
-                state_ = STATE.IDLE;
-            }
-            else if (timeSinceLastSawPlayer > suspicionTime)
-            {
-                state_ = STATE.PATROL;
+                if (patrolPath == null)
+                {
+                    state_ = STATE.IDLE;
+                }
+                else if (timeSinceLastSawPlayer > suspicionTime)
+                {
+                    state_ = STATE.PATROL;
+                }
+
+                if (timeSinceLastSawPlayer < suspicionTime)
+                {
+                    state_ = STATE.SUSPICIOUS;
+                }
             }
 
-            if (timeSinceLastSawPlayer < suspicionTime)
+            if (engaging)
             {
-                state_ = STATE.SUSPICIOUS;
-            }
-        }
+                if (distanceToPlayer > attackDistance && !combatActionInProgress)
+                {
+                    state_ = STATE.PURSUE;
+                }
 
-        if (engaging)
-        {
-            if (distanceToPlayer > attackDistance && !combatActionInProgress)
-            {
-                state_ = STATE.PURSUE;
-            }
-
-            if (CanAttack())
-            {
-                state_ = STATE.IN_COMBAT;
+                if (CanAttack())
+                {
+                    state_ = STATE.IN_COMBAT;
+                }
             }
         }
         print("State of " + gameObject.name + ": " + state_);
@@ -341,5 +343,6 @@ public class MeleeEnemy : EnemyBase
         blockChanceOutOf10 = blackboard.BlockChanceOutOf10;
         waypointTolerance = blackboard.MeleeWaypointTolerance;
         waypointWaitTime = blackboard.MeleeWaypointWaitTime;
+        stunDuration = blackboard.StunDuration;
     }
 }
