@@ -130,7 +130,7 @@ public class PlayerAttack : MonoBehaviour
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging)
+        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging && !controller.stunned)
         {
 
 
@@ -308,6 +308,7 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(delay);
         attackThrown = false;
         attacking = false;
+
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
 
         //APPLY DPS
