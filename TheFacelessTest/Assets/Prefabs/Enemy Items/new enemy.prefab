@@ -27235,7 +27235,7 @@ MonoBehaviour:
   attackDistance: 1
   attackHitBox: 0
   dodgeChanceOutOf10: 1
-  blockChanceOutOf10: 1
+  blockChanceOutOf10: 0
   waypointTolerance: 1.5
   waypointWaitTime: 3
   attackDelay: 0.7
