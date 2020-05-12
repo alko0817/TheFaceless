@@ -46,9 +46,10 @@ MonoBehaviour:
   maxNumberOfPursuingEnemies: 6
   enemiesPursuingPlayer: []
   enemiesInSightOfPlayer: []
+  StunDuration: 0
   MeleeSightDistance: 15
   MeleeAttackDistance: 2
-  MeleeMaxHealth: 80
+  MeleeMaxHealth: 50
   MeleeInitialSpeed: 4
   MeleePursueSpeed: 4
   MeleeAttackDamage: 8
@@ -70,7 +71,7 @@ MonoBehaviour:
   JonesWaypointTolerance: 0
   JonesWaypointWaitTime: 0
   ShooterSightDistance: 20
-  ShooterMaxHealth: 75
+  ShooterMaxHealth: 45
   ShooterInitialSpeed: 3
   ShooterFleeSpeed: 3
   ShooterFleeTime: 2
