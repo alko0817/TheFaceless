@@ -32,7 +32,7 @@ public class PlayerDodge : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
 
         //CHECK FOR LAST TIME DODGED
-        if (dodgeCd <= 0 && !controller.attacking)
+        if (dodgeCd <= 0 && !controller.attacking && !controller.stunned)
         {
             if (controller.stamina.bar.fillAmount >= controller.dodgeCost)
             {
