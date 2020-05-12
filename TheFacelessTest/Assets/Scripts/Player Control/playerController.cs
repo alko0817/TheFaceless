@@ -75,6 +75,7 @@ public class playerController : MonoBehaviour
     internal bool holding = false;
     internal bool attacking = false;
     internal bool dodging = false;
+    internal bool stunned = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -217,16 +218,6 @@ public class playerController : MonoBehaviour
         jumping = !gameObject.GetComponent<vThirdPersonMotor>().isGrounded;
         speed = rb.velocity.magnitude;
 
-        
-
-        //if (sprinting && !MotionSounds.isPlaying)
-        //{
-        //    MotionSounds.clip = SprintSound;
-        //    MotionSounds.Play();
-        //}
-
-        //else if (!sprinting) MotionSounds.Stop();
-
         if (stamina.bar.fillAmount <= 0 )
         {
             gameObject.GetComponent<vThirdPersonMotor>().isSprinting = false;
@@ -262,6 +253,11 @@ public class playerController : MonoBehaviour
         if (attacking) swordTrail.SetActive(true);
         else swordTrail.SetActive(false);
 
+        //STUN TEST
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Stun();
+        }
     }
 
     //SWORD CHARGE
@@ -294,7 +290,35 @@ public class playerController : MonoBehaviour
 
     public void Stun()
     {
-        // stun code;
+        if (!stunned)
+        {
+            if (!sprinting)
+            {
+                anim.SetTrigger("stun2");
+                stunned = true;
+                StartCoroutine(Stunning(1.5f));
+            }
+
+            else
+            {
+                anim.SetTrigger("stun");
+                stunned = true;
+                StartCoroutine(Stunning(3f));
+            }
+            
+        }
+        
+
+    }
+
+    IEnumerator Stunning(float delay)
+    {
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(delay);
+
+        stunned = false;
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+
     }
 }
 
