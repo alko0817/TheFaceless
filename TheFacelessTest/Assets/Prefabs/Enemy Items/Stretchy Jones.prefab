@@ -31465,7 +31465,6 @@ Transform:
   - {fileID: 6109281174577659440}
   - {fileID: 6109281175780280492}
   - {fileID: 6109281176000962319}
-  - {fileID: 6109281175254113982}
   m_Father: {fileID: 6109281175819913095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38494,7 +38493,6 @@ GameObject:
   - component: {fileID: 6109281175254113987}
   - component: {fileID: 6109281175254113980}
   - component: {fileID: 6109281175254113981}
-  - component: {fileID: 7956718102460981176}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -38510,17 +38508,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6109281175254113983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.231}
+  m_LocalPosition: {x: 0, y: 0, z: 0.216}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 7549338715909575762}
   - {fileID: 6109281174513299836}
-  m_Father: {fileID: 6109281174731232390}
-  m_RootOrder: 3
+  m_Father: {fileID: 6109281175314232495}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0609, y: 0.79372716}
+  m_AnchoredPosition: {x: 0.060889825, y: 0.115021706}
   m_SizeDelta: {x: 0.3262, y: 0.1222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6109281175254113987
@@ -38583,19 +38581,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7956718102460981176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6109281175254113983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34e9561c8f309bb49b20696659d4a913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthFace: {fileID: 6862694813410470243}
 --- !u!1 &6109281175254947239
 GameObject:
   m_ObjectHideFlags: 0
@@ -38808,7 +38793,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.000009992265, y: 0.07722212, z: -0.026412558}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6109281175254113982}
   m_Father: {fileID: 6109281175438934678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46934,6 +46920,7 @@ GameObject:
   - component: {fileID: 6109281176069369597}
   - component: {fileID: 6109281176069369598}
   - component: {fileID: 320480216354898231}
+  - component: {fileID: 4280857158899141514}
   m_Layer: 9
   m_Name: Stretchy Jones
   m_TagString: Enemy
@@ -47146,7 +47133,8 @@ MonoBehaviour:
   ChatterSound: {fileID: 0}
   burst: {fileID: 0}
   burstPoint: {fileID: 0}
-  explosion: {fileID: 0}
+  explosion: {fileID: 336842621751363225, guid: 534372d3ba1f912419da2dac3bc95786,
+    type: 3}
   patrolPath: {fileID: 0}
   aoeRadius: 10
   hitRadius: 1
@@ -47209,6 +47197,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animSmooth: 1
+--- !u!114 &4280857158899141514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109281176069369599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e9561c8f309bb49b20696659d4a913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFace: {fileID: 6862694813410470243}
 --- !u!1 &6109281176070007234
 GameObject:
   m_ObjectHideFlags: 0
