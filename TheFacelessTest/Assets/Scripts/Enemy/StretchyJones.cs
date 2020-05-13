@@ -168,7 +168,7 @@ public class StretchyJones : EnemyBase
         yield return new WaitForSeconds(.8f);
         if (dying) yield break;
 
-        //Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
+        Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
         if (Physics.CheckSphere(aoePoint.position, aoeRadius, playerMask))
         {
             player.GetComponent<playerController>().Stun();

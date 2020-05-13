@@ -19170,6 +19170,36 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &5652710966675841282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6822474612069543661}
+  m_Layer: 9
+  m_Name: burstPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6822474612069543661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5652710966675841282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.42, z: 1.017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6109281176069369344}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6109281173991894638
 GameObject:
   m_ObjectHideFlags: 0
@@ -46945,6 +46975,7 @@ Transform:
   - {fileID: 6109281175451660064}
   - {fileID: 878514976209422157}
   - {fileID: 8412821530959457772}
+  - {fileID: 6822474612069543661}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47131,8 +47162,8 @@ MonoBehaviour:
   MoveSound: {fileID: 0}
   StaticSound: {fileID: 0}
   ChatterSound: {fileID: 0}
-  burst: {fileID: 0}
-  burstPoint: {fileID: 0}
+  burst: {fileID: 8459568857137699131, guid: 552df0c862b0fcd4e87ec4c496d5dba3, type: 3}
+  burstPoint: {fileID: 6822474612069543661}
   explosion: {fileID: 336842621751363225, guid: 534372d3ba1f912419da2dac3bc95786,
     type: 3}
   patrolPath: {fileID: 0}
