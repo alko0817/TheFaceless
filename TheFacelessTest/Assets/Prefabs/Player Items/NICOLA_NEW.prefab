@@ -740,7 +740,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  attackRadius: 1.4
+  attackRadius: 1.2
   heavyRadius: 2
   aoeRadius: 12
   canDie: 1
@@ -770,7 +770,7 @@ MonoBehaviour:
   slash2Damage: 12
   slash3Damage: 14
   slash4Damage: 16
-  heavyDamage: 35
+  heavyDamage: 30
   heavy2Damage: 40
   dischargeDamage: 25
   blockAttack1Dmg: 25
@@ -796,13 +796,13 @@ MonoBehaviour:
   HAStamCost: 0.2
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
-  lightAttack1Sound: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
-  lightAttack2Sound: {fileID: 8300000, guid: 0f51666af62543e4391248200ef9a761, type: 3}
-  lightAttack3Sound: {fileID: 8300000, guid: 720ddb630da3a0b42b038c6f248cebd1, type: 3}
-  lightAttack4Sound: {fileID: 8300000, guid: c1dc2c40c31155f42851864071f4e984, type: 3}
-  wallHit: {fileID: 0}
+  lightAttack1Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
+  lightAttack2Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
+  lightAttack3Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
+  lightAttack4Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
+  wallHit: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
   heavyAttackSound: {fileID: 0}
-  blockAttack1Sound: {fileID: 8300000, guid: 96856b22b11edb1438a0ebe925a5b09c, type: 3}
+  blockAttack1Sound: {fileID: 8300000, guid: 05a9e01dcb3576a4593be5030bd9b1c4, type: 3}
   blockAttack2Sound: {fileID: 8300000, guid: 10597d74e6328a0479622265494fac5b, type: 3}
   BlockSound: {fileID: 0}
   DodgeSound: {fileID: 0}
@@ -810,8 +810,8 @@ MonoBehaviour:
   DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
   ReceiveDmgSound: {fileID: 8300000, guid: 01c7422e46c896e41b0b90e90bc20ae1, type: 3}
   DeathSound: {fileID: 0}
-  MoveSound: {fileID: 8300000, guid: 5dd4942a2d4615743b031c3b4df904d2, type: 3}
-  SprintSound: {fileID: 8300000, guid: affc69a5a7a915c45ba2606569dc8adf, type: 3}
+  MoveSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
+  SprintSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
   SlowBeat: {fileID: 8300000, guid: aaae0ab5dd5f8e2418fd0ebf6b80d6a1, type: 3}
   MediumSlowBeat: {fileID: 8300000, guid: 70a306b967a9ed84788a5f802d3c3be4, type: 3}
   MediumFastBeat: {fileID: 8300000, guid: af8b541573145a84db03ef206fa1d360, type: 3}
@@ -880,7 +880,7 @@ Transform:
   m_GameObject: {fileID: 4292110268255106600}
   m_LocalRotation: {x: -0.0000000745058, y: 0.0000002980232, z: 0.00000004470348,
     w: 1}
-  m_LocalPosition: {x: -0.018, y: 1.469, z: 1.061}
+  m_LocalPosition: {x: -0.124, y: 1.556, z: 1.149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4292110267926525846}
