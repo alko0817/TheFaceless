@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class autoDoor : MonoBehaviour
 {
     Animator DoorAnim;
     GameObject player, detector;
-    //bool isOpen = false;
+    public LeverTurn lever;
+
+    [Tooltip("Set to true if this door has a lever")]
+    public bool useLever = false;
+    bool isOpen = false;
 
     private void Start()
     {
@@ -22,15 +27,22 @@ public class autoDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (useLever)
+        {
+            if (!lever.triggered) return;
+        }
+
         if (player.CompareTag(other.tag))
         {
             Open();
+            isOpen = true;
             
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!isOpen) return;
         Close();
     }
 
