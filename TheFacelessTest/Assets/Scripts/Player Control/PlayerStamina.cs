@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,18 +17,28 @@ public class PlayerStamina : MonoBehaviour
     [Tooltip("Delay before stamina starts recharging")]
     public float chargeDelay = .5f;
 
+    public Image fatigue;
+    Animator anim;
+    bool tired = false;
+
+
     playerController controller;
     internal bool canBlock = true;
     internal bool canSprint = true;
     internal bool canRecharge = true;
+    internal bool fullAtt = true;
+
     internal bool drainingBlock = false;
     internal bool drainingSprint = false;
     internal bool drainingDodge = false;
+    internal bool drainingAtt = false;
 
     private void Start()
     {
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+        anim = GetComponent<Animator>();
         bar.fillAmount = 1f;
+
     }
 
     private void Update()
@@ -76,7 +87,14 @@ public class PlayerStamina : MonoBehaviour
         }
         else drainingSprint = false;
 
-        if (!drainingBlock && !drainingSprint && !drainingDodge) //((!controller.blocking && !canRecharge) || (controller.blocking && controller.attacking) || (!controller.sprinting && !canRecharge))
+        if (bar.fillAmount <= 0 && fullAtt)
+        {
+            tired = true;
+            fullAtt = false;
+            drainingAtt = false;
+        }
+
+        if (!drainingBlock && !drainingSprint && !drainingDodge && !drainingAtt)
         {
             StartCoroutine(ChargeDelay());
         }
@@ -87,7 +105,13 @@ public class PlayerStamina : MonoBehaviour
             Regen();
         }
 
-        
+        #region shitCode
+        if (tired)
+        {
+            anim.SetTrigger("tired");
+            tired = false;
+        }
+        #endregion
     }
 
     IEnumerator ChargeDelay ()
@@ -103,11 +127,20 @@ public class PlayerStamina : MonoBehaviour
     public void Regen()
     {
         bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * rechargeRate));
-        if (bar.fillAmount > 0.6f)
+
+        if (bar.fillAmount > 0.7f)
         {
             canBlock = true;
             canSprint = true;
+            fullAtt = true;
         }
+
+    }
+
+    public void Drain(float drain)
+    {
+        canRecharge = false;
+        bar.fillAmount -= drain;
 
     }
 }

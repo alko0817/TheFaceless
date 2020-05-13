@@ -91,6 +91,7 @@ public class EnemyBase : MonoBehaviour
         engaging = false;
         stunned = false;
         blocking = false;
+        canHitPlayer = true;
 
         timeSinceLastSawPlayer = Mathf.Infinity;
 

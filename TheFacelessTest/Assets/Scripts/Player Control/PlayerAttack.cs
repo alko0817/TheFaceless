@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Invector.vCharacterController;
+using UnityEditor.UIElements;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class PlayerAttack : MonoBehaviour
     bool attackThrown = false;
     bool holding = false;
     bool isDischarge = false;
+    bool isHeavy = false;
 
     //TIMERS 
     int combos = 0;
-    int combosBlock = 0;
     float lastClick = 0;
+
+    int heavyComb = 0;
 
     float attackDelay1;
     float attackDelay2;
@@ -31,7 +34,6 @@ public class PlayerAttack : MonoBehaviour
     float dischargeDelay;
 
     float blockAttackDelay1;
-    float blockAttackDelay2;
 
     float nextAttack;
     float nextHeavyAttack;
@@ -51,7 +53,6 @@ public class PlayerAttack : MonoBehaviour
     float hitDischarge;
 
     float hitBlock1;
-    float hitBlock2;
 
     //DAMAGES
     int slashDamage;
@@ -64,7 +65,8 @@ public class PlayerAttack : MonoBehaviour
     int dischargeDamage;
 
     int blockAttack1Dmg;
-    int blockAttack2Dmg;
+
+    public ParticleSystem heavySlash;
 
     #endregion  
 
@@ -75,7 +77,6 @@ public class PlayerAttack : MonoBehaviour
 
         //CLICK TIMERS
         combos = controller.combos;
-        combosBlock = controller.combosBlock;
         lastClick = controller.lastClick;
 
         attackDelay1 = controller.attackDelay1;
@@ -87,7 +88,6 @@ public class PlayerAttack : MonoBehaviour
         dischargeDelay = controller.dischargeDelay;
 
         blockAttackDelay1 = controller.blockAttackDelay1;
-        blockAttackDelay2 = controller.blockAttackDelay2;
 
         nextAttack = controller.nextAttack;
         nextHeavyAttack = controller.nextHeavyAttack;
@@ -105,7 +105,6 @@ public class PlayerAttack : MonoBehaviour
         hitDischarge = controller.hitDischarge;
 
         hitBlock1 = controller.hitBlock1;
-        hitBlock2 = controller.hitBlock2;
 
         //DAMAGES
         slashDamage = controller.slashDamage;
@@ -117,7 +116,6 @@ public class PlayerAttack : MonoBehaviour
         dischargeDamage = controller.dischargeDamage;
 
         blockAttack1Dmg = controller.blockAttack1Dmg;
-        blockAttack2Dmg = controller.blockAttack2Dmg;
 
 
     }
@@ -130,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging)
+        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging && !controller.stunned)
         {
 
 
@@ -138,7 +136,8 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 combos = 1;
-                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint.position,
+                                        controller.attackRadius, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
 
                 nextCombo = nextAttack;
@@ -152,7 +151,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 isDischarge = true;
                 controller.canDischarge = false;
-                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", controller.aoePoint.position, controller.aoeRadius, nextAttack);
+                Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", 
+                    controller.aoePoint.position, controller.aoeRadius, nextAttack, 0);
 
                 StartCoroutine(Discharge());
             }
@@ -165,28 +165,33 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 1))
             {
                 combos = 2;
-                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", 
+                    controller.detectPoint.position, controller.attackRadius, nextAttack, controller.LAStamCost);
+
                 StartCoroutine(AttackSound(hitLight2, controller.lightAttack2Sound));
             }
 
             else if (Input.GetButtonUp("Fire1") && (combos == 2))
             {
                 combos = 3;
-                Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", 
+                    controller.detectPoint.position, controller.attackRadius, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight3, controller.lightAttack3Sound));
             }
 
             else if (Input.GetButtonUp("Fire1") && (combos == 3))
             {
                 combos = 4;
-                Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", controller.detectPoint.position, controller.attackRadius, nextAttack);
+                Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", 
+                    controller.detectPoint.position, controller.attackRadius, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight4, controller.lightAttack4Sound));
             }
 
             else if (Input.GetButtonUp("Fire1") && (combos == 4))
             {
                 combos = 0;
-                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", controller.detectPoint.position, controller.attackRadius, nextBlockAttack);
+                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", 
+                    controller.detectPoint.position, controller.attackRadius, nextBlockAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
                 //StartCoroutine(EpicLand(.6f, controller.dischargeSlowDuration));
             }
@@ -196,8 +201,8 @@ public class PlayerAttack : MonoBehaviour
         if (nextCombo <= 0)
         {
             combos = 0;
-            combosBlock = 0;
             attacking = false;
+            controller.stamina.drainingAtt = false;
 
         }
         #endregion
@@ -214,15 +219,18 @@ public class PlayerAttack : MonoBehaviour
         {
             StopCoroutine("Holding");
             holding = false;
+            heavySlash.Stop();
+            heavyComb = 0;
         }
 
         if (Input.GetButton("Fire1"))
         {
 
             //ACTUAL HEAVY ATTACK
-            if (lastClick <= 0 && holding && !attacking)
+            if (lastClick <= 0 && holding && !attacking && heavyComb == 0)
             {
-                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", controller.detectPoint.position, controller.attackRadius, nextHeavyAttack);
+                Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", 
+                    controller.heavyPoint.position, controller.heavyRadius, nextHeavyAttack, controller.HAStamCost);
                 StartCoroutine(AttackSound(hitHeavy, controller.heavyAttackSound));
             }
         }
@@ -266,6 +274,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(holdForHeavy);
         holding = true;
+        heavySlash.Play();
     }
 
     IEnumerator Blocking()
@@ -290,22 +299,25 @@ public class PlayerAttack : MonoBehaviour
         controller.SwordSounds.PlayOneShot(sound);
     }
 
-    public void Attack (float connectDelay, float clickDelay, int damage, string animation,Vector3 AreaOfEffect, float aoeRadius, float comboTimer)
+    public void Attack (float connectDelay, float clickDelay, int damage, string animation,
+                        Vector3 AreaOfEffect, float aoeRadius, float comboTimer, float staminaDrain)
     {
+        controller.stamina.drainingAtt = true;
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
         attackThrown = true;
-        StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius));
+        StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius, staminaDrain));
         nextCombo = comboTimer;
 
     }
 
-    IEnumerator AttackConnection (float delay, int damage, Vector3 aoe, float aoeRadius)
+    IEnumerator AttackConnection (float delay, int damage, Vector3 aoe, float aoeRadius, float drain)
     {
-        //yield return new WaitForEndOfFrame();
-        //attackThrown = false;
         yield return new WaitForSeconds(delay);
+        controller.stamina.Drain(drain);
+        if (!controller.stamina.fullAtt) damage = damage / 3;
+
         attackThrown = false;
         attacking = false;
         Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
@@ -321,6 +333,19 @@ public class PlayerAttack : MonoBehaviour
             }
             else controller.Charge();
         }
+
+        if (!isDischarge)
+        {
+            Collider[] walls = Physics.OverlapSphere(aoe, aoeRadius);
+            foreach (Collider wall in walls)
+            {
+                if (wall.tag == "Map")
+                {
+                    controller.SwordSounds.PlayOneShot(controller.wallHit);
+                }
+            }
+        }
+
         isDischarge = false;
     }
 

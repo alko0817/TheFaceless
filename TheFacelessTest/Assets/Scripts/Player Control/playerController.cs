@@ -14,11 +14,13 @@ public class playerController : MonoBehaviour
     public GameObject swordTrail;
     [Header("- Player Attack Pointers")]
     public Transform detectPoint;
+    public Transform heavyPoint;
     public Transform aoePoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
     [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
     public float attackRadius = .5f;
+    public float heavyRadius = 2f;
     [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
     [Space]
@@ -75,6 +77,7 @@ public class playerController : MonoBehaviour
     internal bool holding = false;
     internal bool attacking = false;
     internal bool dodging = false;
+    internal bool stunned = false;
 
     [Header("- Attack Damage")]
     public int slashDamage = 20;
@@ -139,6 +142,11 @@ public class playerController : MonoBehaviour
     public Transform burstPoint;
     #endregion
 
+    [Space]
+    public float LAStamCost;
+    public float HAStamCost;
+    [Space]
+
     #region SOUNDS
     [Header("- Sounds")]
     public AudioSource SwordSounds;
@@ -148,6 +156,8 @@ public class playerController : MonoBehaviour
     public AudioClip lightAttack2Sound;
     public AudioClip lightAttack3Sound;
     public AudioClip lightAttack4Sound;
+    [Space]
+    public AudioClip wallHit;
     [Space]
     public AudioClip heavyAttackSound;
     [Space]
@@ -215,16 +225,6 @@ public class playerController : MonoBehaviour
         jumping = !gameObject.GetComponent<vThirdPersonMotor>().isGrounded;
         speed = rb.velocity.magnitude;
 
-        
-
-        //if (sprinting && !MotionSounds.isPlaying)
-        //{
-        //    MotionSounds.clip = SprintSound;
-        //    MotionSounds.Play();
-        //}
-
-        //else if (!sprinting) MotionSounds.Stop();
-
         if (stamina.bar.fillAmount <= 0 )
         {
             gameObject.GetComponent<vThirdPersonMotor>().isSprinting = false;
@@ -260,6 +260,11 @@ public class playerController : MonoBehaviour
         if (attacking) swordTrail.SetActive(true);
         else swordTrail.SetActive(false);
 
+        //STUN TEST
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Stun();
+        }
     }
 
     //SWORD CHARGE
@@ -276,12 +281,15 @@ public class playerController : MonoBehaviour
 
     }
 
+   
+
     //VISUALS FOR THE AREAS OF ATTACK
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        if (detectPoint == null || aoePoint == null) return;
+        if (detectPoint == null || aoePoint == null || heavyPoint == null) return;
 
         Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
+        Gizmos.DrawWireSphere(heavyPoint.position, heavyRadius);
         Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
     }
 
@@ -292,7 +300,35 @@ public class playerController : MonoBehaviour
 
     public void Stun()
     {
-        // stun code;
+        if (!stunned)
+        {
+            if (!sprinting)
+            {
+                anim.SetTrigger("stun2");
+                stunned = true;
+                StartCoroutine(Stunning(1.5f));
+            }
+
+            else
+            {
+                anim.SetTrigger("stun");
+                stunned = true;
+                StartCoroutine(Stunning(3f));
+            }
+            
+        }
+        
+
+    }
+
+    IEnumerator Stunning(float delay)
+    {
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(delay);
+
+        stunned = false;
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
+
     }
 }
 
