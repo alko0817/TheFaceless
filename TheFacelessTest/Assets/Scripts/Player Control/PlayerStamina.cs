@@ -137,6 +137,12 @@ public class PlayerStamina : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// Drain an amount of stamina
+    /// </summary>
+    /// <param name="drain"></param>
+    /// <returns></returns>
     public void Drain(float drain)
     {
         canRecharge = false;

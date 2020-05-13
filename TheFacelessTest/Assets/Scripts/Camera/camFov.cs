@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class camFov : MonoBehaviour
 {
-    public vThirdPersonCamera controller;
+    vThirdPersonCamera controller;
     public float zoomRate = 1f;
 
     bool unzooming = false;
@@ -14,7 +14,7 @@ public class camFov : MonoBehaviour
 
     private void Start()
     {
-        //controller = GetComponentInChildren<vThirdPersonCamera>();
+        controller = GetComponent<vThirdPersonCamera>();
         originDistance = controller.defaultDistance;
     }
 

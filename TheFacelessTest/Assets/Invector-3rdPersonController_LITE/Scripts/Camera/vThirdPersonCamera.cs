@@ -39,6 +39,7 @@ public class vThirdPersonCamera : MonoBehaviour
 
     [HideInInspector]
     public Transform targetLookAt;
+    private Transform originLook;
     private Vector3 currentTargetPos;
     private Vector3 lookPoint;
     private Vector3 current_cPos;
@@ -80,6 +81,8 @@ public class vThirdPersonCamera : MonoBehaviour
         targetLookAt.hideFlags = HideFlags.HideInHierarchy;
         targetLookAt.rotation = currentTarget.rotation;
 
+        originLook = targetLookAt;
+
         mouseY = currentTarget.eulerAngles.x;
         mouseX = currentTarget.eulerAngles.y;
 
@@ -102,6 +105,7 @@ public class vThirdPersonCamera : MonoBehaviour
     {
         currentTarget = newTarget ? newTarget : target;
     }
+
 
     public void SetMainTarget(Transform newTarget)
     {

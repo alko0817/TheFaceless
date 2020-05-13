@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerFootsteps : MonoBehaviour
 {
-    public AudioSource sprint;
+    public AudioSource source;
+    public AudioClip step;
     playerController con;
+
+    public bool useStepInstead;
 
     private void Start()
     {
@@ -15,22 +18,30 @@ public class PlayerFootsteps : MonoBehaviour
 
     private void Update()
     {
+        if (useStepInstead) return;
+
         if (con.speed > 2f && !con.stamina.drainingDodge && !con.jumping)
         {
-            sprint.enabled = true;
+            source.enabled = true;
             if (con.sprinting)
             {
-                sprint.pitch = 1.2f;
+                source.pitch = 1.2f;
             }
 
             else
             {
-                sprint.pitch = .71f;
+                source.pitch = .71f;
             }
         }
         else
         {
-            sprint.enabled = false;
+            source.enabled = false;
         }
+    }
+
+    public void Step()
+    {
+        if (!useStepInstead) return;
+        source.PlayOneShot(step);
     }
 }
