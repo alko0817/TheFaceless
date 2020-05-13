@@ -14,11 +14,13 @@ public class playerController : MonoBehaviour
     public GameObject swordTrail;
     [Header("- Player Attack Pointers")]
     public Transform detectPoint;
+    public Transform heavyPoint;
     public Transform aoePoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
     [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
     public float attackRadius = .5f;
+    public float heavyRadius = 2f;
     [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
     [Space]
@@ -139,6 +141,11 @@ public class playerController : MonoBehaviour
     public GameObject burst;
     public Transform burstPoint;
     #endregion
+
+    [Space]
+    public float LAStamCost;
+    public float HAStamCost;
+    [Space]
 
     #region SOUNDS
     [Header("- Sounds")]
@@ -274,12 +281,15 @@ public class playerController : MonoBehaviour
 
     }
 
+   
+
     //VISUALS FOR THE AREAS OF ATTACK
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        if (detectPoint == null || aoePoint == null) return;
+        if (detectPoint == null || aoePoint == null || heavyPoint == null) return;
 
         Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
+        Gizmos.DrawWireSphere(heavyPoint.position, heavyRadius);
         Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
     }
 
