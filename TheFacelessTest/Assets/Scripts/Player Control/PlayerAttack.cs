@@ -126,6 +126,8 @@ public class PlayerAttack : MonoBehaviour
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
+        if (controller.stunned) return;
+
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
         if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging && !controller.stunned)
