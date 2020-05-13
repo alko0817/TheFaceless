@@ -47149,7 +47149,7 @@ MonoBehaviour:
   healthBar: {fileID: 6109281174956035498}
   hit: {fileID: 7943850423064372651}
   blockHit: {fileID: 5026891820079274414}
-  useGlobalSettings: 1
+  useGlobalSettings: 0
   maxHealth: 100
   sightDistance: 15
   initialSpeed: 0.5
