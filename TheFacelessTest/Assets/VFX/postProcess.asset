@@ -126,31 +126,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 0.5
+    value: 1
   threshold:
     overrideState: 1
-    value: 1.6
+    value: 1.4
   softKnee:
     overrideState: 1
-    value: 0.797
+    value: 0.6
   clamp:
     overrideState: 1
     value: 65472
   diffusion:
     overrideState: 1
-    value: 4.3
+    value: 5.5
   anamorphicRatio:
     overrideState: 1
-    value: 0.07
+    value: 0
   color:
     overrideState: 1
-    value: {r: 9.31505, g: 9.31505, b: 0.8767106, a: 1}
+    value: {r: 14.90811, g: 11.199511, b: 16.60347, a: 1}
   fastMode:
     overrideState: 0
     value: 0
