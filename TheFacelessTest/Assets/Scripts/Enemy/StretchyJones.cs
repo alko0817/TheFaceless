@@ -160,14 +160,15 @@ public class StretchyJones : EnemyBase
 
         Stop();
         discharging = true;
-
-        yield return new WaitForSeconds(1f);
+        anim.Stun();
+        yield return new WaitForSeconds(.5f);
 
         //explosion.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.8f);
+        if (dying) yield break;
 
-        //Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
+        Instantiate(burst, burstPoint.position, Quaternion.Euler(90, 0, 0));
         if (Physics.CheckSphere(aoePoint.position, aoeRadius, playerMask))
         {
             player.GetComponent<playerController>().Stun();

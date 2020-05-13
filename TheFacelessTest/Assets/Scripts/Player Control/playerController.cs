@@ -288,9 +288,16 @@ public class playerController : MonoBehaviour
     {
         if (detectPoint == null || aoePoint == null || heavyPoint == null) return;
 
-        Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
-        Gizmos.DrawWireSphere(heavyPoint.position, heavyRadius);
-        Gizmos.DrawWireSphere(aoePoint.position, aoeRadius);
+        //Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(aoePoint.position, aoePoint.localScale);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(heavyPoint.position, heavyPoint.localScale);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(detectPoint.position, detectPoint.localScale);
     }
 
     public void TakeDamage(int damage)

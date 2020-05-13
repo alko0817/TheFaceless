@@ -12,7 +12,8 @@ public class audioManager : MonoBehaviour
     public sound[] Ambient;
     [Space]
     public string BackgroundMusic;
-    public string BackgroundAmbient;
+    [Space]
+    public string[] BackgroundAmbient;
     [Space]
     [Tooltip("Disables all sounds")]
     public bool muteAll;
@@ -49,7 +50,12 @@ public class audioManager : MonoBehaviour
 
     private void Start()
     {
-        Play(BackgroundAmbient, Ambient);
+        foreach (string sound in BackgroundAmbient)
+        {
+            Play(sound, Ambient);
+        }
+        
+
         Play(BackgroundMusic, Music);
     }
 
@@ -79,7 +85,6 @@ public class audioManager : MonoBehaviour
 
             if (useMasterControls) s.source.volume = indexVolume;
             else s.source.volume = s.volume;
-
         }
     }
 
