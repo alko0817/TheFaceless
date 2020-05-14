@@ -12,7 +12,7 @@ public class MeleeEnemy : EnemyBase
     [Header("- Unique Properties -")]
     #region COMPONENETS
     public PatrolRoute patrolPath;
-    Transform attackPoint;
+    public Transform attackPoint;
     #endregion
 
     [Header("Unique Variables")]
@@ -87,9 +87,12 @@ public class MeleeEnemy : EnemyBase
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
+        
 
         Gizmos.DrawWireSphere(transform.position, sightDistance);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackHitBox);
 
     }
 
