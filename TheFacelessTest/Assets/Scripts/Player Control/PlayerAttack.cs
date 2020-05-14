@@ -240,6 +240,15 @@ public class PlayerAttack : MonoBehaviour
         #endregion
 
         #region Block
+        if (controller.stunned)
+        {
+            StopCoroutine("Blocking");
+            controller.blocking = false;
+            controller.anim.SetBool("blocking", false);
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+            return;
+        }
+
         if (controller.stamina.canBlock)
         {
             if (Input.GetButtonDown("Fire2"))
@@ -268,7 +277,6 @@ public class PlayerAttack : MonoBehaviour
             }
 
         }
-
         else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
         #endregion
     }
