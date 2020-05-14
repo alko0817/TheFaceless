@@ -207,7 +207,7 @@ public class EnemyBase : MonoBehaviour
         Stop();
         canHitPlayer = false;
         electricStun.Play();
-        yield return new WaitForSeconds(stunDuration);
+        yield return new WaitForSeconds(stunDuration); 
         electricStun.Stop();
         stunned = false;
         canHitPlayer = true;
@@ -274,6 +274,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         dying = true;
+        electricStun.Stop();
         audioSource.PlayOneShot(dyingSound);
         blackboard.RemoveEnemyInSight(this.gameObject);
         blackboard.RemovePursuingEnemy(this.gameObject);
