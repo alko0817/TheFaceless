@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerStamina : MonoBehaviour
 {
-    public Image bar;
+    //public Image bar;
+    RectTransform anchor;
+
+    Quaternion max;
+    Quaternion minim;
+
+    internal float unit;
+
     [Tooltip("Rate at which stamina depletes while blocking")]
     public float blockDepleteRate = 1f;
     [Tooltip("Rate at which stamina depletes while sprinting")]
@@ -35,14 +43,24 @@ public class PlayerStamina : MonoBehaviour
 
     private void Start()
     {
+        max = Quaternion.Euler(0, 180, 180f);
+        minim = Quaternion.Euler(0, 180, 0f);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         anim = GetComponent<Animator>();
-        bar.fillAmount = 1f;
+        unit = 1f;
+        //bar.fillAmount = 1f;
+
+        anchor = GetComponent<RectTransform>();
+        anchor.rotation = max;
 
     }
 
+    //if you want to return a value between 0 - 1, just fucking multiple it by the max no. of the other scale. The other scale MUST start at 0
+
     private void Update()
     {
+        unit = Mathf.Clamp01(unit);
+        anchor.rotation = Quaternion.Euler(0, 180f, unit * 180f);
 
         if (controller.blocking && canBlock && !controller.attacking)
         {
@@ -51,12 +69,12 @@ public class PlayerStamina : MonoBehaviour
             drainingBlock = true;
             StopCoroutine(ChargeDelay());
             canRecharge = false;
-            if (bar.fillAmount > 0)
+            if (unit > 0)
             {
-                bar.fillAmount -= Time.deltaTime * blockDepleteRate;
+                unit -= Time.deltaTime * blockDepleteRate;
             }
 
-            if (bar.fillAmount == 0)
+            if (unit == 0)
             {
                 canBlock = false;
                 controller.blocking = false;
@@ -74,12 +92,12 @@ public class PlayerStamina : MonoBehaviour
             drainingSprint = true;
             StopCoroutine(ChargeDelay());
             canRecharge = false;
-            if (bar.fillAmount > 0)
+            if (unit > 0)
             {
-                bar.fillAmount -= Time.deltaTime * sprintDepleteRate;
+                unit -= Time.deltaTime * sprintDepleteRate;
             }
 
-            if (bar.fillAmount == 0)
+            if (unit == 0)
             {
                 canSprint = false;
                 drainingSprint = false;
@@ -87,7 +105,7 @@ public class PlayerStamina : MonoBehaviour
         }
         else drainingSprint = false;
 
-        if (bar.fillAmount <= 0 && fullAtt)
+        if (unit <= 0 && fullAtt)
         {
             tired = true;
             fullAtt = false;
@@ -126,9 +144,8 @@ public class PlayerStamina : MonoBehaviour
 
     public void Regen()
     {
-        bar.fillAmount = Mathf.Clamp01(bar.fillAmount + (Time.deltaTime * rechargeRate));
-
-        if (bar.fillAmount > 0.7f)
+        unit = Mathf.Clamp01(unit + (Time.deltaTime * rechargeRate));
+        if (unit > .6f)
         {
             canBlock = true;
             canSprint = true;
@@ -146,7 +163,7 @@ public class PlayerStamina : MonoBehaviour
     public void Drain(float drain)
     {
         canRecharge = false;
-        bar.fillAmount -= drain;
+        unit -= drain;
 
     }
 }

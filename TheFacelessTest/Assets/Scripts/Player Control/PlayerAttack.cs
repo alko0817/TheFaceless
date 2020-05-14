@@ -157,7 +157,7 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-            //DISCHARGE
+            //ELECTRIC DISCHARGE
             if (Input.GetButton("discharge") && controller.canDischarge && controller.GetComponent<vThirdPersonMotor>().isGrounded)
             {
                 isDischarge = true;
@@ -166,6 +166,14 @@ public class PlayerAttack : MonoBehaviour
                     controller.aoePoint, controller.aoeRadius, nextAttack, 0);
 
                 StartCoroutine(Discharge());
+            }
+
+            //FROST DISCHARGE
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
+                    controller.aoePoint, controller.aoeRadius, nextAttack, 0);
+                StartCoroutine(FrostSlam());
             }
 
         }
@@ -358,6 +366,19 @@ public class PlayerAttack : MonoBehaviour
         }
 
         isDischarge = false;
+    }
+
+    IEnumerator FrostSlam()
+    {
+        controller.health.Immortality(true);
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(.8f);
+        controller.timeManager.slowmoDuration = 1f;
+        controller.timeManager.Slowmo();
+        yield return new WaitForSeconds(1f);
+
+        controller.health.Immortality(false);
+        gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
     }
 
     IEnumerator Discharge ()

@@ -201,7 +201,7 @@ public class playerController : MonoBehaviour
         timeManager = GameObject.FindGameObjectWithTag("Time Manager").GetComponent<TimeManager>();
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
-        swordFill = GameObject.Find("swordChargeFill").GetComponent<Image>();
+        swordFill = GameObject.FindGameObjectWithTag("Charge").GetComponent<Image>();
         rb = GetComponent<Rigidbody>();
 
         //ORIGINAL MOVEMENT SPEED SET
@@ -225,7 +225,7 @@ public class playerController : MonoBehaviour
         jumping = !gameObject.GetComponent<vThirdPersonMotor>().isGrounded;
         speed = rb.velocity.magnitude;
 
-        if (stamina.bar.fillAmount <= 0 )
+        if (stamina.unit <= 0)
         {
             gameObject.GetComponent<vThirdPersonMotor>().isSprinting = false;
         }

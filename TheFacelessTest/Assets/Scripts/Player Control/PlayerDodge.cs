@@ -34,7 +34,7 @@ public class PlayerDodge : MonoBehaviour
         //CHECK FOR LAST TIME DODGED
         if (dodgeCd <= 0 && !controller.attacking && !controller.stunned && !controller.health.dead)
         {
-            if (controller.stamina.bar.fillAmount >= controller.dodgeCost)
+            if (controller.stamina.unit >= controller.dodgeCost)
             {
                 if (!controller.sprinting)
                 {
@@ -75,7 +75,7 @@ public class PlayerDodge : MonoBehaviour
         controller.health.Immortality(true);
         dodgeCd = dodgeCooldown;
 
-        controller.stamina.bar.fillAmount -= controller.dodgeCost;
+        controller.stamina.unit -= controller.dodgeCost;
         controller.stamina.drainingDodge = true;
         controller.stamina.canRecharge = false;
 
