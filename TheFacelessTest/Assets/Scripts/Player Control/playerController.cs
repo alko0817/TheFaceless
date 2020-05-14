@@ -307,6 +307,7 @@ public class playerController : MonoBehaviour
 
     public void Stun()
     {
+        if (health.immortal || jumping) return;
         if (!stunned)
         {
             if (!sprinting)
