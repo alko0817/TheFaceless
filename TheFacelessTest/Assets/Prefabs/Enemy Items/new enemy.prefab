@@ -27115,6 +27115,7 @@ MonoBehaviour:
   StaticSound: {fileID: 0}
   ChatterSound: {fileID: 8300000, guid: edaf788c1016281448bb54ce990d7dbe, type: 3}
   patrolPath: {fileID: 0}
+  attackPoint: {fileID: 4835999131634439272}
   pursueSpeed: 4
   attackDamage: 0
   attackDistance: 1
