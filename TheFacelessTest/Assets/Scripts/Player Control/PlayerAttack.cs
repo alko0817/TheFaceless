@@ -126,12 +126,20 @@ public class PlayerAttack : MonoBehaviour
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
 
-        if (controller.stunned || controller.health.dead) return;
+        if (controller.stunned || controller.health.dead)
+        {
+            StopCoroutine("Blocking");
+            controller.blocking = false;
+            controller.anim.SetBool("blocking", false);
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+
+            return;
+        }
         
 
         #region Attacks&Discharge
         //CHECK FOR LAST TIME ATTACKED
-        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging && !controller.stunned)
+        if (lastClick <= 0 && !holding && !controller.blocking && !controller.dodging)
         {
 
 
@@ -240,6 +248,7 @@ public class PlayerAttack : MonoBehaviour
         #endregion
 
         #region Block
+
         if (controller.stamina.canBlock)
         {
             if (Input.GetButtonDown("Fire2"))
@@ -268,7 +277,6 @@ public class PlayerAttack : MonoBehaviour
             }
 
         }
-
         else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
         #endregion
     }
