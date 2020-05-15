@@ -40930,7 +40930,7 @@ MonoBehaviour:
   sightDistance: 15
   initialSpeed: 2
   stunDuration: 0
-  ReceiveDmgSound: {fileID: 0}
+  ReceiveDmgSound: {fileID: 8300000, guid: bb905c6670f096c478590cbd10f3119c, type: 3}
   DealDmgSound: {fileID: 0}
   StunnedSound: {fileID: 0}
   dyingSound: {fileID: 0}

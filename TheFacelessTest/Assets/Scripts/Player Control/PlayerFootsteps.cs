@@ -6,6 +6,9 @@ public class PlayerFootsteps : MonoBehaviour
 {
     public AudioSource source;
     public AudioClip step;
+    [Space]
+    public float jogPitch = .71f;
+    public float runPitch = 1.2f;
     playerController con;
 
     public bool useStepInstead;
@@ -25,12 +28,12 @@ public class PlayerFootsteps : MonoBehaviour
             source.enabled = true;
             if (con.sprinting)
             {
-                source.pitch = 1.2f;
+                source.pitch = runPitch;
             }
 
             else
             {
-                source.pitch = .71f;
+                source.pitch = jogPitch;
             }
         }
         else

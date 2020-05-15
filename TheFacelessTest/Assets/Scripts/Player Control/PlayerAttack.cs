@@ -248,7 +248,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", 
                     controller.heavyPoint, nextHeavyAttack, controller.HAStamCost);
-                StartCoroutine(AttackSound(hitHeavy, controller.heavyAttackSound));
+                StartCoroutine(AttackSound(.45f, controller.heavyAttackSound));
             }
         }
         #endregion

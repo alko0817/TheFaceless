@@ -1646,7 +1646,7 @@ MonoBehaviour:
   healingRate: 5
   healingDelay: 2
   blockMitigation: 0.1
-  testDamage: 10
+  testDamage: 100
   intensity: 0.2
 --- !u!114 &420907641
 MonoBehaviour:

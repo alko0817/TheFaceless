@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 124821287621079051}
   step: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
+  jogPitch: 0.85
+  runPitch: 1.25
   useStepInstead: 0
 --- !u!1 &2303583760980131351
 GameObject:
@@ -841,7 +843,7 @@ MonoBehaviour:
   attackRadius: 1.2
   heavyRadius: 2
   aoeRadius: 12
-  canDie: 1
+  canDie: 0
   foving: {fileID: 0}
   attackDelay1: 0.2
   attackDelay2: 0.2
@@ -890,24 +892,24 @@ MonoBehaviour:
   electricityCharge: {fileID: 3300975218034385351}
   burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   burstPoint: {fileID: 9040024944503598342}
-  LAStamCost: 0.1
-  HAStamCost: 0.2
+  LAStamCost: 0.05
+  HAStamCost: 0.1
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
-  lightAttack1Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
-  lightAttack2Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
-  lightAttack3Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
-  lightAttack4Sound: {fileID: 8300000, guid: 9c71860524cf6f04cb973586c2540f8d, type: 3}
+  lightAttack1Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  lightAttack2Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  lightAttack3Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  lightAttack4Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   wallHit: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
-  heavyAttackSound: {fileID: 0}
-  blockAttack1Sound: {fileID: 8300000, guid: 05a9e01dcb3576a4593be5030bd9b1c4, type: 3}
+  heavyAttackSound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
+  blockAttack1Sound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   blockAttack2Sound: {fileID: 8300000, guid: 10597d74e6328a0479622265494fac5b, type: 3}
   BlockSound: {fileID: 0}
   DodgeSound: {fileID: 0}
   DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
   DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
   ReceiveDmgSound: {fileID: 8300000, guid: 01c7422e46c896e41b0b90e90bc20ae1, type: 3}
-  DeathSound: {fileID: 0}
+  DeathSound: {fileID: 8300000, guid: eca248f07c649b249ade6c68b0a4baa4, type: 3}
   MoveSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
   SprintSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
   SlowBeat: {fileID: 8300000, guid: aaae0ab5dd5f8e2418fd0ebf6b80d6a1, type: 3}
