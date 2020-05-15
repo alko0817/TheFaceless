@@ -449,8 +449,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: groundSlam
-  m_Speed: 1
+  m_Name: Jones Attack
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1165422830129383913}
@@ -463,7 +463,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 563f323ed1af3384d8daad9f013d60a5,
+  m_Motion: {fileID: 6544056955479387395, guid: 30ad039a6500c5e4fbcf5824ce615b8f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
