@@ -235,6 +235,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             StopCoroutine("Holding");
+            GetComponent<vThirdPersonMotor>().stopMove = false;
             holding = false;
             heavySlash.Stop();
             heavyComb = 0;
@@ -244,7 +245,7 @@ public class PlayerAttack : MonoBehaviour
         {
 
             //ACTUAL HEAVY ATTACK
-            if (lastClick <= 0 && holding && !attacking && heavyComb == 0)
+            if (lastClick <= 0 && holding && !attacking)
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", 
                     controller.heavyPoint, nextHeavyAttack, controller.HAStamCost);
@@ -291,6 +292,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(holdForHeavy);
         holding = true;
+        GetComponent<vThirdPersonMotor>().stopMove = true;
         heavySlash.Play();
     }
 
@@ -337,7 +339,7 @@ public class PlayerAttack : MonoBehaviour
 
         attackThrown = false;
         attacking = false;
-        //Collider[] hitEnemies = Physics.OverlapSphere(aoe, aoeRadius, controller.enemyLayer);
+
         Collider[] hitEnemies = Physics.OverlapBox(aoe.position, aoe.localScale / 2, Quaternion.identity, controller.enemyLayer);
         //APPLY DPS
         foreach (Collider enemy in hitEnemies)

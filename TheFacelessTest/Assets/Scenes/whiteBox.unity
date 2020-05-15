@@ -510,6 +510,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2857576706712976029, guid: a5c011aff990a4147bb7d2e38b99821a,
+        type: 3}
+      propertyPath: heavySlash
+      value: 
+      objectReference: {fileID: 317833407}
     - target: {fileID: 4292110267926525846, guid: a5c011aff990a4147bb7d2e38b99821a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -671,6 +676,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4163118272013343523, guid: 58043f40acea00e4284ce21a2aa2c0fe,
     type: 3}
   m_PrefabInstance: {fileID: 455154587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &317833407 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4404553057165548908, guid: a5c011aff990a4147bb7d2e38b99821a,
+    type: 3}
+  m_PrefabInstance: {fileID: 270147491}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &359813014
 PrefabInstance:
