@@ -12,7 +12,7 @@ public class swordGlow : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animator>();
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
     }
 
