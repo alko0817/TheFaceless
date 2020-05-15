@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour
     public Transform detectPoint;
     public Transform heavyPoint;
     public Transform aoePoint;
+    public Transform frostPoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
     [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
@@ -286,18 +287,25 @@ public class playerController : MonoBehaviour
     //VISUALS FOR THE AREAS OF ATTACK
     private void OnDrawGizmos()
     {
-        if (detectPoint == null || aoePoint == null || heavyPoint == null) return;
+        try
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(aoePoint.position, aoePoint.localScale);
 
-        //Gizmos.DrawWireSphere(detectPoint.position, attackRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(heavyPoint.position, heavyPoint.localScale);
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(aoePoint.position, aoePoint.localScale);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(detectPoint.position, detectPoint.localScale);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(heavyPoint.position, heavyPoint.localScale);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(frostPoint.position, frostPoint.localScale);
+        }
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(detectPoint.position, detectPoint.localScale);
+        catch
+        {
+            print("Assign Gizmos!!!");
+        }
     }
 
     public void TakeDamage(int damage)

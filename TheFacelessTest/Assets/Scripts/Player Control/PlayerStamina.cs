@@ -12,8 +12,10 @@ public class PlayerStamina : MonoBehaviour
     RectTransform anchor;
 
     Quaternion max;
-    Quaternion minim;
 
+    /// <summary>
+    /// Base stamina unit. Is clamped between 0 - 1
+    /// </summary>
     internal float unit;
 
     [Tooltip("Rate at which stamina depletes while blocking")]
@@ -44,18 +46,16 @@ public class PlayerStamina : MonoBehaviour
     private void Start()
     {
         max = Quaternion.Euler(0, 180, 180f);
-        minim = Quaternion.Euler(0, 180, 0f);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         anim = GetComponent<Animator>();
         unit = 1f;
-        //bar.fillAmount = 1f;
 
         anchor = GetComponent<RectTransform>();
         anchor.rotation = max;
 
     }
 
-    //if you want to return a value between 0 - 1, just fucking multiple it by the max no. of the other scale. The other scale MUST start at 0
+    //if you want to translate a value between 0 - 1, just fucking multiple it by the max no. of the other scale. The other scale MUST start at 0
 
     private void Update()
     {

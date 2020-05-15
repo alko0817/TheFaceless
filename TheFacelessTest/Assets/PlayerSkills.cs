@@ -75,4 +75,24 @@ public class PlayerSkills : MonoBehaviour
         anim.SetTrigger(source);
         selected = true;
     }
+
+    public int GetSkill()
+    {
+        if (eleOn)
+        {
+            return 1;
+        }
+
+        else if (frostOn)
+        {
+            return 2;
+        }
+
+        else if (fireOn)
+        {
+            return 3;
+        }
+
+        return 0;
+    }
 }

@@ -147,8 +147,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 combos = 1;
-                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint,
-                                        controller.attackRadius, nextAttack, controller.LAStamCost);
+                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
 
                 nextCombo = nextAttack;
@@ -163,7 +162,7 @@ public class PlayerAttack : MonoBehaviour
                 isDischarge = true;
                 controller.canDischarge = false;
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "discharge", 
-                    controller.aoePoint, controller.aoeRadius, nextAttack, 0);
+                    controller.aoePoint, nextAttack, 0);
 
                 StartCoroutine(Discharge());
             }
@@ -172,7 +171,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
-                    controller.aoePoint, controller.aoeRadius, nextAttack, 0);
+                    controller.frostPoint, nextAttack, 0);
                 StartCoroutine(FrostSlam());
             }
 
@@ -185,7 +184,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 2;
                 Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", 
-                    controller.detectPoint, controller.attackRadius, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LAStamCost);
 
                 StartCoroutine(AttackSound(hitLight2, controller.lightAttack2Sound));
             }
@@ -194,7 +193,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 3;
                 Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", 
-                    controller.detectPoint, controller.attackRadius, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight3, controller.lightAttack3Sound));
             }
 
@@ -202,7 +201,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 4;
                 Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", 
-                    controller.detectPoint, controller.attackRadius, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight4, controller.lightAttack4Sound));
             }
 
@@ -210,9 +209,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 0;
                 Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", 
-                    controller.detectPoint, controller.attackRadius, nextBlockAttack, controller.LAStamCost);
+                    controller.detectPoint, nextBlockAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
-                //StartCoroutine(EpicLand(.6f, controller.dischargeSlowDuration));
             }
         }
 
@@ -249,7 +247,7 @@ public class PlayerAttack : MonoBehaviour
             if (lastClick <= 0 && holding && !attacking && heavyComb == 0)
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", 
-                    controller.heavyPoint, controller.heavyRadius, nextHeavyAttack, controller.HAStamCost);
+                    controller.heavyPoint, nextHeavyAttack, controller.HAStamCost);
                 StartCoroutine(AttackSound(hitHeavy, controller.heavyAttackSound));
             }
         }
@@ -319,19 +317,19 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,
-                        Transform AreaOfEffect, float aoeRadius, float comboTimer, float staminaDrain)
+                        Transform AreaOfEffect, float comboTimer, float staminaDrain)
     {
         controller.stamina.drainingAtt = true;
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
         attackThrown = true;
-        StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, aoeRadius, staminaDrain));
+        StartCoroutine(AttackConnection(connectDelay, damage, AreaOfEffect, staminaDrain));
         nextCombo = comboTimer;
 
     }
 
-    IEnumerator AttackConnection (float delay, int damage, Transform aoe, float aoeRadius, float drain)
+    IEnumerator AttackConnection (float delay, int damage, Transform aoe, float drain)
     {
         yield return new WaitForSeconds(delay);
         controller.stamina.Drain(drain);
@@ -406,8 +404,6 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(.7f);
         controller.electricityCharge.Stop();
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
-
-        //controller.burst.Play();
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
         float temp = controller.SwordSounds.volume;

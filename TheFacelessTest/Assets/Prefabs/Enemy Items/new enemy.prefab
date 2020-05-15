@@ -32874,7 +32874,7 @@ RectTransform:
   m_GameObject: {fileID: 3993762239224380388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.34821, z: 0.3}
+  m_LocalScale: {x: 0.3, y: 0.4301438, z: 0.3}
   m_Children: []
   m_Father: {fileID: 3435207734412566090}
   m_RootOrder: 1
@@ -32914,7 +32914,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
