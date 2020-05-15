@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class PlayerStamina : MonoBehaviour
 {
-    //public Image bar;
-    RectTransform anchor;
+    Image bar;
+    //RectTransform anchor;
 
-    Quaternion max;
+    //Quaternion max;
 
     /// <summary>
     /// Base stamina unit. Is clamped between 0 - 1
@@ -45,13 +45,14 @@ public class PlayerStamina : MonoBehaviour
 
     private void Start()
     {
-        max = Quaternion.Euler(0, 180, 180f);
+        //max = Quaternion.Euler(0, 180, 180f);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+        bar = GetComponent<Image>();
         anim = GetComponent<Animator>();
         unit = 1f;
 
-        anchor = GetComponent<RectTransform>();
-        anchor.rotation = max;
+        //anchor = GetComponent<RectTransform>();
+        //anchor.rotation = max;
 
     }
 
@@ -60,7 +61,8 @@ public class PlayerStamina : MonoBehaviour
     private void Update()
     {
         unit = Mathf.Clamp01(unit);
-        anchor.rotation = Quaternion.Euler(0, 180f, unit * 180f);
+        bar.fillAmount = unit;
+        //anchor.rotation = Quaternion.Euler(0, 180f, unit * 180f);
 
         if (controller.blocking && canBlock && !controller.attacking)
         {
