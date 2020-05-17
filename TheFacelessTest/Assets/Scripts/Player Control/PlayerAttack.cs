@@ -30,16 +30,18 @@ public class PlayerAttack : MonoBehaviour
     float attackDelay2;
     float attackDelay3;
     float attackDelay4;
+    float attackDelay5;
+
+    float parryDelay;
 
     float heavyDelay1;
 
     float dischargeDelay;
 
-    float attackDelay5;
 
     float nextAttack;
     float nextHeavyAttack;
-    float nextBlockAttack;
+    float nextParry;
     float nextCombo;
 
     float holdForHeavy;
@@ -49,24 +51,28 @@ public class PlayerAttack : MonoBehaviour
     float hitLight2;
     float hitLight3;
     float hitLight4;
+    float hitLight5;
+
+    float hitParry;
 
     float hitHeavy;
 
     float hitDischarge;
 
-    float hitLight5;
 
     //DAMAGES
     int slashDamage;
     int slash2Damage;
     int slash3Damage;
     int slash4Damage;
+    int slash5Damage;
+
+    int parryDamage;
 
     int heavyDamage;
 
     int dischargeDamage;
 
-    int slash5Damage;
 
     public ParticleSystem heavySlash;
 
@@ -86,6 +92,8 @@ public class PlayerAttack : MonoBehaviour
         attackDelay3 = controller.attackDelay3;
         attackDelay4 = controller.attackDelay4;
 
+        parryDelay = controller.parryDelay;
+
         heavyDelay1 = controller.heavyDelay1;
         dischargeDelay = controller.dischargeDelay;
 
@@ -93,7 +101,7 @@ public class PlayerAttack : MonoBehaviour
 
         nextAttack = controller.nextAttack;
         nextHeavyAttack = controller.nextHeavyAttack;
-        nextBlockAttack = controller.nextBlockAttack;
+        nextParry = controller.nextParry;
         nextCombo = controller.nextCombo;
         holdForHeavy = controller.holdForHeavy;
 
@@ -102,26 +110,29 @@ public class PlayerAttack : MonoBehaviour
         hitLight2 = controller.hitLight2;
         hitLight3 = controller.hitLight3;
         hitLight4 = controller.hitLight4;
+        hitLight5 = controller.hitLight5;
+
+        hitParry = controller.hitParry;
 
         hitHeavy = controller.hitHeavy;
         hitDischarge = controller.hitDischarge;
 
-        hitLight5 = controller.hitLight5;
 
         //DAMAGES
         slashDamage = controller.slashDamage;
         slash2Damage = controller.slash2Damage;
         slash3Damage = controller.slash3Damage;
         slash4Damage = controller.slash4Damage;
+        slash5Damage = controller.slash5Damage;
+
+        hitParry = controller.hitParry;
 
         heavyDamage = controller.heavyDamage;
         dischargeDamage = controller.dischargeDamage;
 
-        slash5Damage = controller.slash5Damage;
-
 
     }
-
+    
     private void Update()
     {
         controller.attacking = attacking;
@@ -211,7 +222,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 0;
                 Attack(hitLight5, attackDelay5, slash5Damage, "blockAttack", 
-                    controller.detectPoint, nextBlockAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LAStamCost);
                 StartCoroutine(AttackSound(hitLight5, controller.blockAttack1Sound));
             }
         }
@@ -285,7 +296,10 @@ public class PlayerAttack : MonoBehaviour
                     if (attacked && CanReact)
                     {
                         CanReact = false;
-                        controller.anim.SetTrigger("react");
+                        //controller.anim.SetTrigger("react");
+
+                        Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
+
                         StartCoroutine(EpicLand(.5f, .3f));
                         break;
                     }
@@ -365,6 +379,8 @@ public class PlayerAttack : MonoBehaviour
         controller.timeManager.Slowmo();
     }
 
+
+    
     IEnumerator AttackSound (float connectDelay, AudioClip sound)
     {
         yield return new WaitForSeconds(connectDelay);
@@ -372,6 +388,17 @@ public class PlayerAttack : MonoBehaviour
         controller.SwordSounds.PlayOneShot(sound);
     }
 
+
+    /// <summary>
+    /// Throws and casts an attack for the player.
+    /// </summary>
+    /// <param name="connectDelay"></param>
+    /// <param name="clickDelay"></param>
+    /// <param name="damage"></param>
+    /// <param name="animation"></param>
+    /// <param name="AreaOfEffect"></param>
+    /// <param name="comboTimer"></param>
+    /// <param name="staminaDrain"></param>
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,
                         Transform AreaOfEffect, float comboTimer, float staminaDrain)
     {

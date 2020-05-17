@@ -43,22 +43,20 @@ public class playerController : MonoBehaviour
     public float attackDelay4 = 1.5f;
     public float attackDelay5 = 2f;
     [Space]
+    public float parryDelay = 2f;
+    [Space]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
     [Space]
     public float dischargeDelay = 2f;
     [Space]
-    public float blockAttackDelay2 = 2f;
-    [Space]
     [Tooltip("Input timer before next light combo")]
     public float nextAttack = 2f;
-    [Tooltip("Input timer before next heavy combo")]
     public float nextHeavyAttack = 2f;
-    [Tooltip("Input timer before next block combo")]
-    public float nextBlockAttack = 2f;
+    public float nextParry = 2f;
     internal float nextCombo = 0f;
 
-    [Header("- Delay before attack lands and applies damage")]
+    [Header("- Attack Land Delays")]
     public float hitLight1 = 0f;
     public float hitLight2 = 0f;
     public float hitLight3 = 0f;
@@ -69,7 +67,8 @@ public class playerController : MonoBehaviour
     [Space]
     public float hitDischarge = 0f;
     [Space]
-    public float hitBlock2 = 0f;
+    public float hitParry = 0f;
+    [Space]
 
     [Tooltip("How long has the player to hold the button before triggering the heavy attack. Requires fine-tunning!")]
     [Range(.1f, 1f)]
@@ -87,12 +86,12 @@ public class playerController : MonoBehaviour
     public int slash4Damage = 25;
     public int slash5Damage = 30;
     [Space]
+    public int ParryDamage = 30;
+    [Space]
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
     [Space]
     public int dischargeDamage = 40;
-    [Space]
-    public int blockAttack2Dmg = 30;
 
     //DODGE
     [Header("- Dodging")]
