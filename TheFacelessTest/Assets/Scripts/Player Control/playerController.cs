@@ -162,7 +162,8 @@ public class playerController : MonoBehaviour
     public AudioClip heavyAttackSound;
     [Space]
     public AudioClip blockAttack1Sound;
-    public AudioClip blockAttack2Sound;
+    public AudioClip ParrySound;
+    public AudioClip ParryAttackSound;
     [Space]
     public AudioClip BlockSound;
     public AudioClip DodgeSound;
@@ -235,6 +236,10 @@ public class playerController : MonoBehaviour
         {
             lastCharge += Time.deltaTime * UIChargeMultiplier;
             swordFill.fillAmount = lastCharge / maxCharge;
+            if (swordFill.fillAmount == 1)
+            {
+                currentCharge = maxCharge;
+            }
         }
 
         if (currentCharge == maxCharge && !played)

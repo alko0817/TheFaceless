@@ -125,7 +125,7 @@ public class PlayerAttack : MonoBehaviour
         slash4Damage = controller.slash4Damage;
         slash5Damage = controller.slash5Damage;
 
-        hitParry = controller.hitParry;
+        parryDamage = controller.ParryDamage;
 
         heavyDamage = controller.heavyDamage;
         dischargeDamage = controller.dischargeDamage;
@@ -268,7 +268,7 @@ public class PlayerAttack : MonoBehaviour
         #endregion
 
         #region ParryBlock
-        if (lastClick <= 0 && !holding && !attacking)
+        if (lastClick <= 0 && !holding)
         {
             if (Input.GetButtonDown("Fire2"))
             {
@@ -299,8 +299,9 @@ public class PlayerAttack : MonoBehaviour
                         //controller.anim.SetTrigger("react");
 
                         Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
-
-                        StartCoroutine(EpicLand(.5f, .3f));
+                        //StartCoroutine(EpicLand(.5f, .3f));
+                        StartCoroutine(AttackSound(.1f, controller.ParrySound));
+                        StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
                         break;
                     }
                 }

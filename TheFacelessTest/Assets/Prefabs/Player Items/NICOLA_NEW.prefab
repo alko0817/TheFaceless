@@ -370,7 +370,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 116
-  DopplerLevel: 5
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: -0
@@ -850,13 +850,13 @@ MonoBehaviour:
   attackDelay3: 0.35
   attackDelay4: 0.45
   attackDelay5: 1.1
+  parryDelay: 1.8
   heavyDelay1: 1.15
   heavyDelay2: 1.5
   dischargeDelay: 2
-  blockAttackDelay2: 0.9
   nextAttack: 0.9
   nextHeavyAttack: 1.8
-  nextBlockAttack: 1.2
+  nextParry: 2
   hitLight1: 0.25
   hitLight2: 0.25
   hitLight3: 0.4
@@ -864,17 +864,17 @@ MonoBehaviour:
   hitLight5: 0.8
   hitHeavy: 0.86
   hitDischarge: 1.8
-  hitBlock2: 0.8
+  hitParry: 1.2
   holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 12
   slash3Damage: 14
   slash4Damage: 16
   slash5Damage: 25
+  ParryDamage: 40
   heavyDamage: 30
   heavy2Damage: 40
   dischargeDamage: 25
-  blockAttack2Dmg: 30
   dodgeCooldown: 1
   dodgeDashBoost: 3
   dodgeCost: 0.204
@@ -903,7 +903,8 @@ MonoBehaviour:
   wallHit: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
   heavyAttackSound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
   blockAttack1Sound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
-  blockAttack2Sound: {fileID: 8300000, guid: 10597d74e6328a0479622265494fac5b, type: 3}
+  ParrySound: {fileID: 8300000, guid: 360bf9a0529fc8c448e2fef03122aeea, type: 3}
+  ParryAttackSound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   BlockSound: {fileID: 0}
   DodgeSound: {fileID: 0}
   DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
