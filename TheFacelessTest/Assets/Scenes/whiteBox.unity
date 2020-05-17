@@ -575,21 +575,6 @@ PrefabInstance:
       propertyPath: camShake
       value: 
       objectReference: {fileID: 1864942470}
-    - target: {fileID: 4292110267926525847, guid: a5c011aff990a4147bb7d2e38b99821a,
-        type: 3}
-      propertyPath: ParryDamage
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292110267926525847, guid: a5c011aff990a4147bb7d2e38b99821a,
-        type: 3}
-      propertyPath: hitParry
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292110267926525847, guid: a5c011aff990a4147bb7d2e38b99821a,
-        type: 3}
-      propertyPath: parryDelay
-      value: 1.6
-      objectReference: {fileID: 0}
     - target: {fileID: 4292110267926525852, guid: a5c011aff990a4147bb7d2e38b99821a,
         type: 3}
       propertyPath: m_Name

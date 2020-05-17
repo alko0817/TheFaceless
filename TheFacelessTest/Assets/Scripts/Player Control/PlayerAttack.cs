@@ -296,7 +296,6 @@ public class PlayerAttack : MonoBehaviour
                     if (attacked && CanReact)
                     {
                         CanReact = false;
-                        //controller.anim.SetTrigger("react");
 
                         Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
                         //StartCoroutine(EpicLand(.5f, .3f));
