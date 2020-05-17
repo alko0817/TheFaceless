@@ -70,19 +70,22 @@ public class PlayerHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if (immortal) return;
+        if (immortal || player.blocking) return;
 
-        if (!player.blocking)
-        {
-            currentHealth -= damage;
-            player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
-        }
+        currentHealth -= damage;
+        player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
 
-        else
-        {
-            currentHealth -= damage * blockMitigation;
-            player.SwordSounds.PlayOneShot(player.BlockSound);
-        }
+        //if (!player.blocking)
+        //{
+        //    currentHealth -= damage;
+        //    player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
+        //}
+
+        //else
+        //{
+        //    currentHealth -= damage * blockMitigation;
+        //    player.SwordSounds.PlayOneShot(player.BlockSound);
+        //}
 
         StopCoroutine("HealingDelay");
         canRegen = false;

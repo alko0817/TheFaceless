@@ -23,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     //TIMERS 
     int combos = 0;
     float lastClick = 0;
+    float blockCd = 0;
 
     int heavyComb = 0;
 
@@ -138,6 +139,7 @@ public class PlayerAttack : MonoBehaviour
         controller.attacking = attacking;
         lastClick -= Time.deltaTime;
         nextCombo -= Time.deltaTime;
+        blockCd -= Time.deltaTime;
 
         if (controller.stunned || controller.health.dead)
         {
@@ -268,17 +270,18 @@ public class PlayerAttack : MonoBehaviour
         #endregion
 
         #region ParryBlock
-        if (lastClick <= 0 && !holding)
+        if (blockCd <= 0 && !holding && CanReact)
         {
             if (Input.GetButtonDown("Fire2"))
             {
                 StartCoroutine("Blocking");
-                lastClick = 1f;
+                blockCd = 1.7f;
             }
         }
 
         if (controller.blocking)
         {
+            
             gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
 
             Collider[] enemies = Physics.OverlapBox(controller.heavyPoint.position,
@@ -298,7 +301,6 @@ public class PlayerAttack : MonoBehaviour
                         CanReact = false;
 
                         Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
-                        //StartCoroutine(EpicLand(.5f, .3f));
                         StartCoroutine(AttackSound(.1f, controller.ParrySound));
                         StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
                         break;
@@ -362,9 +364,13 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Blocking()
     {
         controller.anim.SetTrigger("startBlock");
+        controller.health.Immortality(true);
         controller.blocking = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.1f);
         controller.blocking = false;
+
+        yield return new WaitForSeconds(.9f);
+        controller.health.Immortality(false);
 
         //yield return new WaitForSeconds(.2f);
         //controller.blocking = true;
