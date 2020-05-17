@@ -850,7 +850,7 @@ MonoBehaviour:
   attackDelay3: 0.35
   attackDelay4: 0.45
   attackDelay5: 1.1
-  parryDelay: 1.8
+  parryDelay: 1.6
   heavyDelay1: 1.15
   heavyDelay2: 1.5
   dischargeDelay: 2
@@ -864,7 +864,7 @@ MonoBehaviour:
   hitLight5: 0.8
   hitHeavy: 0.86
   hitDischarge: 1.8
-  hitParry: 1.2
+  hitParry: 1
   holdForHeavy: 0.2
   slashDamage: 10
   slash2Damage: 12
