@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Invector.vCharacterController;
 using UnityEditor.UIElements;
+using System.Diagnostics;
+using UnityEngine.Networking;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
     bool attackThrown = false;
     bool holding = false;
     bool isDischarge = false;
-    bool isHeavy = false;
+    bool CanReact = true;
 
     //TIMERS 
     int combos = 0;
@@ -33,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     float dischargeDelay;
 
-    float blockAttackDelay1;
+    float attackDelay5;
 
     float nextAttack;
     float nextHeavyAttack;
@@ -52,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
 
     float hitDischarge;
 
-    float hitBlock1;
+    float hitLight5;
 
     //DAMAGES
     int slashDamage;
@@ -64,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
 
     int dischargeDamage;
 
-    int blockAttack1Dmg;
+    int slash5Damage;
 
     public ParticleSystem heavySlash;
 
@@ -87,7 +89,7 @@ public class PlayerAttack : MonoBehaviour
         heavyDelay1 = controller.heavyDelay1;
         dischargeDelay = controller.dischargeDelay;
 
-        blockAttackDelay1 = controller.blockAttackDelay1;
+        attackDelay5 = controller.attackDelay5;
 
         nextAttack = controller.nextAttack;
         nextHeavyAttack = controller.nextHeavyAttack;
@@ -104,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
         hitHeavy = controller.hitHeavy;
         hitDischarge = controller.hitDischarge;
 
-        hitBlock1 = controller.hitBlock1;
+        hitLight5 = controller.hitLight5;
 
         //DAMAGES
         slashDamage = controller.slashDamage;
@@ -115,7 +117,7 @@ public class PlayerAttack : MonoBehaviour
         heavyDamage = controller.heavyDamage;
         dischargeDamage = controller.dischargeDamage;
 
-        blockAttack1Dmg = controller.blockAttack1Dmg;
+        slash5Damage = controller.slash5Damage;
 
 
     }
@@ -208,9 +210,9 @@ public class PlayerAttack : MonoBehaviour
             else if (Input.GetButtonUp("Fire1") && (combos == 4))
             {
                 combos = 0;
-                Attack(hitBlock1, blockAttackDelay1, blockAttack1Dmg, "blockAttack", 
+                Attack(hitLight5, attackDelay5, slash5Damage, "blockAttack", 
                     controller.detectPoint, nextBlockAttack, controller.LAStamCost);
-                StartCoroutine(AttackSound(hitBlock1, controller.blockAttack1Sound));
+                StartCoroutine(AttackSound(hitLight5, controller.blockAttack1Sound));
             }
         }
 
@@ -254,37 +256,84 @@ public class PlayerAttack : MonoBehaviour
         }
         #endregion
 
-        #region Block
-
-        if (controller.stamina.canBlock)
+        #region ParryBlock
+        if (lastClick <= 0 && !holding && !attacking)
         {
             if (Input.GetButtonDown("Fire2"))
             {
-
                 StartCoroutine("Blocking");
-
+                lastClick = 1f;
             }
+        }
 
-            //IF BUTTON RELEASED STOP BLOCKING
-            if (Input.GetButtonUp("Fire2"))
-            {
-                StopCoroutine("Blocking");
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-                controller.blocking = false;
-                controller.anim.SetBool("blocking", false);
-            }
+        if (controller.blocking)
+        {
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
 
-            //WHILE BUTTON IS PRESSED 
-            if (Input.GetButton("Fire2"))
+            Collider[] enemies = Physics.OverlapBox(controller.heavyPoint.position,
+                controller.heavyPoint.localScale / 2, Quaternion.identity, controller.enemyLayer);
+
+            foreach (Collider enemy in enemies)
             {
-                if (controller.blocking)
+                if (enemy.GetComponent<MeleeEnemy>() == null)
                 {
-                    gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+                    continue;
+                }
+                else
+                {
+                    bool attacked = enemy.GetComponent<MeleeEnemy>().attackThrown;
+                    if (attacked && CanReact)
+                    {
+                        CanReact = false;
+                        controller.anim.SetTrigger("react");
+                        StartCoroutine(EpicLand(.5f, .3f));
+                        break;
+                    }
                 }
             }
-
         }
-        else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+
+        else
+        {
+            CanReact = true;
+            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+        }
+
+
+
+        #endregion
+
+        #region OldBlock
+
+        //if (controller.stamina.canBlock)
+        //{
+        //    if (Input.GetButtonDown("Fire2"))
+        //    {
+
+        //        StartCoroutine("Blocking");
+
+        //    }
+
+        //    //IF BUTTON RELEASED STOP BLOCKING
+        //    if (Input.GetButtonUp("Fire2"))
+        //    {
+        //        StopCoroutine("Blocking");
+        //        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+        //        controller.blocking = false;
+        //        controller.anim.SetBool("blocking", false);
+        //    }
+
+        //    //WHILE BUTTON IS PRESSED 
+        //    if (Input.GetButton("Fire2"))
+        //    {
+        //        if (controller.blocking)
+        //        {
+        //            //gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+        //        }
+        //    }
+
+        //}
+        //else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
         #endregion
     }
 
@@ -298,10 +347,15 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator Blocking()
     {
-        yield return new WaitForSeconds(.2f);
-        controller.blocking = true;
-        controller.anim.SetBool("blocking", controller.blocking);
         controller.anim.SetTrigger("startBlock");
+        controller.blocking = true;
+        yield return new WaitForSeconds(1f);
+        controller.blocking = false;
+
+        //yield return new WaitForSeconds(.2f);
+        //controller.blocking = true;
+        //controller.anim.SetBool("blocking", controller.blocking);
+        //controller.anim.SetTrigger("startBlock");
     }
 
     IEnumerator EpicLand(float delay, float duration)

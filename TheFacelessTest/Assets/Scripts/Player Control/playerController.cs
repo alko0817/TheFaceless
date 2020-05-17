@@ -41,13 +41,13 @@ public class playerController : MonoBehaviour
     public float attackDelay2 = 1.5f;
     public float attackDelay3 = 1.5f;
     public float attackDelay4 = 1.5f;
+    public float attackDelay5 = 2f;
     [Space]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
     [Space]
     public float dischargeDelay = 2f;
     [Space]
-    public float blockAttackDelay1 = 2f;
     public float blockAttackDelay2 = 2f;
     [Space]
     [Tooltip("Input timer before next light combo")]
@@ -63,12 +63,12 @@ public class playerController : MonoBehaviour
     public float hitLight2 = 0f;
     public float hitLight3 = 0f;
     public float hitLight4 = 0f;
+    public float hitLight5 = 0f;
     [Space]
     public float hitHeavy = 0f;
     [Space]
     public float hitDischarge = 0f;
     [Space]
-    public float hitBlock1 = 0f;
     public float hitBlock2 = 0f;
 
     [Tooltip("How long has the player to hold the button before triggering the heavy attack. Requires fine-tunning!")]
@@ -85,13 +85,13 @@ public class playerController : MonoBehaviour
     public int slash2Damage = 25;
     public int slash3Damage = 25;
     public int slash4Damage = 25;
+    public int slash5Damage = 30;
     [Space]
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
     [Space]
     public int dischargeDamage = 40;
     [Space]
-    public int blockAttack1Dmg = 30;
     public int blockAttack2Dmg = 30;
 
     //DODGE
