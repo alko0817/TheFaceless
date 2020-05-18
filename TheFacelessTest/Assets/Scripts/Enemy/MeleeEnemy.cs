@@ -247,8 +247,9 @@ public class MeleeEnemy : EnemyBase
         {
             player.GetComponent<playerController>().TakeDamage(attackDamage);
         }
-        yield return new WaitForSeconds(1f);
         attackThrown = false;
+        yield return new WaitForSeconds(1f);
+        
         combatActionInProgress = false;
 
     }

@@ -7,5 +7,349 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: block
-  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000000000000000000
-  m_Elements: []
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Nicola
+    m_Weight: 1
+  - m_Path: Nicola1_Reference
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_LeftUpLeg
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_LeftUpLeg/Nicola1_LeafLeftUpLegRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_LeftUpLeg/Nicola1_LeftLeg
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_LeftUpLeg/Nicola1_LeftLeg/Nicola1_LeftFoot
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_LeftUpLeg/Nicola1_LeftLeg/Nicola1_LeftFoot/Nicola1_LeftToeBase
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_RightUpLeg
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_RightUpLeg/Nicola1_LeafRightUpLegRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_RightUpLeg/Nicola1_RightLeg
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_RightUpLeg/Nicola1_RightLeg/Nicola1_RightFoot
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_RightUpLeg/Nicola1_RightLeg/Nicola1_RightFoot/Nicola1_RightToeBase
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeafLeftArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeafLeftForeArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandIndex1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandIndex1/Nicola1_LeftHandIndex2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandIndex1/Nicola1_LeftHandIndex2/Nicola1_LeftHandIndex3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandIndex1/Nicola1_LeftHandIndex2/Nicola1_LeftHandIndex3/Nicola1_LeftHandIndex4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandMiddle1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandMiddle1/Nicola1_LeftHandMiddle2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandMiddle1/Nicola1_LeftHandMiddle2/Nicola1_LeftHandMiddle3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandMiddle1/Nicola1_LeftHandMiddle2/Nicola1_LeftHandMiddle3/Nicola1_LeftHandMiddle4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandPinky1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandPinky1/Nicola1_LeftHandPinky2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandPinky1/Nicola1_LeftHandPinky2/Nicola1_LeftHandPinky3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandPinky1/Nicola1_LeftHandPinky2/Nicola1_LeftHandPinky3/Nicola1_LeftHandPinky4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandRing1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandRing1/Nicola1_LeftHandRing2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandRing1/Nicola1_LeftHandRing2/Nicola1_LeftHandRing3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandRing1/Nicola1_LeftHandRing2/Nicola1_LeftHandRing3/Nicola1_LeftHandRing4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandThumb1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandThumb1/Nicola1_LeftHandThumb2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandThumb1/Nicola1_LeftHandThumb2/Nicola1_LeftHandThumb3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_LeftShoulder/Nicola1_LeftArm/Nicola1_LeftForeArm/Nicola1_LeftHand/Nicola1_LeftHandThumb1/Nicola1_LeftHandThumb2/Nicola1_LeftHandThumb3/Nicola1_LeftHandThumb4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_Neck
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_Neck/Nicola1_Neck1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_Neck/Nicola1_Neck1/Nicola1_Head
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_LeafRightArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_LeafRightForeArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandIndex1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandIndex1/Nicola1_RightHandIndex2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandIndex1/Nicola1_RightHandIndex2/Nicola1_RightHandIndex3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandIndex1/Nicola1_RightHandIndex2/Nicola1_RightHandIndex3/Nicola1_RightHandIndex4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandMiddle1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandMiddle1/Nicola1_RightHandMiddle2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandMiddle1/Nicola1_RightHandMiddle2/Nicola1_RightHandMiddle3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandMiddle1/Nicola1_RightHandMiddle2/Nicola1_RightHandMiddle3/Nicola1_RightHandMiddle4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandPinky1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandPinky1/Nicola1_RightHandPinky2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandPinky1/Nicola1_RightHandPinky2/Nicola1_RightHandPinky3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandPinky1/Nicola1_RightHandPinky2/Nicola1_RightHandPinky3/Nicola1_RightHandPinky4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandRing1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandRing1/Nicola1_RightHandRing2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandRing1/Nicola1_RightHandRing2/Nicola1_RightHandRing3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandRing1/Nicola1_RightHandRing2/Nicola1_RightHandRing3/Nicola1_RightHandRing4
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandThumb1
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandThumb1/Nicola1_RightHandThumb2
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandThumb1/Nicola1_RightHandThumb2/Nicola1_RightHandThumb3
+    m_Weight: 1
+  - m_Path: Nicola1_Reference/Nicola1_Hips/Nicola1_Spine/Nicola1_Spine1/Nicola1_Spine2/Nicola1_Spine3/Nicola1_RightShoulder/Nicola1_RightArm/Nicola1_RightForeArm/Nicola1_RightHand/Nicola1_RightHandThumb1/Nicola1_RightHandThumb2/Nicola1_RightHandThumb3/Nicola1_RightHandThumb4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:ChestEndEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:ChestOriginEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:HeadEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:LeftUpLeg
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:LeftUpLeg/Nicola_Ctrl:LeafLeftUpLegRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:LeftUpLeg/Nicola_Ctrl:LeftLeg
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:LeftUpLeg/Nicola_Ctrl:LeftLeg/Nicola_Ctrl:LeftFoot
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:LeftUpLeg/Nicola_Ctrl:LeftLeg/Nicola_Ctrl:LeftFoot/Nicola_Ctrl:LeftToeBase
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:RightUpLeg
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:RightUpLeg/Nicola_Ctrl:LeafRightUpLegRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:RightUpLeg/Nicola_Ctrl:RightLeg
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:RightUpLeg/Nicola_Ctrl:RightLeg/Nicola_Ctrl:RightFoot
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:RightUpLeg/Nicola_Ctrl:RightLeg/Nicola_Ctrl:RightFoot/Nicola_Ctrl:RightToeBase
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeafLeftArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeafLeftForeArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandIndex1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandIndex1/Nicola_Ctrl:LeftHandIndex2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandIndex1/Nicola_Ctrl:LeftHandIndex2/Nicola_Ctrl:LeftHandIndex3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandIndex1/Nicola_Ctrl:LeftHandIndex2/Nicola_Ctrl:LeftHandIndex3/Nicola_Ctrl:LeftHandIndex4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandMiddle1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandMiddle1/Nicola_Ctrl:LeftHandMiddle2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandMiddle1/Nicola_Ctrl:LeftHandMiddle2/Nicola_Ctrl:LeftHandMiddle3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandMiddle1/Nicola_Ctrl:LeftHandMiddle2/Nicola_Ctrl:LeftHandMiddle3/Nicola_Ctrl:LeftHandMiddle4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandPinky1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandPinky1/Nicola_Ctrl:LeftHandPinky2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandPinky1/Nicola_Ctrl:LeftHandPinky2/Nicola_Ctrl:LeftHandPinky3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandPinky1/Nicola_Ctrl:LeftHandPinky2/Nicola_Ctrl:LeftHandPinky3/Nicola_Ctrl:LeftHandPinky4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandRing1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandRing1/Nicola_Ctrl:LeftHandRing2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandRing1/Nicola_Ctrl:LeftHandRing2/Nicola_Ctrl:LeftHandRing3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandRing1/Nicola_Ctrl:LeftHandRing2/Nicola_Ctrl:LeftHandRing3/Nicola_Ctrl:LeftHandRing4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandThumb1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandThumb1/Nicola_Ctrl:LeftHandThumb2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandThumb1/Nicola_Ctrl:LeftHandThumb2/Nicola_Ctrl:LeftHandThumb3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:LeftShoulder/Nicola_Ctrl:LeftArm/Nicola_Ctrl:LeftForeArm/Nicola_Ctrl:LeftHand/Nicola_Ctrl:LeftHandThumb1/Nicola_Ctrl:LeftHandThumb2/Nicola_Ctrl:LeftHandThumb3/Nicola_Ctrl:LeftHandThumb4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:Neck
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:Neck/Nicola_Ctrl:Neck1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:Neck/Nicola_Ctrl:Neck1/Nicola_Ctrl:Head
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:LeafRightArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:LeafRightForeArmRoll1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandIndex1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandIndex1/Nicola_Ctrl:RightHandIndex2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandIndex1/Nicola_Ctrl:RightHandIndex2/Nicola_Ctrl:RightHandIndex3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandIndex1/Nicola_Ctrl:RightHandIndex2/Nicola_Ctrl:RightHandIndex3/Nicola_Ctrl:RightHandIndex4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandMiddle1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandMiddle1/Nicola_Ctrl:RightHandMiddle2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandMiddle1/Nicola_Ctrl:RightHandMiddle2/Nicola_Ctrl:RightHandMiddle3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandMiddle1/Nicola_Ctrl:RightHandMiddle2/Nicola_Ctrl:RightHandMiddle3/Nicola_Ctrl:RightHandMiddle4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandPinky1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandPinky1/Nicola_Ctrl:RightHandPinky2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandPinky1/Nicola_Ctrl:RightHandPinky2/Nicola_Ctrl:RightHandPinky3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandPinky1/Nicola_Ctrl:RightHandPinky2/Nicola_Ctrl:RightHandPinky3/Nicola_Ctrl:RightHandPinky4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandRing1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandRing1/Nicola_Ctrl:RightHandRing2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandRing1/Nicola_Ctrl:RightHandRing2/Nicola_Ctrl:RightHandRing3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandRing1/Nicola_Ctrl:RightHandRing2/Nicola_Ctrl:RightHandRing3/Nicola_Ctrl:RightHandRing4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandThumb1
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandThumb1/Nicola_Ctrl:RightHandThumb2
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandThumb1/Nicola_Ctrl:RightHandThumb2/Nicola_Ctrl:RightHandThumb3
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:Hips/Nicola_Ctrl:Spine/Nicola_Ctrl:Spine1/Nicola_Ctrl:Spine2/Nicola_Ctrl:Spine3/Nicola_Ctrl:RightShoulder/Nicola_Ctrl:RightArm/Nicola_Ctrl:RightForeArm/Nicola_Ctrl:RightHand/Nicola_Ctrl:RightHandThumb1/Nicola_Ctrl:RightHandThumb2/Nicola_Ctrl:RightHandThumb3/Nicola_Ctrl:RightHandThumb4
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:HipsEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftAnkleEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftElbowEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftFootEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHandIndexEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHandMiddleEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHandPinkyEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHandRingEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHandThumbEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftHipEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftKneeEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftShoulderEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:LeftWristEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightAnkleEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightElbowEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightFootEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHandIndexEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHandMiddleEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHandPinkyEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHandRingEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHandThumbEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightHipEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightKneeEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightShoulderEffector
+    m_Weight: 1
+  - m_Path: Nicola_Ctrl:Reference/Nicola_Ctrl:RightWristEffector
+    m_Weight: 1

@@ -41,35 +41,34 @@ public class playerController : MonoBehaviour
     public float attackDelay2 = 1.5f;
     public float attackDelay3 = 1.5f;
     public float attackDelay4 = 1.5f;
+    public float attackDelay5 = 2f;
+    [Space]
+    public float parryDelay = 2f;
     [Space]
     public float heavyDelay1 = 1f;
     public float heavyDelay2 = 1f;
     [Space]
     public float dischargeDelay = 2f;
     [Space]
-    public float blockAttackDelay1 = 2f;
-    public float blockAttackDelay2 = 2f;
-    [Space]
     [Tooltip("Input timer before next light combo")]
     public float nextAttack = 2f;
-    [Tooltip("Input timer before next heavy combo")]
     public float nextHeavyAttack = 2f;
-    [Tooltip("Input timer before next block combo")]
-    public float nextBlockAttack = 2f;
+    public float nextParry = 2f;
     internal float nextCombo = 0f;
 
-    [Header("- Delay before attack lands and applies damage")]
+    [Header("- Attack Land Delays")]
     public float hitLight1 = 0f;
     public float hitLight2 = 0f;
     public float hitLight3 = 0f;
     public float hitLight4 = 0f;
+    public float hitLight5 = 0f;
     [Space]
     public float hitHeavy = 0f;
     [Space]
     public float hitDischarge = 0f;
     [Space]
-    public float hitBlock1 = 0f;
-    public float hitBlock2 = 0f;
+    public float hitParry = 0f;
+    [Space]
 
     [Tooltip("How long has the player to hold the button before triggering the heavy attack. Requires fine-tunning!")]
     [Range(.1f, 1f)]
@@ -85,14 +84,14 @@ public class playerController : MonoBehaviour
     public int slash2Damage = 25;
     public int slash3Damage = 25;
     public int slash4Damage = 25;
+    public int slash5Damage = 30;
+    [Space]
+    public int ParryDamage = 30;
     [Space]
     public int heavyDamage = 40;
     public int heavy2Damage = 40;
     [Space]
     public int dischargeDamage = 40;
-    [Space]
-    public int blockAttack1Dmg = 30;
-    public int blockAttack2Dmg = 30;
 
     //DODGE
     [Header("- Dodging")]
@@ -163,7 +162,8 @@ public class playerController : MonoBehaviour
     public AudioClip heavyAttackSound;
     [Space]
     public AudioClip blockAttack1Sound;
-    public AudioClip blockAttack2Sound;
+    public AudioClip ParrySound;
+    public AudioClip ParryAttackSound;
     [Space]
     public AudioClip BlockSound;
     public AudioClip DodgeSound;
@@ -236,6 +236,10 @@ public class playerController : MonoBehaviour
         {
             lastCharge += Time.deltaTime * UIChargeMultiplier;
             swordFill.fillAmount = lastCharge / maxCharge;
+            if (swordFill.fillAmount == 1)
+            {
+                currentCharge = maxCharge;
+            }
         }
 
         if (currentCharge == maxCharge && !played)

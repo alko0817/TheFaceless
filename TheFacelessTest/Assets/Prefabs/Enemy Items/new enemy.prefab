@@ -27107,7 +27107,7 @@ MonoBehaviour:
   initialSpeed: 2
   stunDuration: 0
   ReceiveDmgSound: {fileID: 8300000, guid: b92f18b82929cbe49a26d73d939fd11c, type: 3}
-  DealDmgSound: {fileID: 0}
+  DealDmgSound: {fileID: 8300000, guid: d9681cd695844c441bd584a7c1ab428b, type: 3}
   StunnedSound: {fileID: 0}
   dyingSound: {fileID: 8300000, guid: 16f54dc00aa9f624ca7b75b3cf07796f, type: 3}
   DeathSound: {fileID: 8300000, guid: 79404db0ea338544ba138e01c5760ad6, type: 3}

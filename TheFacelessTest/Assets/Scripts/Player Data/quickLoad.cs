@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Invector.vCharacterController;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class quickLoad : MonoBehaviour
 
     IEnumerator Ressurect()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         GetComponent<playerController>().anim.SetBool("dead", false);
         health.deathScreen.SetActive(false);

@@ -83,7 +83,7 @@ public class PlayerDodge : MonoBehaviour
 
         controller.anim.SetTrigger(side);
 
-        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
+        //gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
 
         yield return new WaitForSeconds(.7f);
 
