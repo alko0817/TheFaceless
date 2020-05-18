@@ -124,12 +124,12 @@ namespace Invector.vCharacterController
 
         protected virtual void SprintInput()
         {
-            if (Input.GetKeyDown(sprintInput))
+            if (Input.GetButtonDown("Sprint"))
             {
                 if (controller.stamina.canSprint)
                 cc.Sprint(true);
             }
-            else if (Input.GetKeyUp(sprintInput))
+            else if (Input.GetButtonUp("Sprint"))
                 cc.Sprint(false);
         }
 
@@ -147,7 +147,7 @@ namespace Invector.vCharacterController
         /// </summary>
         protected virtual void JumpInput()
         {
-            if (Input.GetKeyDown(jumpInput) && JumpConditions())
+            if (Input.GetButtonDown("Jump") && JumpConditions())
                 cc.Jump();
         }
 
