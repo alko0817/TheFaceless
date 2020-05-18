@@ -5,6 +5,7 @@ using Invector.vCharacterController;
 using UnityEditor.UIElements;
 using System.Diagnostics;
 using UnityEngine.Networking;
+using System.IO;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -353,6 +354,10 @@ public class PlayerAttack : MonoBehaviour
             controller.timeManager.slowmoDuration = duration;
             controller.timeManager.Slowmo();
         }
+
+        GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(1f);
+        GetComponent<vThirdPersonMotor>().stopMove = false;
     }
 
 
