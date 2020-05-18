@@ -75,9 +75,7 @@ public class PlayerDodge : MonoBehaviour
         controller.health.Immortality(true);
         dodgeCd = dodgeCooldown;
 
-        controller.stamina.unit -= controller.dodgeCost;
-        controller.stamina.drainingDodge = true;
-        controller.stamina.canRecharge = false;
+        controller.stamina.Drain(controller.dodgeCost);
 
         controller.SwordSounds.PlayOneShot(controller.DodgeSound);
 
@@ -89,7 +87,6 @@ public class PlayerDodge : MonoBehaviour
 
         controller.dodging = false;
         controller.health.Immortality(false);
-        controller.stamina.drainingDodge = false;
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
     }
 }

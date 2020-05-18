@@ -143,8 +143,11 @@ public class playerController : MonoBehaviour
     #endregion
 
     [Space]
-    public float LAStamCost;
-    public float HAStamCost;
+    [Header("- Stamina costs")]
+    public float LightCost;
+    public float HeavyCost;
+    public float blockCost;
+    public float parryCost;
     [Space]
 
     #region SOUNDS
