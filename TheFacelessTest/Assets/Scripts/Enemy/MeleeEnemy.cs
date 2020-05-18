@@ -256,13 +256,13 @@ public class MeleeEnemy : EnemyBase
 
     IEnumerator Dodge()
     {
+        immortal = true;
         combatActionInProgress = true;
         dodging = true;
         anim.Dodge();
-        Vector3 direction = (player.transform.position - transform.position) * -1;
-        direction.Normalize();
-        navMeshAgent.Move(direction * 2);
+
         yield return new WaitForSeconds(1f);
+        immortal = false;
         dodging = false;
         combatActionInProgress = false;
 

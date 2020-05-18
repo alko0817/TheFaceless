@@ -42,6 +42,7 @@ public class EnemyBase : MonoBehaviour
     [Space]
     protected bool playerDetected;
     internal bool dying;
+    internal bool immortal = false;
     protected bool stunned;
     internal bool engaging;
     internal bool blocking;
@@ -241,7 +242,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        if (dying) return;
+        if (dying || immortal) return;
         if (!blocking)
         {
             currentHealth -= damage;

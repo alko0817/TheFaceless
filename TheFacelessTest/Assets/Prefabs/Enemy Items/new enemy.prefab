@@ -26980,7 +26980,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 64b093e0c787acb43918e75858cc3c84, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -27120,8 +27120,8 @@ MonoBehaviour:
   attackDamage: 0
   attackDistance: 1
   attackHitBox: 0
-  dodgeChanceOutOf10: 1
-  blockChanceOutOf10: 0
+  dodgeChanceOutOf10: 10
+  blockChanceOutOf10: 10
   waypointTolerance: 1.5
   waypointWaitTime: 3
   attackDelay: 0.7
