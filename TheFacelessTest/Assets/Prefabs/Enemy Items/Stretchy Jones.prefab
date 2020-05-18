@@ -47256,7 +47256,7 @@ MonoBehaviour:
   sightDistance: 15
   initialSpeed: 0.5
   stunDuration: 0
-  ReceiveDmgSound: {fileID: 0}
+  ReceiveDmgSound: {fileID: 8300000, guid: b92f18b82929cbe49a26d73d939fd11c, type: 3}
   DealDmgSound: {fileID: 0}
   StunnedSound: {fileID: 0}
   dyingSound: {fileID: 0}
