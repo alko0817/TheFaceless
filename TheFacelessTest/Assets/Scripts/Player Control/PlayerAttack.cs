@@ -76,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
 
 
     public ParticleSystem heavySlash;
+    public ParticleSystem parryDeflect;
 
     #endregion  
 
@@ -299,7 +300,7 @@ public class PlayerAttack : MonoBehaviour
                     if (attacked && CanReact)
                     {
                         CanReact = false;
-
+                        StartCoroutine(EpicLand(.2f, .3f, false));
                         Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
                         StartCoroutine(AttackSound(.1f, controller.ParrySound));
                         StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
@@ -378,11 +379,15 @@ public class PlayerAttack : MonoBehaviour
         //controller.anim.SetTrigger("startBlock");
     }
 
-    IEnumerator EpicLand(float delay, float duration)
+    IEnumerator EpicLand(float delay, float duration, bool slow)
     {
         yield return new WaitForSeconds(delay);
-        controller.timeManager.slowmoDuration = duration;
-        controller.timeManager.Slowmo();
+        parryDeflect.Play();
+        if (slow)
+        {
+            controller.timeManager.slowmoDuration = duration;
+            controller.timeManager.Slowmo();
+        }
     }
 
 
