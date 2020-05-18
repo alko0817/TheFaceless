@@ -5704,8 +5704,10 @@ MonoBehaviour:
   electricityCharge: {fileID: 3300975218034385351}
   burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   burstPoint: {fileID: 9040024944503598342}
-  LAStamCost: 0.05
-  HAStamCost: 0.1
+  LightCost: 0.05
+  HeavyCost: 0.1
+  blockCost: 0.2
+  parryCost: 0.3
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
   lightAttack1Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}

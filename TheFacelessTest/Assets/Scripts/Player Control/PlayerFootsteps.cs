@@ -23,7 +23,7 @@ public class PlayerFootsteps : MonoBehaviour
     {
         if (useStepInstead) return;
 
-        if (con.speed > 2f && !con.stamina.drainingDodge && !con.jumping)
+        if (con.speed > 2f && /*!con.stamina.drainingDodge*/ !con.jumping)
         {
             source.enabled = true;
             if (con.sprinting)

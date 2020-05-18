@@ -2658,6 +2658,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8802495705965616724, guid: 78245e1da84781c4491f5efe5dfac56f,
+        type: 3}
+      propertyPath: chargeDelay
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78245e1da84781c4491f5efe5dfac56f, type: 3}
 --- !u!114 &1012459140 stripped

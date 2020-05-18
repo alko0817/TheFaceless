@@ -163,7 +163,7 @@ public class PlayerAttack : MonoBehaviour
             if (Input.GetButtonUp("Fire1") && (combos == 0))
             {
                 combos = 1;
-                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint, nextAttack, controller.LAStamCost);
+                Attack(hitLight1, attackDelay1, slashDamage, "isSlash", controller.detectPoint, nextAttack, controller.LightCost);
                 StartCoroutine(AttackSound(hitLight1, controller.lightAttack1Sound));
 
                 nextCombo = nextAttack;
@@ -200,7 +200,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 2;
                 Attack(hitLight2, attackDelay2, slash2Damage, "isSlash2", 
-                    controller.detectPoint, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LightCost);
 
                 StartCoroutine(AttackSound(hitLight2, controller.lightAttack2Sound));
             }
@@ -209,7 +209,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 3;
                 Attack(hitLight3, attackDelay3, slash3Damage, "isSlash3", 
-                    controller.detectPoint, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LightCost);
                 StartCoroutine(AttackSound(hitLight3, controller.lightAttack3Sound));
             }
 
@@ -217,7 +217,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 4;
                 Attack(hitLight4, attackDelay4, slash4Damage, "isSlash4", 
-                    controller.detectPoint, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LightCost);
                 StartCoroutine(AttackSound(hitLight4, controller.lightAttack4Sound));
             }
 
@@ -225,7 +225,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 combos = 0;
                 Attack(hitLight5, attackDelay5, slash5Damage, "blockAttack", 
-                    controller.detectPoint, nextAttack, controller.LAStamCost);
+                    controller.detectPoint, nextAttack, controller.LightCost);
                 StartCoroutine(AttackSound(hitLight5, controller.blockAttack1Sound));
             }
         }
@@ -235,7 +235,6 @@ public class PlayerAttack : MonoBehaviour
         {
             combos = 0;
             attacking = false;
-            controller.stamina.drainingAtt = false;
 
         }
         #endregion
@@ -264,93 +263,62 @@ public class PlayerAttack : MonoBehaviour
             if (lastClick <= 0 && holding && !attacking)
             {
                 Attack(hitHeavy, heavyDelay1, heavyDamage, "isHeavy", 
-                    controller.heavyPoint, nextHeavyAttack, controller.HAStamCost);
+                    controller.heavyPoint, nextHeavyAttack, controller.HeavyCost);
                 StartCoroutine(AttackSound(.45f, controller.heavyAttackSound));
             }
         }
         #endregion
 
         #region ParryBlock
-        if (blockCd <= 0 && !holding && CanReact)
+        if (controller.stamina.canBlock)
         {
-            if (Input.GetButtonDown("Fire2"))
+            if (blockCd <= 0 && !holding && CanReact)
             {
-                StartCoroutine("Blocking");
-                blockCd = 1.7f;
-            }
-        }
-
-        if (controller.blocking)
-        {
-            
-            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
-
-            Collider[] enemies = Physics.OverlapBox(controller.heavyPoint.position,
-                controller.heavyPoint.localScale / 2, Quaternion.identity, controller.enemyLayer);
-
-            foreach (Collider enemy in enemies)
-            {
-                if (enemy.GetComponent<MeleeEnemy>() == null)
+                if (Input.GetButtonDown("Fire2"))
                 {
-                    continue;
+                    StartCoroutine("Blocking");
+                    blockCd = 1.7f;
                 }
-                else
+            }
+
+            if (controller.blocking)
+            {
+
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
+
+                Collider[] enemies = Physics.OverlapBox(controller.heavyPoint.position,
+                    controller.heavyPoint.localScale / 2, Quaternion.identity, controller.enemyLayer);
+
+                foreach (Collider enemy in enemies)
                 {
-                    bool attacked = enemy.GetComponent<MeleeEnemy>().attackThrown;
-                    if (attacked && CanReact)
+                    if (enemy.GetComponent<MeleeEnemy>() == null)
                     {
-                        CanReact = false;
-                        StartCoroutine(EpicLand(.2f, .3f, false));
-                        Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, 0f);
-                        StartCoroutine(AttackSound(.1f, controller.ParrySound));
-                        StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
-                        break;
+                        continue;
+                    }
+                    else
+                    {
+                        bool attacked = enemy.GetComponent<MeleeEnemy>().attackThrown;
+                        if (attacked && CanReact)
+                        {
+                            CanReact = false;
+                            StartCoroutine(EpicLand(.2f, .3f, false));
+                            Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, controller.parryCost);
+                            StartCoroutine(AttackSound(.1f, controller.ParrySound));
+                            StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
+                            break;
+                        }
                     }
                 }
             }
+
+            else
+            {
+                CanReact = true;
+                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
+            }
+
         }
 
-        else
-        {
-            CanReact = true;
-            gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-        }
-
-
-
-        #endregion
-
-        #region OldBlock
-
-        //if (controller.stamina.canBlock)
-        //{
-        //    if (Input.GetButtonDown("Fire2"))
-        //    {
-
-        //        StartCoroutine("Blocking");
-
-        //    }
-
-        //    //IF BUTTON RELEASED STOP BLOCKING
-        //    if (Input.GetButtonUp("Fire2"))
-        //    {
-        //        StopCoroutine("Blocking");
-        //        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-        //        controller.blocking = false;
-        //        controller.anim.SetBool("blocking", false);
-        //    }
-
-        //    //WHILE BUTTON IS PRESSED 
-        //    if (Input.GetButton("Fire2"))
-        //    {
-        //        if (controller.blocking)
-        //        {
-        //            //gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
-        //        }
-        //    }
-
-        //}
-        //else gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
         #endregion
     }
 
@@ -367,16 +335,13 @@ public class PlayerAttack : MonoBehaviour
         controller.anim.SetTrigger("startBlock");
         controller.health.Immortality(true);
         controller.blocking = true;
+        controller.stamina.Drain(controller.blockCost);
+
         yield return new WaitForSeconds(.1f);
         controller.blocking = false;
 
         yield return new WaitForSeconds(.9f);
         controller.health.Immortality(false);
-
-        //yield return new WaitForSeconds(.2f);
-        //controller.blocking = true;
-        //controller.anim.SetBool("blocking", controller.blocking);
-        //controller.anim.SetTrigger("startBlock");
     }
 
     IEnumerator EpicLand(float delay, float duration, bool slow)
@@ -413,7 +378,6 @@ public class PlayerAttack : MonoBehaviour
     public void Attack (float connectDelay, float clickDelay, int damage, string animation,
                         Transform AreaOfEffect, float comboTimer, float staminaDrain)
     {
-        controller.stamina.drainingAtt = true;
         lastClick = clickDelay;
         controller.anim.SetTrigger(animation);
         attacking = true;
