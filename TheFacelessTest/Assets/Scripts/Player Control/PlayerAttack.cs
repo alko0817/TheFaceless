@@ -76,10 +76,14 @@ public class PlayerAttack : MonoBehaviour
     int dischargeDamage;
 
 
+
+    #endregion  
+
     public ParticleSystem heavySlash;
     public ParticleSystem parryDeflect;
 
-    #endregion  
+    public float dischargeForce = 100f;
+    
 
     private void Start()
     {
@@ -468,6 +472,18 @@ public class PlayerAttack : MonoBehaviour
         controller.electricityCharge.Stop();
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
+
+        Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius);
+
+        foreach (Collider prop in props)
+        {
+            Rigidbody rb = prop.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(dischargeForce, transform.position, controller.aoeRadius, 5f);
+            }
+        }
+
 
         float temp = controller.SwordSounds.volume;
         controller.SwordSounds.volume += .4f;
