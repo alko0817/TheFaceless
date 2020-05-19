@@ -47,14 +47,14 @@ MonoBehaviour:
   enemiesPursuingPlayer: []
   enemiesInSightOfPlayer: []
   StunDuration: 0
-  MeleeSightDistance: 15
-  MeleeAttackDistance: 2
+  MeleeSightDistance: 20
+  MeleeAttackDistance: 3
   MeleeMaxHealth: 50
   MeleeInitialSpeed: 4
   MeleePursueSpeed: 4
   MeleeAttackDamage: 8
-  DodgeChanceOutOf10: 1
-  BlockChanceOutOf10: 1
+  DodgeChanceOutOf10: 3
+  BlockChanceOutOf10: 0
   MeleePusueDelay: 1
   MeleeSuspicionTime: 3
   MeleeWaypointTolerance: 1
