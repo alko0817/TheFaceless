@@ -6,6 +6,7 @@ public class LeverTurn : MonoBehaviour
 {
     Animator anim;
     GameObject player;
+    public GameObject e;
     bool canOpen = false;
     internal bool triggered = false;
 
@@ -20,12 +21,14 @@ public class LeverTurn : MonoBehaviour
         if (player.CompareTag(other.tag))
         {
             canOpen = true;
+            e.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         canOpen = false;
+        e.SetActive(false);
     }
 
     private void Update()
@@ -38,6 +41,7 @@ public class LeverTurn : MonoBehaviour
                 {
                     triggered = true;
                     anim.SetTrigger("open");
+                    e.SetActive(false);
                 }
             }
         }

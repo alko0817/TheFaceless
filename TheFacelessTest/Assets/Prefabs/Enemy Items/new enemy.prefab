@@ -27102,10 +27102,10 @@ MonoBehaviour:
   hit: {fileID: 6717278179761086472}
   blockHit: {fileID: 2513236989849174248}
   useGlobalSettings: 0
-  maxHealth: 40
+  maxHealth: 100
   sightDistance: 5
   initialSpeed: 2
-  stunDuration: 0
+  stunDuration: 4
   ReceiveDmgSound: {fileID: 8300000, guid: b92f18b82929cbe49a26d73d939fd11c, type: 3}
   DealDmgSound: {fileID: 8300000, guid: d9681cd695844c441bd584a7c1ab428b, type: 3}
   StunnedSound: {fileID: 0}
@@ -27117,11 +27117,11 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   attackPoint: {fileID: 4835999131634439272}
   pursueSpeed: 4
-  attackDamage: 0
-  attackDistance: 1
-  attackHitBox: 0
-  dodgeChanceOutOf10: 3
-  blockChanceOutOf10: 3
+  attackDamage: 15
+  attackDistance: 2
+  attackHitBox: 2
+  dodgeChanceOutOf10: 10
+  blockChanceOutOf10: 0
   waypointTolerance: 1.5
   waypointWaitTime: 3
   attackDelay: 0.7
