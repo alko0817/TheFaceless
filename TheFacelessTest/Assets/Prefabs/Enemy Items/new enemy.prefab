@@ -27120,8 +27120,8 @@ MonoBehaviour:
   attackDamage: 0
   attackDistance: 1
   attackHitBox: 0
-  dodgeChanceOutOf10: 10
-  blockChanceOutOf10: 10
+  dodgeChanceOutOf10: 3
+  blockChanceOutOf10: 3
   waypointTolerance: 1.5
   waypointWaitTime: 3
   attackDelay: 0.7

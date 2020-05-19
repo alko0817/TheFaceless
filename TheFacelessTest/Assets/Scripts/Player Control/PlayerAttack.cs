@@ -278,7 +278,7 @@ public class PlayerAttack : MonoBehaviour
                 if (Input.GetButtonDown("Fire2"))
                 {
                     StartCoroutine("Blocking");
-                    blockCd = 1.7f;
+                    blockCd = 1.1f;
                 }
             }
 
