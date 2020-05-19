@@ -196,7 +196,7 @@ public class playerController : MonoBehaviour
 
     bool played = false;
 
-    Rigidbody rb;
+    internal Rigidbody rb;
     internal float speed;
 
 
