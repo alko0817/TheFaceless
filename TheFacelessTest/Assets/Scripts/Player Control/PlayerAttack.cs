@@ -339,6 +339,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Blocking()
     {
         controller.anim.SetTrigger("startBlock");
+        GetComponent<vThirdPersonMotor>().stopMove = true;
         controller.health.Immortality(true);
         controller.blocking = true;
         controller.stamina.Drain(controller.blockCost);
@@ -346,7 +347,10 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         controller.blocking = false;
 
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(.5f);
+        GetComponent<vThirdPersonMotor>().stopMove = false;
+
+        yield return new WaitForSeconds(.4f);
         controller.health.Immortality(false);
     }
 
