@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/Prefabs/Environmental Props/Trinkets/Kit (non-interact).prefab.meta
 guid: 147614f8c686be543bc35751d6897054
 PrefabImporter:
+=======
+guid: c704c1e1e434285468fe8a7652aa338b
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Weapon Effects/Materials.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

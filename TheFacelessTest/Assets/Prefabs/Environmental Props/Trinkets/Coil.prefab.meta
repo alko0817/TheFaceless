@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/Prefabs/Environmental Props/Trinkets/Coil.prefab.meta
 guid: 50a995ac13c44624f80047f846f0580e
 PrefabImporter:
+=======
+guid: c6eb21c7232baa7408b8a73623c92f3d
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Water Effects/Textures.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

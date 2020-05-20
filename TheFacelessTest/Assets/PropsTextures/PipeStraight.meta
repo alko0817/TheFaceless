@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/PipeStraight.meta
 guid: 6780a17ef5a2ac246b0a835ac79de28c
+=======
+guid: 873a46651cc0ca643a7dbf979ad526ed
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Magic Effects/Prefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

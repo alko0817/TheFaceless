@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Cauldron/CauldronV2.mat.meta
 guid: 19b1b776c9cbb2748a3827e2009ec698
 NativeFormatImporter:
+=======
+guid: 261af97df41cba74790e06b7014013ee
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Scenes/Profiles.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

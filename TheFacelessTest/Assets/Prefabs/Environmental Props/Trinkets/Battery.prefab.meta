@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/Prefabs/Environmental Props/Trinkets/Battery.prefab.meta
 guid: f6e87d209aedca0498d0e3784c322531
 PrefabImporter:
+=======
+guid: 8aba91ea39bd8a345983bdd06ce8d533
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Water Effects/Prefabs.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

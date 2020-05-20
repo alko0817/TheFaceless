@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Locker/Locker.mat.meta
 guid: 772e02eb7bcb267499316695799d21a7
 NativeFormatImporter:
+=======
+guid: e1f86d8f50b10b54695ddc423f1b4ef8
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Shared/Environment/Materials.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

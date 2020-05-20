@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Arch/ArchOpen.mat.meta
 guid: 4b3d1e568538217408a66cb325d23180
 NativeFormatImporter:
+=======
+guid: 28a813567354e0c45a2b2c935171806c
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Invector-3rdPersonController_LITE/Animator.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

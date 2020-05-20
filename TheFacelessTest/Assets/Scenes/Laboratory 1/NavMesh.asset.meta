@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/Scenes/Laboratory 1/NavMesh.asset.meta
 guid: 8945ee0cbe9bed54d9f25d931e669281
 NativeFormatImporter:
+=======
+guid: 4213e342521f941429ba506d2c503111
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Shared/Environment/Textures.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/PipeStraight/PipeStraight.mat.meta
 guid: 13e2a3309bba6464398d3ee4b374df5e
 NativeFormatImporter:
+=======
+guid: d688e5c2e0a80a04a8ba3a68765556fa
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Shared/Environment/Prefabs.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

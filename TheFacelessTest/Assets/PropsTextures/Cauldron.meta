@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Cauldron.meta
 guid: 0f7a99bca92a4ef4387d60be22897e06
+=======
+guid: c0055ff4ea1aa7441a0aca9ce9688a72
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Goop Effects/Textures.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

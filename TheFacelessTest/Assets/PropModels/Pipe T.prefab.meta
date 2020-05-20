@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropModels/Pipe T.prefab.meta
 guid: 4831345f1f6072c408c34e168fa5f64d
 PrefabImporter:
+=======
+guid: 7e2ff5b031f1b8f49ab743e5e242f40c
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Weapon Effects/Prefabs.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

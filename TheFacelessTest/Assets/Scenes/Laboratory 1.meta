@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/Scenes/Laboratory 1.meta
 guid: c3f3d2ee81ddf9147a897186253e6685
+=======
+guid: bbe09f110e1631d458794a23df44e220
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Magic Effects/Shaders.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

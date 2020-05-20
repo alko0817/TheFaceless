@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/PipeCurvedTex/pipeCurved.mat.meta
 guid: a67d0949ff4a70f4a9e220536bb3ff54
 NativeFormatImporter:
+=======
+guid: 92a2267bf274d1f4e9e5ef330c1c1170
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/Shared/Environment/Models.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

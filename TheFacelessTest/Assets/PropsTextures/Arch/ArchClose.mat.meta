@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Arch/ArchClose.mat.meta
 guid: 5370ce595de43e445b9e8700128b23e7
 NativeFormatImporter:
+=======
+guid: ea87ec9c6bca3be4f8c28108d892b053
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Weapon Effects/Textures.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

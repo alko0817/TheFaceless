@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TheFacelessTest/Assets/PropsTextures/Locker.meta
 guid: fc4b38903e9b87241b3a31c222131fba
+=======
+guid: 50f5ef93ec4e1ff4d9a76c619577d477
+>>>>>>> Jossan4:TheFacelessTest/Assets/EffectExamples/Magic Effects/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
