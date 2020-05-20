@@ -83,6 +83,7 @@ public class PlayerAttack : MonoBehaviour
     public ParticleSystem parryDeflect;
 
     public float dischargeForce = 100f;
+    public LayerMask movables;
     
 
     private void Start()
@@ -473,14 +474,14 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90,0,0));
 
-        Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius);
+        Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius, movables);
 
         foreach (Collider prop in props)
         {
             Rigidbody rb = prop.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddExplosionForce(dischargeForce, transform.position, controller.aoeRadius, 5f);
+                rb.AddExplosionForce(dischargeForce, transform.position, controller.aoeRadius, 1f);
             }
         }
 

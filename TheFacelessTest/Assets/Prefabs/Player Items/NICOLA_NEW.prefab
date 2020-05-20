@@ -5759,6 +5759,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavySlash: {fileID: 4404553057165548908}
   parryDeflect: {fileID: 7897410500992900791}
+  dischargeForce: 100000
+  movables:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &2303583761765616223
 MonoBehaviour:
   m_ObjectHideFlags: 0
