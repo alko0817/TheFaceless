@@ -21,6 +21,9 @@ public class triggerDetails
     [Tooltip("The sound/music needs to be copy-pasted from the Audio Manager")]
     public string sound;
 
+    internal bool trigger = false;
+    internal bool played = false;
+
     //ADD SOME VFX 
 
     [HideInInspector]

@@ -18,6 +18,7 @@ TagManager:
   - Flashbacks
   - Post
   - Charge
+  - Triggers
   layers:
   - Default
   - TransparentFX
