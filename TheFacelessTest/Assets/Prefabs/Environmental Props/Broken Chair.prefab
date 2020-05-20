@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7900657265651562565}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Broken Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,6 +127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chair_Broken
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 35a42bf819b07fe4cb1f2786ec89cf04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a42bf819b07fe4cb1f2786ec89cf04, type: 3}
