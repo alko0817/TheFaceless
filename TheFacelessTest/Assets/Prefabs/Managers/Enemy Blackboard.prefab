@@ -59,17 +59,17 @@ MonoBehaviour:
   MeleeSuspicionTime: 3
   MeleeWaypointTolerance: 1
   MeleeWaypointWaitTime: 2
-  JonesSightDistance: 0
-  JonesAttackDistance: 0
-  JonesMaxHealth: 0
-  JonesInitialSpeed: 0
-  JonesPursueSpeed: 0
-  JonesAttackDamage: 0
-  JonesPusueDelay: 0
-  JonesSuspicionTime: 0
-  JonesAoeRadius: 0
-  JonesWaypointTolerance: 0
-  JonesWaypointWaitTime: 0
+  JonesSightDistance: 15
+  JonesAttackDistance: 6
+  JonesMaxHealth: 200
+  JonesInitialSpeed: 0.5
+  JonesPursueSpeed: 1.5
+  JonesAttackDamage: 10
+  JonesPusueDelay: 2
+  JonesSuspicionTime: 5
+  JonesAoeRadius: 10
+  JonesWaypointTolerance: 1.5
+  JonesWaypointWaitTime: 1
   ShooterSightDistance: 20
   ShooterMaxHealth: 45
   ShooterInitialSpeed: 3
