@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314928194045938989}
+  - component: {fileID: 6412073208496066725}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -32,6 +33,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6412073208496066725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483247308768935299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7948aa33234284398a8c2106369864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flick: {fileID: 4502084013639622084}
+  minWaitTime: 0.02
+  maxWaitTime: 0.3
+  useFlickering: 0
+  mesh: {fileID: 9026218470753526194}
+  dark: {fileID: 2100000, guid: 7d4f978465c004443b2e8e26e51384ce, type: 2}
+  bright: {fileID: 2100000, guid: 421822936f21c094f93f36d8cb2fa353, type: 2}
 --- !u!1 &4477506678476972639
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +95,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.3483724, b: 0, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -201,6 +221,12 @@ PrefabInstance:
 --- !u!4 &5990946613337630589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 5046d452c8114cd4282307078b90e4d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1611913709876677735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9026218470753526194 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 5046d452c8114cd4282307078b90e4d8,
     type: 3}
   m_PrefabInstance: {fileID: 1611913709876677735}
   m_PrefabAsset: {fileID: 0}
