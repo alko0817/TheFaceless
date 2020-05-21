@@ -7,21 +7,43 @@ public class autoDoor : MonoBehaviour
 {
     Animator DoorAnim;
     GameObject player, detector;
+    public Material green, red;
+
+    public GameObject arch;
+    MeshRenderer mesh;
     public LeverTurn lever;
 
     [Tooltip("Set to true if this door has a lever")]
     public bool useLever = false;
     bool isOpen = false;
+    bool canOpen = false;
 
     private void Start()
     {
         DoorAnim = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-
+        mesh = arch.GetComponent<MeshRenderer>();
+        
         detector = GameObject.FindGameObjectWithTag("Detector");
         if (detector != null)
         {
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), detector.GetComponent<Collider>(), true);
+        }
+        if (useLever)
+            mesh.material = red;
+        else mesh.material = green;
+    }
+
+
+    private void Update()
+    {
+        if (useLever)
+        {
+            if (lever.triggered && !canOpen)
+            {
+                mesh.material = green;
+                canOpen = true;
+            }
         }
     }
 
@@ -55,4 +77,6 @@ public class autoDoor : MonoBehaviour
     {
         DoorAnim.SetTrigger("close");
     }
+
+
 }

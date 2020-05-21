@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &481202093886078041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308493278901130428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.45490444, y: 0.5306756, z: 0.5378636}
+  m_Center: {x: -0.000042140484, y: 0.2653378, z: -0.0011146665}
+--- !u!65 &5428264994047673171
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308493278901130428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.52785695, y: 0.4150467, z: 0.14115721}
+  m_Center: {x: -0.000042140484, y: 0.7444663, z: 0.37253615}
 --- !u!1 &4967272146750604023
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,32 +57,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &481202093886078041
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308493278901130428}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.45490444, y: 0.5306756, z: 0.5378636}
-  m_Center: {x: -0.000042140484, y: 0.2653378, z: -0.0011146665}
---- !u!65 &5428264994047673171
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308493278901130428}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.52785695, y: 0.4150467, z: 0.14115721}
-  m_Center: {x: -0.000042140484, y: 0.7444663, z: 0.37253615}
 --- !u!1001 &8603581828545121717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +119,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 4a5c101447e741e4d803a073a496e267,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bb644b5c19934c4d9469e3b9fed3dcc, type: 2}
     - target: {fileID: -927199367670048503, guid: 4a5c101447e741e4d803a073a496e267,
         type: 3}
       propertyPath: m_Name
