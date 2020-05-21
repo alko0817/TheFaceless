@@ -133,7 +133,7 @@ MonoBehaviour:
   red: {fileID: 2100000, guid: 5370ce595de43e445b9e8700128b23e7, type: 2}
   arch: {fileID: 8296172668493487111}
   lever: {fileID: 0}
-  useLever: 1
+  useLever: 0
 --- !u!1 &6223100172670170167
 GameObject:
   m_ObjectHideFlags: 0
