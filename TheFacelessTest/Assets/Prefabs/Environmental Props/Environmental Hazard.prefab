@@ -94,9 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5a37df87d06774fac2a1813c844a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  health: {fileID: 0}
-  damagePerTick: 1
+  damagePerTick: 3
   tick: 0.3
 --- !u!65 &1604761954
 BoxCollider:
