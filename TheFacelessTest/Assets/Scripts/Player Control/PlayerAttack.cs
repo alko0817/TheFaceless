@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Invector.vCharacterController;
-using UnityEditor.UIElements;
 using System.Diagnostics;
-using UnityEngine.Networking;
 using System.IO;
 
 public class PlayerAttack : MonoBehaviour

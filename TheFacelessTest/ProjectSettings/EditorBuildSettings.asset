@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/startingMenu.unity
     guid: 9cbbe5abd1330164bacddb24d4e1b2fd
   - enabled: 1
-    path: Assets/Scenes/Laboratory.unity
-    guid: 95e028867ef2c784996e19ae10c52a00
+    path: Assets/Scenes/Laboratory 1.unity
+    guid: e7f2daef9a32fc34ebaffd44af4ba709
   m_configObjects: {}
