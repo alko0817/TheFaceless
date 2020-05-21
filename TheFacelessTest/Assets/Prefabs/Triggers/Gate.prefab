@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lever: {fileID: 0}
-  useLever: 1
+  useLever: 0
 --- !u!1 &6223100172670170167
 GameObject:
   m_ObjectHideFlags: 0

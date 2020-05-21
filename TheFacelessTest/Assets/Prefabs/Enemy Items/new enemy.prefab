@@ -27128,7 +27128,7 @@ MonoBehaviour:
   pursueDelay: 1
   suspicionTime: 3
   attackSound: {fileID: 0}
-  blockSound: {fileID: 8300000, guid: 7245fda55c3f62d4e91b03c0f5f08c3f, type: 3}
+  blockSound: {fileID: 8300000, guid: 9c2b1a141f6851f428029bdb6224efe4, type: 3}
 --- !u!114 &3435207733819755351
 MonoBehaviour:
   m_ObjectHideFlags: 0
