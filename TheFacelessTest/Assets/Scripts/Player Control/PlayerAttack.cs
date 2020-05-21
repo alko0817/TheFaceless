@@ -278,7 +278,7 @@ public class PlayerAttack : MonoBehaviour
         #region ParryBlock
         if (controller.stamina.canBlock)
         {
-            if (blockCd <= 0 && !holding && CanReact)
+            if (blockCd <= 0 && !holding && CanReact && !controller.discharging)
             {
                 if (Input.GetButtonDown("Fire2"))
                 {

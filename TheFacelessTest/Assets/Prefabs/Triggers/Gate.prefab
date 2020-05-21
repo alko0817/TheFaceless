@@ -129,6 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3489824726051a04b9b9de2b484bc45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  green: {fileID: 2100000, guid: 4b3d1e568538217408a66cb325d23180, type: 2}
+  red: {fileID: 2100000, guid: 5370ce595de43e445b9e8700128b23e7, type: 2}
+  arch: {fileID: 8296172668493487111}
   lever: {fileID: 0}
   useLever: 1
 --- !u!1 &6223100172670170167
@@ -406,6 +409,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc239942b29704144b848d3bf26c9c2e, type: 3}
+--- !u!1 &8296172668493487111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: bc239942b29704144b848d3bf26c9c2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 718570766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5006512735505952276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: bc239942b29704144b848d3bf26c9c2e,
