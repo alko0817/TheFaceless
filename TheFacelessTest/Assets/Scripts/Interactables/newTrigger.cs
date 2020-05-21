@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class newTrigger : MonoBehaviour
@@ -11,40 +13,51 @@ public class newTrigger : MonoBehaviour
     Animator UIAnim;
     float fadeOutDelay;
     string sound;
-    bool triggered = false;
-    internal bool wait = false;
+    internal bool triggered = false;
+    bool done = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         manager = GameObject.Find("Flashbacks Manager").GetComponent<fbManager>();
         sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
-        fadeOutDelay = manager.triggers[localIndex].duration;
-        UIAnim = manager.triggers[localIndex].animator;
-        sound = manager.triggers[localIndex].sound;
+        //fadeOutDelay = manager.triggers[localIndex].duration;
+        //UIAnim = manager.triggers[localIndex].animator;
+        //sound = manager.triggers[localIndex].sound;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!triggered)
+        if (!triggered && !done) 
         {
             if (other.gameObject.tag == player.tag)
             {
-                triggered = true;
-                wait = true;
-                UIAnim.SetTrigger("fadeIn");
-                StartCoroutine("FadeOut");
-                sounds.Play(sound, sounds.Flashbacks);
+                //triggered = true;
+                done = true;
+                StartCoroutine(Trigger());
+                //UIAnim.SetTrigger("fadeIn");
+                //StartCoroutine("FadeOut");
+                //sounds.Play(sound, sounds.Flashbacks);
 
             }
         }
     }
 
+    IEnumerator Trigger()
+    {
+        triggered = true;
+        yield return new WaitForEndOfFrame();
+        triggered = false;
+    }
     IEnumerator FadeOut()
     {
         yield return new WaitForSeconds(fadeOutDelay);
-        wait = false;
         UIAnim.SetTrigger("fadeOut");
+    }
+
+    public int GetTriggerIndex ()
+    {
+        return localIndex;
     }
 }
 
