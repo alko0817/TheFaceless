@@ -959,6 +959,11 @@ PrefabInstance:
       propertyPath: camShake
       value: 
       objectReference: {fileID: 1864942470}
+    - target: {fileID: 4292110267926525847, guid: a5c011aff990a4147bb7d2e38b99821a,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 677983427}
     - target: {fileID: 4292110267926525852, guid: a5c011aff990a4147bb7d2e38b99821a,
         type: 3}
       propertyPath: m_Name
@@ -1252,7 +1257,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-7536
+  m_Name: pb_Mesh-7550
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2634,6 +2639,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e02fd211cccf0543b2847a48ecc767d, type: 3}
+--- !u!4 &677983427 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8201172084126074902, guid: a5c011aff990a4147bb7d2e38b99821a,
+    type: 3}
+  m_PrefabInstance: {fileID: 270147491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &723775114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5239,9 +5250,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8160589f3b8c7334fb4cf6f908364694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0.5
+  travelTime: 20
   fire: {fileID: 648468975}
-  travelTime: 3
+  explosion: {fileID: 4968785381836782999, guid: 81d2180a431dfa4458422adaa30aff6b,
+    type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  damage: 2
+  dmgRadius: 4
 --- !u!4 &1581427720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5216819709439799524, guid: 3cace7dae9d83524c86501ca5368f8f3,

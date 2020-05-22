@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour
     public Transform detectPoint;
     public Transform heavyPoint;
     public Transform aoePoint;
-    public Transform frostPoint;
+    public Transform firePoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
     [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
@@ -306,7 +306,7 @@ public class playerController : MonoBehaviour
             Gizmos.DrawWireCube(detectPoint.position, detectPoint.localScale);
 
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(frostPoint.position, frostPoint.localScale);
+            Gizmos.DrawWireCube(firePoint.position, firePoint.localScale);
         }
 
         catch

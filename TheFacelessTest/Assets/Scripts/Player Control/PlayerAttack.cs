@@ -82,8 +82,6 @@ public class PlayerAttack : MonoBehaviour
 
     public float dischargeForce = 100f;
     public LayerMask movables;
-    
-
     private void Start()
     {
         controller = GetComponent<playerController>();
@@ -187,12 +185,12 @@ public class PlayerAttack : MonoBehaviour
                 StartCoroutine(Discharge());
             }
 
-            //FROST DISCHARGE
+            //FIRE DISCHARGE
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
-                    controller.frostPoint, nextAttack, 0);
-                StartCoroutine(FrostSlam());
+                    controller.firePoint, nextAttack, 0);
+                StartCoroutine(Flame());
             }
 
         }
@@ -436,8 +434,9 @@ public class PlayerAttack : MonoBehaviour
         isDischarge = false;
     }
 
-    IEnumerator FrostSlam()
+    IEnumerator Flame()
     {
+
         controller.health.Immortality(true);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         yield return new WaitForSeconds(.8f);
