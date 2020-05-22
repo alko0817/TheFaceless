@@ -53,7 +53,7 @@ MonoBehaviour:
     source: {fileID: 0}
   Flashbacks:
   - name: Flashback 1
-    clip: {fileID: 8300000, guid: 0bb366af98b6e174f8e812dcbba452c7, type: 3}
+    clip: {fileID: 8300000, guid: 3130961af7fbaf24bbc076d8cc594521, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
     mute: 0
     source: {fileID: 0}
   BackgroundMusic: 
-  BackgroundAmbient: Hallway
+  BackgroundAmbient: []
   muteAll: 0
   useMasterControls: 1
   MusicVolume: 0
