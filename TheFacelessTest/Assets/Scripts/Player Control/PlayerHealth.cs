@@ -73,7 +73,8 @@ public class PlayerHealth : MonoBehaviour
         if (immortal || player.blocking) return;
 
         currentHealth -= damage;
-        player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
+        int rand = Random.Range(0, player.ReceiveDmgSound.Length);
+        player.SwordSounds.PlayOneShot(player.ReceiveDmgSound[rand]);
 
         //if (!player.blocking)
         //{

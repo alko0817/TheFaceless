@@ -174,7 +174,7 @@ public class playerController : MonoBehaviour
     public AudioClip DischargeFirst;
     public AudioClip DischargeSecond;
     [Space]
-    public AudioClip ReceiveDmgSound;
+    public AudioClip[] ReceiveDmgSound;
     public AudioClip DeathSound;
     [Space]
     public AudioClip MoveSound;
