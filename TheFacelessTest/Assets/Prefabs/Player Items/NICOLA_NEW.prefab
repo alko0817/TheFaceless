@@ -6205,7 +6205,20 @@ MonoBehaviour:
   DodgeSound: {fileID: 0}
   DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
   DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
-  ReceiveDmgSound: {fileID: 8300000, guid: 01c7422e46c896e41b0b90e90bc20ae1, type: 3}
+  ReceiveDmgSound:
+  - {fileID: 8300000, guid: c0a4298315f6352498159e3ffcf8a7da, type: 3}
+  - {fileID: 8300000, guid: 9309ee8476a9c4e4a8be073ef33a242a, type: 3}
+  - {fileID: 8300000, guid: 6844421d84c4003498239308df5335a8, type: 3}
+  - {fileID: 8300000, guid: dc6ed4fb62654bb4888a22c20ee48c9e, type: 3}
+  - {fileID: 8300000, guid: 3378d5a63d3cee344933837bf1e8e23c, type: 3}
+  - {fileID: 8300000, guid: 69e629704e50f024f838e41484714a80, type: 3}
+  - {fileID: 8300000, guid: 1cd7036e7f049974ebec4cf2a07779a6, type: 3}
+  - {fileID: 8300000, guid: b1ed40b57a8d6a64ca6f450bc8014779, type: 3}
+  - {fileID: 8300000, guid: aec437b073fe11a42abcbfa74ad8f4e9, type: 3}
+  - {fileID: 8300000, guid: 83767f5e81c1cfd47b68b21a41c2c4c0, type: 3}
+  - {fileID: 8300000, guid: 5fbcb7d6f93a02b4891839934f703cbe, type: 3}
+  - {fileID: 8300000, guid: 90075a79d75277f4fb7c512d7824a537, type: 3}
+  - {fileID: 8300000, guid: c5a03a816872f0a4b946227de830b189, type: 3}
   DeathSound: {fileID: 8300000, guid: eca248f07c649b249ade6c68b0a4baa4, type: 3}
   MoveSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
   SprintSound: {fileID: 8300000, guid: 8e158505d2a377a41a4f48896bcfe75d, type: 3}
