@@ -7,6 +7,7 @@ public class quickLoad : MonoBehaviour
 {
     saveLoader loader;
     PlayerHealth health;
+    bool ressed = false;
 
     private void Start()
     {
@@ -16,19 +17,20 @@ public class quickLoad : MonoBehaviour
 
     private void Update()
     {
-        if (health.dead)
+        if (health.dead && !ressed)
         {
+            ressed = true;
             StartCoroutine(Ressurect());
         }
     }
 
     IEnumerator Ressurect()
     {
-        yield return new WaitForSeconds(4f);
-
+        yield return new WaitForSeconds(3f);
         GetComponent<playerController>().anim.SetBool("dead", false);
-        health.deathScreen.SetActive(false);
         health.dead = false;
+        ressed = false;
+        health.deathScreen.SetActive(false);
         health.ResetHealth();
         loader.LoadPlayer();
         

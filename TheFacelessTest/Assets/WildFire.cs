@@ -1,45 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.IO;
-using System.Security;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class WildFire : MonoBehaviour
 {
     public float speed;
     public float travelTime;
     [Space]
-    public ParticleSystem fire;
+    public ParticleSystem lingeringFlame;
+    public ParticleSystem swordFire;
     public GameObject explosion;
     [Space]
     public LayerMask enemyLayer;
     public int damage;
     public float dmgRadius;
-
+    [Range(3f, 30f)]
+    public float maxDistance;
 
     playerController controller;
+    Vector3 maxPos;
     Vector3 orPos;
     Vector3 vel;
 
-    float timer;
     bool shot = false;
-    bool startFlame = true;
+    bool startFlame = false;
 
     private void Start()
     {
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         vel = new Vector3(speed, 0, 0);
         orPos = transform.localPosition;
+        maxPos = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + maxDistance);
     }
     private void Update()
     {
-
-        timer -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.R) && !shot)
         {
-            timer = travelTime;
             shot = true;
             StartCoroutine(Flame());
             
@@ -47,20 +45,25 @@ public class WildFire : MonoBehaviour
         if (startFlame)
         {
             Guide();
+            ClampDistance();
         }
     }
 
     IEnumerator Flame()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.4f);
         Instantiate(explosion, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
-        fire.Play();
+        lingeringFlame.Play();
+        swordFire.Play();
         startFlame = true;
+        controller.foving.FovOut();
         yield return new WaitForSeconds(travelTime);
+        controller.foving.FovIn();
         startFlame = false;
         shot = false;
         transform.localPosition = orPos;
-        fire.Stop();
+        lingeringFlame.Stop();
+        swordFire.Stop();
     }
 
     void Guide()
@@ -81,6 +84,13 @@ public class WildFire : MonoBehaviour
         {
             enemy.GetComponent<EnemyBase>().TakeDamage(damage);
         }
+    }
+
+    void ClampDistance ()
+    {
+        float distance = Vector3.Distance(orPos, transform.localPosition);
+        if (distance > maxDistance) transform.localPosition = maxPos;
+        if (transform.localPosition.magnitude < orPos.magnitude) transform.localPosition = orPos;
     }
 
     private void OnDrawGizmos()

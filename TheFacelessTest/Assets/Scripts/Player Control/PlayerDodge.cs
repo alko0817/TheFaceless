@@ -14,6 +14,8 @@ public class PlayerDodge : MonoBehaviour
     float inputX;
     float inputZ;
 
+    bool isRoll = false;
+
     private void Start()
     {
         controller = GetComponent<playerController>();
@@ -56,6 +58,7 @@ public class PlayerDodge : MonoBehaviour
                     else if (Input.GetButtonDown("Dodge") && inputZ > axisThreshold)
                     {
                         StartCoroutine(Dodge("dodgingRoll"));
+                        isRoll = true;
                     }
                 }
                 else
@@ -63,6 +66,7 @@ public class PlayerDodge : MonoBehaviour
                     if (Input.GetButtonDown("Dodge"))
                     {
                         StartCoroutine(Dodge("dodgingRoll"));
+                        isRoll = true;
                     }
                 }
             }
@@ -76,17 +80,15 @@ public class PlayerDodge : MonoBehaviour
         dodgeCd = dodgeCooldown;
 
         controller.stamina.Drain(controller.dodgeCost);
-
         controller.SwordSounds.PlayOneShot(controller.DodgeSound);
-
         controller.anim.SetTrigger(side);
 
-        //gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;
+        yield return new WaitForSeconds(.3f);
+        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
 
-        yield return new WaitForSeconds(.7f);
-
+        yield return new WaitForSeconds(.5f);
         controller.dodging = false;
         controller.health.Immortality(false);
-        gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
     }
 }
