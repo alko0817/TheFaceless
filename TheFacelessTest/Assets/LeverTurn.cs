@@ -9,7 +9,7 @@ public class LeverTurn : MonoBehaviour
     public GameObject e;
     bool canOpen = false;
     internal bool triggered = false;
-
+    public GameObject flaskbackTrigger;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -41,6 +41,7 @@ public class LeverTurn : MonoBehaviour
                 {
                     triggered = true;
                     anim.SetTrigger("open");
+                    flaskbackTrigger.SetActive(false);
                     e.SetActive(false);
                 }
             }

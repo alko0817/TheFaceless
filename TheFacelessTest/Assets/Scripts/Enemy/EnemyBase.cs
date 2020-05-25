@@ -120,7 +120,7 @@ public class EnemyBase : MonoBehaviour
 
         if (currentHealth <= 0 && !dead)
         {
-            Die();
+            StartCoroutine( Die());
             dead = true;
         }
 
@@ -272,7 +272,7 @@ public class EnemyBase : MonoBehaviour
             Stop();
     }
 
-    protected virtual void Die()
+    protected virtual IEnumerator Die()
     {
         dying = true;
         electricStun.Stop();
@@ -281,8 +281,9 @@ public class EnemyBase : MonoBehaviour
         blackboard.RemovePursuingEnemy(this.gameObject);
         Stop();
         StartCoroutine("Dissolve");
-        Destroy(gameObject, 4f);
-
+       // Destroy(gameObject, 4f);
+        yield return new WaitForSeconds(4f);
+        gameObject.SetActive(false);
     }
 
     IEnumerator Dissolve ()
