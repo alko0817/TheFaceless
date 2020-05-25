@@ -70,9 +70,6 @@ public class PlayerAttack : MonoBehaviour
     int heavyDamage;
 
     int dischargeDamage;
-
-
-
     #endregion  
 
     public ParticleSystem heavySlash;
@@ -80,6 +77,8 @@ public class PlayerAttack : MonoBehaviour
 
     public float dischargeForce = 100f;
     public LayerMask movables;
+    public static bool blocker = false;
+
     private void Start()
     {
         controller = GetComponent<playerController>();
@@ -184,7 +183,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             //FIRE DISCHARGE
-            if (Input.GetKeyDown(KeyCode.R))
+            if (blocker /*Input.GetKeyDown(KeyCode.R)*/)
             {
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
                     controller.aoePoint, nextAttack, 0);
