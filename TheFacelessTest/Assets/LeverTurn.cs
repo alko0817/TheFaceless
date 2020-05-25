@@ -10,10 +10,13 @@ public class LeverTurn : MonoBehaviour
     bool canOpen = false;
     internal bool triggered = false;
     public GameObject flaskbackTrigger;
+    AudioSource source;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        source = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,6 +42,7 @@ public class LeverTurn : MonoBehaviour
             {
                 if (!triggered)
                 {
+                    source.Play();
                     triggered = true;
                     anim.SetTrigger("open");
                     flaskbackTrigger.SetActive(false);
