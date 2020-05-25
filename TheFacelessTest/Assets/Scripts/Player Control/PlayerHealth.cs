@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     Image healthOverlay;
     Color tempAlpha;
     playerController player;
+    Animator anim;
     public GameObject deathScreen;
 
     [HideInInspector]
@@ -33,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
         healthOverlay = GetComponent<Image>();
         tempAlpha = healthOverlay.color;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
@@ -71,6 +73,8 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(int damage)
     {
         if (immortal || player.blocking) return;
+
+        anim.SetTrigger("hit");
 
         currentHealth -= damage;
         int rand = Random.Range(0, player.ReceiveDmgSound.Length);
