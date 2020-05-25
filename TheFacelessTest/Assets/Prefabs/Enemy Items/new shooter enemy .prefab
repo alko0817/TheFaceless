@@ -40858,7 +40858,7 @@ MonoBehaviour:
   damage: 0
   fleeTime: 1
   fireRate: 2
-  shot: {fileID: 8300000, guid: 25f90afc4bf8e9d4f9985431052210a1, type: 3}
+  shot: {fileID: 8300000, guid: d41c8ae66c8b354468a6e11dedf670e3, type: 3}
 --- !u!114 &7315947886663085777
 MonoBehaviour:
   m_ObjectHideFlags: 0
