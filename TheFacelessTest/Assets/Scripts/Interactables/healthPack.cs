@@ -8,11 +8,16 @@ public class healthPack : MonoBehaviour
     public int healAmount;
     PlayerHealth health;
     bool canHeal = false;
+    AudioSource pickUp;
+    MeshRenderer mesh;
+    bool healed = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
+        pickUp = GetComponent<AudioSource>();
+        mesh = GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -28,12 +33,22 @@ public class healthPack : MonoBehaviour
     {
         if (player.CompareTag(other.tag))
         {
-            if (canHeal)
+            if (canHeal && !healed)
             {
+                healed = true;
                 health.Heal(healAmount);
-                Destroy(gameObject);
+                StartCoroutine(disable());
+
             }
 
         }
     }
-}
+    IEnumerator disable()
+    {
+        pickUp.Play();
+        mesh.enabled = false;
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+
+    }
+} 
