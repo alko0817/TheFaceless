@@ -45666,7 +45666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6109281175788978793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47259,11 +47259,11 @@ MonoBehaviour:
   ReceiveDmgSound: {fileID: 8300000, guid: b92f18b82929cbe49a26d73d939fd11c, type: 3}
   DealDmgSound: {fileID: 0}
   StunnedSound: {fileID: 0}
-  dyingSound: {fileID: 0}
-  DeathSound: {fileID: 0}
+  dyingSound: {fileID: 8300000, guid: 16f54dc00aa9f624ca7b75b3cf07796f, type: 3}
+  DeathSound: {fileID: 8300000, guid: 79404db0ea338544ba138e01c5760ad6, type: 3}
   MoveSound: {fileID: 0}
   StaticSound: {fileID: 0}
-  ChatterSound: {fileID: 0}
+  ChatterSound: {fileID: 8300000, guid: edaf788c1016281448bb54ce990d7dbe, type: 3}
   burst: {fileID: 8459568857137699131, guid: 552df0c862b0fcd4e87ec4c496d5dba3, type: 3}
   burstPoint: {fileID: 6822474612069543661}
   explosion: {fileID: 336842621751363225, guid: 534372d3ba1f912419da2dac3bc95786,
