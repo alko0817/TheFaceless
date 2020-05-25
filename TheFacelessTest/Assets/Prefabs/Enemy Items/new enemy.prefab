@@ -27057,7 +27057,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -27102,8 +27102,8 @@ MonoBehaviour:
   hit: {fileID: 6717278179761086472}
   blockHit: {fileID: 2513236989849174248}
   useGlobalSettings: 0
-  maxHealth: 100
-  sightDistance: 5
+  maxHealth: 50
+  sightDistance: 15
   initialSpeed: 2
   stunDuration: 4
   ReceiveDmgSound: {fileID: 8300000, guid: b92f18b82929cbe49a26d73d939fd11c, type: 3}
@@ -27117,10 +27117,10 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   attackPoint: {fileID: 4835999131634439272}
   pursueSpeed: 4
-  attackDamage: 15
-  attackDistance: 2
-  attackHitBox: 2
-  dodgeChanceOutOf10: 10
+  attackDamage: 5
+  attackDistance: 3
+  attackHitBox: 0
+  dodgeChanceOutOf10: 0
   blockChanceOutOf10: 0
   waypointTolerance: 1.5
   waypointWaitTime: 3
@@ -27264,7 +27264,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

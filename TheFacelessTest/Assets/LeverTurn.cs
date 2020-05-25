@@ -45,8 +45,9 @@ public class LeverTurn : MonoBehaviour
                     source.Play();
                     triggered = true;
                     anim.SetTrigger("open");
-                    flaskbackTrigger.SetActive(false);
                     e.SetActive(false);
+                    if  (flaskbackTrigger != null)
+                        flaskbackTrigger.SetActive(false);
                 }
             }
         }
