@@ -156,7 +156,7 @@ public class PlayerStamina : MonoBehaviour
     /// <returns></returns>
     public void Drain(float drain)
     {
-        timer = 1f;
+        timer = 1.2f;
         channeling = true;
         canRecharge = false;
         unit -= drain;

@@ -5407,7 +5407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprintDepleteRate: 0.1
   rechargeRate: 1
-  chargeDelay: 0.5
+  chargeDelay: 0.3
 --- !u!95 &5748776549390659464
 Animator:
   serializedVersion: 3
