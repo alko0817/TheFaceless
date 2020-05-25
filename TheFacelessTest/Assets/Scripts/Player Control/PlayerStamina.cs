@@ -80,7 +80,7 @@ public class PlayerStamina : MonoBehaviour
             canBlock = false;
         }
 
-        if (unit <= .05f)
+        if (unit <= .2f)
         {
             tired = true;
         }
@@ -91,6 +91,7 @@ public class PlayerStamina : MonoBehaviour
             if (!animate)
             {
                 animate = true;
+                anim.SetTrigger("play");
                 anim.SetBool("tired", true);
             }
 
