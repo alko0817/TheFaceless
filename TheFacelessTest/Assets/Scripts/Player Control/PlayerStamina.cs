@@ -21,8 +21,8 @@ public class PlayerStamina : MonoBehaviour
     [Tooltip("Delay before stamina starts recharging")]
     public float chargeDelay = .5f;
 
-    public Image fatigue;
     Animator anim;
+    bool animate = false;
     bool tired = false;
 
 
@@ -76,10 +76,35 @@ public class PlayerStamina : MonoBehaviour
 
         if (unit <= 0 && fullAtt)
         {
-            tired = true;
             fullAtt = false;
             canBlock = false;
         }
+
+        if (unit <= .05f)
+        {
+            tired = true;
+        }
+
+        #region shitCode
+        if (tired)
+        {
+            if (!animate)
+            {
+                animate = true;
+                anim.SetBool("tired", true);
+            }
+
+            if (unit >= .6f)
+            {
+                tired = false;
+                animate = false;
+                anim.SetBool("tired", false);
+            }
+            
+        }
+        #endregion
+
+
 
         if (!draining)
         {
@@ -93,16 +118,6 @@ public class PlayerStamina : MonoBehaviour
             Regen();
         }
 
-        #region shitCode
-        if (tired)
-        {
-            if (anim != null)
-            {
-                anim.SetTrigger("tired");
-            }
-            tired = false;
-        }
-        #endregion
     }
     private bool drainCheck()
     {
