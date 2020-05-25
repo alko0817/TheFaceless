@@ -3731,7 +3731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d2ee590d58e43a4b984b078e3a1540d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6be35296f29f19c47850fb7e94d86137, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5408,7 +5408,6 @@ MonoBehaviour:
   sprintDepleteRate: 0.1
   rechargeRate: 1
   chargeDelay: 0.5
-  fatigue: {fileID: 1871550715068216285}
 --- !u!95 &5748776549390659464
 Animator:
   serializedVersion: 3
@@ -6151,7 +6150,6 @@ MonoBehaviour:
   sprintDepleteRate: 0.1
   rechargeRate: 1
   chargeDelay: 0.5
-  fatigue: {fileID: 0}
 --- !u!95 &1011076363
 Animator:
   serializedVersion: 3
