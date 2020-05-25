@@ -1,7 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Runtime.Serialization;
 using UnityEngine;
 
 public class newTrigger : MonoBehaviour
