@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Invector.vCharacterController;
-using System.Diagnostics;
-using System.IO;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -82,8 +80,6 @@ public class PlayerAttack : MonoBehaviour
 
     public float dischargeForce = 100f;
     public LayerMask movables;
-    
-
     private void Start()
     {
         controller = GetComponent<playerController>();
@@ -187,12 +183,12 @@ public class PlayerAttack : MonoBehaviour
                 StartCoroutine(Discharge());
             }
 
-            //FROST DISCHARGE
+            //FIRE DISCHARGE
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
-                    controller.frostPoint, nextAttack, 0);
-                StartCoroutine(FrostSlam());
+                    controller.aoePoint, nextAttack, 0);
+                StartCoroutine(Flame());
             }
 
         }
@@ -287,40 +283,27 @@ public class PlayerAttack : MonoBehaviour
 
             if (controller.blocking)
             {
-
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.blockingSpeed;
-
                 Collider[] enemies = Physics.OverlapBox(controller.heavyPoint.position,
                     controller.heavyPoint.localScale / 2, Quaternion.identity, controller.enemyLayer);
 
                 foreach (Collider enemy in enemies)
                 {
-                    if (enemy.GetComponent<MeleeEnemy>() == null)
+                    if (enemy.GetComponent<MeleeEnemy>() == null) continue;
+                    
+                    bool attacked = enemy.GetComponent<MeleeEnemy>().attackThrown;
+                    if (attacked && CanReact)
                     {
-                        continue;
+                        CanReact = false;
+                        StartCoroutine(Parrying(.2f, .3f, false));
+                        Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, controller.parryCost);
+                        StartCoroutine(AttackSound(.1f, controller.ParrySound));
+                        StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
+                        break;
                     }
-                    else
-                    {
-                        bool attacked = enemy.GetComponent<MeleeEnemy>().attackThrown;
-                        if (attacked && CanReact)
-                        {
-                            CanReact = false;
-                            StartCoroutine(EpicLand(.2f, .3f, false));
-                            Attack(hitParry, parryDelay, parryDamage, "react", controller.detectPoint, nextParry, controller.parryCost);
-                            StartCoroutine(AttackSound(.1f, controller.ParrySound));
-                            StartCoroutine(AttackSound(hitParry, controller.ParryAttackSound));
-                            break;
-                        }
-                    }
+                    
                 }
             }
-
-            else
-            {
-                CanReact = true;
-                gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.originSpeed;
-            }
-
+            else CanReact = true;
         }
 
         #endregion
@@ -352,7 +335,7 @@ public class PlayerAttack : MonoBehaviour
         controller.health.Immortality(false);
     }
 
-    IEnumerator EpicLand(float delay, float duration, bool slow)
+    IEnumerator Parrying(float delay, float duration, bool slow)
     {
         yield return new WaitForSeconds(delay);
         parryDeflect.Play();
@@ -361,9 +344,10 @@ public class PlayerAttack : MonoBehaviour
             controller.timeManager.slowmoDuration = duration;
             controller.timeManager.Slowmo();
         }
+        yield return new WaitUntil(() => !GetComponent<vThirdPersonMotor>().stopMove);
 
         GetComponent<vThirdPersonMotor>().stopMove = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
         GetComponent<vThirdPersonMotor>().stopMove = false;
     }
 
@@ -436,15 +420,17 @@ public class PlayerAttack : MonoBehaviour
         isDischarge = false;
     }
 
-    IEnumerator FrostSlam()
+    IEnumerator Flame()
     {
+
         controller.health.Immortality(true);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = true;
         yield return new WaitForSeconds(.8f);
         controller.timeManager.slowmoDuration = 1f;
         controller.timeManager.Slowmo();
-        yield return new WaitForSeconds(1f);
-
+        yield return new WaitForSeconds(.6f);
+        StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
+        yield return new WaitForSeconds(.4f);
         controller.health.Immortality(false);
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
     }

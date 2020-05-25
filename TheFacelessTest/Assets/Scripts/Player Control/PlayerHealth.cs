@@ -76,18 +76,6 @@ public class PlayerHealth : MonoBehaviour
         int rand = Random.Range(0, player.ReceiveDmgSound.Length);
         player.SwordSounds.PlayOneShot(player.ReceiveDmgSound[rand]);
 
-        //if (!player.blocking)
-        //{
-        //    currentHealth -= damage;
-        //    player.SwordSounds.PlayOneShot(player.ReceiveDmgSound);
-        //}
-
-        //else
-        //{
-        //    currentHealth -= damage * blockMitigation;
-        //    player.SwordSounds.PlayOneShot(player.BlockSound);
-        //}
-
         StopCoroutine("HealingDelay");
         canRegen = false;
         tempAlpha.a = ((maxHealth - currentHealth) / maxHealth) * intensity;
@@ -122,6 +110,7 @@ public class PlayerHealth : MonoBehaviour
         canRegen = false;
         dead = true;
         player.anim.SetTrigger("die");
+        player.anim.SetBool("dead", true);
         player.SwordSounds.PlayOneShot(player.DeathSound);
         deathScreen.SetActive(true);
 

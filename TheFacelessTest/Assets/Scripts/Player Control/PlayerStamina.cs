@@ -96,7 +96,10 @@ public class PlayerStamina : MonoBehaviour
         #region shitCode
         if (tired)
         {
-            anim.SetTrigger("tired");
+            if (anim != null)
+            {
+                anim.SetTrigger("tired");
+            }
             tired = false;
         }
         #endregion
