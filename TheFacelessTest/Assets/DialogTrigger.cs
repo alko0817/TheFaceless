@@ -5,14 +5,13 @@ public class DialogTrigger : MonoBehaviour
 {
     GameObject player;
     AudioSource sound;
-    public AudioClip entity;
+    public bool answer = false;
     public AudioClip nicola;
-
+    [Space]
     public Animator face;
     public GameObject greta;
 
     bool triggered = false;
-    bool answer = false;
 
     private void Start()
     {
@@ -46,7 +45,15 @@ public class DialogTrigger : MonoBehaviour
         {
             yield return null;
         }
-        answer = true;
         greta.SetActive(false);
+        if (answer)
+        {
+
+            yield return new WaitForSeconds(1f);
+            player.GetComponent<playerController>().Dialog(nicola);
+        }
+
     }
+
+
 }

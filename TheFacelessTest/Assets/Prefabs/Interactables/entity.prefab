@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2315217603171169880
 Transform:
   m_ObjectHideFlags: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   entity: {fileID: 0}
   nicola: {fileID: 0}
   face: {fileID: 1380900418883861051}
+  greta: {fileID: 2902026634136215266}
 --- !u!212 &7211341905738970466
 SpriteRenderer:
   m_ObjectHideFlags: 0
