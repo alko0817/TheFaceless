@@ -25,8 +25,9 @@ public class PlayerStamina : MonoBehaviour
     bool animate = false;
     bool tired = false;
 
-
     playerController controller;
+    AudioSource source;
+
     internal bool canBlock = true;
     internal bool canSprint = true;
     internal bool canRecharge = true;
@@ -42,6 +43,7 @@ public class PlayerStamina : MonoBehaviour
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         bar = GetComponent<Image>();
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         unit = 1f;
 
     }
@@ -78,6 +80,7 @@ public class PlayerStamina : MonoBehaviour
         {
             fullAtt = false;
             canBlock = false;
+            source.Play();
         }
 
         if (unit <= .2f)
