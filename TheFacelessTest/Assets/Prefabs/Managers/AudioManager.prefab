@@ -80,6 +80,20 @@ MonoBehaviour:
     loop: 0
     mute: 0
     source: {fileID: 0}
+  - name: Lever Hint
+    clip: {fileID: 8300000, guid: eb67f1d7d331a9a41a7a230f9ceab4e9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
+  - name: Parry Hint
+    clip: {fileID: 8300000, guid: f8e8eb4213c974c428b808bee674a2b5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mute: 0
+    source: {fileID: 0}
   Ambient:
   - name: Hallway
     clip: {fileID: 8300000, guid: 94ea95a11b0eba54591104dae2959e47, type: 3}
@@ -109,8 +123,16 @@ MonoBehaviour:
     loop: 1
     mute: 0
     source: {fileID: 0}
+  - name: Creepy Ambient
+    clip: {fileID: 8300000, guid: 405fe9506c22fae4a8a2cfc48b1c2297, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    mute: 0
+    source: {fileID: 0}
   BackgroundMusic: 
-  BackgroundAmbient: []
+  BackgroundAmbient:
+  - Creepy Ambient
   muteAll: 0
   useMasterControls: 1
   MusicVolume: 0

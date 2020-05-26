@@ -40841,7 +40841,7 @@ MonoBehaviour:
   DealDmgSound: {fileID: 0}
   StunnedSound: {fileID: 0}
   dyingSound: {fileID: 8300000, guid: 16f54dc00aa9f624ca7b75b3cf07796f, type: 3}
-  DeathSound: {fileID: 8300000, guid: 79404db0ea338544ba138e01c5760ad6, type: 3}
+  DeathSound: {fileID: 8300000, guid: 6602548966d5f6346b0ef9a1b1dc46db, type: 3}
   MoveSound: {fileID: 0}
   StaticSound: {fileID: 0}
   ChatterSound: {fileID: 8300000, guid: edaf788c1016281448bb54ce990d7dbe, type: 3}
