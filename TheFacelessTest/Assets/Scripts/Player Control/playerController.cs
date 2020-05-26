@@ -349,5 +349,10 @@ public class playerController : MonoBehaviour
         gameObject.GetComponent<vThirdPersonMotor>().stopMove = false;
 
     }
+
+    public void Dialog(AudioClip clip)
+    {
+        SwordSounds.PlayOneShot(clip);
+    }
 }
 
