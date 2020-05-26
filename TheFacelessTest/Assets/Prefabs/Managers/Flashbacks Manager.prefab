@@ -47,7 +47,7 @@ MonoBehaviour:
   - name: Movement_Tutorial
     index: 0
     popUp: {fileID: 0}
-    duration: 5
+    duration: 10
     sound: 
     animator: {fileID: 0}
   - name: Combat_Tutorial
@@ -85,4 +85,16 @@ MonoBehaviour:
     popUp: {fileID: 0}
     duration: 7
     sound: Flashback 4
+    animator: {fileID: 0}
+  - name: Parry Hint
+    index: 6
+    popUp: {fileID: 0}
+    duration: 5
+    sound: Parry Hint
+    animator: {fileID: 0}
+  - name: Lever Hint
+    index: 6
+    popUp: {fileID: 0}
+    duration: 5
+    sound: Lever Hint
     animator: {fileID: 0}
