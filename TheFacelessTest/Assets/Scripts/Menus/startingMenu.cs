@@ -14,6 +14,8 @@ public class startingMenu : MonoBehaviour
         sounds = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<audioManager>();
 
         sounds.Play("intro", sounds.Music);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     public void PlayGame ()
     {
