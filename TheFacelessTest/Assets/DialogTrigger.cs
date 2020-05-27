@@ -10,6 +10,10 @@ public class DialogTrigger : MonoBehaviour
     [Space]
     public Animator face;
     public GameObject greta;
+    [Header("Subs")]
+    public GameObject text;
+    public float duration;
+    Animator anim;
 
     bool triggered = false;
 
@@ -17,6 +21,7 @@ public class DialogTrigger : MonoBehaviour
     {
         sound = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = text.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +32,7 @@ public class DialogTrigger : MonoBehaviour
             {
                 triggered = true;
                 Face();
+                StartCoroutine(Subs());
                 StartCoroutine(Dialog());
             }
         }
@@ -55,5 +61,13 @@ public class DialogTrigger : MonoBehaviour
 
     }
 
+    IEnumerator Subs ()
+    {
+        text.SetActive(true);
+        anim.SetTrigger("fadeIn");
+        yield return new WaitForSeconds(duration);
+
+        anim.SetTrigger("fadeOut");
+    }
 
 }
