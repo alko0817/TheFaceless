@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5837,6 +5839,7 @@ GameObject:
   - component: {fileID: 2857576706712976029}
   - component: {fileID: 2303583761765616223}
   - component: {fileID: 625471944}
+  - component: {fileID: 1057572431064986603}
   m_Layer: 10
   m_Name: NICOLA_NEW
   m_TagString: Player
@@ -6121,7 +6124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4292110267926525852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2959a599e3cfd342b30fd7509fdabb3, type: 3}
   m_Name: 
@@ -6159,6 +6162,51 @@ MonoBehaviour:
   tpc: {fileID: 0}
   detectArea: {fileID: 4292110266742442858}
   detectRadius: 12
+--- !u!114 &1057572431064986603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292110267926525852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65479cda5d11284428aa265b3aa8dde0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdComboFor: 0.9
+  delay1: 0.25
+  delay2: 0.25
+  delay3: 0.4
+  delay4: 0.4
+  delay5: 0.8
+  heavyDelay: 0.86
+  cd1: 0.2
+  cd2: 0.2
+  cd3: 0.35
+  cd4: 0.45
+  cd5: 1.1
+  heavyCooldown: 1.15
+  dmg1: 20
+  dmg2: 20
+  dmg3: 20
+  dmg4: 20
+  dmg5: 20
+  heavyDamage: 30
+  anim1: isSlash
+  anim2: isSlash2
+  anim3: isSlash3
+  anim4: isSlash4
+  anim5: blockAttack
+  heavyAnim: isHeavy
+  cost: 0.05
+  heavyCost: 0.1
+  sound1: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  sound2: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  sound3: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  sound4: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
+  sound5: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
+  heavySound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
 --- !u!1 &4292110268255106600
 GameObject:
   m_ObjectHideFlags: 0
@@ -16108,6 +16156,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

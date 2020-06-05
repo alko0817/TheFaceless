@@ -75,7 +75,10 @@ public class playerController : MonoBehaviour
 
     internal bool holding = false;
     internal bool attacking = false;
+    internal bool blocking = false;
     internal bool dodging = false;
+    internal float global = 0f;
+    internal bool isDischarge = false;
     internal bool stunned = false;
 
     [Header("- Attack Damage")]
@@ -112,7 +115,6 @@ public class playerController : MonoBehaviour
     [Header("Blocking/Parrying")]
     [Tooltip("Player movement speed while blocking")]
     public float blockingSpeed = 2f;
-    internal bool blocking = false;
 
     //DISCHARGE
     [Header("- Discharge Mechanic")]
