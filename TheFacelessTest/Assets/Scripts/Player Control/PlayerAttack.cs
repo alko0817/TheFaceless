@@ -183,7 +183,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             //FIRE DISCHARGE
-            if (blocker /*Input.GetKeyDown(KeyCode.R)*/)
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 Attack(hitDischarge, dischargeDelay, dischargeDamage, "slam",
                     controller.aoePoint, nextAttack, 0);
