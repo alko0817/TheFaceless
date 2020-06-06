@@ -47,7 +47,7 @@ public class ElectricDischarge : DischargeAttack
             controller.timeManager.slowmoDuration = controller.dischargeSlowDuration;
             controller.timeManager.Slowmo();
         }
-        controller.foving.FovOut();
+        controller.cameraView.ZoomOut();
 
         yield return new WaitForSeconds(.7f);
         controller.electricityCharge.Stop();
@@ -73,7 +73,7 @@ public class ElectricDischarge : DischargeAttack
 
 
         yield return new WaitForSeconds(.8f);
-        controller.foving.FovIn();
+        controller.cameraView.ZoomIn();
         controller.isDischarge = false;
         controller.SwordSounds.volume = temp;
         yield return new WaitForSeconds(1f);

@@ -202,10 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef7595e6bce52845ab4bab7dce178b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 4975347576686165658, guid: 1688cab570547e14991b3c57e0a94646,
-    type: 3}
   zoomRate: 5
   maxDistance: 7
+  aimRate: 100
+  maxAim: 45
 --- !u!114 &1012459138
 MonoBehaviour:
   m_ObjectHideFlags: 0

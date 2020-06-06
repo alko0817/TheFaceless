@@ -68,9 +68,9 @@ public class WildFire : DischargeAttack
         lingeringFlame.Play();
         swordFire.Play();
         startFlame = true;
-        controller.foving.FovOut();
+        controller.cameraView.ZoomOut();
         yield return new WaitForSeconds(travelTime);
-        controller.foving.FovIn();
+        controller.cameraView.ZoomIn();
         startFlame = false;
         shot = false;
         transform.localPosition = orPos;

@@ -20,6 +20,7 @@ TagManager:
   - Charge
   - Triggers
   - Skills
+  - Stone Point
   layers:
   - Default
   - TransparentFX

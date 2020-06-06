@@ -5845,6 +5845,7 @@ GameObject:
   - component: {fileID: 1057572431064986603}
   - component: {fileID: 5351670438720077872}
   - component: {fileID: 8086162237439897500}
+  - component: {fileID: 7728505526933082470}
   m_Layer: 10
   m_Name: NICOLA_NEW
   m_TagString: Player
@@ -5873,6 +5874,7 @@ Transform:
   - {fileID: 2018024912583142719}
   - {fileID: 184792432698288639}
   - {fileID: 1537668490}
+  - {fileID: 3084967947698354444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -6020,7 +6022,7 @@ MonoBehaviour:
   heavyRadius: 2
   aoeRadius: 12
   canDie: 0
-  foving: {fileID: 0}
+  cameraView: {fileID: 0}
   maxCharge: 100
   chargeRate: 10
   UIChargeMultiplier: 50
@@ -6036,9 +6038,6 @@ MonoBehaviour:
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
   wallHit: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
-  ParrySound: {fileID: 8300000, guid: 360bf9a0529fc8c448e2fef03122aeea, type: 3}
-  BlockSound: {fileID: 0}
-  DodgeSound: {fileID: 0}
   ReceiveDmgSound:
   - {fileID: 8300000, guid: c0a4298315f6352498159e3ffcf8a7da, type: 3}
   - {fileID: 8300000, guid: 9309ee8476a9c4e4a8be073ef33a242a, type: 3}
@@ -6197,6 +6196,34 @@ MonoBehaviour:
   damage: 50
   DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
   DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
+--- !u!114 &7728505526933082470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292110267926525852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182666b1031bc544faf71cf3f346cae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setStone: {fileID: 9185449454617723089, guid: 82cf5cd1c876d444287c4ab7533a60c9,
+    type: 3}
+  stones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  point: {fileID: 3084967947698354444}
+  cooldown: 2
+  dischargeAnimation: stoneInit
+  delay: 2
+  initialDamage: 20
+  duration: 20
+  maxShots: 6
+  fireRate: 1
+  force: 300
+  stoneDamage: 0
 --- !u!1 &4292110268255106600
 GameObject:
   m_ObjectHideFlags: 0
@@ -11040,6 +11067,36 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &5634314853402498730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3084967947698354444}
+  m_Layer: 0
+  m_Name: StonePoint
+  m_TagString: Stone Point
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3084967947698354444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634314853402498730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.265, z: 1.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4292110267926525846}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6069871896125602449
 GameObject:
   m_ObjectHideFlags: 0

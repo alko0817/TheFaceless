@@ -27,9 +27,10 @@ public class playerController : MonoBehaviour
     public bool canDie = false;
     [Header("- Slow Motion & Camera FX")]
     internal TimeManager timeManager;
-    public camFov foving;
+    public CameraView cameraView;
 
     #region COMBAT_VARIABLES
+    internal bool shooting = false;
     internal bool holding = false;
     internal bool attacking = false;
     internal bool blocking = false;
@@ -88,6 +89,7 @@ public class playerController : MonoBehaviour
     #endregion
 
     internal float originSpeed;
+    internal float halfSpeed;
     internal float originTimeReset;
     internal bool sprinting = false;
     internal bool jumping = false;
@@ -106,8 +108,9 @@ public class playerController : MonoBehaviour
         swordFill = GameObject.FindGameObjectWithTag("Charge").GetComponent<Image>();
         rb = GetComponent<Rigidbody>();
 
-        //ORIGINAL MOVEMENT SPEED SET
+        //MOVEMENT SPEED SET
         originSpeed = gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed;
+        halfSpeed = originSpeed / 2f;
 
         //HIDE CURSOR
         Cursor.lockState = CursorLockMode.Locked;

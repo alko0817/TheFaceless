@@ -7,7 +7,7 @@ public class PlayerSkills : MonoBehaviour
 {
     Animator anim;
 
-    internal bool selected, eleOn, frostOn, fireOn = false;
+    internal bool selected, eleOn, frostOn, fireOn, stoneOn = false;
 
     private void Start()
     {
@@ -41,6 +41,14 @@ public class PlayerSkills : MonoBehaviour
 
             fireOn = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) && !stoneOn)
+        {
+            if (selected) selectSet("stoneIn");
+            else SetSkill("stoneIn");
+
+            stoneOn = true;
+        }
     }
 
 
@@ -63,6 +71,12 @@ public class PlayerSkills : MonoBehaviour
         {
             anim.SetTrigger("fireOut");
             fireOn = false;
+        }
+
+        if (stoneOn)
+        {
+            anim.SetTrigger("stoneOut");
+            stoneOn = false;
         }
 
         SetSkill(source);
@@ -89,6 +103,11 @@ public class PlayerSkills : MonoBehaviour
         else if (fireOn)
         {
             return 3;
+        }
+
+        else if (stoneOn)
+        {
+            return 4;
         }
 
         return 0;
