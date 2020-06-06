@@ -227,23 +227,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537668489}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8160589f3b8c7334fb4cf6f908364694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
-  travelTime: 20
   lingeringFlame: {fileID: 198679442531461058}
   swordFire: {fileID: 547159610409981296}
   explosion: {fileID: 4968785381836782999, guid: 81d2180a431dfa4458422adaa30aff6b,
     type: 3}
+  speed: 0.5
+  travelTime: 20
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  damage: 2
+  wildFireDamage: 1
   dmgRadius: 4
   maxDistance: 15
+  cooldown: 2
+  delay: 1
+  anim: slam
+  initialDamage: 10
 --- !u!1 &320996789132721593
 GameObject:
   m_ObjectHideFlags: 0
@@ -5836,10 +5840,11 @@ GameObject:
   - component: {fileID: 4292110267926525853}
   - component: {fileID: 4292110267926525847}
   - component: {fileID: 2303583761765616221}
-  - component: {fileID: 2857576706712976029}
   - component: {fileID: 2303583761765616223}
   - component: {fileID: 625471944}
   - component: {fileID: 1057572431064986603}
+  - component: {fileID: 5351670438720077872}
+  - component: {fileID: 8086162237439897500}
   m_Layer: 10
   m_Name: NICOLA_NEW
   m_TagString: Player
@@ -6016,41 +6021,6 @@ MonoBehaviour:
   aoeRadius: 12
   canDie: 0
   foving: {fileID: 0}
-  attackDelay1: 0.2
-  attackDelay2: 0.2
-  attackDelay3: 0.35
-  attackDelay4: 0.45
-  attackDelay5: 1.1
-  parryDelay: 1.6
-  heavyDelay1: 1.15
-  heavyDelay2: 1.5
-  dischargeDelay: 2
-  nextAttack: 0.9
-  nextHeavyAttack: 1.8
-  nextParry: 2
-  hitLight1: 0.25
-  hitLight2: 0.25
-  hitLight3: 0.4
-  hitLight4: 0.4
-  hitLight5: 0.8
-  hitHeavy: 0.86
-  hitDischarge: 1.8
-  hitParry: 1
-  holdForHeavy: 0.2
-  slashDamage: 10
-  slash2Damage: 12
-  slash3Damage: 14
-  slash4Damage: 16
-  slash5Damage: 25
-  ParryDamage: 40
-  heavyDamage: 30
-  heavy2Damage: 40
-  dischargeDamage: 25
-  dodgeCooldown: 1
-  dodgeDashBoost: 4
-  dodgeCost: 0.204
-  axisThreshold: 0.3
-  blockingSpeed: 0.1
   maxCharge: 100
   chargeRate: 10
   UIChargeMultiplier: 50
@@ -6063,25 +6033,12 @@ MonoBehaviour:
   electricityCharge: {fileID: 3300975218034385351}
   burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   burstPoint: {fileID: 9040024944503598342}
-  LightCost: 0.05
-  HeavyCost: 0.1
-  blockCost: 0.2
-  parryCost: 0.3
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
-  lightAttack1Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
-  lightAttack2Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
-  lightAttack3Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
-  lightAttack4Sound: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   wallHit: {fileID: 8300000, guid: 9c0b7c4e40ecd014b93b66b8e5c11b82, type: 3}
-  heavyAttackSound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
-  blockAttack1Sound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   ParrySound: {fileID: 8300000, guid: 360bf9a0529fc8c448e2fef03122aeea, type: 3}
-  ParryAttackSound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   BlockSound: {fileID: 0}
   DodgeSound: {fileID: 0}
-  DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
-  DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
   ReceiveDmgSound:
   - {fileID: 8300000, guid: c0a4298315f6352498159e3ffcf8a7da, type: 3}
   - {fileID: 8300000, guid: 9309ee8476a9c4e4a8be073ef33a242a, type: 3}
@@ -6117,24 +6074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144fc1569b94dec47b404f1adb17ed4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2857576706712976029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4292110267926525852}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2959a599e3cfd342b30fd7509fdabb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heavySlash: {fileID: 4404553057165548908}
-  parryDeflect: {fileID: 7897410500992900791}
-  dischargeForce: 100000
-  movables:
-    serializedVersion: 2
-    m_Bits: 8192
 --- !u!114 &2303583761765616223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6147,6 +6086,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42aaa415d58812049ba4f95acd01271a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dodgeCooldown: 1
+  dodgeDashBoost: 4
+  axisThreshold: 0.3
+  dodgeCost: 0.2
+  DodgeSound: {fileID: 0}
 --- !u!114 &625471944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6207,6 +6151,52 @@ MonoBehaviour:
   sound4: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   sound5: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   heavySound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
+--- !u!114 &5351670438720077872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292110267926525852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d314f3002b094340817854f31ead7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parryDeflect: {fileID: 7897410500992900791}
+  blockCooldown: 1.1
+  parryAnim: startBlock
+  parryCost: 0.2
+  allowSlowmotion: 0
+  cooldown: 1.6
+  delay: 1
+  damage: 50
+  reposteAnim: react
+  reposteCost: 0.2
+  swordSound: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
+  reposteSound: {fileID: 8300000, guid: 360bf9a0529fc8c448e2fef03122aeea, type: 3}
+--- !u!114 &8086162237439897500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292110267926525852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb1a8b17fef48443b7b412f38e52ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dischargeForce: 100000
+  movables:
+    serializedVersion: 2
+    m_Bits: 8192
+  cooldown: 2
+  anim: discharge
+  delay: 1.8
+  damage: 50
+  DischargeFirst: {fileID: 8300000, guid: 0484a19bf53811e479940b8bdfd71884, type: 3}
+  DischargeSecond: {fileID: 8300000, guid: 60922d703214a524f8b6f52e729715be, type: 3}
 --- !u!1 &4292110268255106600
 GameObject:
   m_ObjectHideFlags: 0

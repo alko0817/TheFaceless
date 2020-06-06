@@ -54,12 +54,11 @@ public class LightAttack : BaseAttack
     public AudioClip heavySound;
     #endregion
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
         nextCombo -= Time.deltaTime;
 
-        if (canLightAttack() && combo == 0)
+        if (CanLightAttack() && combo == 0)
         {
             Attack(1, cd1, anim1, delay1, dmg1, sound1);
         }
@@ -83,9 +82,10 @@ public class LightAttack : BaseAttack
         }
 
         CheckHold();
+
         if (Input.GetButton("Fire1"))
         {
-            if (canHeavyAttack())
+            if (CanHeavyAttack())
             {
                 StartCoroutine(Attack(heavyCooldown, heavyAnim, heavyDelay,
                 heavyDamage, controller.heavyPoint, heavyCost, heavySound));

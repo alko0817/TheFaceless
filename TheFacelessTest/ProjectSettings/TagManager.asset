@@ -19,6 +19,7 @@ TagManager:
   - Post
   - Charge
   - Triggers
+  - Skills
   layers:
   - Default
   - TransparentFX

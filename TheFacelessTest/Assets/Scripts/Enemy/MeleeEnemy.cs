@@ -209,7 +209,7 @@ public class MeleeEnemy : EnemyBase
 
         if (!combatActionInProgress)
         {
-            if (player.GetComponent<PlayerAttack>().GetAttacking())
+            if (player.GetComponent<BaseAttack>().GetAttack())
             {
                 rand = UnityEngine.Random.Range(0, 10);
 

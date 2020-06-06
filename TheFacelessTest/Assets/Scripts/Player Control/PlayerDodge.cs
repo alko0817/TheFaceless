@@ -7,10 +7,14 @@ public class PlayerDodge : MonoBehaviour
 {
     playerController controller;
 
-    private float dodgeCooldown = 1f;
-    private float dodgeDashBoost = 4f;
-    private float axisThreshold = .1f;
-    private float dodgeCd = 0;
+    public float dodgeCooldown = 1f;
+    public float dodgeDashBoost = 4f;
+    [Range(.01f, .5f)] 
+    public float axisThreshold = .1f;
+    [Range(.01f, .5f)]
+    public float dodgeCost = .5f;
+    public AudioClip DodgeSound;
+    float dodgeCd = 0;
     float inputX;
     float inputZ;
 
@@ -19,11 +23,6 @@ public class PlayerDodge : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<playerController>();
-
-        dodgeCooldown = controller.dodgeCooldown;
-        dodgeDashBoost = controller.dodgeDashBoost;
-        axisThreshold = controller.axisThreshold;
-        dodgeCd = controller.dodgeCd;
     }
 
     private void Update()
@@ -36,7 +35,7 @@ public class PlayerDodge : MonoBehaviour
         //CHECK FOR LAST TIME DODGED
         if (dodgeCd <= 0 && !controller.attacking && !controller.stunned && !controller.health.dead)
         {
-            if (controller.stamina.unit >= controller.dodgeCost)
+            if (controller.stamina.unit >= dodgeCost)
             {
                 if (!controller.sprinting)
                 {
@@ -79,8 +78,8 @@ public class PlayerDodge : MonoBehaviour
         controller.health.Immortality(true);
         dodgeCd = dodgeCooldown;
 
-        controller.stamina.Drain(controller.dodgeCost);
-        controller.SwordSounds.PlayOneShot(controller.DodgeSound);
+        controller.stamina.Drain(dodgeCost);
+        controller.SwordSounds.PlayOneShot(DodgeSound);
         controller.anim.SetTrigger(side);
 
         gameObject.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed += dodgeDashBoost;

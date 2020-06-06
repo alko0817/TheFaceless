@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class WildFire : MonoBehaviour
+public class WildFire : DischargeAttack
 {
-    public float speed;
-    public float travelTime;
-    [Space]
+    [Header("Effects")]
     public ParticleSystem lingeringFlame;
     public ParticleSystem swordFire;
     public GameObject explosion;
-    [Space]
+    [Header("Wild Fire")]
+    public float speed;
+    public float travelTime;
     public LayerMask enemyLayer;
-    public int damage;
+    public int wildFireDamage;
     public float dmgRadius;
     [Range(3f, 30f)]
     public float maxDistance;
+    [Header("Initial Burst")]
+    public float cooldown = 1f;
+    public float delay = 1f;
+    public string anim;
+    public int initialDamage = 5;
 
-    playerController controller;
     Vector3 maxPos;
     Vector3 orPos;
     Vector3 vel;
@@ -24,18 +28,21 @@ public class WildFire : MonoBehaviour
     bool shot = false;
     bool startFlame = false;
 
-    private void Start()
+    protected override void Start()
     {
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+        base.Start();
         vel = new Vector3(speed, 0, 0);
         orPos = transform.localPosition;
         maxPos = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + maxDistance);
     }
-    private void Update()
+    protected override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !shot)
+        base.Update();
+        if (!AllowAction() || !AllowDischarge() || skillIndex != 3) return;
+        if (Input.GetButtonDown("discharge") && !shot)
         {
             shot = true;
+            StartCoroutine(Attack(cooldown, anim, delay, initialDamage, controller.heavyPoint, 0));
             StartCoroutine(Flame());
             
         }
@@ -48,7 +55,15 @@ public class WildFire : MonoBehaviour
 
     IEnumerator Flame()
     {
-        yield return new WaitForSeconds(1.4f);
+        controller.health.Immortality(true);
+        BlockMovement();
+        yield return new WaitForSeconds(.8f);
+        controller.timeManager.slowmoDuration = 1f;
+        controller.timeManager.Slowmo();
+        yield return new WaitForSeconds(.6f);
+        controller.health.Immortality(true);
+        AllowMovement();
+        StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
         Instantiate(explosion, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
         lingeringFlame.Play();
         swordFire.Play();
@@ -79,7 +94,7 @@ public class WildFire : MonoBehaviour
 
         foreach (Collider enemy in enemies)
         {
-            enemy.GetComponent<EnemyBase>().TakeDamage(damage);
+            enemy.GetComponent<EnemyBase>().TakeDamage(wildFireDamage);
         }
     }
 

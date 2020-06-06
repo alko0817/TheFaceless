@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Invector.vCharacterController;
 
 public class BaseAttack : MonoBehaviour
 {
@@ -8,11 +9,7 @@ public class BaseAttack : MonoBehaviour
 
     protected virtual void Start()
     {
-        controller = GetComponent<playerController>();
-    }
-    protected virtual void Update()
-    {
-        controller.global -= Time.deltaTime;
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
     }
 
     protected void CheckHold ()
@@ -53,28 +50,40 @@ public class BaseAttack : MonoBehaviour
         controller.attacking = false;
     }
 
-    #region Checks
+    protected IEnumerator Attack(float cooldown, string animation, float attackDelay, int damage, Transform aoe, float cost)
+    {
+        controller.global = cooldown;
+        controller.anim.SetTrigger(animation);
+        controller.attacking = true;
+        yield return new WaitForSeconds(attackDelay);
+        controller.stamina.Drain(cost);
+
+        //APPLY DPS
+        Collider[] hitEnemies = Physics.OverlapBox(aoe.position, aoe.localScale / 2, Quaternion.identity, controller.enemyLayer);
+        foreach (Collider enemy in hitEnemies)
+        {
+            enemy.GetComponent<EnemyBase>().TakeDamage(damage);
+            if (controller.isDischarge)
+            {
+                if (!enemy.GetComponent<EnemyBase>().GetStunned())
+                    enemy.GetComponent<EnemyBase>().SetStunned(true);
+            }
+            else controller.Charge();
+        }
+        controller.attacking = false;
+    }
+
+    #region Checks'n'Passes
     protected void SetAttacking (bool value) { controller.attacking = value; }
     protected void SetBlocking (bool value) { controller.blocking = value; }
     protected void SetHolding (bool value) { controller.holding = value; }
     protected void SetDischarge (bool value) { controller.isDischarge = value; }
-    protected bool canLightAttack()
-    {
-        if (controller.global <= 0 && !controller.holding && !controller.blocking && !controller.isDischarge) return true;
-        else return false;
-    }
-
-    protected bool canHeavyAttack()
-    {
-        if (controller.global <= 0 && controller.holding && !controller.attacking) return true;
-        else return false;
-    }
-
-    protected bool AllowAction()
-    {
-        if (controller.global <= 0) return true;
-        else return false;
-    }
+    protected bool CanLightAttack() { return controller.global <= 0 && !controller.holding && !controller.blocking && !controller.isDischarge; }
+    protected bool CanHeavyAttack() { return controller.global <= 0 && controller.holding && !controller.attacking; }
+    protected bool AllowAction() { return controller.global <= 0; }
+    protected void BlockMovement() { controller.GetComponent<vThirdPersonMotor>().stopMove = true; }
+    protected void AllowMovement() { controller.GetComponent<vThirdPersonMotor>().stopMove = false; }
+    public bool GetAttack() { return controller.attacking; }
     #endregion
 
 }

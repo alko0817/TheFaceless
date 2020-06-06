@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
 {
-    playerController controller;
     Animator anim;
 
-    bool selected, eleOn, frostOn, fireOn = false;
+    internal bool selected, eleOn, frostOn, fireOn = false;
 
     private void Start()
     {
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         anim = GetComponent<Animator>();
     }
 
@@ -93,6 +91,6 @@ public class PlayerSkills : MonoBehaviour
             return 3;
         }
 
-        return 1;
+        return 0;
     }
 }
