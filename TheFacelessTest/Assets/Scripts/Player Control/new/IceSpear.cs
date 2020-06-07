@@ -114,9 +114,12 @@ public class IceSpear : DischargeAttack
                     controller.camSettings.xMouseSensitivity = aimSensitivity;
                     controller.camSettings.yMouseSensitivity = aimSensitivity;
                     crossAnim.SetTrigger("aim");
+                    controller.anim.SetTrigger("aim");
+                    controller.anim.SetBool("shootMode", true);
                 }
                 else
                 {
+                    controller.anim.SetBool("shootMode", false);
                     controller.aiming = !controller.aiming;
                     controller.cameraView.Unaim();
                     controller.camSettings.xMouseSensitivity = originXsense;
@@ -155,6 +158,7 @@ public class IceSpear : DischargeAttack
         {
             if (controller.aiming)
             {
+                controller.anim.SetBool("shootMode", false);
                 controller.aiming = false;
                 controller.cameraView.Unaim();
                 controller.camSettings.xMouseSensitivity = originXsense;
