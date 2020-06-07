@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour
 {
     
     public Animator anim;
+    internal vThirdPersonCamera camSettings;
     internal PlayerHealth health;
     internal PlayerStamina stamina;
     public GameObject swordTrail;
@@ -56,10 +57,6 @@ public class playerController : MonoBehaviour
     public AudioSource fullCharge;
     [Space]
     public cameraShake camShake;
-    public float shakeDuration = 1f;
-    public float shakeMagnitude = 1f;
-    [Tooltip("Slow motion duration")]
-    public float dischargeSlowDuration = 2f;
     public ParticleSystem electricityCharge;
     public GameObject burst;
     public Transform burstPoint;
@@ -106,6 +103,7 @@ public class playerController : MonoBehaviour
         health = GameObject.Find("stateOfHealth").GetComponent<PlayerHealth>();
         stamina = GameObject.FindGameObjectWithTag("Stamina").GetComponent<PlayerStamina>();
         swordFill = GameObject.FindGameObjectWithTag("Charge").GetComponent<Image>();
+        camSettings = GameObject.FindGameObjectWithTag("Camera Holder").GetComponent<vThirdPersonCamera>();
         rb = GetComponent<Rigidbody>();
 
         //MOVEMENT SPEED SET

@@ -21,6 +21,8 @@ TagManager:
   - Triggers
   - Skills
   - Stone Point
+  - Crosshair
+  - Camera Holder
   layers:
   - Default
   - TransparentFX

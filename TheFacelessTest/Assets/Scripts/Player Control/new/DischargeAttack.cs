@@ -19,11 +19,7 @@ public class DischargeAttack : BaseAttack
         skillIndex = skills.GetSkill();
     }
 
-    protected bool AllowDischarge()
-    {
-        if (controller.canDischarge && controller.GetComponent<vThirdPersonMotor>().isGrounded) return true;
-        else return false;
-    }
+    protected bool AllowDischarge() { return controller.canDischarge && controller.GetComponent<vThirdPersonMotor>().isGrounded; }
 
 }
 

@@ -6,6 +6,10 @@ public class ElectricDischarge : DischargeAttack
 {
     public float dischargeForce = 100000f;
     public LayerMask movables;
+    [Header("Effects")]
+    public float shakeDuration;
+    public float shakeMagnitude;
+    public float slowDuration;
     [Space]
     public float cooldown = 1f;
     public string anim;
@@ -44,14 +48,14 @@ public class ElectricDischarge : DischargeAttack
 
         if (controller.timeManager != null)
         {
-            controller.timeManager.slowmoDuration = controller.dischargeSlowDuration;
+            controller.timeManager.slowmoDuration = slowDuration;
             controller.timeManager.Slowmo();
         }
         controller.cameraView.ZoomOut();
 
         yield return new WaitForSeconds(.7f);
         controller.electricityCharge.Stop();
-        StartCoroutine(controller.camShake.Shake(controller.shakeDuration, controller.shakeMagnitude));
+        StartCoroutine(controller.camShake.Shake(shakeDuration, shakeMagnitude));
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
 
         Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius, movables);
