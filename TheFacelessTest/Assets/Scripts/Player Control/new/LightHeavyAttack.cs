@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LightAttack : BaseAttack
+public class LightHeavyAttack : BaseAttack
 {
     protected int combo = 0;
     protected bool check;
@@ -38,6 +38,7 @@ public class LightAttack : BaseAttack
     public string anim4;
     public string anim5;
     public string heavyAnim;
+    public string heavyAnim2;
 
     [Header("Stamina cost")]
     [Range(.01f, .5f)]
@@ -57,22 +58,22 @@ public class LightAttack : BaseAttack
     private void Update()
     {
         nextCombo -= Time.deltaTime;
-
+        ComboControl();
         if (CanLightAttack() && combo == 0)
         {
-            Attack(1, cd1, anim1, delay1, dmg1, sound1);
+            LightAttack(cd1, anim1, delay1, dmg1, sound1);
         }
 
         if (canCombo())
         {
             if (combo == 1)
-                Attack(2, cd2, anim2, delay2, dmg2, sound2);
+                LightAttack(cd2, anim2, delay2, dmg2, sound2);
             else if (combo == 2)
-                Attack(3, cd3, anim3, delay3, dmg3, sound3);
+                LightAttack(cd3, anim3, delay3, dmg3, sound3);
             else if (combo == 3)
-                Attack(4, cd4, anim4, delay4, dmg4, sound4);
+                LightAttack(cd4, anim4, delay4, dmg4, sound4);
             else if (combo == 4)
-                Attack(0, cd5, anim5, delay5, dmg5, sound5);
+                LightAttack(cd5, anim5, delay5, dmg5, sound5);
         }
 
         if (nextCombo <= 0)
@@ -87,26 +88,41 @@ public class LightAttack : BaseAttack
         {
             if (CanHeavyAttack())
             {
-                StartCoroutine(Attack(heavyCooldown, heavyAnim, heavyDelay,
-                heavyDamage, controller.heavyPoint, heavyCost, heavySound));
+                if (combo <= 2)
+                {
+                    HeavyAttack(heavyCooldown, heavyAnim, heavyDelay, heavyDamage, heavySound);
+                }
+                else
+                {
+                    HeavyAttack(heavyCooldown, heavyAnim2, heavyDelay, heavyDamage, heavySound);
+                }
             }
         }
     }
 
-    protected void Attack(int comboCounter, float cooldown, string animation, float delay, int damage, AudioClip sound)
+    protected void LightAttack(float cooldown, string animation, float delay, int damage, AudioClip sound)
     {
         if (Input.GetButtonUp("Fire1"))
         {
-            combo = comboCounter;
-            StartCoroutine(Attack(cooldown, animation, delay, damage, 
-                controller.detectPoint, cost, sound));
+            combo++;
             nextCombo = holdComboFor;
+            StartCoroutine(Attack(cooldown, animation, delay, damage, controller.detectPoint, cost, sound));
         }
     }
-
+    protected void HeavyAttack(float cooldown, string animation, float delay, int damage, AudioClip sound)
+    {
+        combo++;
+        nextCombo = holdComboFor;
+        StartCoroutine(Attack(cooldown, animation, delay, damage, controller.heavyPoint, heavyCost, sound));
+        StartCoroutine(BlockMovement(cooldown));
+    }
     protected bool canCombo()
     {
         if (controller.global <= 0 && nextCombo > 0) return true;
         else return false;
+    }
+    protected void ComboControl()
+    {
+        if (combo > 4) combo = 0;
     }
 }

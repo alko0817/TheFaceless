@@ -17,7 +17,7 @@ public class BaseAttack : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             holder += Time.deltaTime;
-            if (holder >= .35f) SetHolding(true);
+            if (holder >= .28f) SetHolding(true);
         }
         else
         {
@@ -25,7 +25,6 @@ public class BaseAttack : MonoBehaviour
             holder = 0;
         }
     }
-
     protected IEnumerator Attack(float cooldown, string animation, float attackDelay, int damage, Transform aoe, float cost, AudioClip sound)
     {
         controller.global = cooldown;
@@ -49,7 +48,6 @@ public class BaseAttack : MonoBehaviour
         }
         controller.attacking = false;
     }
-
     protected IEnumerator Attack(float cooldown, string animation, float attackDelay, int damage, Transform aoe, float cost)
     {
         controller.global = cooldown;
@@ -79,10 +77,26 @@ public class BaseAttack : MonoBehaviour
     protected void SetHolding (bool value) { controller.holding = value; }
     protected void SetDischarge (bool value) { controller.isDischarge = value; }
     protected bool CanLightAttack() { return controller.global <= 0 && !controller.holding && !controller.blocking && !controller.isDischarge && !controller.aiming; }
-    protected bool CanHeavyAttack() { return controller.global <= 0 && controller.holding && !controller.attacking && !controller.shooting; }
+    protected bool CanHeavyAttack() { return controller.global <= 0 && controller.holding && !controller.attacking && !controller.aiming; }
     protected bool AllowShootMode() { return !controller.attacking && !controller.shooting && !controller.discharging; }
     protected bool AllowAction() { return controller.global <= 0 && !controller.shooting; }
+
+    /// <summary>
+    /// Pauses player movement indefinitely or until AllowMovement is called.
+    /// </summary>
     protected void BlockMovement() { controller.GetComponent<vThirdPersonMotor>().stopMove = true; }
+
+    /// <summary>
+    /// Pauses player movement for a given duration, and then enables it again. 
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
+    protected IEnumerator BlockMovement(float duration)
+    {
+        controller.GetComponent<vThirdPersonMotor>().stopMove = true;
+        yield return new WaitForSeconds(duration);
+        controller.GetComponent<vThirdPersonMotor>().stopMove = false;
+    }
     protected void RestrainMovement (bool condition)
     {
         if (condition) controller.GetComponent<vThirdPersonMotor>().strafeSpeed.walkSpeed = controller.halfSpeed;
