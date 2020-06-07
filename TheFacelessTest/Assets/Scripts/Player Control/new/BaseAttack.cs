@@ -78,7 +78,7 @@ public class BaseAttack : MonoBehaviour
     protected void SetBlocking (bool value) { controller.blocking = value; }
     protected void SetHolding (bool value) { controller.holding = value; }
     protected void SetDischarge (bool value) { controller.isDischarge = value; }
-    protected bool CanLightAttack() { return controller.global <= 0 && !controller.holding && !controller.blocking && !controller.isDischarge && !controller.shooting; }
+    protected bool CanLightAttack() { return controller.global <= 0 && !controller.holding && !controller.blocking && !controller.isDischarge && !controller.aiming; }
     protected bool CanHeavyAttack() { return controller.global <= 0 && controller.holding && !controller.attacking && !controller.shooting; }
     protected bool AllowShootMode() { return !controller.attacking && !controller.shooting && !controller.discharging; }
     protected bool AllowAction() { return controller.global <= 0 && !controller.shooting; }

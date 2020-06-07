@@ -24,6 +24,7 @@ public class IceSpear : DischargeAttack
     public float duration = 20f;
     public int maxShots = 4;
     [Header("Shooting Settings")]
+    public bool toggleAim;
     public float fireRate;
     public int spearDamage;
     public float aimSensitivity;
@@ -102,20 +103,49 @@ public class IceSpear : DischargeAttack
     }
     private void Aimer()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (toggleAim)
         {
-            controller.cameraView.Aim();
-            controller.camSettings.xMouseSensitivity = aimSensitivity;
-            controller.camSettings.yMouseSensitivity = aimSensitivity;
-            crossAnim.SetTrigger("aim");
+            if (Input.GetButtonDown("Fire2"))
+            {
+                if (!controller.aiming)
+                {
+                    controller.aiming = !controller.aiming;
+                    controller.cameraView.Aim();
+                    controller.camSettings.xMouseSensitivity = aimSensitivity;
+                    controller.camSettings.yMouseSensitivity = aimSensitivity;
+                    crossAnim.SetTrigger("aim");
+                }
+                else
+                {
+                    controller.aiming = !controller.aiming;
+                    controller.cameraView.Unaim();
+                    controller.camSettings.xMouseSensitivity = originXsense;
+                    controller.camSettings.yMouseSensitivity = originYsense;
+                    crossAnim.SetTrigger("unaim");
+                }
+            }
+
         }
 
-        else if (Input.GetButtonUp("Fire2"))
+        else
         {
-            controller.cameraView.Unaim();
-            controller.camSettings.xMouseSensitivity = originXsense;
-            controller.camSettings.yMouseSensitivity = originYsense;
-            crossAnim.SetTrigger("unaim");
+            if (Input.GetButtonDown("Fire2"))
+            {
+                controller.aiming = true;
+                controller.cameraView.Aim();
+                controller.camSettings.xMouseSensitivity = aimSensitivity;
+                controller.camSettings.yMouseSensitivity = aimSensitivity;
+                crossAnim.SetTrigger("aim");
+            }
+
+            else if (Input.GetButtonUp("Fire2"))
+            {
+                controller.aiming = false;
+                controller.cameraView.Unaim();
+                controller.camSettings.xMouseSensitivity = originXsense;
+                controller.camSettings.yMouseSensitivity = originYsense;
+                crossAnim.SetTrigger("unaim");
+            }
         }
     }
     private void AllowSkill()
@@ -123,10 +153,14 @@ public class IceSpear : DischargeAttack
         timer -= Time.deltaTime;
         if (shots > maxShots || timer <= 0f)
         {
-            controller.cameraView.Unaim();
-            controller.camSettings.xMouseSensitivity = originXsense;
-            controller.camSettings.yMouseSensitivity = originYsense;
-            crossAnim.SetTrigger("unaim");
+            if (controller.aiming)
+            {
+                controller.aiming = false;
+                controller.cameraView.Unaim();
+                controller.camSettings.xMouseSensitivity = originXsense;
+                controller.camSettings.yMouseSensitivity = originYsense;
+                crossAnim.SetTrigger("unaim");
+            }
 
             controller.shooting = false;
             shootMode = false;

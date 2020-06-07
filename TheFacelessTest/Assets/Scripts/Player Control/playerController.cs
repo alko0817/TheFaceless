@@ -32,6 +32,7 @@ public class playerController : MonoBehaviour
 
     #region COMBAT_VARIABLES
     internal bool shooting = false;
+    internal bool aiming = false;
     internal bool holding = false;
     internal bool attacking = false;
     internal bool blocking = false;
@@ -43,7 +44,7 @@ public class playerController : MonoBehaviour
     internal bool discharging = false;
 
     //DISCHARGE
-    [Header("- Discharge Mechanic")]
+    [Header("- Discharge")]
     public float maxCharge = 100f;
     [Tooltip("How fast the sword actually charges")]
     public float chargeRate = 10f;
