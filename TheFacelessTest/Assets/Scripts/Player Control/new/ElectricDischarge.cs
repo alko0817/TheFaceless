@@ -10,6 +10,7 @@ public class ElectricDischarge : DischargeAttack
     public float shakeDuration;
     public float shakeMagnitude;
     public float slowDuration;
+    public ParticleSystem explosion;
     [Space]
     public float cooldown = 1f;
     public string anim;
@@ -18,24 +19,28 @@ public class ElectricDischarge : DischargeAttack
     [Space]
     public AudioClip DischargeFirst;
     public AudioClip DischargeSecond;
+
+    private bool check = false;
     protected override void Update()
     {
         base.Update();
-        if (!AllowAction() || !AllowDischarge() || skillIndex != 1) return;
-
-        if (Input.GetButtonDown("discharge"))
+        if (AllowAction() && AllowDischarge() && skillIndex == 1)
         {
-            controller.isDischarge = true;
-            controller.canDischarge = false;
-            StartCoroutine(Attack(cooldown, anim, delay, damage, controller.aoePoint, 0));
-            StartCoroutine(Electric());
+            if (Input.GetButtonDown("discharge"))
+            {
+                StartCoroutine(Attack(cooldown, anim, delay, damage, controller.aoePoint, 0));
+                StartCoroutine(Electric());
+            }
         }
+        if (check) controller.UIDischarge();
     }
 
     protected IEnumerator Electric()
     {
+        check = true;
+        controller.isDischarge = true;
+        controller.canDischarge = false;
         controller.health.Immortality(true);
-
         yield return new WaitForSeconds(.7f);
         BlockMovement();
 
@@ -43,7 +48,7 @@ public class ElectricDischarge : DischargeAttack
 
         controller.fullCharge.Stop();
         controller.discharging = true;
-        controller.explosion.Play();
+        explosion.Play();
         controller.SwordSounds.PlayOneShot(DischargeFirst);
 
         if (controller.timeManager != null)
@@ -52,14 +57,12 @@ public class ElectricDischarge : DischargeAttack
             controller.timeManager.Slowmo();
         }
         controller.cameraView.ZoomOut();
-
         yield return new WaitForSeconds(.7f);
-        controller.electricityCharge.Stop();
+        controller.electricCharge.Stop();
         StartCoroutine(controller.camShake.Shake(shakeDuration, shakeMagnitude));
         Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
 
         Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius, movables);
-
         foreach (Collider prop in props)
         {
             Rigidbody rb = prop.GetComponent<Rigidbody>();
@@ -68,13 +71,9 @@ public class ElectricDischarge : DischargeAttack
                 rb.AddExplosionForce(dischargeForce, transform.position, controller.aoeRadius, 1f);
             }
         }
-
-
         float temp = controller.SwordSounds.volume;
         controller.SwordSounds.volume += .4f;
         controller.SwordSounds.PlayOneShot(DischargeSecond);
-
-
 
         yield return new WaitForSeconds(.8f);
         controller.cameraView.ZoomIn();
@@ -82,9 +81,8 @@ public class ElectricDischarge : DischargeAttack
         controller.SwordSounds.volume = temp;
         yield return new WaitForSeconds(1f);
         AllowMovement();
-
         controller.health.Immortality(false);
-
         controller.discharging = false;
+        check = false;
     }
 }

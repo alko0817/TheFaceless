@@ -566,13 +566,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e969e467339d947ac8f12cd504be03, type: 3}
---- !u!43 &205999718
+--- !u!4 &237334404 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7528748215671548864, guid: 2ffd4ddbf241b354694c0d4aa4c257ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7528748215106039637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &242185763
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5082
+  m_Name: pb_Mesh-5114
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -729,12 +735,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &237334404 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7528748215671548864, guid: 2ffd4ddbf241b354694c0d4aa4c257ab,
-    type: 3}
-  m_PrefabInstance: {fileID: 7528748215106039637}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &242646000 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4975347576686165601, guid: 1688cab570547e14991b3c57e0a94646,
@@ -819,6 +819,11 @@ PrefabInstance:
       propertyPath: camShake
       value: 
       objectReference: {fileID: 242646000}
+    - target: {fileID: 4292110267926525847, guid: a5c011aff990a4147bb7d2e38b99821a,
+        type: 3}
+      propertyPath: chargeMultiplier
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4292110267926525852, guid: a5c011aff990a4147bb7d2e38b99821a,
         type: 3}
       propertyPath: m_Name
@@ -2512,7 +2517,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 205999718}
+      objectReference: {fileID: 242185763}
     - target: {fileID: 9040260260683301226, guid: b3ee980d0b0d4364fbf256e88cd436d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2577,7 +2582,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 205999718}
+      objectReference: {fileID: 242185763}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3ee980d0b0d4364fbf256e88cd436d4, type: 3}
 --- !u!4 &779398814 stripped
@@ -4595,66 +4600,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1473288825}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1475690475
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: LiberationSans SDF Material
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!4 &1478378285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8154758155224302480, guid: 4257ef64ddded4649ae29fbfd4297729,

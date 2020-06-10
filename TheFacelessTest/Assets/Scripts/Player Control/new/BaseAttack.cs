@@ -17,12 +17,17 @@ public class BaseAttack : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             holder += Time.deltaTime;
-            if (holder >= .28f) SetHolding(true);
+            if (holder >= .22f)
+            {
+                SetHolding(true);
+                controller.heavyTrail.Play();
+            }
         }
         else
         {
             SetHolding(false);
             holder = 0;
+            controller.heavyTrail.Stop();
         }
     }
     protected IEnumerator Attack(float cooldown, string animation, float attackDelay, int damage, Transform aoe, float cost, AudioClip sound)
@@ -44,7 +49,7 @@ public class BaseAttack : MonoBehaviour
                 if (!enemy.GetComponent<EnemyBase>().GetStunned())
                     enemy.GetComponent<EnemyBase>().SetStunned(true);
             }
-            else controller.Charge();
+            else controller.Charge(controller.chargeRate);
         }
         controller.attacking = false;
     }
@@ -66,11 +71,10 @@ public class BaseAttack : MonoBehaviour
                 if (!enemy.GetComponent<EnemyBase>().GetStunned())
                     enemy.GetComponent<EnemyBase>().SetStunned(true);
             }
-            else controller.Charge();
+            else controller.Charge(controller.chargeRate);
         }
         controller.attacking = false;
     }
-
     #region Checks'n'Passes
     protected void SetAttacking (bool value) { controller.attacking = value; }
     protected void SetBlocking (bool value) { controller.blocking = value; }

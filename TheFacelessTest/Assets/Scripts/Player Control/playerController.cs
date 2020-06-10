@@ -13,16 +13,16 @@ public class playerController : MonoBehaviour
     internal PlayerHealth health;
     internal PlayerStamina stamina;
     public GameObject swordTrail;
+    public ParticleSystem heavyTrail;
     [Header("- Player Attack Pointers")]
     public Transform detectPoint;
     public Transform heavyPoint;
     public Transform aoePoint;
     [Tooltip("By default, this needs to be 'Enemy'")]
     public LayerMask enemyLayer;
-    [Tooltip("Radius at which damage is applied by simple attacks. Requires fine-tunning!")]
+    [Tooltip("Radius at which damage is applied. Requires fine-tunning!")]
     public float attackRadius = .5f;
     public float heavyRadius = 2f;
-    [Tooltip("Area of effect for the Discharge attack")]
     public float aoeRadius = 5f;
     [Space]
     public bool canDie = false;
@@ -42,25 +42,27 @@ public class playerController : MonoBehaviour
     internal bool stunned = false;
     internal bool canDischarge = false;
     internal bool discharging = false;
+    internal bool charged = false;
 
     //DISCHARGE
     [Header("- Discharge")]
-    public float maxCharge = 100f;
     [Tooltip("How fast the sword actually charges")]
     public float chargeRate = 10f;
     [Tooltip("How fast the UI updates the charge")]
-    public float UIChargeMultiplier = 2f;
-    [Space]
-    public ParticleSystem explosion;
-    internal float currentCharge = 0f;
+    public float chargeMultiplier = 2f;
+
     internal float lastCharge = 0f;
     internal Image swordFill;
     public AudioSource fullCharge;
+    [Header("- Sword Effects when fully charged")]
+    public ParticleSystem electricCharge;
+    public ParticleSystem frostCharge;
+    public ParticleSystem fireCharge;
     [Space]
     public cameraShake camShake;
-    public ParticleSystem electricityCharge;
     public GameObject burst;
     public Transform burstPoint;
+    float swordCharge = 0f;
     #endregion
     [Space]
 
@@ -92,7 +94,6 @@ public class playerController : MonoBehaviour
     internal bool sprinting = false;
     internal bool jumping = false;
 
-    bool played = false;
 
     internal Rigidbody rb;
     internal float speed;
@@ -126,17 +127,22 @@ public class playerController : MonoBehaviour
     {
         //GLOBAL ACTION COOLDOWN
         global -= Time.deltaTime;
-
         Checks();
-        UICharge();
-        UIDischarge();
-
-        //SWORD FX
+        SwordTrail();
+        Cheats();
+    }
+    private void Cheats()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) Stun();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            lastCharge = 1;
+        }
+    }
+    private void SwordTrail()
+    {
         if (attacking) swordTrail.SetActive(true);
         else swordTrail.SetActive(false);
-
-        //STUN TEST
-        if (Input.GetKeyDown(KeyCode.L)) Stun();
     }
     private void Checks()
     {
@@ -145,46 +151,58 @@ public class playerController : MonoBehaviour
         speed = rb.velocity.magnitude;
         if (stamina.unit <= 0) gameObject.GetComponent<vThirdPersonMotor>().isSprinting = false;
     }
-    private void UICharge()
+    public void ChargeCheck()
     {
-        if (currentCharge > lastCharge && !discharging)
+        swordCharge = Mathf.Clamp01(swordCharge);
+        swordFill.fillAmount = swordCharge;
+        if (!discharging && !charged)
         {
-            lastCharge += Time.deltaTime * UIChargeMultiplier;
-            swordFill.fillAmount = lastCharge / maxCharge;
-            if (swordFill.fillAmount == 1)
+            if (swordCharge < lastCharge)
             {
-                currentCharge = maxCharge;
+                swordCharge += Time.deltaTime * chargeMultiplier;
             }
         }
 
-        if (currentCharge == maxCharge && !played)
+        if (swordCharge >= 1 && !charged)
         {
-            fullCharge.Play();
-            played = true;
+            charged = true;
+            canDischarge = true;
         }
     }
-    private void UIDischarge()
+    /// <summary>
+    /// Instantly discharges the UI sword.
+    /// </summary>
+    public void UIDischarge()
     {
         if (discharging)
         {
-            if (lastCharge > 0)
+            if (swordCharge > 0)
             {
-                lastCharge -= Time.deltaTime * UIChargeMultiplier;
-                swordFill.fillAmount = lastCharge / maxCharge;
-                currentCharge = lastCharge;
-                played = false;
+                charged = false;
+                lastCharge = 0;
+                swordCharge -= Time.deltaTime;
             }
         }
     }
-    public void Charge()
+    /// <summary>
+    /// Gradually discharge the UI sword, following the given lasting duration.
+    /// </summary>
+    /// <param name="duration"></param>
+    public void UIDischarge(float duration, float maxDuration)
     {
-        if (currentCharge < maxCharge) currentCharge += chargeRate;
-        else if (currentCharge >= maxCharge)
+        if (discharging)
         {
-            currentCharge = maxCharge;
-            canDischarge = true;
-            electricityCharge.Play();
+            if (swordCharge > 0)
+            {
+                lastCharge = 0;
+                swordCharge = (duration/maxDuration);
+                charged = false;
+            }
         }
+    }
+    public void Charge(float rate)
+    {
+        lastCharge += rate;
     }
     private void OnDrawGizmos()
     {

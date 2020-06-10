@@ -1,10 +1,6 @@
-﻿using Cinemachine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics.Contracts;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class IceSpear : DischargeAttack
 {
@@ -15,6 +11,7 @@ public class IceSpear : DischargeAttack
     public float shakeDuration;
     public float shakeMagnitude;
     public float slowDuration;
+    public ParticleSystem[] frostHands;
     [Header("Frost Discharge Settings")]
     public float cooldown = 1f;
     public string dischargeAnimation;
@@ -56,17 +53,22 @@ public class IceSpear : DischargeAttack
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.R))
+        if (AllowDischarge() && AllowAction() && skillIndex == 2)
         {
-            if (AllowShootMode() && !controller.shooting)
+            if (Input.GetButtonDown("discharge"))
             {
-                StartCoroutine(Attack(cooldown, dischargeAnimation, delay, initialDamage, controller.aoePoint, 0));
-                InitShootMode();
+                if (AllowShootMode())
+                {
+                    controller.frostCharge.Stop();
+                    StartCoroutine(Attack(cooldown, dischargeAnimation, delay, initialDamage, controller.aoePoint, 0));
+                    InitShootMode();
+                }
             }
         }
 
         if (shootMode)
         {
+            controller.UIDischarge(timer, duration);
             Aimer();
             Shoot();
             Detect();
@@ -171,18 +173,23 @@ public class IceSpear : DischargeAttack
             }
 
             controller.shooting = false;
+            controller.discharging = false;
             shootMode = false;
+            foreach (ParticleSystem hand in frostHands) hand.Stop();
             shotCd = 0;
             timer = duration;
         }
     }
     private void InitShootMode()
     {
+        controller.canDischarge = false;
+        controller.discharging = true;
         controller.shooting = true;
         shootMode = true;
         shots = 0;
         RestrainMovement(true);
         StartCoroutine(PlayAnimation());
+        foreach (ParticleSystem hand in frostHands) hand.Play();
         //change locomotion
     }
     private void AnimControl()

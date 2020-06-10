@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerSkills : MonoBehaviour
 {
     Animator anim;
-
+    internal bool block = false;
     internal bool selected, eleOn, frostOn, fireOn, stoneOn = false;
 
     private void Start()
@@ -17,6 +17,8 @@ public class PlayerSkills : MonoBehaviour
 
     private void Update()
     {
+        if (block) return;
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && !eleOn)
         {
             if (selected) selectSet("eleIn");
@@ -50,8 +52,6 @@ public class PlayerSkills : MonoBehaviour
             stoneOn = true;
         }
     }
-
-
 
     void selectSet(string source)
     {
@@ -112,4 +112,5 @@ public class PlayerSkills : MonoBehaviour
 
         return 0;
     }
+    public void BlockSkills(bool value) { block = value; }
 }

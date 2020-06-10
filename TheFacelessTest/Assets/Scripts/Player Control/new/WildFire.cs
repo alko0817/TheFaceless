@@ -29,12 +29,14 @@ public class WildFire : DischargeAttack
     Vector3 orPos;
     Vector3 vel;
 
+    float timer;
     bool shot = false;
     bool startFlame = false;
 
     protected override void Start()
     {
         base.Start();
+        timer = travelTime;
         vel = new Vector3(speed, 0, 0);
         orPos = transform.localPosition;
         maxPos = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + maxDistance);
@@ -42,16 +44,20 @@ public class WildFire : DischargeAttack
     protected override void Update()
     {
         base.Update();
-        if (!AllowAction() || !AllowDischarge() || skillIndex != 3) return;
-        if (Input.GetButtonDown("discharge") && !shot)
+        if (AllowAction() && AllowDischarge() && skillIndex == 3)
         {
-            shot = true;
-            StartCoroutine(Attack(cooldown, anim, delay, initialDamage, controller.heavyPoint, 0));
-            StartCoroutine(Flame());
-            
+            if (Input.GetButtonDown("discharge") && !shot)
+            {
+                shot = true;
+                StartCoroutine(Attack(cooldown, anim, delay, initialDamage, controller.heavyPoint, 0));
+                StartCoroutine(Flame());
+
+            }
         }
         if (startFlame)
         {
+            timer -= Time.deltaTime;
+            controller.UIDischarge(timer, travelTime);
             Guide();
             ClampDistance();
         }
@@ -60,6 +66,8 @@ public class WildFire : DischargeAttack
     IEnumerator Flame()
     {
         controller.health.Immortality(true);
+        controller.canDischarge = false;
+        controller.discharging = true;
         BlockMovement();
         yield return new WaitForSeconds(.8f);
         controller.timeManager.slowmoDuration = slowDuration;
@@ -75,11 +83,13 @@ public class WildFire : DischargeAttack
         controller.cameraView.ZoomOut();
         yield return new WaitForSeconds(travelTime);
         controller.cameraView.ZoomIn();
+        controller.discharging = false;
         startFlame = false;
         shot = false;
         transform.localPosition = orPos;
         lingeringFlame.Stop();
         swordFire.Stop();
+        timer = travelTime;
     }
 
     void Guide()
@@ -101,14 +111,12 @@ public class WildFire : DischargeAttack
             enemy.GetComponent<EnemyBase>().TakeDamage(wildFireDamage);
         }
     }
-
     void ClampDistance ()
     {
         float distance = Vector3.Distance(orPos, transform.localPosition);
         if (distance > maxDistance) transform.localPosition = maxPos;
         if (transform.localPosition.magnitude < orPos.magnitude) transform.localPosition = orPos;
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, dmgRadius);
