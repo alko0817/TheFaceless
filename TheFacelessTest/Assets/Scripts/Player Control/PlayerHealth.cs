@@ -10,10 +10,7 @@ public class PlayerHealth : MonoBehaviour
     playerController player;
     Animator anim;
     public GameObject deathScreen;
-
-    [HideInInspector]
-    public float currentHealth;
-
+    internal float currentHealth;
     public float maxHealth = 100f;
     public float healingRate = 2f;
     public float healingDelay = 1f;
@@ -25,12 +22,10 @@ public class PlayerHealth : MonoBehaviour
 
     public int testDamage = 10;
     public float intensity = 1f;
+    internal bool regening = false;
     bool canRegen = true;
     internal bool dead = false;
     internal bool immortal = false;
-
-    
-
     private void Start()
     {
         currentHealth = maxHealth;
@@ -39,35 +34,14 @@ public class PlayerHealth : MonoBehaviour
         tempAlpha = healthOverlay.color;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
         //deathScreen = GameObject.FindGameObjectWithTag("Death Screen");
-
-
     }
 
     private void Update()
     {
-        #region PassiveRegen
-        //if (canRegen)
-        //{
-        //    currentHealth += Time.deltaTime * healingRate;
-        //    currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
-        //    tempAlpha.a = (maxHealth - currentHealth) / maxHealth;
-
-        //    healthOverlay.color = tempAlpha;
-        //}
-        #endregion
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Damage(testDamage);
-        }
-
-        if (currentHealth <= 0 && !dead)
-        {
-            Death();
-        }
-
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (Input.GetKeyDown(KeyCode.K)) Damage(testDamage);
+        if (currentHealth <= 0 && !dead) Death();
     }
 
     public void Damage(int damage)
@@ -86,7 +60,17 @@ public class PlayerHealth : MonoBehaviour
         healthOverlay.color = tempAlpha;
         StartCoroutine("HealingDelay");
     }
-
+    public void PassiveRegen(float healRate)
+    {
+        if (canRegen)
+        {
+            regening = true;
+            currentHealth += Time.deltaTime * healRate;
+            tempAlpha.a = (maxHealth - currentHealth) / maxHealth * intensity;
+            healthOverlay.color = tempAlpha;
+        }
+        else regening = false;
+    }
     public void Heal (int heal)
     {
         currentHealth += heal;

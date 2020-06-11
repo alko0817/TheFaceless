@@ -29,7 +29,7 @@ public class ParryAttack : BaseAttack
         cd -= Time.deltaTime;
         if (controller.stamina.canBlock)
         {
-            if (cd <= 0 && !controller.holding && canReact && !controller.discharging && !controller.shooting)
+            if (cd <= 0 && !controller.holding && canReact && !controller.discharging && !controller.shooting && !controller.berserk)
             {
                 if (Input.GetButtonDown("Fire2"))
                 {

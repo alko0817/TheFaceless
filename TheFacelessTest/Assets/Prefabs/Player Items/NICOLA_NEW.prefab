@@ -20040,6 +20040,7 @@ GameObject:
   - component: {fileID: 5351670438720077872}
   - component: {fileID: 8086162237439897500}
   - component: {fileID: 7728505526933082470}
+  - component: {fileID: 4259724343138672911}
   m_Layer: 10
   m_Name: NICOLA_NEW
   m_TagString: Player
@@ -20217,15 +20218,13 @@ MonoBehaviour:
   aoeRadius: 12
   canDie: 0
   cameraView: {fileID: 0}
-  maxCharge: 100
+  camShake: {fileID: 0}
   chargeRate: 0.2
-  chargeMultiplier: 0.1
+  chargeMultiplier: 0.2
   fullCharge: {fileID: 2303583760056370141}
   electricCharge: {fileID: 3300975218034385351}
   frostCharge: {fileID: 5151819999867146259}
   fireCharge: {fileID: 547159610409981296}
-  camShake: {fileID: 0}
-  burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   burstPoint: {fileID: 9040024944503598342}
   SwordSounds: {fileID: 5876314465610038995}
   MotionSounds: {fileID: 0}
@@ -20316,18 +20315,21 @@ MonoBehaviour:
   delay4: 0.4
   delay5: 0.8
   heavyDelay: 0.86
+  heavyDelay2: 0.6
   cd1: 0.2
   cd2: 0.2
   cd3: 0.35
   cd4: 0.45
   cd5: 1.1
   heavyCooldown: 1.15
-  dmg1: 20
-  dmg2: 20
-  dmg3: 20
-  dmg4: 20
+  heavyCooldown2: 1.1
+  dmg1: 10
+  dmg2: 10
+  dmg3: 10
+  dmg4: 15
   dmg5: 20
   heavyDamage: 30
+  heavyDamage2: 30
   anim1: isSlash
   anim2: isSlash2
   anim3: isSlash3
@@ -20335,14 +20337,15 @@ MonoBehaviour:
   anim5: blockAttack
   heavyAnim: isHeavy
   heavyAnim2: isHeavy2
-  cost: 0.05
-  heavyCost: 0.1
+  cost: 0.03
+  heavyCost: 0.06
   sound1: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   sound2: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   sound3: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   sound4: {fileID: 8300000, guid: b47bd6cdaf85a1948922617ce7b82186, type: 3}
   sound5: {fileID: 8300000, guid: 9da0dfaad2cfefe4183568dae9abd59e, type: 3}
   heavySound: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
+  heavySound2: {fileID: 8300000, guid: b35364a3a0177d1419100e899175ece7, type: 3}
 --- !u!114 &5351670438720077872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20358,7 +20361,7 @@ MonoBehaviour:
   parryDeflect: {fileID: 7897410500992900791}
   blockCooldown: 1.1
   parryAnim: startBlock
-  parryCost: 0.2
+  parryCost: 0.1
   allowSlowmotion: 0
   cooldown: 1.6
   delay: 1
@@ -20387,6 +20390,7 @@ MonoBehaviour:
   shakeMagnitude: 0.4
   slowDuration: 0.6
   explosion: {fileID: 86385489198993858}
+  burst: {fileID: 8459568857137699131, guid: 534372d3ba1f912419da2dac3bc95786, type: 3}
   cooldown: 2
   anim: discharge
   delay: 1.8
@@ -20414,7 +20418,7 @@ MonoBehaviour:
   - {fileID: 7460700946798147786}
   - {fileID: 1070304021229266796}
   cooldown: 2
-  dischargeAnimation: stoneInit
+  dischargeAnimation: frostInit
   delay: 2
   initialDamage: 20
   duration: 20
@@ -20424,6 +20428,42 @@ MonoBehaviour:
   animRate: 1.2
   spearDamage: 25
   aimSensitivity: 0.9
+--- !u!114 &4259724343138672911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292110267926525852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7408a193cf33c48bcced7ecac26a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  dischargeAnim: berserkInit
+  delay: 2
+  initDamage: 20
+  duration: 30
+  healthRegen: 5
+  comboDuration: 2
+  cd1: 0.5
+  cd2: 0.8
+  cd3: 0.9
+  slamCd: 1
+  anim1: isStone1
+  anim2: isStone2
+  anim3: isStone3
+  slamAnim: isStoneHeavy
+  delay1: 1
+  delay2: 1
+  delay3: 1.5
+  slamDelay: 1
+  dmg1: 20
+  dmg2: 20
+  dmg3: 20
+  slamDmg: 20
+  cost: 0.2
 --- !u!1 &4292110268255106600
 GameObject:
   m_ObjectHideFlags: 0

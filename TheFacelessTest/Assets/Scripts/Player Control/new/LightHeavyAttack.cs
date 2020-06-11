@@ -16,27 +16,34 @@ public class LightHeavyAttack : BaseAttack
     public float delay3 = 1f;
     public float delay4 = 1f;
     public float delay5 = 1f;
+    [Space]
     public float heavyDelay = 1f;
+    public float heavyDelay2 = 1f;
     [Header("Attack Cooldown")]
     public float cd1 = 1f;
     public float cd2 = 1f;
     public float cd3 = 1f;
     public float cd4 = 1f;
     public float cd5 = 1f;
+    [Space]
     public float heavyCooldown = 1f;
+    public float heavyCooldown2 = 1f;
     [Header("Damage")]
     public int dmg1 = 1;
     public int dmg2 = 1;
     public int dmg3 = 1;
     public int dmg4 = 1;
     public int dmg5 = 1;
+    [Space]
     public int heavyDamage = 1;
+    public int heavyDamage2 = 1;
     [Header("Animation sequence triggers")]
     public string anim1;
     public string anim2;
     public string anim3;
     public string anim4;
     public string anim5;
+    [Space]
     public string heavyAnim;
     public string heavyAnim2;
 
@@ -52,7 +59,9 @@ public class LightHeavyAttack : BaseAttack
     public AudioClip sound3;
     public AudioClip sound4;
     public AudioClip sound5;
+    [Space]
     public AudioClip heavySound;
+    public AudioClip heavySound2;
     #endregion
 
     private void Update()
@@ -94,7 +103,7 @@ public class LightHeavyAttack : BaseAttack
                 }
                 else
                 {
-                    HeavyAttack(heavyCooldown, heavyAnim2, heavyDelay, heavyDamage, heavySound);
+                    HeavyAttack(heavyCooldown2, heavyAnim2, heavyDelay2, heavyDamage2, heavySound2);
                 }
             }
         }

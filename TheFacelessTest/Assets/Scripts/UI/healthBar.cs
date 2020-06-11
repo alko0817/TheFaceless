@@ -18,20 +18,31 @@ public class healthBar : MonoBehaviour
 
     private void Update()
     {
-        //DAMAGE
+        Reduce();
+        if (health.regening) Increment();
+        else BurstIncrease();
+
+        bar.fillAmount = currentState/health.maxHealth;
+    }
+
+    void Reduce()
+    {
         if (currentState > health.currentHealth)
         {
             currentState -= Time.deltaTime * rate;
         }
-
-        //HEAL
-
+    }
+    
+    void BurstIncrease()
+    {
         if (currentState < health.currentHealth)
         {
             currentState += Time.deltaTime * rate;
         }
+    }
 
-        //BAR
-        bar.fillAmount = currentState/health.maxHealth;
+    void Increment()
+    {
+        currentState = health.currentHealth;
     }
 }

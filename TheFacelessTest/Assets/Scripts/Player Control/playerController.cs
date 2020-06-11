@@ -7,7 +7,7 @@ using Invector.vCharacterController;
 [System.Serializable]
 public class playerController : MonoBehaviour
 {
-    
+    [Header(" - Master Controller - ")]
     public Animator anim;
     internal vThirdPersonCamera camSettings;
     internal PlayerHealth health;
@@ -26,9 +26,10 @@ public class playerController : MonoBehaviour
     public float aoeRadius = 5f;
     [Space]
     public bool canDie = false;
-    [Header("- Slow Motion & Camera FX")]
+    [Header("- Camera & Time Settings")]
     internal TimeManager timeManager;
     public CameraView cameraView;
+    public cameraShake camShake;
 
     #region COMBAT_VARIABLES
     internal bool shooting = false;
@@ -43,6 +44,7 @@ public class playerController : MonoBehaviour
     internal bool canDischarge = false;
     internal bool discharging = false;
     internal bool charged = false;
+    internal bool berserk = false;
 
     //DISCHARGE
     [Header("- Discharge")]
@@ -51,6 +53,7 @@ public class playerController : MonoBehaviour
     [Tooltip("How fast the UI updates the charge")]
     public float chargeMultiplier = 2f;
 
+    internal float swordCharge = 0f;
     internal float lastCharge = 0f;
     internal Image swordFill;
     public AudioSource fullCharge;
@@ -59,10 +62,7 @@ public class playerController : MonoBehaviour
     public ParticleSystem frostCharge;
     public ParticleSystem fireCharge;
     [Space]
-    public cameraShake camShake;
-    public GameObject burst;
     public Transform burstPoint;
-    float swordCharge = 0f;
     #endregion
     [Space]
 

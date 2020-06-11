@@ -11,6 +11,7 @@ public class ElectricDischarge : DischargeAttack
     public float shakeMagnitude;
     public float slowDuration;
     public ParticleSystem explosion;
+    public GameObject burst;
     [Space]
     public float cooldown = 1f;
     public string anim;
@@ -60,7 +61,7 @@ public class ElectricDischarge : DischargeAttack
         yield return new WaitForSeconds(.7f);
         controller.electricCharge.Stop();
         StartCoroutine(controller.camShake.Shake(shakeDuration, shakeMagnitude));
-        Instantiate(controller.burst, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
+        Instantiate(burst, controller.burstPoint.position, Quaternion.Euler(90, 0, 0));
 
         Collider[] props = Physics.OverlapSphere(controller.aoePoint.position, controller.aoeRadius, movables);
         foreach (Collider prop in props)

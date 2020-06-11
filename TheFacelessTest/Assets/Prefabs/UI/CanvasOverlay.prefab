@@ -1661,9 +1661,9 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   healingRate: 5
-  healingDelay: 2
+  healingDelay: 1
   blockMitigation: 0.1
-  testDamage: 100
+  testDamage: 70
   intensity: 0.2
 --- !u!114 &420907641
 MonoBehaviour:
